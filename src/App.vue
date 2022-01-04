@@ -25,7 +25,7 @@
         <n-layout>
           <n-tabs type="card" justify-content="space-evenly">
             <n-tab-pane 
-              v-for="timeline in unlockedTimelineList" 
+              v-for="timeline in (timelineList.filter(timeline => timeline.isUnlocked))" 
               :key="timeline.key"
               :name="timeline.key" 
               :tab="timeline.personName"
@@ -229,31 +229,17 @@ export default {
     let { increment } = useScience();
     let { timelineList } = useTimeline();
 
-    //todo - do this better
     const sidebar = [];
-    for(let i = 0; i < timelineList.length; i++) {
-      const timeline = timelineList[i];
-      if(!timeline.isUnlocked) {
-        continue;
-      }
-      for(let j = 0; j < timeline.scienceList.length; j++) {
-        const science = timeline.scienceList[j];
-        if(!science.isUnlocked){
-          continue;
-        }
-        sidebar.push({
+    timelineList
+      .filter(timeline => timeline.isUnlocked)
+      .forEach(timeline => timeline.scienceList
+        .filter(science => science.isUnlocked)
+        .forEach(science => sidebar.push({
           label: renderLabel(science),
           key: science.key,
           icon: renderIcon(science.icon),
-        })
-      }
-    }
-
-    const unlockedTimelineList = computed(() => {
-      return timelineList.filter(function(timeline) {
-        return timeline.isUnlocked;
-      });
-    });
+        }))
+      );
 
     return {
       darkTheme,
@@ -261,8 +247,7 @@ export default {
       show: ref(false),
       topMenu,
       TMenuItem,
-
-      unlockedTimelineList,
+      timelineList,
       increment,
     };
   }

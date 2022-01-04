@@ -1,8 +1,32 @@
-import { reactive } from 'vue'
-import { scienceList as unreactiveScienceList } from '../entities/Science'
+import { reactive, shallowRef } from 'vue'
 
-//todo - i probably don't need this to be accessible so i can make it not reactive
-let scienceList = reactive(unreactiveScienceList);
+import {
+  Atom as PhysicsIcon,
+} from '@vicons/tabler'
+
+import {
+  AnimalTurtle16Regular as BiologyIcon,
+} from '@vicons/fluent'
+
+import { Science } from '../entities/Science'
+
+export let scienceList = reactive([
+  new Science(
+    'quantum-mechanics', 
+    'Quantum Mechanics', 
+    shallowRef(PhysicsIcon), 
+    '#8a2be2', 
+    true
+  ),
+
+  new Science(
+    'biology', 
+    'Biology', 
+    shallowRef(BiologyIcon), 
+    '#ff69b4', 
+    true
+  ),
+])
 
 export default function useScience() {
   const increment = (key) => {
@@ -25,6 +49,7 @@ export default function useScience() {
   };
 
   return {
+    scienceList,
     increment,
   };
 }
