@@ -25,16 +25,16 @@
         <n-layout>
           <n-tabs type="card" justify-content="space-evenly">
             <n-tab-pane 
-              v-for="timeline in (timelineList.filter(timeline => timeline.isUnlocked))" 
-              :key="timeline.key"
-              :name="timeline.key" 
-              :tab="timeline.personName"
+              v-for="person in (personList.filter(person => person.isUnlocked))" 
+              :key="person.key"
+              :name="person.key" 
+              :tab="person.personName"
             >
               <n-space horizontal style="padding-left: 20px;">
                 <n-progress
                   type="multiple-circle"
-                  :percentage="timeline.scienceList.filter(science => science.isUnlocked).map(({ current }) => current)"
-                  :color="timeline.scienceList.filter(science => science.isUnlocked).map(({ color }) => color)"
+                  :percentage="person.scienceList.filter(science => science.isUnlocked).map(({ current }) => current)"
+                  :color="person.scienceList.filter(science => science.isUnlocked).map(({ color }) => color)"
                 >
                   Science
                 </n-progress>
@@ -42,7 +42,7 @@
                   <n-button 
                     ghost
                     round
-                    v-for="science in timeline.scienceList.filter(science => science.isUnlocked)"
+                    v-for="science in person.scienceList.filter(science => science.isUnlocked)"
                     :key="science.key"
                     :color="science.color"
                     @click="increment(science.key)"
@@ -51,44 +51,21 @@
                   </n-button>
                 </n-space>
               </n-space>
-              <n-space style="padding: 20px;">
-                <n-badge value=5>
+              <n-space vertical style="padding: 20px;">
+                <!-- <n-badge value=5> -->
                   <n-switch v-model:value="show">
                     <template #checked>Hide Timeline</template>
                     <template #unchecked>Show Timeline</template>
                   </n-switch>
-                </n-badge>
+                <!-- </n-badge> -->
                 <n-collapse-transition :show="show">
                   <n-timeline>
-                    <n-timeline-item
-                      type="success"
-                      title="Start"
-                      content="started your research. bloop blap a lot of flavour text"
-                      time="2022-01-01 20:46"
-                    />
-                    <n-timeline-item
-                      type="success"
-                      title="Bwah"
-                      content="figured out bwah"
-                      time="2022-01-02 04:44"
-                    />
-                    <n-timeline-item
-                      type="error"
-                      title="Oh crap"
-                      content="Some sort of issue"
-                      time="2022-01-03 00:32"
-                    />
-                    <n-timeline-item
-                      type="warning"
-                      title="Warning"
-                      content="warning content"
-                      time="2022-01-04 03:09"
-                    />
-                    <n-timeline-item
-                      type="info"
-                      title="Info"
-                      content="info content"
-                      time="2022-01-05 22:53"
+                    <n-timeline-item 
+                      v-for="timeline in person.timeline" 
+                      :key="timeline.key"
+                      :title="timeline.name"
+                      :content="timeline.text"
+                      :time="timeline.timestamp"
                     />
                   </n-timeline>
                 </n-collapse-transition>
@@ -119,8 +96,6 @@ import { computed, h, ref } from 'vue'
 
 import { 
   darkTheme,
-
-  NBadge,
   NButton,
   NCollapseTransition,
   NConfigProvider,
@@ -148,7 +123,7 @@ import {
 } from '@vicons/ionicons5'
 
 import useScience from './composables/useScience'
-import useTimeline from './composables/useTimeline'
+import usePerson from './composables/usePerson'
 import TMenuItem from './components/TMenuItem.vue'
 
 function renderIcon (icon) {
@@ -194,8 +169,6 @@ export default {
   name: 'App',
   components: {
     BulbIcon,
-
-    NBadge,
     NButton,
     NCollapseTransition,
     NConfigProvider,
@@ -216,13 +189,13 @@ export default {
   },
   setup () {
     let { increment } = useScience();
-    let { timelineList } = useTimeline();
+    let { personList } = usePerson();
 
     const sidebar = computed(() => {
       const sidebar = [];
-      timelineList
-        .filter(timeline => timeline.isUnlocked)
-        .forEach(timeline => timeline.scienceList
+      personList
+        .filter(person => person.isUnlocked)
+        .forEach(person => person.scienceList
           .filter(science => science.isUnlocked)
           .forEach(science => sidebar.push({
             label: renderLabel(science),
@@ -242,7 +215,7 @@ export default {
       increment,
       sidebar,
       show: ref(false),
-      timelineList,
+      personList,
       TMenuItem,
       topMenu,
     };

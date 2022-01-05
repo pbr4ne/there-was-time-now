@@ -24,7 +24,7 @@ export let scienceList = reactive([
     //quantum mechanics unlocks young lennox
     [
       {
-        type: 'timeline',
+        type: 'person',
         key: 'lennox-young',
         threshold: 1,
       }

@@ -8,7 +8,7 @@ export class Research {
     /* example
       [
         {
-          type: 'timeline',
+          type: 'person',
           key: 'lennox-young',
           threshold: 5,
         }
