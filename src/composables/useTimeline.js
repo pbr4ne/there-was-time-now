@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { reactive, watchEffect } from 'vue'
 import { Timeline } from '../entities/Timeline'
 import { scienceList } from '../composables/useScience'

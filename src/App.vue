@@ -115,8 +115,7 @@
 </template>
 
 <script>
-/* eslint-disable */
-import { computed, h, reactive, ref } from 'vue'
+import { computed, h, ref } from 'vue'
 
 import { 
   darkTheme,
@@ -142,19 +141,11 @@ import {
 } from 'naive-ui'
 
 import {
-  Microscope as ExperimentIcon,
-} from '@vicons/carbon'
-
-import {
   AlarmOutline as AlarmIcon,
   ApertureOutline as ApertureIcon,
   BulbOutline as BulbIcon,
   SettingsOutline as SettingsIcon,
 } from '@vicons/ionicons5'
-
-import {
-  Atom2 as ResearchIcon,
-} from '@vicons/tabler'
 
 import useScience from './composables/useScience'
 import useTimeline from './composables/useTimeline'
@@ -203,8 +194,6 @@ export default {
   name: 'App',
   components: {
     BulbIcon,
-    ExperimentIcon,
-    ResearchIcon,
 
     NBadge,
     NButton,
@@ -229,22 +218,6 @@ export default {
     let { increment } = useScience();
     let { timelineList } = useTimeline();
 
-    // const sidebar = reactive([]);
-    // timelineList
-    //   .filter(timeline => timeline.isUnlocked)
-    //   .forEach(timeline => timeline.scienceList
-    //     .filter(science => science.isUnlocked)
-    //     .forEach(science => sidebar.push({
-    //       label: renderLabel(science),
-    //       key: science.key,
-    //       icon: renderIcon(science.icon),
-    //     }))
-    //   );
-    // sidebar.push({
-    //   key: 'divider-1',
-    //   type: 'divider',
-    // });
-
     const sidebar = computed(() => {
       const sidebar = [];
       timelineList
@@ -266,12 +239,12 @@ export default {
 
     return {
       darkTheme,
+      increment,
       sidebar,
       show: ref(false),
-      topMenu,
-      TMenuItem,
       timelineList,
-      increment,
+      TMenuItem,
+      topMenu,
     };
   }
 }
