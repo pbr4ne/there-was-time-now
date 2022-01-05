@@ -1,10 +1,6 @@
 <template>
   <n-layout position="absolute">
-    <n-layout-header bordered>
-      <n-space justify="end">
-        <n-menu mode="horizontal" :options="topMenu" />
-      </n-space>
-    </n-layout-header>
+    <t-header />
     <n-layout has-sider>
       <n-layout-sider
         bordered
@@ -90,7 +86,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import { computed, h, ref } from 'vue'
 
 import { 
@@ -99,7 +94,6 @@ import {
   NIcon,
   NLayout,
   NLayoutFooter,
-  NLayoutHeader,
   NLayoutSider, 
   NMenu,
   NProgress,
@@ -113,15 +107,13 @@ import {
 } from 'naive-ui'
 
 import {
-  AlarmOutline as AlarmIcon,
-  ApertureOutline as ApertureIcon,
   BulbOutline as BulbIcon,
-  SettingsOutline as SettingsIcon,
 } from '@vicons/ionicons5'
 
 import useScience from '../composables/useScience'
 import usePerson from '../composables/usePerson'
 import TMenuItem from '../components/TMenuItem.vue'
+import THeader from '../components/THeader.vue'
 
 function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -135,33 +127,6 @@ function renderLabel(science) {
   });
 }
 
-const topMenu = [
-  {
-    label: 'Settings',
-    key: 'settings',
-    icon: renderIcon(SettingsIcon),
-    children: [
-      {
-        type: 'group',
-        label: 'Bwah',
-        key: 'bwah',
-        children: [
-          {
-            label: 'Setting 1',
-            key: 'setting-1',
-            icon: renderIcon(AlarmIcon),
-          },
-          {
-            label: 'Setting 2',
-            key: 'setting-2',
-            icon: renderIcon(ApertureIcon),
-          }
-        ]
-      }
-    ]
-  }
-]
-
 export default {
   name: 'TGame',
   components: {
@@ -171,7 +136,6 @@ export default {
     NIcon,
     NLayout,
     NLayoutFooter,
-    NLayoutHeader,
     NLayoutSider,
     NMenu,
     NProgress,
@@ -182,6 +146,7 @@ export default {
     NTimeline,
     NTimelineItem,
     NTooltip,
+    THeader,
   },
   setup () {
     let { increment } = useScience();
@@ -212,7 +177,6 @@ export default {
       show: ref(false),
       personList,
       TMenuItem,
-      topMenu,
     };
   }
 }
