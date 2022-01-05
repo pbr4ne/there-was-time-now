@@ -1,67 +1,38 @@
 <template>
   <n-layout-header bordered>
     <n-space justify="end">
-      <n-menu mode="horizontal" :options="topMenu" />
+    <!-- eslint-disable-next-line vue/valid-v-slot -->
+    <n-spin #icon>
+      <n-icon><time-icon /></n-icon>
+    </n-spin>
     </n-space>
   </n-layout-header>
 </template>
 
 <script>
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 
 import { 
   NIcon,
   NLayoutHeader,
-  NMenu,
   NSpace,
+  NSpin,
 } from 'naive-ui'
 
 import {
-  AlarmOutline as AlarmIcon,
-  ApertureOutline as ApertureIcon,
-  SettingsOutline as SettingsIcon,
-} from '@vicons/ionicons5'
-
-function renderIcon (icon) {
-  return () => h(NIcon, null, { default: () => h(icon) })
-}
+  AccessTimeOutlined as TimeIcon
+} from '@vicons/material'
 
 export default defineComponent({
   components: {
+    NIcon,
     NLayoutHeader,
-    NMenu,
     NSpace,
+    NSpin,
+    TimeIcon,
   },
   setup() {
-    const topMenu = [
-      {
-        label: 'Settings',
-        key: 'settings',
-        icon: renderIcon(SettingsIcon),
-        children: [
-          {
-            type: 'group',
-            label: 'Bwah',
-            key: 'bwah',
-            children: [
-              {
-                label: 'Setting 1',
-                key: 'setting-1',
-                icon: renderIcon(AlarmIcon),
-              },
-              {
-                label: 'Setting 2',
-                key: 'setting-2',
-                icon: renderIcon(ApertureIcon),
-              }
-            ]
-          }
-        ]
-      }
-    ]
-
     return {
-      topMenu,
     }
   },
 })
