@@ -1,5 +1,9 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
+  devServer: {
+    hot: false,
+    liveReload: false
+  },
   transpileDependencies: true,
   pages: {
     index: {
