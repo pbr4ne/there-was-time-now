@@ -69,19 +69,7 @@
         </n-tabs>
       </n-layout>
     </n-layout>
-    <n-layout-footer bordered>
-      <n-space justify="end">
-        <n-tooltip placement="left" trigger="click">
-          <template #trigger>
-            <!-- eslint-disable-next-line vue/valid-v-slot -->
-            <n-button strong secondary circle #icon>
-              <n-icon><bulb-icon /></n-icon>
-            </n-button>
-          </template>
-          <span>Help Message? Or something</span>
-        </n-tooltip>
-      </n-space>
-    </n-layout-footer>
+    <t-footer />
   </n-layout>
 </template>
 
@@ -93,7 +81,6 @@ import {
   NCollapseTransition,
   NIcon,
   NLayout,
-  NLayoutFooter,
   NLayoutSider, 
   NMenu,
   NProgress,
@@ -103,12 +90,7 @@ import {
   NTabPane,
   NTimeline,
   NTimelineItem,
-  NTooltip,
 } from 'naive-ui'
-
-import {
-  BulbOutline as BulbIcon,
-} from '@vicons/ionicons5'
 
 import useScience from '../composables/useScience'
 import usePerson from '../composables/usePerson'
@@ -130,12 +112,9 @@ function renderLabel(science) {
 export default {
   name: 'TGame',
   components: {
-    BulbIcon,
     NButton,
     NCollapseTransition,
-    NIcon,
     NLayout,
-    NLayoutFooter,
     NLayoutSider,
     NMenu,
     NProgress,
@@ -145,7 +124,6 @@ export default {
     NTabPane,
     NTimeline,
     NTimelineItem,
-    NTooltip,
     THeader,
   },
   setup () {
