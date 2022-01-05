@@ -90,6 +90,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { computed, h, ref } from 'vue'
 
 import { 
@@ -186,7 +187,6 @@ export default {
     let { increment } = useScience();
     let { personList } = usePerson();
 
-
     const sidebar = computed(() => {
       const sidebar = [];
       personList
@@ -213,7 +213,6 @@ export default {
       personList,
       TMenuItem,
       topMenu,
-
     };
   }
 }

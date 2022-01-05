@@ -1,8 +1,8 @@
 <template>
   <n-config-provider :theme="darkTheme">
-    <n-message-provider>
+    <n-notification-provider>
       <t-game />
-    </n-message-provider>
+    </n-notification-provider>
   </n-config-provider>
 </template>
 
@@ -10,7 +10,7 @@
 import { 
   darkTheme,
   NConfigProvider,
-  NMessageProvider,
+  NNotificationProvider,
 } from 'naive-ui'
 
 import TGame from './components/TGame.vue'
@@ -19,7 +19,7 @@ export default {
   name: 'App',
   components: {
     NConfigProvider,
-    NMessageProvider,
+    NNotificationProvider,
     TGame,
   },
   setup () {    

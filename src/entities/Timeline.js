@@ -1,5 +1,6 @@
 export class Timeline {
-  constructor(key, name, text, timestamp) {
+  constructor(personKey, key, name, text, timestamp) {
+    this.personKey = personKey;
     this.key = key;
     this.name = name;
     this.text = text;
