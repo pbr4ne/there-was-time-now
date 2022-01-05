@@ -66,7 +66,7 @@ import {
 } from 'naive-ui'
 
 import useScience from '../composables/useScience'
-import usePerson from '../composables/usePerson'
+import useInitialize from '../composables/useInitialize'
 
 export default defineComponent({
   components: {
@@ -82,7 +82,7 @@ export default defineComponent({
   },
   setup() {
     let { increment } = useScience();
-    let { personList } = usePerson();
+    let { personList } = useInitialize();
 
     return {
       increment,

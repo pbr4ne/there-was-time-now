@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import { 
-  NLayout,
-} from 'naive-ui'
+import { NLayout } from 'naive-ui'
 
-import TFooter from '../components/TFooter.vue'
-import THeader from '../components/THeader.vue'
-import TSider from '../components/TSider.vue'
-import TTabs from '../components/TTabs.vue'
+import TFooter from './TFooter.vue'
+import THeader from './THeader.vue'
+import TSider from './TSider.vue'
+import TTabs from './TTabs.vue'
+
+import useUnlockWatch from '../composables/useUnlockWatch'
 
 export default {
   name: 'TGame',
@@ -29,6 +29,8 @@ export default {
     TTabs,
   },
   setup () {
+    useUnlockWatch();
+
     return {
     };
   }

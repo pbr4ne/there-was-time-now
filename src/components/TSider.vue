@@ -4,10 +4,14 @@
     show-trigger
     collapse-mode="width"
     :collapsed-width="64"
+    :collapsed="collapsed"
     :width="240"
     :native-scrollbar="false"
+    @collapse="collapsed = true"
+    @expand="collapsed = false" 
   >
     <n-menu
+      :collapsed="collapsed"
       :collapsed-width="64"
       :collapsed-icon-size="32"
       :icon-size="32"
@@ -17,7 +21,7 @@
 </template>
 
 <script>
-import { computed, defineComponent, h } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 
 import { 
   NIcon,
@@ -26,7 +30,7 @@ import {
 } from 'naive-ui'
 
 import TMenuItem from './TMenuItem.vue'
-import usePerson from '../composables/usePerson'
+import useInitialize from '../composables/useInitialize'
 
 function renderIcon (icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -46,7 +50,10 @@ export default defineComponent({
     NMenu,
   },
   setup() {
-    const { personList } = usePerson();
+    const { personList } = useInitialize();
+
+    //initially collapse the sider for smol windows
+    let collapsed = window.innerWidth < 700;
 
     const sidebar = computed(() => {
       const sidebar = [];
@@ -68,6 +75,7 @@ export default defineComponent({
     });
 
     return {
+      collapsed: ref(collapsed),
       sidebar,
       TMenuItem,
     }
