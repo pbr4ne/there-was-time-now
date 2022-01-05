@@ -31,8 +31,6 @@ export let personList = reactive([
 ])
 
 export default function usePerson() {
-
-  //const notification = useNotification();
   //todo - this is probably not good
   watchEffect(() => {
     scienceList.forEach(science => {
