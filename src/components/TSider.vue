@@ -1,0 +1,76 @@
+<template>
+  <n-layout-sider
+    bordered
+    show-trigger
+    collapse-mode="width"
+    :collapsed-width="64"
+    :width="240"
+    :native-scrollbar="false"
+  >
+    <n-menu
+      :collapsed-width="64"
+      :collapsed-icon-size="32"
+      :icon-size="32"
+      :options="sidebar"
+    />
+  </n-layout-sider>
+</template>
+
+<script>
+import { computed, defineComponent, h } from 'vue'
+
+import { 
+  NIcon,
+  NLayoutSider,
+  NMenu,
+} from 'naive-ui'
+
+import TMenuItem from './TMenuItem.vue'
+import usePerson from '../composables/usePerson'
+
+function renderIcon (icon) {
+  return () => h(NIcon, null, { default: () => h(icon) })
+}
+
+function renderLabel(science) {
+  //todo - seems overkill to have a whole-ass SFC
+  return () => h(TMenuItem, {}, {
+    label: () => h('span', {}, science.label),
+    total: () => h('span', {}, science.total), 
+  });
+}
+
+export default defineComponent({
+  components: {
+    NLayoutSider,
+    NMenu,
+  },
+  setup() {
+    const { personList } = usePerson();
+
+    const sidebar = computed(() => {
+      const sidebar = [];
+      personList
+        .filter(person => person.isUnlocked)
+        .forEach(person => person.scienceList
+          .filter(science => science.isUnlocked)
+          .forEach(science => sidebar.push({
+            label: renderLabel(science),
+            key: science.key,
+            icon: renderIcon(science.icon),
+          }))
+        );
+      sidebar.push({
+        key: 'divider-1',
+        type: 'divider',
+      });
+      return sidebar;
+    });
+
+    return {
+      sidebar,
+      TMenuItem,
+    }
+  },
+})
+</script>

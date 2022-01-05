@@ -2,21 +2,7 @@
   <n-layout position="absolute">
     <t-header />
     <n-layout has-sider>
-      <n-layout-sider
-        bordered
-        show-trigger
-        collapse-mode="width"
-        :collapsed-width="64"
-        :width="240"
-        :native-scrollbar="false"
-      >
-        <n-menu
-          :collapsed-width="64"
-          :collapsed-icon-size="32"
-          :icon-size="32"
-          :options="sidebar"
-        />
-      </n-layout-sider>
+      <t-sider />
       <n-layout>
         <n-tabs type="card" justify-content="space-evenly">
           <n-tab-pane 
@@ -74,15 +60,12 @@
 </template>
 
 <script>
-import { computed, h, ref } from 'vue'
+import { ref } from 'vue'
 
 import { 
   NButton,
   NCollapseTransition,
-  NIcon,
   NLayout,
-  NLayoutSider, 
-  NMenu,
   NProgress,
   NSpace,
   NSwitch,
@@ -94,20 +77,9 @@ import {
 
 import useScience from '../composables/useScience'
 import usePerson from '../composables/usePerson'
-import TMenuItem from '../components/TMenuItem.vue'
+import TFooter from '../components/TFooter.vue'
 import THeader from '../components/THeader.vue'
-
-function renderIcon (icon) {
-  return () => h(NIcon, null, { default: () => h(icon) })
-}
-
-function renderLabel(science) {
-  //todo - seems overkill to have a whole-ass SFC
-  return () => h(TMenuItem, {}, {
-    label: () => h('span', {}, science.label),
-    total: () => h('span', {}, science.total), 
-  });
-}
+import TSider from '../components/TSider.vue'
 
 export default {
   name: 'TGame',
@@ -115,8 +87,6 @@ export default {
     NButton,
     NCollapseTransition,
     NLayout,
-    NLayoutSider,
-    NMenu,
     NProgress,
     NSpace,
     NSwitch,
@@ -124,37 +94,18 @@ export default {
     NTabPane,
     NTimeline,
     NTimelineItem,
+    TFooter,
     THeader,
+    TSider,
   },
   setup () {
     let { increment } = useScience();
     let { personList } = usePerson();
 
-    const sidebar = computed(() => {
-      const sidebar = [];
-      personList
-        .filter(person => person.isUnlocked)
-        .forEach(person => person.scienceList
-          .filter(science => science.isUnlocked)
-          .forEach(science => sidebar.push({
-            label: renderLabel(science),
-            key: science.key,
-            icon: renderIcon(science.icon),
-          }))
-        );
-      sidebar.push({
-        key: 'divider-1',
-        type: 'divider',
-      });
-      return sidebar;
-    });
-
     return {
       increment,
-      sidebar,
       show: ref(false),
       personList,
-      TMenuItem,
     };
   }
 }
