@@ -1,7 +1,11 @@
 import { reactive, shallowRef } from 'vue'
 
 import {
-  Atom as PhysicsIcon,
+  Chip as QuantumComputingIcon
+} from '@vicons/carbon'
+
+import {
+  Atom as QuantumPhysicsIcon,
 } from '@vicons/tabler'
 
 import {
@@ -14,17 +18,43 @@ export let scienceList = reactive([
   new Science(
     'quantum-mechanics', 
     'Quantum Mechanics', 
-    shallowRef(PhysicsIcon), 
-    '#8a2be2', 
-    true
+    shallowRef(QuantumPhysicsIcon), 
+    '#B10DC9', 
+    true,
+    //quantum mechanics unlocks young lennox
+    [
+      {
+        type: 'timeline',
+        key: 'lennox-young',
+        threshold: 1,
+      }
+    ],
+  ),
+
+  new Science(
+    'quantum-computing', 
+    'Quantum Computing', 
+    shallowRef(QuantumComputingIcon), 
+    '#39CCCC', 
+    false,
+    //no unlocks
+    [],
   ),
 
   new Science(
     'biology', 
     'Biology', 
     shallowRef(BiologyIcon), 
-    '#ff69b4', 
-    true
+    '#F012BE', 
+    true,
+    //biology unlocks quantum computing
+    [
+      {
+        type: 'science',
+        key: 'quantum-computing',
+        threshold: 1,
+      }
+    ],
   ),
 ])
 

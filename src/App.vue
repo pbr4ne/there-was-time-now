@@ -30,7 +30,7 @@
               :name="timeline.key" 
               :tab="timeline.personName"
             >
-              <n-space vertical style="padding-left: 20px;">
+              <n-space horizontal style="padding-left: 20px;">
                 <n-progress
                   type="multiple-circle"
                   :percentage="timeline.scienceList.filter(science => science.isUnlocked).map(({ current }) => current)"
@@ -38,11 +38,11 @@
                 >
                   Science
                 </n-progress>
-                <n-space>
+                <n-space vertical>
                   <n-button 
                     ghost
                     round
-                    v-for="science in timeline.scienceList"
+                    v-for="science in timeline.scienceList.filter(science => science.isUnlocked)"
                     :key="science.key"
                     :color="science.color"
                     @click="increment(science.key)"
@@ -50,8 +50,8 @@
                     {{science.label}}
                   </n-button>
                 </n-space>
-
-                <br />
+              </n-space>
+              <n-space style="padding: 20px;">
                 <n-badge value=5>
                   <n-switch v-model:value="show">
                     <template #checked>Hide Timeline</template>
@@ -116,7 +116,7 @@
 
 <script>
 /* eslint-disable */
-import { computed, h, ref } from 'vue'
+import { computed, h, reactive, ref } from 'vue'
 
 import { 
   darkTheme,
@@ -229,17 +229,40 @@ export default {
     let { increment } = useScience();
     let { timelineList } = useTimeline();
 
-    const sidebar = [];
-    timelineList
-      .filter(timeline => timeline.isUnlocked)
-      .forEach(timeline => timeline.scienceList
-        .filter(science => science.isUnlocked)
-        .forEach(science => sidebar.push({
-          label: renderLabel(science),
-          key: science.key,
-          icon: renderIcon(science.icon),
-        }))
-      );
+    // const sidebar = reactive([]);
+    // timelineList
+    //   .filter(timeline => timeline.isUnlocked)
+    //   .forEach(timeline => timeline.scienceList
+    //     .filter(science => science.isUnlocked)
+    //     .forEach(science => sidebar.push({
+    //       label: renderLabel(science),
+    //       key: science.key,
+    //       icon: renderIcon(science.icon),
+    //     }))
+    //   );
+    // sidebar.push({
+    //   key: 'divider-1',
+    //   type: 'divider',
+    // });
+
+    const sidebar = computed(() => {
+      const sidebar = [];
+      timelineList
+        .filter(timeline => timeline.isUnlocked)
+        .forEach(timeline => timeline.scienceList
+          .filter(science => science.isUnlocked)
+          .forEach(science => sidebar.push({
+            label: renderLabel(science),
+            key: science.key,
+            icon: renderIcon(science.icon),
+          }))
+        );
+      sidebar.push({
+        key: 'divider-1',
+        type: 'divider',
+      });
+      return sidebar;
+    });
 
     return {
       darkTheme,

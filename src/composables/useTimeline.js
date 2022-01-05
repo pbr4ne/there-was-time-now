@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { reactive, watch } from 'vue'
+import { reactive, watchEffect } from 'vue'
 import { Timeline } from '../entities/Timeline'
 import { scienceList } from '../composables/useScience'
 
@@ -10,7 +10,8 @@ export let timelineList = reactive([
     'Lennox', 
     1984, 
     [
-      scienceList.find(science => science.key === 'quantum-mechanics')
+      scienceList.find(science => science.key === 'quantum-mechanics'),
+      scienceList.find(science => science.key === 'quantum-computing'),
     ],
     [],
     [],
@@ -32,8 +33,19 @@ export let timelineList = reactive([
 
 export default function useTimeline() {
 
-  watch(timelineList, (timelineList, prevTimelineList) => {
-    console.log('watching timeline');
+  //todo - this is probably not good
+  watchEffect(() => {
+    scienceList.forEach(science => {
+      science.unlocks.forEach(unlock => {
+        if(unlock.threshold <= science.total) {
+          if(unlock.type === 'timeline') {
+            timelineList.find(timeline => timeline.key === unlock.key).isUnlocked = true;
+          } else if(unlock.type === 'science') {
+            scienceList.find(science => science.key === unlock.key).isUnlocked = true;
+          }
+        }
+      });
+    });
   });
 
   return {
