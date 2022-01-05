@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 
 import { 
   NButton,
@@ -36,12 +36,9 @@ import {
   ApertureOutline as ApertureIcon,
   BulbOutline as BulbIcon,
   SettingsOutline as SettingsIcon,
-
 } from '@vicons/ionicons5'
 
-function renderIcon (icon) {
-  return () => h(NIcon, null, { default: () => h(icon) })
-}
+import useIcon from '../composables/useIcon'
 
 export default defineComponent({
   components: {
@@ -54,6 +51,8 @@ export default defineComponent({
     NTooltip,
   },
   setup() {
+    const { renderIcon } = useIcon();
+
     const settings = [
       {
         label: 'Settings',

@@ -1,12 +1,20 @@
 <template>
-  <n-layout-header bordered>
+  <n-layout-header bordered style="padding-top: 5px;">
     <n-space justify="end">
-      <n-tag>{{expandConstant}}</n-tag>
-      <n-tag>{{timeLeft}}</n-tag>
+
+      <n-statistic label="Time Expansion">
+        {{expandConstant}}
+      </n-statistic>
+
+      <n-statistic label="Days Left">
+        {{timeLeft}}
+      </n-statistic>
+
       <!-- eslint-disable-next-line vue/valid-v-slot -->
-      <n-spin #icon>
+      <n-spin #icon style="vertical-align: middle;">
         <n-icon><time-icon /></n-icon>
       </n-spin>
+
     </n-space>
   </n-layout-header>
 </template>
@@ -19,7 +27,7 @@ import {
   NLayoutHeader,
   NSpace,
   NSpin,
-  NTag,
+  NStatistic,
 } from 'naive-ui'
 
 import {
@@ -34,7 +42,7 @@ export default defineComponent({
     NLayoutHeader,
     NSpace,
     NSpin,
-    NTag,
+    NStatistic,
     TimeIcon,
   },
   setup() {

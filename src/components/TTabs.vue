@@ -4,7 +4,7 @@
       v-for="person in (personList.filter(person => person.isUnlocked))" 
       :key="person.key"
       :name="person.key" 
-      :tab="person.personName"
+      :tab="renderTab(person)"
     >
       <n-space horizontal style="padding-left: 20px;">
         <n-progress
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 
 import { 
   NButton,
@@ -65,8 +65,13 @@ import {
   NTimelineItem,
 } from 'naive-ui'
 
+import TTabTop from './TTabTop.vue'
 import useScience from '../composables/useScience'
 import useInitialize from '../composables/useInitialize'
+
+function renderTab(person, name, numUnread) {
+  return () => h(TTabTop, { person, name, numUnread });
+}
 
 export default defineComponent({
   components: {
@@ -87,6 +92,7 @@ export default defineComponent({
     return {
       increment,
       personList,
+      renderTab,
       show: ref(false),
     }
   },

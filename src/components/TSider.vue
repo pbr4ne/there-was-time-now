@@ -22,26 +22,13 @@
 
 <script>
 import { computed, defineComponent, h, ref } from 'vue'
-
-import { 
-  NIcon,
-  NLayoutSider,
-  NMenu,
-} from 'naive-ui'
-
+import { NLayoutSider, NMenu } from 'naive-ui'
 import TMenuItem from './TMenuItem.vue'
 import useInitialize from '../composables/useInitialize'
-
-function renderIcon (icon) {
-  return () => h(NIcon, null, { default: () => h(icon) })
-}
+import useIcon from '../composables/useIcon'
 
 function renderLabel(science) {
-  //todo - seems overkill to have a whole-ass SFC
-  return () => h(TMenuItem, {}, {
-    label: () => h('span', {}, science.label),
-    total: () => h('span', {}, science.total), 
-  });
+  return () => h(TMenuItem, { science });
 }
 
 export default defineComponent({
@@ -51,6 +38,7 @@ export default defineComponent({
   },
   setup() {
     const { personList } = useInitialize();
+    const { renderIcon } = useIcon();
 
     //initially collapse the sider for smol windows
     let collapsed = window.innerWidth < 700;

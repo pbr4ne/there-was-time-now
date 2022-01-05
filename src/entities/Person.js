@@ -1,7 +1,7 @@
 export class Person {
-  constructor(key, personName, year, scienceList, engineeringList, deviceList, isUnlocked) {
+  constructor(key, name, year, scienceList, engineeringList, deviceList, isUnlocked) {
     this.key = key;
-    this.personName = personName;
+    this.name = name;
     this.year = year;
 
     this.scienceList = scienceList;
@@ -11,5 +11,19 @@ export class Person {
     this.isUnlocked = isUnlocked;
 
     this.timeline = [];
+  }
+
+  numUnread() {
+    let count = 0;
+    this.timeline.forEach(t => {
+      if(!t.isRead) {
+        count++;
+      }
+    });
+    return count;
+  }
+
+  markRead() {
+    this.timeline.forEach(t => {t.isRead = true;});
   }
 }

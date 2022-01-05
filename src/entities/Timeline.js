@@ -5,5 +5,6 @@ export class Timeline {
     this.name = name;
     this.text = text;
     this.timestamp = timestamp;
+    this.isRead = false;
   }
 }
