@@ -1,6 +1,8 @@
 import { watchEffect } from 'vue'
 import { useNotification } from 'naive-ui'
 import useInitialize from './useInitialize'
+import { Person } from '@/entities/Person'
+import { Unlock } from '@/entities/Unlock'
 
 export default function useUnlockWatch() {
   const notification = useNotification();
@@ -12,12 +14,12 @@ export default function useUnlockWatch() {
     for(const scienceKey in scienceList){
       const science = scienceList[scienceKey];
       console.log(`science ${science.label} (${science.unlocks.length} unlocks)`)
-      science.unlocks.forEach(unlock => {
+      science.unlocks.forEach((unlock : Unlock) => {
         console.log(`--checking unlock ${unlock.key}`)
         if(science.total >= unlock.threshold) {
           console.log(`----beat threshold`)
           if(unlock.type === 'person') {
-            const person = personList.find(person => person.key === unlock.key);
+            const person = personList.find(person => person.key === unlock.key)!;
             if(!person.isUnlocked) {
               console.log('------unlocked')
               person.isUnlocked = true;
@@ -45,7 +47,7 @@ export default function useUnlockWatch() {
                 meta: message.timestamp,
                 duration: 1000,
               })
-              person.timeline.unshift(message);
+              person?.timeline.unshift(message);
             }
           }
         }

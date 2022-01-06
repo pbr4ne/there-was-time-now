@@ -1,13 +1,13 @@
 export class Timeline {
-  personKey: String;
-  key: String;
-  name: String;
-  text: String;
-  timestamp: String;
+  personKey: string;
+  key: string;
+  name: string;
+  text: string;
+  timestamp: string;
   isRead: Boolean;
 
-  constructor(personKey: String, key: String, name: String, text: String, 
-    timestamp: String, isRead: boolean) {
+  constructor(personKey: string, key: string, name: string, text: string, 
+    timestamp: string, isRead: boolean) {
     this.personKey = personKey;
     this.key = key;
     this.name = name;

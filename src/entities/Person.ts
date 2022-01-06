@@ -3,8 +3,8 @@ import { Engineering } from '@/entities/Engineering'
 import { Timeline } from '@/entities/Timeline'
 
 export class Person {
-  key: String;
-  name: String;
+  key: string;
+  name: string;
   year: Number;
   scienceList: Array<Science>;
   engineeringList: Array<Engineering>;
@@ -12,7 +12,7 @@ export class Person {
   isUnlocked: Boolean;
   timeline: Array<Timeline>;
 
-  constructor(key: String, name: String, year: Number, scienceList: Array<Science>, 
+  constructor(key: string, name: string, year: Number, scienceList: Array<Science>, 
     engineeringList: Array<Engineering>, deviceList: Array<Object>, isUnlocked: Boolean) {
     this.key = key;
     this.name = name;

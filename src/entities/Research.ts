@@ -1,10 +1,10 @@
 import { Unlock } from '@/entities/Unlock'
 
 export class Research {
-  key: String;
-  label: String;
+  key: string;
+  label: string;
   icon: Object;
-  color: String;
+  color: string;
   isUnlocked: Boolean;
 
   unlocks: Array<Unlock>;
@@ -12,7 +12,7 @@ export class Research {
   current: Number;
   isIncrementing: Boolean;
 
-  constructor(key: String, label: String, icon: Object, color: String, 
+  constructor(key: string, label: string, icon: Object, color: string, 
     isUnlocked: Boolean, unlocks: Array<Unlock>) {
     this.key = key;
     this.label = label;
