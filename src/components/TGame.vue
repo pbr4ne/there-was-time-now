@@ -5,13 +5,13 @@
       <t-sider />
       <t-tabs />
     </n-layout>
-    <t-footer />
+    <t-game-footer />
   </n-layout>
 </template>
 
 <script>
 import { NLayout } from 'naive-ui'
-import TFooter from '@/components/TFooter.vue'
+import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TSider from '@/components/TSider.vue'
 import TTabs from '@/components/TTabs.vue'
@@ -23,7 +23,7 @@ import { useNotification } from 'naive-ui'
 export default {
   components: {
     NLayout,
-    TFooter,
+    TGameFooter,
     TGameHeader,
     TSider,
     TTabs,
