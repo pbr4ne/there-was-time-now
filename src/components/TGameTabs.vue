@@ -7,25 +7,7 @@
       :tab="renderTab(person)"
     >
       <t-game-tab-science :person="person" />
-      <n-space vertical style="padding: 20px;">
-        <!-- <n-badge value=5> -->
-          <n-switch v-model:value="show">
-            <template #checked>Hide Timeline</template>
-            <template #unchecked>Show Timeline</template>
-          </n-switch>
-        <!-- </n-badge> -->
-        <n-collapse-transition :show="show">
-          <n-timeline>
-            <n-timeline-item 
-              v-for="timeline in person.timeline" 
-              :key="timeline.key"
-              :title="timeline.name"
-              :content="timeline.text"
-              :time="timeline.timestamp"
-            />
-          </n-timeline>
-        </n-collapse-transition>
-      </n-space>
+      <t-game-tab-messages :person="person" />
     </n-tab-pane>
   </n-tabs>
 </template>
@@ -34,16 +16,12 @@
 import { defineComponent, h, ref } from 'vue'
 
 import { 
-  NCollapseTransition,
-  NSpace,
-  NSwitch,
   NTabs,
   NTabPane,
-  NTimeline,
-  NTimelineItem,
 } from 'naive-ui'
 
 import TGameTabCard from '@/components/TGameTabCard.vue'
+import TGameTabMessages from '@/components/TGameTabMessages.vue'
 import TGameTabScience from '@/components/TGameTabScience.vue'
 import useScience from '@/composables/useScience'
 import useInitialize from '@/composables/useInitialize'
@@ -54,13 +32,9 @@ function renderTab(person, name, numUnread) {
 
 export default defineComponent({
   components: {
-    NCollapseTransition,
-    NSpace,
-    NSwitch,
     NTabs,
     NTabPane,
-    NTimeline,
-    NTimelineItem,
+    TGameTabMessages,
     TGameTabScience,
   },
   setup() {
