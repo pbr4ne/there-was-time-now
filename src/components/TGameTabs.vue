@@ -6,27 +6,7 @@
       :name="person.key" 
       :tab="renderTab(person)"
     >
-      <n-space horizontal style="padding-left: 20px;">
-        <n-progress
-          type="multiple-circle"
-          :percentage="person.scienceList.filter(science => science.isUnlocked).map(({ current }) => current)"
-          :color="person.scienceList.filter(science => science.isUnlocked).map(({ color }) => color)"
-        >
-          Science
-        </n-progress>
-        <n-space vertical>
-          <n-button 
-            ghost
-            round
-            v-for="science in person.scienceList.filter(science => science.isUnlocked)"
-            :key="science.key"
-            :color="science.color"
-            @click="increment(science.key)"
-          >
-            {{science.label}}
-          </n-button>
-        </n-space>
-      </n-space>
+      <t-game-tab-science :person="person" />
       <n-space vertical style="padding: 20px;">
         <!-- <n-badge value=5> -->
           <n-switch v-model:value="show">
@@ -54,9 +34,7 @@
 import { defineComponent, h, ref } from 'vue'
 
 import { 
-  NButton,
   NCollapseTransition,
-  NProgress,
   NSpace,
   NSwitch,
   NTabs,
@@ -65,9 +43,10 @@ import {
   NTimelineItem,
 } from 'naive-ui'
 
-import TGameTabCard from './TGameTabCard.vue'
-import useScience from '../composables/useScience'
-import useInitialize from '../composables/useInitialize'
+import TGameTabCard from '@/components/TGameTabCard.vue'
+import TGameTabScience from '@/components/TGameTabScience.vue'
+import useScience from '@/composables/useScience'
+import useInitialize from '@/composables/useInitialize'
 
 function renderTab(person, name, numUnread) {
   return () => h(TGameTabCard, { person, name, numUnread });
@@ -75,15 +54,14 @@ function renderTab(person, name, numUnread) {
 
 export default defineComponent({
   components: {
-    NButton,
     NCollapseTransition,
-    NProgress,
     NSpace,
     NSwitch,
     NTabs,
     NTabPane,
     NTimeline,
     NTimelineItem,
+    TGameTabScience,
   },
   setup() {
     let { increment } = useScience();
