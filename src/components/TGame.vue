@@ -2,7 +2,7 @@
   <n-layout position="absolute">
     <t-game-header />
     <n-layout has-sider>
-      <t-sider />
+      <t-game-sider />
       <t-tabs />
     </n-layout>
     <t-game-footer />
@@ -13,7 +13,7 @@
 import { NLayout } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
-import TSider from '@/components/TSider.vue'
+import TGameSider from '@/components/TGameSider.vue'
 import TTabs from '@/components/TTabs.vue'
 import { Timeline } from '@/entities/Timeline'
 import useUnlockWatch from '@/composables/useUnlockWatch'
@@ -25,7 +25,7 @@ export default {
     NLayout,
     TGameFooter,
     TGameHeader,
-    TSider,
+    TGameSider,
     TTabs,
   },
   setup () {
