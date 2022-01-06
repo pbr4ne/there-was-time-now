@@ -46,6 +46,7 @@ export default {
       title: initialMessage.name,
       content: initialMessage.text,
       meta: initialMessage.timestamp,
+      duration: 1000,
     });
     personList.find(person => person.key === 'lennox-old').timeline.push(initialMessage);
 

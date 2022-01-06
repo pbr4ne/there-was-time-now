@@ -26,6 +26,7 @@ export default function useUnlockWatch() {
                 title: message.name,
                 content: message.text,
                 meta: message.timestamp,
+                duration: 1000,
               })
               person.timeline.unshift(message);
             }
@@ -41,6 +42,7 @@ export default function useUnlockWatch() {
                 title: message.name,
                 content: message.text,
                 meta: message.timestamp,
+                duration: 1000,
               })
               person.timeline.unshift(message);
             }
