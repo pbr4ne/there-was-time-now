@@ -16,7 +16,7 @@ import {
   AnimalTurtle16Regular as BiologyIcon,
 } from '@vicons/fluent'
 
-const scienceList = reactive({
+const scienceList : any = reactive({
   'quantum-mechanics': new Science(
     'quantum-mechanics', 
     'Quantum Mechanics', 
