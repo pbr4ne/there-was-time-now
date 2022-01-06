@@ -5,7 +5,7 @@ export default function useScience() {
   const { expandTime } = useTime();
   const { scienceList } = useInitialize();
 
-  const increment = (key: string) => {
+  const incrementScience = (key: string) => {
     //todo - yuck do this better
     const science = scienceList[key];
     if(!science.isIncrementing) {
@@ -19,7 +19,6 @@ export default function useScience() {
             science.current = 0;
             science.total += 1;
             science.isIncrementing = false;
-            expandTime(2);
           },200);
         }
       },100);
@@ -27,6 +26,6 @@ export default function useScience() {
   };
 
   return {
-    increment,
+    incrementScience,
   };
 }

@@ -1,5 +1,5 @@
 <template>
-  <n-space horizontal style="padding-left: 20px;">
+  <n-space horizontal>
     <n-progress
       type="multiple-circle"
       :percentage="person.scienceList.filter(science => science.isUnlocked).map(({ current }) => current)"
@@ -14,7 +14,7 @@
         v-for="science in person.scienceList.filter(science => science.isUnlocked)"
         :key="science.key"
         :color="science.color"
-        @click="increment(science.key)"
+        @click="incrementScience(science.key)"
       >
         {{science.label}}
       </n-button>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+//TODO - this file is super redundant
 import { defineComponent } from 'vue'
 import { NButton, NProgress, NSpace } from 'naive-ui'
 import { Person } from '@/entities/Person'
@@ -38,10 +39,10 @@ export default defineComponent({
     person: Person,
   },
   setup() {
-    let { increment } = useScience();
+    let { incrementScience } = useScience();
 
     return {
-      increment,
+      incrementScience,
     }
   },
 })
