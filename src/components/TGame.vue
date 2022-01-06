@@ -1,6 +1,6 @@
 <template>
   <n-layout position="absolute">
-    <t-header />
+    <t-game-header />
     <n-layout has-sider>
       <t-sider />
       <t-tabs />
@@ -12,7 +12,7 @@
 <script>
 import { NLayout } from 'naive-ui'
 import TFooter from '@/components/TFooter.vue'
-import THeader from '@/components/THeader.vue'
+import TGameHeader from '@/components/TGameHeader.vue'
 import TSider from '@/components/TSider.vue'
 import TTabs from '@/components/TTabs.vue'
 import { Timeline } from '@/entities/Timeline'
@@ -24,7 +24,7 @@ export default {
   components: {
     NLayout,
     TFooter,
-    THeader,
+    TGameHeader,
     TSider,
     TTabs,
   },
