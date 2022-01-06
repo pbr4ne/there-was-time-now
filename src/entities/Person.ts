@@ -3,6 +3,7 @@ import { Engineering } from '@/entities/Engineering'
 import { Timeline } from '@/entities/Timeline'
 
 export class Person {
+  //todo - do i even need this field
   key: string;
   name: string;
   year: Number;

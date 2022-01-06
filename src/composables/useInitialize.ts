@@ -9,17 +9,23 @@ import {
 } from '@vicons/carbon'
 
 import {
+  AnimalTurtle16Regular as BiologyIcon,
+} from '@vicons/fluent'
+
+import {
+  ComputerOutlined as QuantumComputerIcon
+} from '@vicons/material'
+
+import {
   Atom as QuantumPhysicsIcon,
 } from '@vicons/tabler'
 
-import {
-  AnimalTurtle16Regular as BiologyIcon,
-} from '@vicons/fluent'
+import { EngineeringKey, PersonKey, ScienceKey, UnlockKey } from '@/enum/Constants'
 import { Unlock } from '@/entities/Unlock'
 
 const scienceList : any = reactive({
-  'quantum-mechanics': new Science(
-    'quantum-mechanics', 
+  [ScienceKey.QUANTUM_MECHANICS]: new Science(
+    ScienceKey.QUANTUM_MECHANICS, 
     'Quantum Mechanics', 
     shallowRef(QuantumPhysicsIcon), 
     '#B10DC9', 
@@ -27,14 +33,14 @@ const scienceList : any = reactive({
     //quantum mechanics unlocks young lennox
     //todo - this is a lot of redundant cruft
     [
-      new Unlock('person', 'lennox-young', 'lennox-young', 1, 
-        new Timeline('lennox-young', 'lennox-young-1', 'Young Lennox Unlocked', 
+      new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, 'lennox-young', 1, 
+        new Timeline(PersonKey.LENNOX_YOUNG, 'lennox-young-1', 'Young Lennox Unlocked', 
         'I am Lennox - an inventor. The year is 1934.',  '1934-04-01 05:31:00', false))
     ],
   ),
 
-  'quantum-computing': new Science(
-    'quantum-computing', 
+  [ScienceKey.QUANTUM_COMPUTING]: new Science(
+    ScienceKey.QUANTUM_COMPUTING, 
     'Quantum Computing', 
     shallowRef(QuantumComputingIcon), 
     '#39CCCC', 
@@ -43,29 +49,41 @@ const scienceList : any = reactive({
     [],
   ),
 
-  'biology': new Science(
-    'biology', 
+  [ScienceKey.BIOLOGY]: new Science(
+    ScienceKey.BIOLOGY, 
     'Biology', 
     shallowRef(BiologyIcon), 
     '#F012BE', 
     true,
     //biology unlocks quantum computing
     [
-      new Unlock('science', 'quantum-computing', 'lennox-old', 1,
-        new Timeline('lennox-old','lennox-old-2','Quantum Computing unlocked', 
+      new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 1,
+        new Timeline(PersonKey.LENNOX_OLD,'lennox-old-2','Quantum Computing unlocked', 
         'You can now research Quantum Computing.','1984-05-01 06:42:00', false))
     ],
   ),
-})
+});
+
+const engineeringList : any = reactive({
+  [EngineeringKey.QUANTUM_COMPUTER]: new Science(
+    EngineeringKey.QUANTUM_COMPUTER,
+    'Quantum Computer',
+    shallowRef(QuantumComputerIcon),
+    '#01FF70',
+    false,
+    //no unlocks
+    [],
+   ),
+});
 
 const personList = reactive([
   new Person(
-    'lennox-old', 
+    PersonKey.LENNOX_OLD, 
     'Lennox (1984)', 
     1984, 
     [
-      scienceList['quantum-mechanics'] as Science,
-      scienceList['quantum-computing'] as Science,
+      scienceList[ScienceKey.QUANTUM_MECHANICS] as Science,
+      scienceList[ScienceKey.QUANTUM_COMPUTING] as Science,
     ],
     [],
     [],
@@ -73,21 +91,22 @@ const personList = reactive([
   ),
 
   new Person(
-    'lennox-young',
+    PersonKey.LENNOX_YOUNG,
     'Lennox (1934)',
     1934,
     [
-      scienceList['biology'] as Science
+      scienceList[ScienceKey.BIOLOGY] as Science
     ],
     [],
     [],
     false,
   ),
-])
+]);
 
 export default function useInitialize() {
   return {
     personList,
     scienceList,
+    engineeringList,
   }
 }

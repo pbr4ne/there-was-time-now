@@ -1,6 +1,7 @@
 import { Unlock } from '@/entities/Unlock'
 
 export class Research {
+  //todo - do i even need this field
   key: string;
   label: string;
   icon: Object;
