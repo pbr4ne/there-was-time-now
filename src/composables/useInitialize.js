@@ -79,7 +79,7 @@ let scienceList = reactive([
 let personList = reactive([
   new Person(
     'lennox-old', 
-    'Lennox', 
+    'Lennox (1984)', 
     1984, 
     [
       scienceList.find(science => science.key === 'quantum-mechanics'),
@@ -92,7 +92,7 @@ let personList = reactive([
 
   new Person(
     'lennox-young',
-    'Lennox2',
+    'Lennox (1934)',
     1934,
     [
       scienceList.find(science => science.key === 'biology')
