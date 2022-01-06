@@ -15,6 +15,7 @@ import {
 import {
   AnimalTurtle16Regular as BiologyIcon,
 } from '@vicons/fluent'
+import { Unlock } from '@/entities/Unlock'
 
 const scienceList : any = reactive({
   'quantum-mechanics': new Science(
@@ -24,21 +25,11 @@ const scienceList : any = reactive({
     '#B10DC9', 
     true,
     //quantum mechanics unlocks young lennox
+    //todo - this is a lot of redundant cruft
     [
-      {
-        type: 'person',
-        key: 'lennox-young',
-        person: 'lennox-young',
-        threshold: 1,
-        message: new Timeline(
-          'lennox-young',
-          'lennox-young-1',
-          'Young Lennox Unlocked',
-          'I am Lennox - an inventor. The year is 1934.',
-          '1934-04-01 05:31:00',
-          false,
-        ),
-      }
+      new Unlock('person', 'lennox-young', 'lennox-young', 1, 
+        new Timeline('lennox-young', 'lennox-young-1', 'Young Lennox Unlocked', 
+        'I am Lennox - an inventor. The year is 1934.',  '1934-04-01 05:31:00', false))
     ],
   ),
 
@@ -60,20 +51,9 @@ const scienceList : any = reactive({
     true,
     //biology unlocks quantum computing
     [
-      {
-        type: 'science',
-        key: 'quantum-computing',
-        person: 'lennox-old',
-        threshold: 1,
-        message: new Timeline(
-          'lennox-old',
-          'lennox-old-2',
-          'Quantum Computing unlocked',
-          'You can now research Quantum Computing.',
-          '1984-05-01 06:42:00',
-          false,
-        ),
-      }
+      new Unlock('science', 'quantum-computing', 'lennox-old', 1,
+        new Timeline('lennox-old','lennox-old-2','Quantum Computing unlocked', 
+        'You can now research Quantum Computing.','1984-05-01 06:42:00', false))
     ],
   ),
 })
