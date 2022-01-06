@@ -8,8 +8,9 @@ export default function useUnlockWatch() {
 
   //todo - this is very not good 
   watchEffect(() => {
-    console.log(`========= WATCHING ${scienceList.length} SCIENCES =========`);
-    scienceList.forEach(science => {
+    console.log(`========= WATCHING SCIENCES =========`);
+    for(const scienceKey in scienceList){
+      const science = scienceList[scienceKey];
       console.log(`science ${science.label} (${science.unlocks.length} unlocks)`)
       science.unlocks.forEach(unlock => {
         console.log(`--checking unlock ${unlock.key}`)
@@ -31,7 +32,7 @@ export default function useUnlockWatch() {
               person.timeline.unshift(message);
             }
           } else if(unlock.type === 'science') {
-            const science = scienceList.find(science => science.key === unlock.key);
+            const science = scienceList[unlock.key];
             if(!science.isUnlocked){
               console.log(`------unlocked`)
               science.isUnlocked = true;
@@ -49,7 +50,7 @@ export default function useUnlockWatch() {
           }
         }
       });
-    });
+    }
   });
 
   return {

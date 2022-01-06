@@ -16,8 +16,8 @@ import {
   AnimalTurtle16Regular as BiologyIcon,
 } from '@vicons/fluent'
 
-let scienceList = reactive([
-  new Science(
+let scienceList = reactive({
+  'quantum-mechanics': new Science(
     'quantum-mechanics', 
     'Quantum Mechanics', 
     shallowRef(QuantumPhysicsIcon), 
@@ -41,7 +41,7 @@ let scienceList = reactive([
     ],
   ),
 
-  new Science(
+  'quantum-computing': new Science(
     'quantum-computing', 
     'Quantum Computing', 
     shallowRef(QuantumComputingIcon), 
@@ -51,7 +51,7 @@ let scienceList = reactive([
     [],
   ),
 
-  new Science(
+  'biology': new Science(
     'biology', 
     'Biology', 
     shallowRef(BiologyIcon), 
@@ -74,7 +74,7 @@ let scienceList = reactive([
       }
     ],
   ),
-])
+})
 
 let personList = reactive([
   new Person(
@@ -82,8 +82,8 @@ let personList = reactive([
     'Lennox (1984)', 
     1984, 
     [
-      scienceList.find(science => science.key === 'quantum-mechanics'),
-      scienceList.find(science => science.key === 'quantum-computing'),
+      scienceList['quantum-mechanics'],
+      scienceList['quantum-computing'],
     ],
     [],
     [],
@@ -95,7 +95,7 @@ let personList = reactive([
     'Lennox (1934)',
     1934,
     [
-      scienceList.find(science => science.key === 'biology')
+      scienceList['biology']
     ],
     [],
     [],

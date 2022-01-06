@@ -7,7 +7,7 @@ export default function useScience() {
 
   const increment = (key) => {
     //todo - yuck do this better
-    const science = scienceList.find(science => science.key === key);
+    const science = scienceList[key];
     if(!science.isIncrementing) {
       const timer = setInterval(function() {
         science.isIncrementing = true;
