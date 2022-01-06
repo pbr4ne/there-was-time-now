@@ -65,12 +65,12 @@ import {
   NTimelineItem,
 } from 'naive-ui'
 
-import TTabTop from './TTabTop.vue'
+import TGameTabCard from './TGameTabCard.vue'
 import useScience from '../composables/useScience'
 import useInitialize from '../composables/useInitialize'
 
 function renderTab(person, name, numUnread) {
-  return () => h(TTabTop, { person, name, numUnread });
+  return () => h(TGameTabCard, { person, name, numUnread });
 }
 
 export default defineComponent({
