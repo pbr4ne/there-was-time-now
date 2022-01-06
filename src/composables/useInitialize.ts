@@ -16,7 +16,7 @@ import {
   AnimalTurtle16Regular as BiologyIcon,
 } from '@vicons/fluent'
 
-let scienceList = reactive({
+const scienceList = reactive({
   'quantum-mechanics': new Science(
     'quantum-mechanics', 
     'Quantum Mechanics', 
@@ -36,6 +36,7 @@ let scienceList = reactive({
           'Young Lennox Unlocked',
           'I am Lennox - an inventor. The year is 1934.',
           '1934-04-01 05:31:00',
+          false,
         ),
       }
     ],
@@ -70,13 +71,14 @@ let scienceList = reactive({
           'Quantum Computing unlocked',
           'You can now research Quantum Computing.',
           '1984-05-01 06:42:00',
+          false,
         ),
       }
     ],
   ),
 })
 
-let personList = reactive([
+const personList = reactive([
   new Person(
     'lennox-old', 
     'Lennox (1984)', 
