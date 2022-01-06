@@ -84,8 +84,8 @@ const personList = reactive([
     'Lennox (1984)', 
     1984, 
     [
-      scienceList['quantum-mechanics'],
-      scienceList['quantum-computing'],
+      scienceList['quantum-mechanics'] as Science,
+      scienceList['quantum-computing'] as Science,
     ],
     [],
     [],
@@ -97,7 +97,7 @@ const personList = reactive([
     'Lennox (1934)',
     1934,
     [
-      scienceList['biology']
+      scienceList['biology'] as Science
     ],
     [],
     [],

@@ -5,14 +5,14 @@ import { Timeline } from '@/entities/Timeline'
 export class Person {
   key: String;
   name: String;
-  year: String;
+  year: Number;
   scienceList: Array<Science>;
   engineeringList: Array<Engineering>;
   devicesList: Array<Object>;
   isUnlocked: Boolean;
   timeline: Array<Timeline>;
 
-  constructor(key: String, name: String, year: String, scienceList: Array<Science>, 
+  constructor(key: String, name: String, year: Number, scienceList: Array<Science>, 
     engineeringList: Array<Engineering>, deviceList: Array<Object>, isUnlocked: Boolean) {
     this.key = key;
     this.name = name;
