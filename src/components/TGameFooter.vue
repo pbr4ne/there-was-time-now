@@ -38,7 +38,7 @@ import {
   SettingsOutline as SettingsIcon,
 } from '@vicons/ionicons5'
 
-import useIcon from '../composables/useIcon'
+import useIcon from '@/composables/useIcon'
 
 export default defineComponent({
   components: {

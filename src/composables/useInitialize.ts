@@ -1,8 +1,8 @@
 import { reactive, shallowRef } from 'vue'
 
-import { Person } from '../entities/Person'
-import { Science } from '../entities/Science'
-import { Timeline } from '../entities/Timeline'
+import { Person } from '@/entities/Person'
+import { Science } from '@/entities/Science'
+import { Timeline } from '@/entities/Timeline'
 
 import {
   Chip as QuantumComputingIcon

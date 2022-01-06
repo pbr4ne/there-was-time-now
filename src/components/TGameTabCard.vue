@@ -7,7 +7,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { NBadge } from 'naive-ui'
-import { Person } from '../entities/Person'
+import { Person } from '@/entities/Person'
 
 export default defineComponent({
   components: {

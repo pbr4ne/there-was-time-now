@@ -1,5 +1,5 @@
-import useTime from './useTime'
-import useInitialize from './useInitialize'
+import useTime from '@/composables/useTime'
+import useInitialize from '@/composables/useInitialize'
 
 export default function useScience() {
   const { expandTime } = useTime();

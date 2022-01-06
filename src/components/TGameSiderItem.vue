@@ -4,7 +4,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { Science } from '../entities/Science'
+import { Science } from '@/entities/Science'
 
 export default defineComponent({
   //todo - i don't think you're supposed to do this 

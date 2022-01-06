@@ -34,7 +34,7 @@ import {
   AccessTimeOutlined as TimeIcon
 } from '@vicons/material'
 
-import useTime from '../composables/useTime'
+import useTime from '@/composables/useTime'
 
 export default defineComponent({
   components: {

@@ -23,9 +23,9 @@
 <script>
 import { computed, defineComponent, h, ref } from 'vue'
 import { NLayoutSider, NMenu } from 'naive-ui'
-import TGameSiderItem from './TGameSiderItem.vue'
-import useInitialize from '../composables/useInitialize'
-import useIcon from '../composables/useIcon'
+import TGameSiderItem from '@/components/TGameSiderItem.vue'
+import useInitialize from '@/composables/useInitialize'
+import useIcon from '@/composables/useIcon'
 
 function renderLabel(science) {
   return () => h(TGameSiderItem, { science });

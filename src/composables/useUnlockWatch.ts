@@ -1,7 +1,6 @@
 import { watchEffect } from 'vue'
 import { useNotification } from 'naive-ui'
-import useInitialize from './useInitialize'
-import { Person } from '@/entities/Person'
+import useInitialize from '@/composables/useInitialize'
 import { Unlock } from '@/entities/Unlock'
 
 export default function useUnlockWatch() {
