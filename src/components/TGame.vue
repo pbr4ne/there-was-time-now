@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { NLayout } from 'naive-ui'
+import { NLayout, useNotification } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
@@ -18,7 +18,6 @@ import TGameTabs from '@/components/TGameTabs.vue'
 import { Timeline } from '@/entities/Timeline'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import useInitialize from '@/composables/useInitialize'
-import { useNotification } from 'naive-ui'
 
 export default {
   components: {
@@ -41,6 +40,7 @@ export default {
       '1984',
       'The year is 1984. You are Lennox, a physicist researching the most cutting-edge technology: Quantum Computing! With enough research, you should be able to build your own Quantum Computer. Let’s get started…',
       '1984-03-05 20:24:00',
+      true,
     );
     notification.create({
       title: initialMessage.name,
