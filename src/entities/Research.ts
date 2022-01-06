@@ -1,10 +1,23 @@
 export class Research {
-  constructor(key, label, icon, color, isUnlocked, unlocks) {
+  key: String;
+  label: String;
+  icon: Object;
+  color: String;
+  isUnlocked: Boolean;
+
+  unlocks: Object;
+  total: number;
+  current: number;
+  isIncrementing: Boolean;
+
+  constructor(key: String, label: String, icon: Object, color: String, 
+    isUnlocked: Boolean, unlocks: Object) {
     this.key = key;
     this.label = label;
     this.icon = icon;
     this.color = color;
     this.isUnlocked = isUnlocked;
+
     /* example
       [
         {
