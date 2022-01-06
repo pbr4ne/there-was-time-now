@@ -9,7 +9,7 @@ export default function useScience() {
     //todo - yuck do this better
     const science = scienceList.find(science => science.key === key);
     if(!science.isIncrementing) {
-      let timer = setInterval(function() {
+      const timer = setInterval(function() {
         science.isIncrementing = true;
         //todo - figure out how I want the progress bars to work
         science.current += 10;
