@@ -1,5 +1,6 @@
 import { reactive, shallowRef } from 'vue'
 
+import { Engineering } from '@/entities/Engineering'
 import { Person } from '@/entities/Person'
 import { Science } from '@/entities/Science'
 import { Timeline } from '@/entities/Timeline'
@@ -33,7 +34,7 @@ const scienceList : any = reactive({
     //quantum mechanics unlocks young lennox
     //todo - this is a lot of redundant cruft
     [
-      new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, 'lennox-young', 1, 
+      new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, 
         new Timeline(PersonKey.LENNOX_YOUNG, 'lennox-young-1', 'Young Lennox Unlocked', 
         'I am Lennox - an inventor. The year is 1934.',  '1934-04-01 05:31:00', false))
     ],
@@ -45,8 +46,12 @@ const scienceList : any = reactive({
     shallowRef(QuantumComputingIcon), 
     '#39CCCC', 
     false,
-    //no unlocks
-    [],
+    //quantum computing unlocks quantum computers
+    [
+      new Unlock(UnlockKey.ENGINEERING, EngineeringKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 1,
+        new Timeline(PersonKey.LENNOX_OLD, 'lennox-old-3', 'Quantum Computer Unlocked',
+        'You can now build Quantum Computers.', '1984-06-23 18:04:00', false))
+    ],
   ),
 
   [ScienceKey.BIOLOGY]: new Science(
@@ -85,7 +90,9 @@ const personList = reactive([
       scienceList[ScienceKey.QUANTUM_MECHANICS] as Science,
       scienceList[ScienceKey.QUANTUM_COMPUTING] as Science,
     ],
-    [],
+    [
+      engineeringList[EngineeringKey.QUANTUM_COMPUTER] as Engineering,
+    ],
     [],
     true,
   ),

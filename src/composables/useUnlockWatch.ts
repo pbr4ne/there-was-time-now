@@ -5,9 +5,9 @@ import { Unlock } from '@/entities/Unlock'
 
 export default function useUnlockWatch() {
   const notification = useNotification();
-  const { personList, scienceList } = useInitialize();
+  const { personList, engineeringList, scienceList } = useInitialize();
 
-  //todo - this is very not good 
+  //todo - this is very not good AT ALL
   watchEffect(() => {
     console.log(`========= WATCHING SCIENCES =========`);
     for(const scienceKey in scienceList){
@@ -37,6 +37,22 @@ export default function useUnlockWatch() {
             if(!science.isUnlocked){
               console.log(`------unlocked`)
               science.isUnlocked = true;
+              const person = personList.find(person => person.key === unlock.person);
+              const message = unlock.message;
+              console.log(`--------notification ${message.name}`)
+              notification.create({
+                title: message.name,
+                content: message.text,
+                meta: message.timestamp,
+                duration: 1000,
+              })
+              person?.timeline.unshift(message);
+            }
+          } else if(unlock.type === 'engineering') {
+            const engineering = engineeringList[unlock.key];
+            if(!engineering.isUnlocked){
+              console.log(`------unlocked`)
+              engineering.isUnlocked = true;
               const person = personList.find(person => person.key === unlock.person);
               const message = unlock.message;
               console.log(`--------notification ${message.name}`)

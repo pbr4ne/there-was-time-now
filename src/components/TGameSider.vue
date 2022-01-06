@@ -59,6 +59,18 @@ export default defineComponent({
         key: 'divider-1',
         type: 'divider',
       });
+      //todo THIS IS redundant
+      personList
+        .filter(person => person.isUnlocked)
+        .forEach(person => person.engineeringList
+          .filter(engineering => engineering.isUnlocked)
+          .forEach(engineering => sidebar.push({
+            label: renderLabel(engineering),
+            key: engineering.key,
+            icon: renderIcon(engineering.icon),
+          }))
+        );
+
       return sidebar;
     });
 
