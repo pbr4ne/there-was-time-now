@@ -23,12 +23,12 @@
 <script>
 import { computed, defineComponent, h, ref } from 'vue'
 import { NLayoutSider, NMenu } from 'naive-ui'
-import TMenuItem from './TMenuItem.vue'
+import TGameSiderItem from './TGameSiderItem.vue'
 import useInitialize from '../composables/useInitialize'
 import useIcon from '../composables/useIcon'
 
 function renderLabel(science) {
-  return () => h(TMenuItem, { science });
+  return () => h(TGameSiderItem, { science });
 }
 
 export default defineComponent({
@@ -65,7 +65,7 @@ export default defineComponent({
     return {
       collapsed: ref(collapsed),
       sidebar,
-      TMenuItem,
+      TGameSiderItem,
     }
   },
 })
