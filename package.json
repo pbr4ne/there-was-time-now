@@ -16,6 +16,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "@vicons/carbon": "^0.11.0",
     "@vicons/fa": "^0.11.0",
     "@vicons/fluent": "^0.11.0",
@@ -24,10 +26,13 @@
     "@vicons/material": "^0.11.0",
     "@vue/cli-plugin-babel": "~5.0.0-rc.1",
     "@vue/cli-plugin-eslint": "~5.0.0-rc.1",
+    "@vue/cli-plugin-typescript": "~5.0.0-rc.1",
     "@vue/cli-service": "~5.0.0-rc.1",
+    "@vue/eslint-config-typescript": "^9.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "naive-ui": "^2.23.2",
+    "typescript": "~4.1.5",
     "vfonts": "^0.1.0"
   },
   "eslintConfig": {
@@ -37,10 +42,11 @@
     },
     "extends": [
       "plugin:vue/vue3-essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/typescript"
     ],
     "parserOptions": {
-      "parser": "@babel/eslint-parser"
+      "parser": "@typescript-eslint/parser"
     },
     "rules": {}
   },
