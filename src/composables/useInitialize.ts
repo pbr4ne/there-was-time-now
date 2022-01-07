@@ -26,7 +26,14 @@ import { Person } from '@/entities/Person'
 import { Science } from '@/entities/Science'
 import { Message } from '@/entities/Message'
 import { Unlock } from '@/entities/Unlock'
-import { DeviceKey, EngineeringKey, PersonKey, ScienceKey, UnlockKey } from '@/enum/Constants'
+import { 
+  DeviceKey, 
+  EngineeringKey, 
+  GameConstants, 
+  PersonKey, 
+  ScienceKey, 
+  UnlockKey
+} from '@/enum/Constants'
 
 const scienceList : any = reactive({
   [ScienceKey.QUANTUM_MECHANICS]: new Science(
@@ -143,6 +150,15 @@ const personList:Person[] = reactive([
 ]);
 
 export default function useInitialize() {
+
+  //todo - remove this later
+  if(GameConstants.UNLOCK_ALL) {
+    personList.forEach(person => person.isUnlocked = true);
+    for(const research in researchList) {
+      researchList[research].isUnlocked = true;
+    }
+  }
+
   return {
     deviceList,
     engineeringList,
