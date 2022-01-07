@@ -45,7 +45,7 @@ const scienceList : any = reactive({
     //todo - this is a lot of redundant cruft
     [
       new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, 
-        new Message('lennox-young-1', 'Young Lennox Unlocked', 
+        new Message('Young Lennox Unlocked', 
         'I am Lennox - an inventor. The year is 1934.', '1934-04-01')),
     ],
   ),
@@ -58,7 +58,7 @@ const scienceList : any = reactive({
     //quantum computing unlocks quantum computers
     [
       new Unlock(UnlockKey.ENGINEERING, EngineeringKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 1,
-        new Message('lennox-old-3', 'Quantum Computer Unlocked',
+        new Message('Quantum Computer Unlocked',
         'You can now build Quantum Computers.', '1984-06-23'))
     ],
   ),
@@ -71,7 +71,7 @@ const scienceList : any = reactive({
     //biology unlocks quantum computing
     [
       new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 1,
-        new Message('lennox-old-2','Quantum Computing unlocked', 
+        new Message('Quantum Computing unlocked', 
         'You can now research Quantum Computing.','1984-05-01'))
     ],
   ),
@@ -86,10 +86,10 @@ const engineeringList : any = reactive({
     //no unlocks
     [
       new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
-        new Message('lennox-old-4', 'Crystal Sarcophagus unlocked',
+        new Message('Crystal Sarcophagus unlocked',
         'You can now build the Crystal Sarcophagus.', '1984-07-15')),
       new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 5,
-        new Message('lennox-old-00', 'Whoaaaa',
+        new Message('Whoaaaa',
         'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.',
         '1984-08-01'))
     ],
