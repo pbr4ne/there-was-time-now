@@ -8,23 +8,16 @@ export class Person {
   key: string;
   name: string;
   year: number;
-  scienceList: Array<Science>;
-  engineeringList: Array<Engineering>;
-  deviceList: Array<Device>;
+  scienceList: Array<Science> = new Array<Science>();
+  engineeringList: Array<Engineering> = new Array<Engineering>();
+  deviceList: Array<Device> = new Array<Device>();
   isUnlocked: boolean = false;
-  messageList: Array<Message>;
+  messageList: Array<Message> = new Array<Message>();
 
-  constructor(key: string, name: string, year: number, scienceList: Array<Science>, 
-    engineeringList: Array<Engineering>, deviceList: Array<Device>) {
+  constructor(key: string, name: string, year: number) {
     this.key = key;
     this.name = name;
     this.year = year;
-
-    this.scienceList = scienceList;
-    this.engineeringList = engineeringList;
-    this.deviceList = deviceList;
-
-    this.messageList = new Array<Message>();
   }
 
   numUnread() {

@@ -1,10 +1,9 @@
 import { Research } from '@/entities/Research'
-import { Unlock } from '@/entities/Unlock'
 
 export class Engineering extends Research {
 
-constructor(label: string, icon: Object, color: string, unlocks: Array<Unlock>) {
+constructor(label: string, icon: Object, color: string) {
 
-    super(label, icon, color, unlocks);
+    super(label, icon, color);
   }
 }
