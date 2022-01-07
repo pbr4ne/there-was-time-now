@@ -40,7 +40,7 @@ const scienceList : any = reactive({
     [
       new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, 
         new Timeline(PersonKey.LENNOX_YOUNG, 'lennox-young-1', 'Young Lennox Unlocked', 
-        'I am Lennox - an inventor. The year is 1934.',  '1934-04-01', false))
+        'I am Lennox - an inventor. The year is 1934.',  '1934-04-01', false)),
     ],
   ),
 
@@ -84,7 +84,11 @@ const engineeringList : any = reactive({
     [
       new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
         new Timeline(PersonKey.LENNOX_OLD, 'lennox-old-4', 'Crystal Sarcophagus unlocked',
-        'You can now build the Crystal Sarcophagus.', '1984-07-15', false))
+        'You can now build the Crystal Sarcophagus.', '1984-07-15', false)),
+      new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 5,
+        new Timeline(PersonKey.LENNOX_OLD, 'lennox-old-00', 'Whoaaaa',
+        'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.',
+        '1984-08-01', false))
     ],
    ),
 });

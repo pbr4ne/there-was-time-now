@@ -3,7 +3,7 @@ import { useNotification } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
 import { Person } from '@/entities/Person'
 import { Unlock } from '@/entities/Unlock'
-import { GameConstants } from '@/enum/Constants'
+import { GameConstants, UnlockKey } from '@/enum/Constants'
 
 function unlockResearch(unlock: Unlock, researchList: any, personList: Array<Person>, notification: any) {
   const research = researchList[unlock.key];
@@ -48,12 +48,15 @@ export default function useUnlockWatch() {
               person.isUnlocked = true;
               sendUnlockMessage(unlock, person, notification);
             }
-          } else if(unlock.type === 'science') {
+          } else if(unlock.type === UnlockKey.SCIENCE) {
             unlockResearch(unlock, scienceList, personList, notification);
-          } else if(unlock.type === 'engineering') {
+          } else if(unlock.type === UnlockKey.ENGINEERING) {
             unlockResearch(unlock, engineeringList, personList, notification);
-          } else if(unlock.type === 'device') {
+          } else if(unlock.type === UnlockKey.DEVICE) {
             unlockResearch(unlock, deviceList, personList, notification);
+          } else if(unlock.type === UnlockKey.MESSAGE) {
+            const person = personList.find(person => person.key === unlock.key)!;
+            sendUnlockMessage(unlock, person, notification);
           }
         }
       });

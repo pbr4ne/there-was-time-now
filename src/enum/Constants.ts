@@ -4,6 +4,7 @@ export const UnlockKey = {
     SCIENCE: "science",
     ENGINEERING: "engineering",
     DEVICE: "device",
+    MESSAGE: "message",
 }
 
 export const PersonKey = {
