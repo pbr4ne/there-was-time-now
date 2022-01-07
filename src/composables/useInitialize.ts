@@ -1,7 +1,8 @@
 import { reactive, shallowRef } from 'vue'
 
 import {
-  Chip as QuantumComputingIcon
+  Chip as QuantumComputingIcon,
+  Dna as BiologyIcon
 } from '@vicons/carbon'
 
 import {
@@ -9,7 +10,6 @@ import {
 } from '@vicons/fa'
 
 import {
-  AnimalTurtle16Regular as BiologyIcon,
 } from '@vicons/fluent'
 
 import {
