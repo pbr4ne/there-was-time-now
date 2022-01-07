@@ -13,6 +13,10 @@ import {
 } from '@vicons/fluent'
 
 import {
+  FlaskOutline as ChemistryIcon,
+} from '@vicons/ionicons5'
+
+import {
   ComputerOutlined as QuantumComputerIcon
 } from '@vicons/material'
 
@@ -75,6 +79,19 @@ const scienceList : any = reactive({
         'You can now research Quantum Computing.'))
     ],
   ),
+
+  [ScienceKey.CHEMISTRY]: new Science(
+    'Chemistry', 
+    shallowRef(ChemistryIcon), 
+    '#FF4136', 
+    false,
+    //biology unlocks quantum computing
+    [
+      new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
+        new Message('Crystal Sarcophagus unlocked',
+        'You can now build the Crystal Sarcophagus.')),
+    ],
+  ),
 });
 
 const engineeringList : any = reactive({
@@ -85,9 +102,9 @@ const engineeringList : any = reactive({
     false,
     //no unlocks
     [
-      new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
-        new Message('Crystal Sarcophagus unlocked',
-        'You can now build the Crystal Sarcophagus.')),
+      new Unlock(UnlockKey.SCIENCE, ScienceKey.CHEMISTRY, PersonKey.LENNOX_YOUNG, 1,
+        new Message('Chemistry unlocked',
+        'You can now research Chemistry.')),
       new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 5,
         new Message('Whoaaaa',
         'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.'))
@@ -135,7 +152,8 @@ const personList:Person[] = reactive([
     'Lennox (1934)',
     1934,
     [
-      scienceList[ScienceKey.BIOLOGY] as Science
+      scienceList[ScienceKey.BIOLOGY] as Science,
+      scienceList[ScienceKey.CHEMISTRY] as Science,
     ],
     [],
     [],

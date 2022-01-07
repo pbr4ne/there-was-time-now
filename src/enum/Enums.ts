@@ -15,6 +15,7 @@ export enum ScienceKey {
   QUANTUM_MECHANICS = "quantum-mechanics",
   QUANTUM_COMPUTING = "quantum-computing",
   BIOLOGY = "biology",
+  CHEMISTRY = "chemistry",
 }
 
 export enum EngineeringKey {
