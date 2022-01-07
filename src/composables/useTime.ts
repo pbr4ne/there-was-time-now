@@ -1,19 +1,23 @@
 import { computed, ref } from 'vue'
-import { useTimer } from 'vue-timer-hook'
+import { useTimer, UseTimer } from 'vue-timer-hook'
 
 const time = new Date();
-time.setSeconds(time.getSeconds() + 600);
+time.setSeconds(time.getSeconds() + 300);
 const timer = useTimer(time.getTime());
 
 const expandConstant = ref(1);
 
-export default function useTime() {
-  const timeLeft = computed(() => {
-    let secondsLeft = timer.seconds.value 
+function getSecondsLeft(timer: UseTimer) {
+  return timer.seconds.value 
       + timer.minutes.value*60 
       + timer.hours.value*60*60 
       + timer.days.value*60*60*24;
+}
 
+export default function useTime() {
+
+  const timeLeft = computed(() => {
+    let secondsLeft = getSecondsLeft(timer);
     secondsLeft *= expandConstant.value;
     
     //console.log(`oldSecondsLeft: ${oldSecondsLeft} expandConstant: ${expandConstant.value} new secondsLeft: ${secondsLeft}`);
@@ -22,12 +26,10 @@ export default function useTime() {
   });
 
   const expandTime = (expand: number) => {
+    console.log('expandTime');
     expandConstant.value /= expand;
 
-    const secondsLeft = timer.seconds.value 
-      + timer.minutes.value*60 
-      + timer.hours.value*60*60 
-      + timer.days.value*60*60*24;
+    const secondsLeft = getSecondsLeft(timer);
 
     const newTime = new Date();
     newTime.setSeconds(secondsLeft * expand);
@@ -38,5 +40,6 @@ export default function useTime() {
     expandConstant,
     expandTime,
     timeLeft,
+    timer,
   };
 }
