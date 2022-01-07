@@ -16,9 +16,7 @@ export default function useDevice() {
         if(device.current >= 100) {
           clearInterval(timer);
           setTimeout(function() {
-            device.current = 0;
             device.total += 1;
-            device.isIncrementing = false;
           },200);
         }
       },100);

@@ -95,7 +95,7 @@ const deviceList : any = reactive({
     DeviceKey.CRYSTAL_SARCOPHAGUS,
     'Crystal Sarcophagus',
     shallowRef(CrystalSarcophagusIcon),
-    '#7FDBFF',
+    '#FFDC00',
     false,
     //no unlocks
     [],
@@ -120,7 +120,9 @@ const personList:Person[] = reactive([
     [
       engineeringList[EngineeringKey.QUANTUM_COMPUTER] as Engineering,
     ],
-    [],
+    [
+      deviceList[DeviceKey.CRYSTAL_SARCOPHAGUS] as Device,
+    ],
     true,
   ),
 

@@ -1,16 +1,16 @@
 <template>
-  {{science.label}} <b>{{science.total}}</b>
+  {{research.label}} <b>{{research.total}}</b>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import { Science } from '@/entities/Science'
+import { Research } from '@/entities/Research'
 
 export default defineComponent({
   //todo - i don't think you're supposed to do this 
   // with composition API? but it isn't working the other way
   props: {
-    science: Science,
+    research: Research,
   },
   setup () {
   }

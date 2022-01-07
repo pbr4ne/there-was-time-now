@@ -27,8 +27,8 @@ import TGameSiderItem from '@/components/TGameSiderItem.vue'
 import useInitialize from '@/composables/useInitialize'
 import useIcon from '@/composables/useIcon'
 
-function renderLabel(science) {
-  return () => h(TGameSiderItem, { science });
+function renderLabel(research) {
+  return () => h(TGameSiderItem, { research });
 }
 
 export default defineComponent({
@@ -68,6 +68,20 @@ export default defineComponent({
             label: renderLabel(engineering),
             key: engineering.key,
             icon: renderIcon(engineering.icon),
+          }))
+        );
+      sidebar.push({
+        key: 'divider-2',
+        type: 'divider',
+      });
+      personList
+        .filter(person => person.isUnlocked)
+        .forEach(person => person.deviceList
+          .filter(device => device.isUnlocked)
+          .forEach(device => sidebar.push({
+            label: renderLabel(device),
+            key: device.key,
+            icon: renderIcon(device.icon),
           }))
         );
 
