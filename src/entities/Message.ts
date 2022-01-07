@@ -3,6 +3,7 @@ export class Message {
   text: string;
   timestamp: string = '';
   isRead: boolean = false;
+  wasSent: boolean = false;
 
   constructor(title: string, text: string) {
     this.title = title;

@@ -72,13 +72,12 @@ function associateUnlocksToResearch() {
   //quantum mechanics unlocks young lennox's first science (biology)
   scienceList[ScienceKey.QUANTUM_MECHANICS].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.BIOLOGY, PersonKey.LENNOX_YOUNG, 1, null!));
 
+  scienceList[ScienceKey.QUANTUM_MECHANICS].unlocks.push(new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 2,
+    new Message('Testing Message', 'Testing Message')));
+
   //quantum computing unlocks quantum computer
   scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.ENGINEERING, EngineeringKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 1,
     new Message('Quantum Computer Unlocked', 'You can now build Quantum Computers.')));
-  
-  //new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 5,
-  //new Message('Whoaaaa',
-  //'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.'))
   
   //biology unlocks quantum computing
   scienceList[ScienceKey.BIOLOGY].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 1,
@@ -91,6 +90,10 @@ function associateUnlocksToResearch() {
   //quantum computer unlocks chemistry
   engineeringList[EngineeringKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.CHEMISTRY, PersonKey.LENNOX_YOUNG, 1,
     new Message('Chemistry unlocked', 'You can now research Chemistry.')));
+  //quantum computer = 5 sends a message
+  engineeringList[EngineeringKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 5,
+    new Message('Whoaaaa', 'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.')));
+
 }
 
 function associateResearchToPeople() {

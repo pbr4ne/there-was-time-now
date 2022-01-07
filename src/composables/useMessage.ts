@@ -14,6 +14,13 @@ export default function useMessage() {
     if(!message) {
       return;
     }
+    if(!message.wasSent) {
+      message.wasSent = true;
+    }
+    else {
+      return;
+    }
+
     const d = new Date(person.year, 0);
     d.setDate(d.getDate() + timeElapsed.value);
     message.timestamp = d.toISOString().split('T')[0];

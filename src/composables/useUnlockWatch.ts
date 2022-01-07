@@ -20,6 +20,7 @@ export default function useUnlockWatch() {
 
   //todo - this seems inefficient
   watchEffect(() => {
+    console.log('watch effect');
     for(const researchKey in researchList){
       const research = researchList[researchKey];
       research.unlocks.forEach((unlock : Unlock) => {
