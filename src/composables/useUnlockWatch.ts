@@ -3,7 +3,8 @@ import { useNotification } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
 import { Person } from '@/entities/Person'
 import { Unlock } from '@/entities/Unlock'
-import { GameConstants, UnlockKey } from '@/enum/Constants'
+import { GameConstants } from '@/enum/Constants'
+import { UnlockKey } from '@/enum/Enums'
 
 function unlockResearch(unlock: Unlock, researchList: any, personList: Array<Person>, notification: any) {
   const research = researchList[unlock.key];

@@ -26,14 +26,14 @@ import { Person } from '@/entities/Person'
 import { Science } from '@/entities/Science'
 import { Message } from '@/entities/Message'
 import { Unlock } from '@/entities/Unlock'
+import { GameConstants } from '@/enum/Constants'
 import { 
   DeviceKey, 
   EngineeringKey, 
-  GameConstants, 
   PersonKey, 
   ScienceKey, 
   UnlockKey
-} from '@/enum/Constants'
+} from '@/enum/Enums'
 
 const scienceList : any = reactive({
   [ScienceKey.QUANTUM_MECHANICS]: new Science(
