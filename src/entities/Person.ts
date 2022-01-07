@@ -11,11 +11,11 @@ export class Person {
   scienceList: Array<Science>;
   engineeringList: Array<Engineering>;
   deviceList: Array<Device>;
-  isUnlocked: Boolean;
+  isUnlocked: boolean = false;
   messageList: Array<Message>;
 
   constructor(key: string, name: string, year: number, scienceList: Array<Science>, 
-    engineeringList: Array<Engineering>, deviceList: Array<Device>, isUnlocked: Boolean) {
+    engineeringList: Array<Engineering>, deviceList: Array<Device>) {
     this.key = key;
     this.name = name;
     this.year = year;
@@ -23,8 +23,6 @@ export class Person {
     this.scienceList = scienceList;
     this.engineeringList = engineeringList;
     this.deviceList = deviceList;
-
-    this.isUnlocked = isUnlocked;
 
     this.messageList = new Array<Message>();
   }

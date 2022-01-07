@@ -44,13 +44,14 @@ const scienceList : any = reactive({
     'Quantum Mechanics', 
     shallowRef(QuantumPhysicsIcon), 
     '#B10DC9', 
-    true,
     //quantum mechanics unlocks young lennox
     //todo - this is a lot of redundant cruft
     [
       new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, 
         new Message('Young Lennox Unlocked', 
         'I am Lennox - an inventor. The year is 1934.')),
+      new Unlock(UnlockKey.SCIENCE, ScienceKey.BIOLOGY, PersonKey.LENNOX_YOUNG, 1, 
+        null!),
     ],
   ),
 
@@ -58,7 +59,6 @@ const scienceList : any = reactive({
     'Quantum Computing', 
     shallowRef(QuantumComputingIcon), 
     '#39CCCC', 
-    false,
     //quantum computing unlocks quantum computers
     [
       new Unlock(UnlockKey.ENGINEERING, EngineeringKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 1,
@@ -71,7 +71,6 @@ const scienceList : any = reactive({
     'Biology', 
     shallowRef(BiologyIcon), 
     '#F012BE', 
-    true,
     //biology unlocks quantum computing
     [
       new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 1,
@@ -84,7 +83,6 @@ const scienceList : any = reactive({
     'Chemistry', 
     shallowRef(ChemistryIcon), 
     '#FF4136', 
-    false,
     //biology unlocks quantum computing
     [
       new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
@@ -95,11 +93,10 @@ const scienceList : any = reactive({
 });
 
 const engineeringList : any = reactive({
-  [EngineeringKey.QUANTUM_COMPUTER]: new Science(
+  [EngineeringKey.QUANTUM_COMPUTER]: new Engineering(
     'Quantum Computer',
     shallowRef(QuantumComputerIcon),
     '#01FF70',
-    false,
     //no unlocks
     [
       new Unlock(UnlockKey.SCIENCE, ScienceKey.CHEMISTRY, PersonKey.LENNOX_YOUNG, 1,
@@ -117,7 +114,6 @@ const deviceList : any = reactive({
     'Crystal Sarcophagus',
     shallowRef(CrystalSarcophagusIcon),
     '#FFDC00',
-    false,
     //no unlocks
     [],
   ),
@@ -144,7 +140,6 @@ const personList:Person[] = reactive([
     [
       deviceList[DeviceKey.CRYSTAL_SARCOPHAGUS] as Device,
     ],
-    true,
   ),
 
   new Person(
@@ -157,11 +152,13 @@ const personList:Person[] = reactive([
     ],
     [],
     [],
-    false,
   ),
 ]);
 
 export default function useInitialize() {
+
+  scienceList[ScienceKey.QUANTUM_MECHANICS].isUnlocked = true;
+  personList[0].isUnlocked = true;
 
   //todo - remove this later
   if(GameConstants.UNLOCK_ALL) {

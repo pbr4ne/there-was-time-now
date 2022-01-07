@@ -10,6 +10,10 @@ export default function useMessage() {
 
   function sendUnlockMessage(unlock: Unlock, person: Person) {
     const message = unlock.message;
+    //not every unlock needs a message
+    if(!message) {
+      return;
+    }
     const d = new Date(person.year, 0);
     d.setDate(d.getDate() + timeElapsed.value);
     message.timestamp = d.toISOString().split('T')[0];
