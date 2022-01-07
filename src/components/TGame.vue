@@ -59,7 +59,7 @@ export default {
     initialMessage.isRead = true;
 
     notification.create({
-      title: initialMessage.name,
+      title: initialMessage.title,
       content: initialMessage.text,
       meta: initialMessage.timestamp,
       duration: GameConstants.NOTIFICATION_DURATION,

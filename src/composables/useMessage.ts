@@ -9,7 +9,7 @@ export default function useMessage() {
   function sendUnlockMessage(unlock: Unlock, person: Person) {
     const message = unlock.message;
     notification.create({
-      title: message.name,
+      title: message.title,
       content: message.text,
       meta: message.timestamp,
       duration: GameConstants.NOTIFICATION_DURATION,
