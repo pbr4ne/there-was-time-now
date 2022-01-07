@@ -53,7 +53,7 @@ export default defineComponent({
           .forEach(science => sidebar.push({
             label: renderLabel(science),
             key: science.label,
-            icon: renderIcon(science.icon),
+            icon: renderIcon(science.icon, science.color),
           }))
         );
       sidebar.push({
@@ -68,7 +68,7 @@ export default defineComponent({
           .forEach(engineering => sidebar.push({
             label: renderLabel(engineering),
             key: engineering.label,
-            icon: renderIcon(engineering.icon),
+            icon: renderIcon(engineering.icon, engineering.color),
           }))
         );
       sidebar.push({
@@ -82,7 +82,7 @@ export default defineComponent({
           .forEach(device => sidebar.push({
             label: renderLabel(device),
             key: device.label,
-            icon: renderIcon(device.icon),
+            icon: renderIcon(device.icon, device.color),
           }))
         );
 

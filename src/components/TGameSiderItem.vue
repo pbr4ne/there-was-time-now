@@ -1,5 +1,5 @@
 <template>
-  {{research.label}} <b>{{research.total}}</b>
+  {{research.label}} <b :style="{ color: research.color }">{{research.total}}</b>
 </template>
 
 <script>
