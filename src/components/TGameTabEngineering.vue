@@ -5,7 +5,7 @@
       :percentage="person.engineeringList.filter(engineering => engineering.isUnlocked).map(({ current }) => current)"
       :color="person.engineeringList.filter(engineering => engineering.isUnlocked).map(({ color }) => color)"
     >
-      Engineering
+      <h3>Engineering</h3>
     </n-progress>
     <n-space vertical>
       <n-button 
