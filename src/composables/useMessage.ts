@@ -13,7 +13,6 @@ export default function useMessage() {
     const d = new Date(person.year, 0);
     d.setDate(d.getDate() + timeElapsed.value);
     message.timestamp = d.toISOString().split('T')[0];
-    console.log(message.timestamp);
     notification.create({
       title: message.title,
       content: message.text,
