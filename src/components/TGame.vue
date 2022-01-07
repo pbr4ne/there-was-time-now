@@ -7,23 +7,35 @@
     </n-layout>
     <t-game-footer />
   </n-layout>
+  <n-modal 
+    v-model:show="showGameOverModal"
+    :mask-closable="false"
+    preset="dialog"
+    positive-text="Dang"
+    @positive-click="onPositiveClick"
+  >
+    GAME OVER
+    #OUTATIME
+  </n-modal>
 </template>
 
 <script>
-import { watchEffect } from 'vue'
-import { NLayout, useNotification } from 'naive-ui'
+import { ref, watchEffect } from 'vue'
+import { NLayout, NModal, useNotification } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
 import TGameTabs from '@/components/TGameTabs.vue'
-import { Timeline } from '@/entities/Timeline'
 import useTime from '@/composables/useTime'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import useInitialize from '@/composables/useInitialize'
+import { Timeline } from '@/entities/Timeline'
+import { GameConstants } from '@/enum/Constants'
 
 export default {
   components: {
     NLayout,
+    NModal,
     TGameFooter,
     TGameHeader,
     TGameSider,
@@ -36,6 +48,7 @@ export default {
     const notification = useNotification();
     const { personList } = useInitialize();
     const { timer } = useTime();
+    const showGameOverModalRef = ref(false);
 
     let initialMessage = new Timeline(
       'lennox-old',
@@ -49,25 +62,21 @@ export default {
       title: initialMessage.name,
       content: initialMessage.text,
       meta: initialMessage.timestamp,
-      duration: 1000,
+      duration: GameConstants.NOTIFICATION_DURATION,
     });
     personList.find(person => person.key === 'lennox-old').timeline.push(initialMessage);
 
     watchEffect(async() => {
-      console.log('hi');
         if(timer.isExpired.value) {
-          console.log('WORLD ENDED');
-          notification.create({
-            title: 'WORLD ENDED',
-            content: 'OOPS YOU TOOK TOO LONG',
-            meta: 'down low too slow',
-            duration: 5000,
-          });
-          personList.length = 0;
+          showGameOverModalRef.value = true;
         }
     });
 
     return {
+      onPositiveClick () {
+        showGameOverModalRef.value = false;
+      },
+      showGameOverModal: showGameOverModalRef,
     };
   }
 }

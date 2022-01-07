@@ -3,6 +3,7 @@ import { useNotification } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
 import { Person } from '@/entities/Person'
 import { Unlock } from '@/entities/Unlock'
+import { GameConstants } from '@/enum/Constants'
 
 function unlockResearch(unlock: Unlock, researchList: any, personList: Array<Person>, notification: any) {
   const research = researchList[unlock.key];
@@ -21,7 +22,7 @@ function sendUnlockMessage(unlock: Unlock, person: Person, notification: any) {
     title: message.name,
     content: message.text,
     meta: message.timestamp,
-    duration: 1000,
+    duration: GameConstants.NOTIFICATION_DURATION,
   })
   person.timeline.unshift(message);
 }

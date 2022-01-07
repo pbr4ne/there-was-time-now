@@ -1,8 +1,9 @@
 import { computed, ref } from 'vue'
 import { useTimer, UseTimer } from 'vue-timer-hook'
+import { GameConstants } from '@/enum/Constants'
 
 const time = new Date();
-time.setSeconds(time.getSeconds() + 300);
+time.setSeconds(time.getSeconds() + GameConstants.INITAL_TIME);
 const timer = useTimer(time.getTime());
 
 const expandConstant = ref(1);

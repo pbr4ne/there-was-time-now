@@ -1,3 +1,4 @@
+//todo - why did i put this in enum when there aren't any enums
 export const UnlockKey = {
     PERSON : "person",
     SCIENCE: "science",
@@ -22,4 +23,9 @@ export const EngineeringKey = {
 
 export const DeviceKey = {
   CRYSTAL_SARCOPHAGUS: "crystal-sarcophagus",
+}
+
+export const GameConstants = {
+  INITAL_TIME: 300,
+  NOTIFICATION_DURATION: 1000,
 }
