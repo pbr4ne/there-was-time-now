@@ -8,7 +8,7 @@
       <n-timeline>
         <n-timeline-item 
           v-for="message in person.messageList" 
-          :key="message.key"
+          :key="message.label"
           :title="message.name"
           :content="message.text"
           :time="message.timestamp"

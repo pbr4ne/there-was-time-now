@@ -12,9 +12,9 @@
         ghost
         round
         v-for="science in person.scienceList.filter(science => science.isUnlocked)"
-        :key="science.key"
+        :key="science.label"
         :color="science.color"
-        @click="incrementScience(science.key)"
+        @click="incrementScience(science)"
       >
         {{science.label}}
       </n-button>

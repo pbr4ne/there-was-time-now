@@ -2,20 +2,18 @@ import { Unlock } from '@/entities/Unlock'
 
 export class Research {
   //todo - do i even need this field
-  key: string;
   label: string;
   icon: Object;
   color: string;
   isUnlocked: Boolean;
 
   unlocks: Array<Unlock>;
-  total: Number;
-  current: Number;
+  total: number;
+  current: number;
   isIncrementing: Boolean;
 
-  constructor(key: string, label: string, icon: Object, color: string, 
+  constructor(label: string, icon: Object, color: string, 
     isUnlocked: Boolean, unlocks: Array<Unlock>) {
-    this.key = key;
     this.label = label;
     this.icon = icon;
     this.color = color;

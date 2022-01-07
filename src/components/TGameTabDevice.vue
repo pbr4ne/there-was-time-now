@@ -9,7 +9,7 @@
         :fill-border-radius="0"
         :color="device.color"
         style="cursor: pointer;"
-        @click="incrementDevice(device.key)"
+        @click="incrementDevice(device)"
       />
   </n-card>
 </template>

@@ -37,7 +37,6 @@ import {
 
 const scienceList : any = reactive({
   [ScienceKey.QUANTUM_MECHANICS]: new Science(
-    ScienceKey.QUANTUM_MECHANICS, 
     'Quantum Mechanics', 
     shallowRef(QuantumPhysicsIcon), 
     '#B10DC9', 
@@ -52,7 +51,6 @@ const scienceList : any = reactive({
   ),
 
   [ScienceKey.QUANTUM_COMPUTING]: new Science(
-    ScienceKey.QUANTUM_COMPUTING, 
     'Quantum Computing', 
     shallowRef(QuantumComputingIcon), 
     '#39CCCC', 
@@ -66,7 +64,6 @@ const scienceList : any = reactive({
   ),
 
   [ScienceKey.BIOLOGY]: new Science(
-    ScienceKey.BIOLOGY, 
     'Biology', 
     shallowRef(BiologyIcon), 
     '#F012BE', 
@@ -82,7 +79,6 @@ const scienceList : any = reactive({
 
 const engineeringList : any = reactive({
   [EngineeringKey.QUANTUM_COMPUTER]: new Science(
-    EngineeringKey.QUANTUM_COMPUTER,
     'Quantum Computer',
     shallowRef(QuantumComputerIcon),
     '#01FF70',
@@ -102,7 +98,6 @@ const engineeringList : any = reactive({
 
 const deviceList : any = reactive({
   [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device(
-    DeviceKey.CRYSTAL_SARCOPHAGUS,
     'Crystal Sarcophagus',
     shallowRef(CrystalSarcophagusIcon),
     '#FFDC00',

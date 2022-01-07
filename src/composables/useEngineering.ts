@@ -1,13 +1,11 @@
 import useTime from '@/composables/useTime'
-import useInitialize from '@/composables/useInitialize'
+import { Engineering } from '@/entities/Engineering'
 
 export default function useEngineering() {
   const { expandTime } = useTime();
-  const { engineeringList } = useInitialize();
 
-  const incrementEngineering = (key: string) => {
+  const incrementEngineering = (engineering: Engineering) => {
     //todo - yuck do this better
-    const engineering = engineeringList[key];
     if(!engineering.isIncrementing) {
       const timer = setInterval(function() {
         engineering.isIncrementing = true;

@@ -1,13 +1,8 @@
-import useTime from '@/composables/useTime'
-import useInitialize from '@/composables/useInitialize'
+import { Device } from '@/entities/Device'
 
 export default function useDevice() {
-  const { expandTime } = useTime();
-  const { deviceList } = useInitialize();
-
-  const incrementDevice = (key: string) => {
+  const incrementDevice = (device: Device) => {
     //todo - yuck do this better
-    const device = deviceList[key];
     if(!device.isIncrementing) {
       const timer = setInterval(function() {
         device.isIncrementing = true;

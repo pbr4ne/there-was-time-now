@@ -12,9 +12,9 @@
         ghost
         round
         v-for="engineering in person.engineeringList.filter(engineering => engineering.isUnlocked)"
-        :key="engineering.key"
+        :key="engineering.label"
         :color="engineering.color"
-        @click="incrementEngineering(engineering.key)"
+        @click="incrementEngineering(engineering)"
       >
         {{engineering.label}}
       </n-button>

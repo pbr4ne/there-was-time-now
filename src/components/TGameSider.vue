@@ -21,6 +21,7 @@
 </template>
 
 <script>
+/*eslint-disable*/
 import { computed, defineComponent, h, ref } from 'vue'
 import { NLayoutSider, NMenu } from 'naive-ui'
 import TGameSiderItem from '@/components/TGameSiderItem.vue'
@@ -51,7 +52,7 @@ export default defineComponent({
           .filter(science => science.isUnlocked)
           .forEach(science => sidebar.push({
             label: renderLabel(science),
-            key: science.key,
+            key: science.label,
             icon: renderIcon(science.icon),
           }))
         );
@@ -66,7 +67,7 @@ export default defineComponent({
           .filter(engineering => engineering.isUnlocked)
           .forEach(engineering => sidebar.push({
             label: renderLabel(engineering),
-            key: engineering.key,
+            key: engineering.label,
             icon: renderIcon(engineering.icon),
           }))
         );
@@ -80,7 +81,7 @@ export default defineComponent({
           .filter(device => device.isUnlocked)
           .forEach(device => sidebar.push({
             label: renderLabel(device),
-            key: device.key,
+            key: device.label,
             icon: renderIcon(device.icon),
           }))
         );
