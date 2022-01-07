@@ -29,7 +29,7 @@ import TGameTabs from '@/components/TGameTabs.vue'
 import useTime from '@/composables/useTime'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import useInitialize from '@/composables/useInitialize'
-import { Timeline } from '@/entities/Timeline'
+import { Message } from '@/entities/Message'
 import { GameConstants } from '@/enum/Constants'
 
 export default {
@@ -50,7 +50,7 @@ export default {
     const { timer } = useTime();
     const showGameOverModalRef = ref(false);
 
-    let initialMessage = new Timeline(
+    let initialMessage = new Message(
       'lennox-old',
       'lennox-old-1',
       '1984',
@@ -64,7 +64,7 @@ export default {
       meta: initialMessage.timestamp,
       duration: GameConstants.NOTIFICATION_DURATION,
     });
-    personList.find(person => person.key === 'lennox-old').timeline.push(initialMessage);
+    personList.find(person => person.key === 'lennox-old').messageList.push(initialMessage);
 
     watchEffect(async() => {
         if(timer.isExpired.value) {

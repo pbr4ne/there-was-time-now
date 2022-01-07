@@ -24,7 +24,7 @@ function sendUnlockMessage(unlock: Unlock, person: Person, notification: any) {
     meta: message.timestamp,
     duration: GameConstants.NOTIFICATION_DURATION,
   })
-  person.timeline.unshift(message);
+  person.messageList.unshift(message);
 }
 
 export default function useUnlockWatch() {

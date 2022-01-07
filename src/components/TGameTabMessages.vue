@@ -7,11 +7,11 @@
     <n-collapse-transition :show="show">
       <n-timeline>
         <n-timeline-item 
-          v-for="timeline in person.timeline" 
-          :key="timeline.key"
-          :title="timeline.name"
-          :content="timeline.text"
-          :time="timeline.timestamp"
+          v-for="message in person.messageList" 
+          :key="message.key"
+          :title="message.name"
+          :content="message.text"
+          :time="message.timestamp"
         />
       </n-timeline>
     </n-collapse-transition>

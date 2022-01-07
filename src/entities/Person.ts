@@ -1,7 +1,7 @@
 import { Device } from '@/entities/Device'
 import { Engineering } from '@/entities/Engineering'
 import { Science } from '@/entities/Science'
-import { Timeline } from '@/entities/Timeline'
+import { Message } from '@/entities/Message'
 
 export class Person {
   //todo - do i even need this field
@@ -12,7 +12,7 @@ export class Person {
   engineeringList: Array<Engineering>;
   deviceList: Array<Device>;
   isUnlocked: Boolean;
-  timeline: Array<Timeline>;
+  messageList: Array<Message>;
 
   constructor(key: string, name: string, year: Number, scienceList: Array<Science>, 
     engineeringList: Array<Engineering>, deviceList: Array<Device>, isUnlocked: Boolean) {
@@ -26,12 +26,12 @@ export class Person {
 
     this.isUnlocked = isUnlocked;
 
-    this.timeline = new Array<Timeline>();
+    this.messageList = new Array<Message>();
   }
 
   numUnread() {
     let count = 0;
-    this.timeline.forEach(t => {
+    this.messageList.forEach(t => {
       if(!t.isRead) {
         count++;
       }
@@ -40,6 +40,6 @@ export class Person {
   }
 
   markRead() {
-    this.timeline.forEach(t => {t.isRead = true;});
+    this.messageList.forEach(t => {t.isRead = true;});
   }
 }

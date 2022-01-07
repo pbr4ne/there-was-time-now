@@ -1,4 +1,4 @@
-export class Timeline {
+export class Message {
   personKey: string;
   key: string;
   name: string;
