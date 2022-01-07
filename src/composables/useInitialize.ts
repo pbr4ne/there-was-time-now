@@ -1,5 +1,6 @@
 import { reactive, shallowRef } from 'vue'
 
+import { Device } from '@/entities/Device'
 import { Engineering } from '@/entities/Engineering'
 import { Person } from '@/entities/Person'
 import { Science } from '@/entities/Science'
@@ -8,6 +9,10 @@ import { Timeline } from '@/entities/Timeline'
 import {
   Chip as QuantumComputingIcon
 } from '@vicons/carbon'
+
+import {
+  GemRegular as CrystalSarcophagusIcon,
+} from '@vicons/fa'
 
 import {
   AnimalTurtle16Regular as BiologyIcon,
@@ -21,7 +26,7 @@ import {
   Atom as QuantumPhysicsIcon,
 } from '@vicons/tabler'
 
-import { EngineeringKey, PersonKey, ScienceKey, UnlockKey } from '@/enum/Constants'
+import { DeviceKey, EngineeringKey, PersonKey, ScienceKey, UnlockKey } from '@/enum/Constants'
 import { Unlock } from '@/entities/Unlock'
 
 const scienceList : any = reactive({
@@ -77,11 +82,33 @@ const engineeringList : any = reactive({
     '#01FF70',
     false,
     //no unlocks
-    [],
+    [
+      new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
+        new Timeline(PersonKey.LENNOX_OLD, 'lennox-old-4', 'Crystal Sarcophagus unlocked',
+        'You can now build the Crystal Sarcophagus.', '1984-07-15 11:11:00', false))
+    ],
    ),
 });
 
-const personList = reactive([
+const deviceList : any = reactive({
+  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device(
+    DeviceKey.CRYSTAL_SARCOPHAGUS,
+    'Crystal Sarcophagus',
+    shallowRef(CrystalSarcophagusIcon),
+    '#7FDBFF',
+    false,
+    //no unlocks
+    [],
+  ),
+});
+
+const researchList : any = reactive({
+  ...scienceList,
+  ...engineeringList,
+  ...deviceList,
+})
+
+const personList:Person[] = reactive([
   new Person(
     PersonKey.LENNOX_OLD, 
     'Lennox (1984)', 
@@ -112,8 +139,10 @@ const personList = reactive([
 
 export default function useInitialize() {
   return {
-    personList,
-    scienceList,
+    deviceList,
     engineeringList,
+    personList,
+    researchList,
+    scienceList,
   }
 }

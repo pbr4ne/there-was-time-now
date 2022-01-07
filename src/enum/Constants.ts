@@ -2,6 +2,7 @@ export const UnlockKey = {
     PERSON : "person",
     SCIENCE: "science",
     ENGINEERING: "engineering",
+    DEVICE: "device",
 }
 
 export const PersonKey = {
@@ -17,4 +18,8 @@ export const ScienceKey = {
 
 export const EngineeringKey = {
   QUANTUM_COMPUTER: "quantum-computer",
+}
+
+export const DeviceKey = {
+  CRYSTAL_SARCOPHAGUS: "crystal-sarcophagus",
 }
