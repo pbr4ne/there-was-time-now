@@ -47,7 +47,7 @@ const scienceList : any = reactive({
     [
       new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, 
         new Message(PersonKey.LENNOX_YOUNG, 'lennox-young-1', 'Young Lennox Unlocked', 
-        'I am Lennox - an inventor. The year is 1934.',  '1934-04-01', false)),
+        'I am Lennox - an inventor. The year is 1934.', '1934-04-01', false)),
     ],
   ),
 
