@@ -56,8 +56,9 @@ export default {
       '1984',
       'The year is 1984. You are Lennox, a physicist researching the most cutting-edge technology: Quantum Computing! With enough research, you should be able to build your own Quantum Computer. Let’s get started…',
       '1984-03-05',
-      true,
     );
+    initialMessage.isRead = true;
+    
     notification.create({
       title: initialMessage.name,
       content: initialMessage.text,

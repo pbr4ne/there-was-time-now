@@ -4,15 +4,14 @@ export class Message {
   name: string;
   text: string;
   timestamp: string;
-  isRead: Boolean;
+  isRead: boolean = false;
 
   constructor(personKey: string, key: string, name: string, text: string, 
-    timestamp: string, isRead: boolean) {
+    timestamp: string) {
     this.personKey = personKey;
     this.key = key;
     this.name = name;
     this.text = text;
     this.timestamp = timestamp;
-    this.isRead = isRead;
   }
 }
