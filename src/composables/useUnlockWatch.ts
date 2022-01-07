@@ -24,7 +24,7 @@ export default function useUnlockWatch() {
       const research = researchList[researchKey];
       research.unlocks.forEach((unlock : Unlock) => {
         if(research.total >= unlock.threshold) {
-          if(unlock.type === 'person') {
+          if(unlock.type === UnlockKey.PERSON) {
             const person = personList.find(person => person.key === unlock.key)!;
             if(!person.isUnlocked) {
               person.isUnlocked = true;
