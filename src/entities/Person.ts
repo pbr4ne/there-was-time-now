@@ -7,14 +7,14 @@ export class Person {
   //todo - do i even need this field
   key: string;
   name: string;
-  year: Number;
+  year: number;
   scienceList: Array<Science>;
   engineeringList: Array<Engineering>;
   deviceList: Array<Device>;
   isUnlocked: Boolean;
   messageList: Array<Message>;
 
-  constructor(key: string, name: string, year: Number, scienceList: Array<Science>, 
+  constructor(key: string, name: string, year: number, scienceList: Array<Science>, 
     engineeringList: Array<Engineering>, deviceList: Array<Device>, isUnlocked: Boolean) {
     this.key = key;
     this.name = name;

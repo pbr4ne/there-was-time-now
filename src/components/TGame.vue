@@ -53,10 +53,10 @@ export default {
     let initialMessage = new Message(
       '1984',
       'The year is 1984. You are Lennox, a physicist researching the most cutting-edge technology: Quantum Computing! With enough research, you should be able to build your own Quantum Computer. Let’s get started…',
-      '1984-03-05',
     );
     initialMessage.isRead = true;
-
+    initialMessage.timestamp = '1984-01-01';
+    
     notification.create({
       title: initialMessage.title,
       content: initialMessage.text,

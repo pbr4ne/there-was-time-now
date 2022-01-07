@@ -10,24 +10,28 @@ const expandConstant = ref(1);
 
 function getSecondsLeft(timer: UseTimer) {
   return timer.seconds.value 
-      + timer.minutes.value*60 
-      + timer.hours.value*60*60 
-      + timer.days.value*60*60*24;
+      + timer.minutes.value * 60 
+      + timer.hours.value * 3600
+      + timer.days.value * 86400;
 }
 
 export default function useTime() {
+
+  const timeElapsed = computed(() => {
+    return GameConstants.INITAL_TIME - timeLeft.value;
+  });
 
   const timeLeft = computed(() => {
     let secondsLeft = getSecondsLeft(timer);
     secondsLeft *= expandConstant.value;
     
-    //console.log(`oldSecondsLeft: ${oldSecondsLeft} expandConstant: ${expandConstant.value} new secondsLeft: ${secondsLeft}`);
+    //console.log(`oldSecondsLeft: ${oldSecondsLeft} 
+    //expandConstant: ${expandConstant.value} new secondsLeft: ${secondsLeft}`);
 
     return Math.round(secondsLeft);
   });
 
   const expandTime = (expand: number) => {
-    console.log('expandTime');
     expandConstant.value /= expand;
 
     const secondsLeft = getSecondsLeft(timer);
@@ -40,6 +44,7 @@ export default function useTime() {
   return {
     expandConstant,
     expandTime,
+    timeElapsed,
     timeLeft,
     timer,
   };

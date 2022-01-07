@@ -18,7 +18,7 @@ export default function useUnlockWatch() {
   const { sendUnlockMessage } = useMessage();
   const { deviceList, engineeringList, personList, researchList, scienceList } = useInitialize();
 
-  //todo - this is very not good AT ALL
+  //todo - this seems inefficient
   watchEffect(() => {
     for(const researchKey in researchList){
       const research = researchList[researchKey];

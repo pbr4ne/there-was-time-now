@@ -1,13 +1,19 @@
 import { useNotification } from 'naive-ui'
+import useTime from '@/composables/useTime'
 import { GameConstants } from '@/enum/Constants'
 import { Person } from '@/entities/Person'
 import { Unlock } from '@/entities/Unlock'
 
 export default function useMessage() {
   const notification = useNotification();
+  const { timeElapsed } = useTime();
 
   function sendUnlockMessage(unlock: Unlock, person: Person) {
     const message = unlock.message;
+    const d = new Date(person.year, 0);
+    d.setDate(d.getDate() + timeElapsed.value);
+    message.timestamp = d.toISOString().split('T')[0];
+    console.log(message.timestamp);
     notification.create({
       title: message.title,
       content: message.text,
