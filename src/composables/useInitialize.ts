@@ -1,11 +1,5 @@
 import { reactive, shallowRef } from 'vue'
 
-import { Device } from '@/entities/Device'
-import { Engineering } from '@/entities/Engineering'
-import { Person } from '@/entities/Person'
-import { Science } from '@/entities/Science'
-import { Timeline } from '@/entities/Timeline'
-
 import {
   Chip as QuantumComputingIcon
 } from '@vicons/carbon'
@@ -26,8 +20,13 @@ import {
   Atom as QuantumPhysicsIcon,
 } from '@vicons/tabler'
 
-import { DeviceKey, EngineeringKey, PersonKey, ScienceKey, UnlockKey } from '@/enum/Constants'
+import { Device } from '@/entities/Device'
+import { Engineering } from '@/entities/Engineering'
+import { Person } from '@/entities/Person'
+import { Science } from '@/entities/Science'
+import { Timeline } from '@/entities/Timeline'
 import { Unlock } from '@/entities/Unlock'
+import { DeviceKey, EngineeringKey, PersonKey, ScienceKey, UnlockKey } from '@/enum/Constants'
 
 const scienceList : any = reactive({
   [ScienceKey.QUANTUM_MECHANICS]: new Science(
@@ -41,7 +40,7 @@ const scienceList : any = reactive({
     [
       new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, 
         new Timeline(PersonKey.LENNOX_YOUNG, 'lennox-young-1', 'Young Lennox Unlocked', 
-        'I am Lennox - an inventor. The year is 1934.',  '1934-04-01 05:31:00', false))
+        'I am Lennox - an inventor. The year is 1934.',  '1934-04-01', false))
     ],
   ),
 
@@ -55,7 +54,7 @@ const scienceList : any = reactive({
     [
       new Unlock(UnlockKey.ENGINEERING, EngineeringKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 1,
         new Timeline(PersonKey.LENNOX_OLD, 'lennox-old-3', 'Quantum Computer Unlocked',
-        'You can now build Quantum Computers.', '1984-06-23 18:04:00', false))
+        'You can now build Quantum Computers.', '1984-06-23', false))
     ],
   ),
 
@@ -69,7 +68,7 @@ const scienceList : any = reactive({
     [
       new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 1,
         new Timeline(PersonKey.LENNOX_OLD,'lennox-old-2','Quantum Computing unlocked', 
-        'You can now research Quantum Computing.','1984-05-01 06:42:00', false))
+        'You can now research Quantum Computing.','1984-05-01', false))
     ],
   ),
 });
@@ -85,7 +84,7 @@ const engineeringList : any = reactive({
     [
       new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
         new Timeline(PersonKey.LENNOX_OLD, 'lennox-old-4', 'Crystal Sarcophagus unlocked',
-        'You can now build the Crystal Sarcophagus.', '1984-07-15 11:11:00', false))
+        'You can now build the Crystal Sarcophagus.', '1984-07-15', false))
     ],
    ),
 });
