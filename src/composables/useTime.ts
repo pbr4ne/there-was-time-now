@@ -53,8 +53,6 @@ countdownTimer.create();
 countupTimer.create();
 const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
 
-//todo - this doesn't math the way i want. the "days left" should stay
-//basically the same
 function expandTime(expand: number) {
   if(countdownTimer.isRunning()) {
     expandConstant.value /= expand;
@@ -62,7 +60,7 @@ function expandTime(expand: number) {
     const secondsLeft = countdownTimer.secondsLeft();
 
     const newTime = new Date();
-    newTime.setSeconds(secondsLeft * expand);
+    newTime.setSeconds(newTime.getSeconds() + (secondsLeft * expand));
 
     countdownTimer.restart(newTime.getTime());
   }
