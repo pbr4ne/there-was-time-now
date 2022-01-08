@@ -7,8 +7,8 @@
       :tab="renderTab(person)"
     >
       <n-space horizontal style="padding: 20px">
-        <t-game-tab-science :person="person" v-if="person.scienceList.filter(science => science.isUnlocked).length > 0" />
-        <t-game-tab-engineering :person="person" v-if="person.engineeringList.filter(engineering => engineering.isUnlocked).length > 0" />
+        <t-game-research label="Science" :researchList="person.scienceList" v-if="person.scienceList.filter(science => science.isUnlocked).length > 0" />
+        <t-game-research label="Engineering" :researchList="person.engineeringList" v-if="person.engineeringList.filter(engineering => engineering.isUnlocked).length > 0" />
       </n-space>
       <n-space horizontal style="padding: 20px">
         <t-game-tab-device 
@@ -33,9 +33,8 @@ import {
 
 import TGameTabCard from '@/components/TGameTabCard.vue'
 import TGameTabDevice from '@/components/TGameTabDevice.vue'
-import TGameTabEngineering from '@/components/TGameTabEngineering.vue'
 import TGameTabMessages from '@/components/TGameTabMessages.vue'
-import TGameTabScience from '@/components/TGameTabScience.vue'
+import TGameResearch from '@/components/TGameResearch.vue'
 import useInitialize from '@/composables/useInitialize'
 
 function renderTab(person, name, numUnread) {
@@ -47,10 +46,9 @@ export default defineComponent({
     NTabs,
     NTabPane,
     NSpace,
-    TGameTabEngineering,
     TGameTabDevice,
     TGameTabMessages,
-    TGameTabScience,
+    TGameResearch,
   },
   setup() {
     let { personList } = useInitialize();
