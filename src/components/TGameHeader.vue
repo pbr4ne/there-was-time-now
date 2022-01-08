@@ -1,17 +1,17 @@
 <template>
   <n-layout-header bordered style="padding-top: 5px;">
-    <n-space justify="end">
-
-      <n-statistic label="Time Expansion">
+    <n-space justify="end" style="height: 72.8px">
+      <span></span>
+      <n-statistic label="Time Expansion" v-if="endOfWorldTimer.isRunning.value">
         {{expandConstant}}
       </n-statistic>
 
-      <n-statistic label="Days Left">
+      <n-statistic label="Days Left" v-if="endOfWorldTimer.isRunning.value">
         {{timeLeft}}
       </n-statistic>
 
       <!-- eslint-disable-next-line vue/valid-v-slot -->
-      <n-spin #icon style="vertical-align: middle;">
+      <n-spin #icon style="vertical-align: middle;" v-if="endOfWorldTimer.isRunning.value">
         <n-icon><time-icon /></n-icon>
       </n-spin>
 
@@ -46,8 +46,9 @@ export default defineComponent({
     TimeIcon,
   },
   setup() {
-    const { expandConstant, timeLeft } = useTime();
+    const { endOfWorldTimer, expandConstant, timeLeft } = useTime();
     return {
+      endOfWorldTimer,
       expandConstant,
       timeLeft,
     }

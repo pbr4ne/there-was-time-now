@@ -2,10 +2,11 @@ import { computed, ref } from 'vue'
 import { useTimer, UseTimer } from 'vue-timer-hook'
 import { GameConstants } from '@/enum/Constants'
 
+//todo - this is a mess
+
 const time = new Date();
 time.setSeconds(time.getSeconds() + GameConstants.INITAL_TIME);
-const endOfWorldTimer = useTimer(time.getTime());
-
+const endOfWorldTimer = useTimer(time.getTime(), false);
 const expandConstant = ref(1);
 
 function getSecondsLeft(endOfWorldTimer: UseTimer) {
@@ -21,6 +22,10 @@ export default function useTime() {
     return GameConstants.INITAL_TIME - timeLeft.value;
   });
 
+  const startEndOfWorldTimer = () => {
+    endOfWorldTimer.start();
+  };
+
   const timeLeft = computed(() => {
     let secondsLeft = getSecondsLeft(endOfWorldTimer);
     secondsLeft *= expandConstant.value;
@@ -31,20 +36,26 @@ export default function useTime() {
     return Math.round(secondsLeft);
   });
 
+  //todo - this doesn't quite math the way i want. the "days left" should stay
+  //basically the same
   const expandTime = (expand: number) => {
-    expandConstant.value /= expand;
+    if(endOfWorldTimer.isRunning.value) {
+      expandConstant.value /= expand;
 
-    const secondsLeft = getSecondsLeft(endOfWorldTimer);
+      const secondsLeft = getSecondsLeft(endOfWorldTimer);
 
-    const newTime = new Date();
-    newTime.setSeconds(secondsLeft * expand);
-    endOfWorldTimer.restart(newTime.getTime());
+      const newTime = new Date();
+      newTime.setSeconds(secondsLeft * expand);
+      endOfWorldTimer.restart(newTime.getTime());
+    }
   }
 
   return {
+    //todo - abstract this away
     endOfWorldTimer,
     expandConstant,
     expandTime,
+    startEndOfWorldTimer,
     timeElapsed,
     timeLeft,
   };

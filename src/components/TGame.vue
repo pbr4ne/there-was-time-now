@@ -46,7 +46,7 @@ export default {
     useUnlockWatch();
     const notification = useNotification();
     const { engineeringList, personList } = useInitialize();
-    const { endOfWorldTimer, timeElapsed } = useTime();
+    const { endOfWorldTimer, startEndOfWorldTimer, timeElapsed } = useTime();
     const showGameOverModalRef = ref(false);
     let endOfWorld = false;
 
@@ -66,15 +66,18 @@ export default {
     personList[PersonKey.LENNOX_OLD].messageList.push(initialMessage);
 
     watchEffect(async() => {
-        if(endOfWorldTimer.isExpired.value) {
-          showGameOverModalRef.value = true;
-        }
+      console.log('watching for end of world timer expired');
+      if(endOfWorldTimer && endOfWorldTimer.isExpired.value) {
+        showGameOverModalRef.value = true;
+      }
     });
 
     //SPECIAL - when first quantum computer is built, start the end of world timer
     watchEffect(() => {
+      console.log('watching for quantum computer == 5');
       if(!endOfWorld && engineeringList[EngineeringKey.QUANTUM_COMPUTER].total == 5) {
         endOfWorld = true;
+        //todo - this message stuff should probably have been done via a normal unlock, idk
         let endOfWorldMessage = new Message(
           'Whoaaaa', 
           'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.'
@@ -90,6 +93,7 @@ export default {
           duration: GameConstants.NOTIFICATION_DURATION,
         });
         personList[PersonKey.LENNOX_OLD].messageList.push(endOfWorldMessage);
+        startEndOfWorldTimer();
       }
     });
 
