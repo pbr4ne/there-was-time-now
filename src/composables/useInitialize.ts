@@ -39,10 +39,10 @@ import {
   UnlockKey
 } from '@/enum/Enums'
 
-const personList:Person[] = reactive([
-  new Person(PersonKey.LENNOX_OLD, 'Lennox (1984)', 1984),
-  new Person(PersonKey.LENNOX_YOUNG, 'Lennox (1934)', 1934),
-]);
+const personList : any = reactive({
+  [PersonKey.LENNOX_OLD]: new Person(PersonKey.LENNOX_OLD, 'Lennox (1984)', 1984),
+  [PersonKey.LENNOX_YOUNG]: new Person(PersonKey.LENNOX_YOUNG, 'Lennox (1934)', 1934),
+});
 
 const scienceList : any = reactive({
   [ScienceKey.QUANTUM_MECHANICS]: new Science('Quantum Mechanics', shallowRef(QuantumPhysicsIcon), '#B10DC9'),
@@ -93,18 +93,16 @@ function associateUnlocksToResearch() {
   //quantum computer = 5 sends a message
   engineeringList[EngineeringKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 5,
     new Message('Whoaaaa', 'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.')));
-
 }
 
 function associateResearchToPeople() {
-  //todo - obviously don't do this by array index
-  personList[0].scienceList.push(scienceList[ScienceKey.QUANTUM_MECHANICS] as Science);
-  personList[0].scienceList.push(scienceList[ScienceKey.QUANTUM_COMPUTING] as Science);
-  personList[0].engineeringList.push(engineeringList[EngineeringKey.QUANTUM_COMPUTER] as Engineering);
-  personList[0].deviceList.push(deviceList[DeviceKey.CRYSTAL_SARCOPHAGUS] as Device);
+  personList[PersonKey.LENNOX_OLD].scienceList.push(scienceList[ScienceKey.QUANTUM_MECHANICS] as Science);
+  personList[PersonKey.LENNOX_OLD].scienceList.push(scienceList[ScienceKey.QUANTUM_COMPUTING] as Science);
+  personList[PersonKey.LENNOX_OLD].engineeringList.push(engineeringList[EngineeringKey.QUANTUM_COMPUTER] as Engineering);
+  personList[PersonKey.LENNOX_OLD].deviceList.push(deviceList[DeviceKey.CRYSTAL_SARCOPHAGUS] as Device);
   
-  personList[1].scienceList.push(scienceList[ScienceKey.BIOLOGY] as Science);
-  personList[1].scienceList.push(scienceList[ScienceKey.CHEMISTRY] as Science);
+  personList[PersonKey.LENNOX_YOUNG].scienceList.push(scienceList[ScienceKey.BIOLOGY] as Science);
+  personList[PersonKey.LENNOX_YOUNG].scienceList.push(scienceList[ScienceKey.CHEMISTRY] as Science);
 }
 
 associateResearchToPeople();
@@ -113,11 +111,13 @@ associateUnlocksToResearch();
 export default function useInitialize() {
 
   scienceList[ScienceKey.QUANTUM_MECHANICS].isUnlocked = true;
-  personList[0].isUnlocked = true;
+  personList[PersonKey.LENNOX_OLD].isUnlocked = true;
 
   //todo - remove this later
   if(GameConstants.UNLOCK_ALL) {
-    personList.forEach(person => person.isUnlocked = true);
+    for(const person in personList) {
+      personList[person].isUnlocked = true;
+    }
     for(const research in researchList) {
       researchList[research].isUnlocked = true;
     }

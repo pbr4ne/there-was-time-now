@@ -1,7 +1,7 @@
 <template>
   <n-tabs type="card" justify-content="space-evenly">
     <n-tab-pane 
-      v-for="person in (personList.filter(person => person.isUnlocked))" 
+      v-for="person in (Object.values(personList).filter(person => person.isUnlocked))" 
       :key="person.key"
       :name="person.key" 
       :tab="renderTab(person)"

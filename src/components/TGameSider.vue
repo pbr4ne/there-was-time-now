@@ -46,7 +46,7 @@ export default defineComponent({
 
     const sidebar = computed(() => {
       const sidebar = [];
-      personList
+      Object.values(personList)
         .filter(person => person.isUnlocked)
         .forEach(person => person.scienceList
           .filter(science => science.isUnlocked)
@@ -61,7 +61,7 @@ export default defineComponent({
         type: 'divider',
       });
       //todo THIS IS redundant
-      personList
+      Object.values(personList)
         .filter(person => person.isUnlocked)
         .forEach(person => person.engineeringList
           .filter(engineering => engineering.isUnlocked)
@@ -75,7 +75,7 @@ export default defineComponent({
         key: 'divider-2',
         type: 'divider',
       });
-      personList
+      Object.values(personList)
         .filter(person => person.isUnlocked)
         .forEach(person => person.deviceList
           .filter(device => device.isUnlocked)

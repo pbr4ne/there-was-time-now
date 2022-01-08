@@ -31,6 +31,7 @@ import useUnlockWatch from '@/composables/useUnlockWatch'
 import useInitialize from '@/composables/useInitialize'
 import { Message } from '@/entities/Message'
 import { GameConstants } from '@/enum/Constants'
+import { PersonKey } from '@/enum/Enums'
 
 export default {
   components: {
@@ -63,7 +64,7 @@ export default {
       meta: initialMessage.timestamp,
       duration: GameConstants.NOTIFICATION_DURATION,
     });
-    personList.find(person => person.key === 'lennox-old').messageList.push(initialMessage);
+    personList[PersonKey.LENNOX_OLD].messageList.push(initialMessage);
 
     watchEffect(async() => {
         if(timer.isExpired.value) {
