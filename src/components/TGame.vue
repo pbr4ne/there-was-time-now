@@ -91,7 +91,7 @@ export default {
           meta: endOfWorldMessage.timestamp,
           duration: GameConstants.NOTIFICATION_DURATION,
         });
-        personList[PersonKey.LENNOX_OLD].messageList.push(endOfWorldMessage);
+        personList[PersonKey.LENNOX_OLD].messageList.unshift(endOfWorldMessage);
         countdownTimer.start();
       }
     });

@@ -1,41 +1,56 @@
 import { computed, ref } from 'vue'
-import { useTimer, UseTimer } from 'vue-timer-hook'
+import { ResUseStopwatch, useStopwatch, useTimer, UseTimer} from 'vue-timer-hook'
 import { GameConstants } from '@/enum/Constants'
 
 //todo - this is still a mess
+const countupTimer = {
+  create: function() {
+    stopwatch = useStopwatch(0, true);
+  },
+
+  secondsElapsed: function() {
+    return stopwatch.seconds.value 
+    + stopwatch.minutes.value * 60 
+    + stopwatch.hours.value * 3600
+    + stopwatch.days.value * 86400;
+  }
+}
+
 const countdownTimer = {
   create: function() {
     const time = new Date();
     time.setSeconds(time.getSeconds() + GameConstants.INITIAL_TIME);
-    vueTimer = useTimer(time.getTime(), false);
+    timer = useTimer(time.getTime(), false);
   },
   
   start: function () {
-    vueTimer.start();
+    timer.start();
   },
 
   restart: function(newTime: number) {
-    vueTimer.restart(newTime);
+    timer.restart(newTime);
   },
 
   secondsLeft: function() {
-    return vueTimer.seconds.value 
-      + vueTimer.minutes.value * 60 
-      + vueTimer.hours.value * 3600
-      + vueTimer.days.value * 86400;
+    return timer.seconds.value 
+      + timer.minutes.value * 60 
+      + timer.hours.value * 3600
+      + timer.days.value * 86400;
   },
 
   isExpired: function() {
-    return vueTimer.isExpired.value;
+    return timer.isExpired.value;
   },
 
   isRunning: function() {
-    return vueTimer.isRunning.value;
+    return timer.isRunning.value;
   }
 }
 
-let vueTimer : UseTimer;
+let timer : UseTimer;
+let stopwatch : ResUseStopwatch;
 countdownTimer.create();
+countupTimer.create();
 const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
 
 //todo - this doesn't math the way i want. the "days left" should stay
@@ -56,7 +71,9 @@ function expandTime(expand: number) {
 export default function useTime() {
 
   const timeElapsed = computed(() => {
-    return GameConstants.INITIAL_TIME - timeLeft.value;
+    let time = GameConstants.INITIAL_TIME - timeLeft.value;
+    time += countupTimer.secondsElapsed();
+    return time;
   });
 
   const timeLeft = computed(() => {
@@ -67,6 +84,7 @@ export default function useTime() {
 
   return {
     countdownTimer,
+    countupTimer,
     expandConstant,
     expandTime,
     timeElapsed,
