@@ -4,15 +4,15 @@ import { GameConstants } from '@/enum/Constants'
 
 const time = new Date();
 time.setSeconds(time.getSeconds() + GameConstants.INITAL_TIME);
-const timer = useTimer(time.getTime());
+const endOfWorldTimer = useTimer(time.getTime());
 
 const expandConstant = ref(1);
 
-function getSecondsLeft(timer: UseTimer) {
-  return timer.seconds.value 
-      + timer.minutes.value * 60 
-      + timer.hours.value * 3600
-      + timer.days.value * 86400;
+function getSecondsLeft(endOfWorldTimer: UseTimer) {
+  return endOfWorldTimer.seconds.value 
+      + endOfWorldTimer.minutes.value * 60 
+      + endOfWorldTimer.hours.value * 3600
+      + endOfWorldTimer.days.value * 86400;
 }
 
 export default function useTime() {
@@ -22,7 +22,7 @@ export default function useTime() {
   });
 
   const timeLeft = computed(() => {
-    let secondsLeft = getSecondsLeft(timer);
+    let secondsLeft = getSecondsLeft(endOfWorldTimer);
     secondsLeft *= expandConstant.value;
     
     //console.log(`oldSecondsLeft: ${oldSecondsLeft} 
@@ -34,11 +34,11 @@ export default function useTime() {
   const expandTime = (expand: number) => {
     expandConstant.value /= expand;
 
-    const secondsLeft = getSecondsLeft(timer);
+    const secondsLeft = getSecondsLeft(endOfWorldTimer);
 
     const newTime = new Date();
     newTime.setSeconds(secondsLeft * expand);
-    timer.restart(newTime.getTime());
+    endOfWorldTimer.restart(newTime.getTime());
   }
 
   return {
@@ -46,6 +46,6 @@ export default function useTime() {
     expandTime,
     timeElapsed,
     timeLeft,
-    timer,
+    endOfWorldTimer,
   };
 }

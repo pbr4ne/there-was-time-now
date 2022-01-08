@@ -44,11 +44,9 @@ export default {
   },
   setup () {
     useUnlockWatch();
-
-    //todo - eh should this be here?
     const notification = useNotification();
     const { personList } = useInitialize();
-    const { timer } = useTime();
+    const { endOfWorldTimer } = useTime();
     const showGameOverModalRef = ref(false);
 
     let initialMessage = new Message(
@@ -67,7 +65,7 @@ export default {
     personList[PersonKey.LENNOX_OLD].messageList.push(initialMessage);
 
     watchEffect(async() => {
-        if(timer.isExpired.value) {
+        if(endOfWorldTimer.isExpired.value) {
           showGameOverModalRef.value = true;
         }
     });
