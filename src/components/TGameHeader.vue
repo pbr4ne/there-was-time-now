@@ -3,7 +3,7 @@
     <n-space justify="end" style="height: 72.8px">
       <span></span>
       <n-statistic label="Time Expansion" v-if="countdownTimer.isRunning()">
-        {{expandConstant}}
+        {{expandConstant.toFixed(2)}}
       </n-statistic>
 
       <n-statistic label="Days Left" v-if="countdownTimer.isRunning()">

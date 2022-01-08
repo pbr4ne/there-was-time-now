@@ -55,7 +55,7 @@ const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
 
 function expandTime(expand: number) {
   if(countdownTimer.isRunning()) {
-    expandConstant.value /= expand;
+    expandConstant.value *= expand;
 
     const secondsLeft = countdownTimer.secondsLeft();
 
@@ -76,7 +76,7 @@ export default function useTime() {
 
   const timeLeft = computed(() => {
     let secondsLeft = countdownTimer.secondsLeft();
-    secondsLeft *= expandConstant.value;
+    secondsLeft /= expandConstant.value;
     return Math.round(secondsLeft);
   });
 

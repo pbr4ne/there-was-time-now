@@ -19,7 +19,7 @@ export default function useResearch() {
             research.total += 1;
             research.isIncrementing = false;
             if(research instanceof Engineering) {
-              expandTime(2);
+              expandTime(research.expand);
             }
           },200);
         }

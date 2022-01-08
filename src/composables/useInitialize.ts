@@ -52,7 +52,7 @@ const scienceList : any = reactive({
 });
 
 const engineeringList : any = reactive({
-  [EngineeringKey.QUANTUM_COMPUTER]: new Engineering('Quantum Computer', shallowRef(QuantumComputerIcon), '#01FF70', 0.5),
+  [EngineeringKey.QUANTUM_COMPUTER]: new Engineering('Quantum Computer', shallowRef(QuantumComputerIcon), '#01FF70', 0.5, 1.2),
 });
 
 const deviceList : any = reactive({
@@ -75,11 +75,11 @@ function associateUnlocksToResearch() {
   // scienceList[ScienceKey.QUANTUM_MECHANICS].unlocks.push(new Unlock(UnlockKey.MESSAGE, PersonKey.LENNOX_OLD, PersonKey.LENNOX_OLD, 2,
   //   new Message('Testing Message', 'Testing Message')));
 
-  scienceList[ScienceKey.QUANTUM_MECHANICS].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 1,
+  scienceList[ScienceKey.QUANTUM_MECHANICS].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 5,
   new Message('Quantum Computing Unlocked', 'You can now research Quantum Computing.')));
 
   //quantum computing unlocks quantum computer
-  scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.ENGINEERING, EngineeringKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 1,
+  scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.ENGINEERING, EngineeringKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 5,
     new Message('Quantum Computer Unlocked', 'You can now build Quantum Computers.')));
   
   //biology unlocks quantum computing
@@ -87,7 +87,7 @@ function associateUnlocksToResearch() {
   //   new Message('Quantum Computing unlocked', 'You can now research Quantum Computing.')));
 
   //quantum computer unlocks crystal sarcophagus
-  engineeringList[EngineeringKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
+  engineeringList[EngineeringKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 5,
     new Message('Crystal Sarcophagus Unlocked', 'You can now construct the Crystal Sarcophagus.')));
 
   //quantum computer unlocks chemistry
@@ -120,6 +120,12 @@ export default function useInitialize() {
     }
     for(const research in researchList) {
       researchList[research].isUnlocked = true;
+    }
+  }
+  if(GameConstants.QUICK_MODE) {
+    for(const research in researchList) {
+      researchList[research].speed = 10;
+      researchList[research].unlocks.forEach((unlock: { threshold: number }) => unlock.threshold = 1);
     }
   }
 
