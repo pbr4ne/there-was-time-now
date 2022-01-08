@@ -7,7 +7,7 @@ export default function useScience() {
       const timer = setInterval(function() {
         science.isIncrementing = true;
         //todo - figure out how I want the progress bars to work
-        science.current += 10;
+        science.current += science.speed;
         if(science.current >= 100) {
           clearInterval(timer);
           setTimeout(function() {

@@ -7,7 +7,7 @@ export default function useDevice() {
       const timer = setInterval(function() {
         device.isIncrementing = true;
         //todo - figure out how I want the progress bars to work
-        device.current += 10;
+        device.current += device.speed;
         if(device.current >= 100) {
           clearInterval(timer);
           setTimeout(function() {

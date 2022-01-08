@@ -45,18 +45,18 @@ const personList : any = reactive({
 });
 
 const scienceList : any = reactive({
-  [ScienceKey.QUANTUM_MECHANICS]: new Science('Quantum Mechanics', shallowRef(QuantumPhysicsIcon), '#B10DC9'),
-  [ScienceKey.QUANTUM_COMPUTING]: new Science('Quantum Computing', shallowRef(QuantumComputingIcon), '#39CCCC'),
-  [ScienceKey.BIOLOGY]: new Science('Biology', shallowRef(BiologyIcon), '#F012BE'),
-  [ScienceKey.CHEMISTRY]: new Science('Chemistry', shallowRef(ChemistryIcon), '#FF4136'),
+  [ScienceKey.QUANTUM_MECHANICS]: new Science('Quantum Mechanics', shallowRef(QuantumPhysicsIcon), '#B10DC9', 10),
+  [ScienceKey.QUANTUM_COMPUTING]: new Science('Quantum Computing', shallowRef(QuantumComputingIcon), '#39CCCC', 5),
+  // [ScienceKey.BIOLOGY]: new Science('Biology', shallowRef(BiologyIcon), '#F012BE'),
+  // [ScienceKey.CHEMISTRY]: new Science('Chemistry', shallowRef(ChemistryIcon), '#FF4136'),
 });
 
 const engineeringList : any = reactive({
-  [EngineeringKey.QUANTUM_COMPUTER]: new Engineering('Quantum Computer', shallowRef(QuantumComputerIcon), '#01FF70'),
+  [EngineeringKey.QUANTUM_COMPUTER]: new Engineering('Quantum Computer', shallowRef(QuantumComputerIcon), '#01FF70', 0.5),
 });
 
 const deviceList : any = reactive({
-  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device('Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#FFDC00'),
+  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device('Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#FFDC00', 0.25),
 });
 
 const researchList : any = reactive({
@@ -86,9 +86,9 @@ function associateUnlocksToResearch() {
   // scienceList[ScienceKey.BIOLOGY].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 1,
   //   new Message('Quantum Computing unlocked', 'You can now research Quantum Computing.')));
 
-  //chemistry unlocks crystal sarcophagus
-  // scienceList[ScienceKey.CHEMISTRY].unlocks.push(new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
-  //   new Message('Crystal Sarcophagus unlocked', 'You can now build the Crystal Sarcophagus.')));
+  //quantum computer unlocks crystal sarcophagus
+  engineeringList[EngineeringKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.DEVICE, DeviceKey.CRYSTAL_SARCOPHAGUS, PersonKey.LENNOX_OLD, 1,
+    new Message('Crystal Sarcophagus Unlocked', 'You can now construct the Crystal Sarcophagus.')));
 
   //quantum computer unlocks chemistry
   // engineeringList[EngineeringKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.CHEMISTRY, PersonKey.LENNOX_YOUNG, 1,

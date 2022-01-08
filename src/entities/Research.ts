@@ -4,21 +4,19 @@ export class Research {
   label: string;
   icon: object;
   color: string;
-  isUnlocked: boolean = false;
+  speed: number;
 
-  total: number;
-  current: number;
-  isIncrementing: boolean;
+  isUnlocked: boolean = false;
+  total: number = 0;
+  current: number = 0;
+  isIncrementing: boolean = false;
 
   unlocks: Array<Unlock> = new Array<Unlock>();
 
-  constructor(label: string, icon: object, color: string) {
+  constructor(label: string, icon: object, color: string, speed: number) {
     this.label = label;
     this.icon = icon;
     this.color = color;
-
-    this.total = 0;
-    this.current = 0;
-    this.isIncrementing = false;
+    this.speed = speed;
   }
 }

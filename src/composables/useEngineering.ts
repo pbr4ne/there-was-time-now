@@ -10,7 +10,7 @@ export default function useEngineering() {
       const timer = setInterval(function() {
         engineering.isIncrementing = true;
         //todo - figure out how I want the progress bars to work
-        engineering.current += 10;
+        engineering.current += engineering.speed;
         if(engineering.current >= 100) {
           clearInterval(timer);
           setTimeout(function() {
