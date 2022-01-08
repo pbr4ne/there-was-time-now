@@ -21,7 +21,7 @@ import {
 } from '@vicons/material'
 
 import {
-  Atom as QuantumPhysicsIcon,
+  Atom as QuantumMechanicsIcon,
 } from '@vicons/tabler'
 
 import { Device } from '@/entities/Device'
@@ -45,7 +45,7 @@ const personList : any = reactive({
 });
 
 const scienceList : any = reactive({
-  [ScienceKey.QUANTUM_MECHANICS]: new Science('Quantum Mechanics', shallowRef(QuantumPhysicsIcon), '#B10DC9', 10),
+  [ScienceKey.QUANTUM_MECHANICS]: new Science('Quantum Mechanics', shallowRef(QuantumMechanicsIcon), '#B10DC9', 10),
   [ScienceKey.QUANTUM_COMPUTING]: new Science('Quantum Computing', shallowRef(QuantumComputingIcon), '#39CCCC', 5),
   // [ScienceKey.BIOLOGY]: new Science('Biology', shallowRef(BiologyIcon), '#F012BE'),
   // [ScienceKey.CHEMISTRY]: new Science('Chemistry', shallowRef(ChemistryIcon), '#FF4136'),
