@@ -31,7 +31,7 @@ import useUnlockWatch from '@/composables/useUnlockWatch'
 import useInitialize from '@/composables/useInitialize'
 import { Message } from '@/entities/Message'
 import { GameConstants } from '@/enum/Constants'
-import { PersonKey } from '@/enum/Enums'
+import { EngineeringKey, PersonKey } from '@/enum/Enums'
 
 export default {
   components: {
@@ -45,9 +45,10 @@ export default {
   setup () {
     useUnlockWatch();
     const notification = useNotification();
-    const { personList } = useInitialize();
-    const { endOfWorldTimer } = useTime();
+    const { engineeringList, personList } = useInitialize();
+    const { endOfWorldTimer, timeElapsed } = useTime();
     const showGameOverModalRef = ref(false);
+    let endOfWorld = false;
 
     let initialMessage = new Message(
       '1984',
@@ -70,6 +71,28 @@ export default {
         }
     });
 
+    //SPECIAL - when first quantum computer is built, start the end of world timer
+    watchEffect(() => {
+      if(!endOfWorld && engineeringList[EngineeringKey.QUANTUM_COMPUTER].total == 5) {
+        endOfWorld = true;
+        let endOfWorldMessage = new Message(
+          'Whoaaaa', 
+          'Quantum Computer: Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.'
+        );
+        const d = new Date(1984, 0);
+        d.setDate(d.getDate() + timeElapsed.value);
+        endOfWorldMessage.timestamp = d.toISOString().split('T')[0];
+
+        notification.create({
+          title: endOfWorldMessage.title,
+          content: endOfWorldMessage.text,
+          meta: endOfWorldMessage.timestamp,
+          duration: GameConstants.NOTIFICATION_DURATION,
+        });
+        personList[PersonKey.LENNOX_OLD].messageList.push(endOfWorldMessage);
+      }
+    });
+
     return {
       onPositiveClick () {
         showGameOverModalRef.value = false;
@@ -79,4 +102,3 @@ export default {
   }
 }
 </script>
-

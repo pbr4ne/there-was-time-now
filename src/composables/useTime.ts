@@ -42,10 +42,10 @@ export default function useTime() {
   }
 
   return {
+    endOfWorldTimer,
     expandConstant,
     expandTime,
     timeElapsed,
     timeLeft,
-    endOfWorldTimer,
   };
 }
