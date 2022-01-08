@@ -2,60 +2,73 @@ import { computed, ref } from 'vue'
 import { useTimer, UseTimer } from 'vue-timer-hook'
 import { GameConstants } from '@/enum/Constants'
 
-//todo - this is a mess
+//todo - this is still a mess
+const countdownTimer = {
+  create: function() {
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + GameConstants.INITIAL_TIME);
+    vueTimer = useTimer(time.getTime(), false);
+  },
+  
+  start: function () {
+    vueTimer.start();
+  },
 
-const time = new Date();
-time.setSeconds(time.getSeconds() + GameConstants.INITAL_TIME);
-const endOfWorldTimer = useTimer(time.getTime(), false);
-const expandConstant = ref(1);
+  restart: function(newTime: number) {
+    vueTimer.restart(newTime);
+  },
 
-function getSecondsLeft(endOfWorldTimer: UseTimer) {
-  return endOfWorldTimer.seconds.value 
-      + endOfWorldTimer.minutes.value * 60 
-      + endOfWorldTimer.hours.value * 3600
-      + endOfWorldTimer.days.value * 86400;
+  secondsLeft: function() {
+    return vueTimer.seconds.value 
+      + vueTimer.minutes.value * 60 
+      + vueTimer.hours.value * 3600
+      + vueTimer.days.value * 86400;
+  },
+
+  isExpired: function() {
+    return vueTimer.isExpired.value;
+  },
+
+  isRunning: function() {
+    return vueTimer.isRunning.value;
+  }
+}
+
+let vueTimer : UseTimer;
+countdownTimer.create();
+const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
+
+//todo - this doesn't math the way i want. the "days left" should stay
+//basically the same
+function expandTime(expand: number) {
+  if(countdownTimer.isRunning()) {
+    expandConstant.value /= expand;
+
+    const secondsLeft = countdownTimer.secondsLeft();
+
+    const newTime = new Date();
+    newTime.setSeconds(secondsLeft * expand);
+
+    countdownTimer.restart(newTime.getTime());
+  }
 }
 
 export default function useTime() {
 
   const timeElapsed = computed(() => {
-    return GameConstants.INITAL_TIME - timeLeft.value;
+    return GameConstants.INITIAL_TIME - timeLeft.value;
   });
 
-  const startEndOfWorldTimer = () => {
-    endOfWorldTimer.start();
-  };
-
   const timeLeft = computed(() => {
-    let secondsLeft = getSecondsLeft(endOfWorldTimer);
+    let secondsLeft = countdownTimer.secondsLeft();
     secondsLeft *= expandConstant.value;
-    
-    //console.log(`oldSecondsLeft: ${oldSecondsLeft} 
-    //expandConstant: ${expandConstant.value} new secondsLeft: ${secondsLeft}`);
-
     return Math.round(secondsLeft);
   });
 
-  //todo - this doesn't quite math the way i want. the "days left" should stay
-  //basically the same
-  const expandTime = (expand: number) => {
-    if(endOfWorldTimer.isRunning.value) {
-      expandConstant.value /= expand;
-
-      const secondsLeft = getSecondsLeft(endOfWorldTimer);
-
-      const newTime = new Date();
-      newTime.setSeconds(secondsLeft * expand);
-      endOfWorldTimer.restart(newTime.getTime());
-    }
-  }
-
   return {
-    //todo - abstract this away
-    endOfWorldTimer,
+    countdownTimer,
     expandConstant,
     expandTime,
-    startEndOfWorldTimer,
     timeElapsed,
     timeLeft,
   };

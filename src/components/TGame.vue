@@ -46,7 +46,7 @@ export default {
     useUnlockWatch();
     const notification = useNotification();
     const { engineeringList, personList } = useInitialize();
-    const { endOfWorldTimer, startEndOfWorldTimer, timeElapsed } = useTime();
+    const { countdownTimer, timeElapsed } = useTime();
     const showGameOverModalRef = ref(false);
     let endOfWorld = false;
 
@@ -66,8 +66,7 @@ export default {
     personList[PersonKey.LENNOX_OLD].messageList.push(initialMessage);
 
     watchEffect(async() => {
-      console.log('watching for end of world timer expired');
-      if(endOfWorldTimer && endOfWorldTimer.isExpired.value) {
+      if(countdownTimer.isExpired()) {
         showGameOverModalRef.value = true;
       }
     });
@@ -75,7 +74,7 @@ export default {
     //SPECIAL - when first quantum computer is built, start the end of world timer
     watchEffect(() => {
       console.log('watching for quantum computer == 5');
-      if(!endOfWorld && engineeringList[EngineeringKey.QUANTUM_COMPUTER].total == 5) {
+      if(!endOfWorld && engineeringList[EngineeringKey.QUANTUM_COMPUTER].total == 1) {
         endOfWorld = true;
         //todo - this message stuff should probably have been done via a normal unlock, idk
         let endOfWorldMessage = new Message(
@@ -93,7 +92,7 @@ export default {
           duration: GameConstants.NOTIFICATION_DURATION,
         });
         personList[PersonKey.LENNOX_OLD].messageList.push(endOfWorldMessage);
-        startEndOfWorldTimer();
+        countdownTimer.start();
       }
     });
 
