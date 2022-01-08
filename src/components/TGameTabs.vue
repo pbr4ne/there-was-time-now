@@ -7,14 +7,11 @@
       :tab="renderTab(person)"
     >
       <n-space horizontal style="padding: 20px">
-        <t-game-research label="Science" :researchList="person.scienceList" v-if="person.scienceList.filter(science => science.isUnlocked).length > 0" />
-        <t-game-research label="Engineering" :researchList="person.engineeringList" v-if="person.engineeringList.filter(engineering => engineering.isUnlocked).length > 0" />
+        <t-game-research label="Science" :researchList="unlockedScienceList(person)" v-if="unlockedScienceList(person).length > 0" />
+        <t-game-research label="Engineering" :researchList="unlockedEngineeringList(person)" v-if="unlockedEngineeringList(person).length > 0" />
       </n-space>
       <n-space horizontal style="padding: 20px">
-        <t-game-tab-device 
-          v-if="person.deviceList.filter(device => device.isUnlocked).length > 0"
-          :device="person.deviceList.find(device => device.isUnlocked)" 
-        />
+        <t-game-tab-device v-if="unlockedDevice(person)" :device="unlockedDevice(person)" />
       </n-space>
 
       <t-game-tab-messages :person="person" />
@@ -23,14 +20,8 @@
 </template>
 
 <script>
-import { defineComponent, h, ref } from 'vue'
-
-import { 
-  NSpace,
-  NTabs,
-  NTabPane,
-} from 'naive-ui'
-
+import { defineComponent, h } from 'vue'
+import { NSpace, NTabs, NTabPane } from 'naive-ui'
 import TGameTabCard from '@/components/TGameTabCard.vue'
 import TGameTabDevice from '@/components/TGameTabDevice.vue'
 import TGameTabMessages from '@/components/TGameTabMessages.vue'
@@ -53,10 +44,24 @@ export default defineComponent({
   setup() {
     let { personList } = useInitialize();
 
+    function unlockedScienceList(person) {
+      return person.scienceList.filter(science => science.isUnlocked);
+    }
+
+    function unlockedEngineeringList(person) {
+      return person.engineeringList.filter(engineering => engineering.isUnlocked);
+    }
+
+    function unlockedDevice(person) {
+      return person.deviceList.find(device => device.isUnlocked);
+    }
+
     return {
       personList,
       renderTab,
-      show: ref(false),
+      unlockedDevice,
+      unlockedEngineeringList,
+      unlockedScienceList,
     }
   },
 })
