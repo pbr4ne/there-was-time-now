@@ -47,11 +47,12 @@
               <td>
                 <n-popover trigger="hover">
                   <template #trigger>
-                    <n-button>
+                    <n-button @click="sellResearch(research)" :disabled="!canSell(research)">
                       Sell
                     </n-button>
                   </template>
-                  <span>Not implemented yet</span>
+                  <span v-if="canSell(research)">Sell for {{sellAmount(research)}}</span>
+                  <span v-else>Can't afford</span>
                 </n-popover>
               </td>
               <td>
@@ -92,6 +93,7 @@ import {
   MinusOutlined as MinusIcon,
   PlusOutlined as PlusIcon,
 } from '@vicons/material'
+import useInitialize from '@/composables/useInitialize'
 import useResearch from '@/composables/useResearch'
 
 export default defineComponent({
@@ -112,24 +114,48 @@ export default defineComponent({
     researchList: Array,
   },
   setup() {
+    let { currency } = useInitialize();
     let { incrementResearch } = useResearch();
 
     const sellIncrementList = [1, 5, 10];
     let sellIncrementIndex = ref(0);
 
     function changeSellIncrement() {
-      console.log('change sell increment');
       sellIncrementIndex.value++;
       if(sellIncrementIndex.value > sellIncrementList.length - 1) {
         sellIncrementIndex.value = 0;
       }
     }
 
+    function canSell(research) {
+      const amount = sellIncrementList[sellIncrementIndex.value];
+      if(research.total < amount) {
+        return false;
+      }
+      return true;
+    }
+
+    function sellAmount(research) {
+      if(canSell(research)) {
+        return sellIncrementList[sellIncrementIndex.value] * 5; //todo - make this configurable per research
+      }
+      return 0;
+    }
+
+    function sellResearch(research) {
+      const amount = sellIncrementList[sellIncrementIndex.value];
+      research.total -= amount;
+      currency.value += amount * 5;
+    }
+
     return {
+      canSell,
       changeSellIncrement,
       incrementResearch,
+      sellAmount,
       sellIncrementIndex,
       sellIncrementList,
+      sellResearch,
     }
   },
 })
