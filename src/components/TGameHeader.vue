@@ -3,7 +3,7 @@
 
     <n-space justify="space-between" class="twtnHeader">
       <n-space style="padding-left: 5px;" width="100%">
-        <span :class="[titleFont]" v-if="showTitle">There Was Time Now</span>
+        <span class="titleText" :class="[titleFont]" v-if="showTitle">There Was Time Now</span>
       </n-space>
 
       <n-space width="209px">
@@ -39,7 +39,9 @@ import {
   AccessTimeOutlined as TimeIcon
 } from '@vicons/material'
 
+import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
+import { PersonKey } from '@/enum/Enums'
 
 export default defineComponent({
   components: {
@@ -51,15 +53,23 @@ export default defineComponent({
     TimeIcon,
   },
   setup() {
+    const { personList } = useInitialize();
     const { countdownTimer, expandConstant, timeLeft } = useTime();
 
     //don't show title for smaller widths until I can figure out 
     let showTitle = window.innerWidth > 700;
 
     const titleFont = computed(() => {
-      return {
-        "title1984": true,
-        "titleText": true,
+      if(personList[PersonKey.NECHTAN].isUnlocked) {
+        return "title2524BC"
+      } else if(personList[PersonKey.ITOTIA].isUnlocked) {
+        return "title374";
+      } else if(personList[PersonKey.SAMA].isUnlocked) {
+        return "title904";
+      } else if(personList[PersonKey.LENNOX_YOUNG].isUnlocked) {
+        return "title1934"
+      } else {
+        return "title1984";
       }
     });
 
@@ -121,15 +131,15 @@ export default defineComponent({
     font-family: "1934";
   }
 
-  .title934 {
+  .title904 {
     font-family: "904";
   }
 
   .title374 {
     font-family: "374"
   }
-  
-  .twtnHeader {
-    
+
+  .title2524BC {
+    font-family: "2524 BC";
   }
 </style>
