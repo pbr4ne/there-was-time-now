@@ -31,7 +31,6 @@ import { Person } from '@/entities/Person'
 import { Science } from '@/entities/Science'
 import { Message } from '@/entities/Message'
 import { Unlock } from '@/entities/Unlock'
-import { GameConstants } from '@/enum/Constants'
 import { 
   DeviceKey, 
   EngineeringKey, 
@@ -182,7 +181,11 @@ export default function useInitialize() {
   personList[PersonKey.LENNOX_OLD].isUnlocked = true;
 
   //todo - remove this later
-  if(GameConstants.UNLOCK_ALL) {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const params = Object.fromEntries(urlSearchParams.entries());
+  console.log(params);
+
+  if(params['UNLOCK_ALL'] === "true") {
     for(const person in personList) {
       personList[person].isUnlocked = true;
     }
@@ -190,7 +193,7 @@ export default function useInitialize() {
       researchList[research].isUnlocked = true;
     }
   }
-  if(GameConstants.QUICK_MODE) {
+  if(params['QUICK_MODE'] === "true") {
     for(const research in researchList) {
       researchList[research].speed = 10;
       researchList[research].unlocks.forEach((unlock: { threshold: number }) => unlock.threshold = 1);
