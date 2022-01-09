@@ -56,27 +56,31 @@
                 </n-popover>
               </td>
               <td>
-                <n-popover trigger="hover">
-                  <template #trigger>
-                    <n-button-group size="small">
+                <n-button-group size="small">
+                  <n-popover trigger="hover">
+                    <template #trigger>
                       <n-button round>
                         <template #icon>
                           <n-icon><minus-icon /></n-icon>
                         </template>
                       </n-button>
-                      <n-button disabled style="width: 40px">
-                        5
-                      </n-button>
+                    </template>
+                    <span>test</span>
+                  </n-popover>
+                  <n-button style="width: 40px">
+                    {{research.numWorkers}}
+                  </n-button>
+                  <n-popover trigger="hover">
+                    <template #trigger>
                       <n-button round>
                         <template #icon>
                           <n-icon><plus-icon /></n-icon>
                         </template>
                       </n-button>
-                      
-                    </n-button-group>
                     </template>
-                  <span>Not implemented yet</span>
-                </n-popover>
+                    <span>test</span>
+                  </n-popover>
+                </n-button-group>
               </td>
             </tr>
           </tbody>
