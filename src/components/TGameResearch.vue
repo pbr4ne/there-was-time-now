@@ -59,7 +59,7 @@
                 <n-button-group size="small">
                   <n-popover trigger="hover">
                     <template #trigger>
-                      <n-button round>
+                      <n-button round :disabled="!canSellWorker(research)" @click="sellWorker(research)">
                         <template #icon>
                           <n-icon><minus-icon /></n-icon>
                         </template>
@@ -72,7 +72,7 @@
                   </n-button>
                   <n-popover trigger="hover">
                     <template #trigger>
-                      <n-button round>
+                      <n-button round :disabled="!canBuyWorker(research)" @click="buyWorker(research)">
                         <template #icon>
                           <n-icon><plus-icon /></n-icon>
                         </template>
@@ -91,6 +91,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { defineComponent, ref } from 'vue'
 import { NButton, NIcon, NButtonGroup, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import {
@@ -154,14 +155,46 @@ export default defineComponent({
       currency.value += amount * 5;
     }
 
+    function canBuyWorker(research) {
+      if(currency.value >= 5) {//todo - make this configurable per research
+        return true;
+      }
+      return false;
+    }
+
+    function canSellWorker(research) {
+      if(research.numWorkers > 0) {
+        return true;
+      }
+      return false;
+    }
+
+    function buyWorker(research) {
+      if(canBuyWorker(research)) {
+        research.numWorkers++;
+        currency.value -= 5;
+      }
+    }
+
+    function sellWorker(research) {
+      if(canSellWorker(research)){
+        research.numWorkers--
+        currency.value += 5;
+      }
+    }
+
     return {
+      buyWorker,
+      canBuyWorker,
       canSell,
+      canSellWorker,
       changeSellIncrement,
       incrementResearch,
       sellAmount,
       sellIncrementIndex,
       sellIncrementList,
       sellResearch,
+      sellWorker,
     }
   },
 })
