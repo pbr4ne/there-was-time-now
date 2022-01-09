@@ -10,10 +10,12 @@ import {
 } from '@vicons/fa'
 
 import {
+  MathFormatProfessional24Regular as TimelessAlgebraIcon,
 } from '@vicons/fluent'
 
 import {
   FlaskOutline as AlchemyIcon,
+  TelescopeOutline as AstronomyIcon,
 } from '@vicons/ionicons5'
 
 import {
@@ -23,6 +25,8 @@ import {
 import {
   Atom as PhysicsIcon,
   CircleX as DefaultIcon,
+  Flask as TheFluidIcon,
+  ZodiacLeo as AethericHoroscopesIcon,
 } from '@vicons/tabler'
 
 import { Device } from '@/entities/Device'
@@ -58,10 +62,10 @@ const scienceList : any = reactive({
   [ScienceKey.CHRONOMOGRIFICATION]: new Science('Chronomogrification', shallowRef(DefaultIcon), '#7FDBFF', 5),
 
   [ScienceKey.MATHEMATICS]: new Science('Mathematics', shallowRef(DefaultIcon), '#2ECC40', 10),
-  [ScienceKey.TIMELESS_ALGEBRA]: new Science('Timeless Algebra', shallowRef(DefaultIcon), '#F012BE', 5),
+  [ScienceKey.TIMELESS_ALGEBRA]: new Science('Timeless Algebra', shallowRef(TimelessAlgebraIcon), '#F012BE', 5),
 
-  [ScienceKey.ASTRONOMY]: new Science('Astronomy', shallowRef(DefaultIcon), '#FFFFFF', 10),
-  [ScienceKey.AETHERIC_HOROSCOPES]: new Science('Aetheric Horoscopes', shallowRef(DefaultIcon), '#85144b', 5),
+  [ScienceKey.ASTRONOMY]: new Science('Astronomy', shallowRef(AstronomyIcon), '#FFFFFF', 10),
+  [ScienceKey.AETHERIC_HOROSCOPES]: new Science('Aetheric Horoscopes', shallowRef(AethericHoroscopesIcon), '#85144b', 5),
 });
 
 const engineeringList : any = reactive({
@@ -69,7 +73,7 @@ const engineeringList : any = reactive({
   [EngineeringKey.CHRONOCRYSTALS]: new Engineering('Chronocrystals', shallowRef(DefaultIcon), '#FFDC00', 0.5, 1),
 
   [EngineeringKey.TELOMERE_STRETCHER]: new Engineering('Telomere Stretcher', shallowRef(DefaultIcon), '#85144b', 0.5, 1.1),
-  [EngineeringKey.THE_FLUID]: new Engineering('The Fluid', shallowRef(DefaultIcon), '#3D9970', 0.5, 1),
+  [EngineeringKey.THE_FLUID]: new Engineering('The Fluid', shallowRef(TheFluidIcon), '#3D9970', 0.5, 1),
 
   [EngineeringKey.DISTILLER]: new Engineering('Distiller', shallowRef(DefaultIcon), '#B10DC9', 0.5, 1.1),
   [EngineeringKey.ELEMENT_ZERO]: new Engineering('Element Zero', shallowRef(DefaultIcon), '#FF851B', 0.5, 1),
