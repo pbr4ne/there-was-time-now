@@ -187,7 +187,6 @@ export default function useInitialize() {
   //todo - remove this later
   const urlSearchParams = new URLSearchParams(window.location.search);
   const params = Object.fromEntries(urlSearchParams.entries());
-  console.log(params);
 
   if(params['UNLOCK_ALL'] === "true") {
     for(const person in personList) {

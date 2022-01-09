@@ -2,8 +2,8 @@
   <n-space horizontal>
     <n-progress
       type="multiple-circle"
-      :percentage="researchList.filter(research => research.isUnlocked).map(({ current }) => current)"
-      :color="researchList.filter(research => research.isUnlocked).map(({ color }) => color)"
+      :percentage="researchList.slice().reverse().filter(research => research.isUnlocked).map(({ current }) => current)"
+      :color="researchList.slice().reverse().filter(research => research.isUnlocked).map(({ color }) => color)"
     >
       <h3>{{label}}</h3>
     </n-progress>
