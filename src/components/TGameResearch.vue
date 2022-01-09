@@ -45,40 +45,39 @@
                 </t-game-research-button>
               </td>
               <td>
-                <n-popover trigger="hover">
+                <n-popover trigger="hover" :disabled="!canSellResearch(research)">
                   <template #trigger>
-                    <n-button @click="sellResearch(research)" :disabled="!canSell(research)">
+                    <n-button @click="sellResearch(research)" :disabled="!canSellResearch(research)">
                       Sell
                     </n-button>
                   </template>
-                  <span v-if="canSell(research)">Sell for {{sellAmount(research)}}</span>
-                  <span v-else>Can't afford</span>
+                  <span>Sell {{research.label}} for {{sellResearchAmount(research)}}</span>
                 </n-popover>
               </td>
               <td>
                 <n-button-group size="small">
-                  <n-popover trigger="hover">
+                  <n-popover trigger="hover" :disabled="!canSellWorker(research)">
                     <template #trigger>
-                      <n-button round :disabled="!canSellWorker(research)" @click="sellWorker(research)">
+                      <n-button round @click="sellWorker(research)" :disabled="!canSellWorker(research)">
                         <template #icon>
                           <n-icon><minus-icon /></n-icon>
                         </template>
                       </n-button>
                     </template>
-                    <span>test</span>
+                    <span>Sell worker for {{sellWorkerAmount(research)}}</span>
                   </n-popover>
                   <n-button style="width: 40px">
                     {{research.numWorkers}}
                   </n-button>
-                  <n-popover trigger="hover">
+                  <n-popover trigger="hover" :disabled="!canBuyWorker(research)">
                     <template #trigger>
-                      <n-button round :disabled="!canBuyWorker(research)" @click="buyWorker(research)">
+                      <n-button round @click="buyWorker(research)" :disabled="!canBuyWorker(research)" >
                         <template #icon>
                           <n-icon><plus-icon /></n-icon>
                         </template>
                       </n-button>
                     </template>
-                    <span>test</span>
+                    <span>Buy worker for {{buyWorkerAmount(research)}}</span>
                   </n-popover>
                 </n-button-group>
               </td>
@@ -134,7 +133,7 @@ export default defineComponent({
       }
     }
 
-    function canSell(research) {
+    function canSellResearch(research) {
       const amount = sellIncrementList[sellIncrementIndex.value];
       if(research.total < amount) {
         return false;
@@ -142,11 +141,8 @@ export default defineComponent({
       return true;
     }
 
-    function sellAmount(research) {
-      if(canSell(research)) {
-        return sellIncrementList[sellIncrementIndex.value] * 5; //todo - make this configurable per research
-      }
-      return 0;
+    function sellResearchAmount(research) {
+      return sellIncrementList[sellIncrementIndex.value] * 5; //todo - make this configurable per research
     }
 
     function sellResearch(research) {
@@ -184,18 +180,28 @@ export default defineComponent({
       }
     }
 
+    function buyWorkerAmount(research) {
+      return 5;
+    }
+
+    function sellWorkerAmount(research) {
+      return 5;
+    }
+
     return {
       buyWorker,
+      buyWorkerAmount,
       canBuyWorker,
-      canSell,
+      canSellResearch,
       canSellWorker,
       changeSellIncrement,
       incrementResearch,
-      sellAmount,
       sellIncrementIndex,
       sellIncrementList,
       sellResearch,
+      sellResearchAmount,
       sellWorker,
+      sellWorkerAmount,
     }
   },
 })
