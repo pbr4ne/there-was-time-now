@@ -44,47 +44,58 @@ export default defineComponent({
     //initially collapse the sider for smol windows
     let collapsed = window.innerWidth < 700;
 
+    //todo - make this better
     const sidebar = computed(() => {
       const sidebar = [];
-      Object.values(personList)
-        .filter(person => person.isUnlocked)
-        .forEach(person => person.scienceList
+      const unlockedPersonList = Object.values(personList).filter(person => person.isUnlocked);
+      const scienceGroup = [];
+      const engineeringGroup = [];
+      const deviceGroup = [];
+
+      unlockedPersonList.forEach(person => person.scienceList
           .filter(science => science.isUnlocked)
-          .forEach(science => sidebar.push({
+          .forEach(science => scienceGroup.push({
             label: renderLabel(science),
             key: science.label,
             icon: renderIcon(science.icon, science.color),
           }))
         );
-      sidebar.push({
-        key: 'divider-1',
-        type: 'divider',
-      });
-      //todo THIS IS redundant
-      Object.values(personList)
-        .filter(person => person.isUnlocked)
-        .forEach(person => person.engineeringList
+
+      sidebar.push(...scienceGroup);
+      
+      unlockedPersonList.forEach(person => person.engineeringList
           .filter(engineering => engineering.isUnlocked)
-          .forEach(engineering => sidebar.push({
+          .forEach(engineering => engineeringGroup.push({
             label: renderLabel(engineering),
             key: engineering.label,
             icon: renderIcon(engineering.icon, engineering.color),
           }))
         );
-      sidebar.push({
-        key: 'divider-2',
-        type: 'divider',
-      });
-      Object.values(personList)
-        .filter(person => person.isUnlocked)
-        .forEach(person => person.deviceList
+      
+      if(engineeringGroup.length > 0) {
+        sidebar.push({
+          key: 'divider-1',
+          type: 'divider',
+        });
+        sidebar.push(...engineeringGroup);
+      }
+
+      unlockedPersonList.forEach(person => person.deviceList
           .filter(device => device.isUnlocked)
-          .forEach(device => sidebar.push({
+          .forEach(device => deviceGroup.push({
             label: renderLabel(device),
             key: device.label,
             icon: renderIcon(device.icon, device.color),
           }))
         );
+      
+      if(deviceGroup.length > 0) {
+        sidebar.push({
+          key: 'divider-2',
+          type: 'divider',
+        });
+        sidebar.push(...deviceGroup);
+      }
 
       return sidebar;
     });
