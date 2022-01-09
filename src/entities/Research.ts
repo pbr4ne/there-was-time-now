@@ -10,6 +10,7 @@ export class Research {
   total: number = 0;
   current: number = 0;
   isIncrementing: boolean = false;
+  numWorkers: number = 0;
 
   unlocks: Array<Unlock> = new Array<Unlock>();
 

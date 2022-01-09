@@ -13,11 +13,13 @@ export class Person {
   deviceList: Array<Device> = new Array<Device>();
   isUnlocked: boolean = false;
   messageList: Array<Message> = new Array<Message>();
+  workerTitle: string;
 
-  constructor(key: string, name: string, year: number) {
+  constructor(key: string, name: string, year: number, workerTitle: string,) {
     this.key = key;
     this.name = name;
     this.year = year;
+    this.workerTitle = workerTitle;
   }
 
   numUnread() {

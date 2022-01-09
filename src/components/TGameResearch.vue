@@ -26,7 +26,7 @@
                 </n-button>
               </th>
               <th style="text-align: center;">
-                Undergrads
+                {{person.workerTitle}}
               </th>
             </tr>
           </thead>
@@ -95,6 +95,7 @@ import {
 } from '@vicons/material'
 import useInitialize from '@/composables/useInitialize'
 import useResearch from '@/composables/useResearch'
+import { Person } from '@/entities/Person'
 
 export default defineComponent({
   components: {
@@ -112,6 +113,7 @@ export default defineComponent({
   props: {
     label: String,
     researchList: Array,
+    person: Person,
   },
   setup() {
     let { currency } = useInitialize();

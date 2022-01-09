@@ -7,7 +7,7 @@
       :tab="renderTab(person)"
     >
       <n-space horizontal style="padding: 20px">
-        <t-game-research label="" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
+        <t-game-research :person="person" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
         <!-- <t-game-research label="Engineering" :researchList="unlockedEngineeringList(person)" v-if="unlockedEngineeringList(person).length > 0" /> -->
       </n-space>
       <n-space horizontal style="padding: 20px">
