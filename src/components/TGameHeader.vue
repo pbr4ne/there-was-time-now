@@ -3,7 +3,7 @@
 
     <n-space justify="space-between" class="twtnHeader">
       <n-space style="padding-left: 5px;" width="100%">
-        <span class="titleText" :class="[titleFont]" v-if="showTitle">There Was Time Now</span>
+        <span class="titleText" :class="[titleFont]">{{titleValue}}</span>
       </n-space>
 
       <n-space width="209px">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 import { 
   NIcon,
@@ -56,8 +56,10 @@ export default defineComponent({
     const { personList } = useInitialize();
     const { countdownTimer, expandConstant, timeLeft } = useTime();
 
-    //don't show title for smaller widths until I can figure out 
-    let showTitle = window.innerWidth > 700;
+    let titleValue = ref('TWTN');
+    if( window.innerWidth > 700) {
+      titleValue = ref('There Was Time Now');
+    }
 
     const titleFont = computed(() => {
       if(personList[PersonKey.NECHTAN].isUnlocked) {
@@ -76,9 +78,9 @@ export default defineComponent({
     return {
       countdownTimer,
       expandConstant,
-      showTitle,
       timeLeft,
       titleFont,
+      titleValue,
     }
   },
 })
