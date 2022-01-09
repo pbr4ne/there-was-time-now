@@ -97,7 +97,7 @@ import {
   MinusOutlined as MinusIcon,
   PlusOutlined as PlusIcon,
 } from '@vicons/material'
-import useInitialize from '@/composables/useInitialize'
+import useCurrency from '@/composables/useCurrency'
 import useResearch from '@/composables/useResearch'
 import { Person } from '@/entities/Person'
 
@@ -120,7 +120,7 @@ export default defineComponent({
     person: Person,
   },
   setup() {
-    let { currency } = useInitialize();
+    let { currency } = useCurrency();
     let { incrementResearch } = useResearch();
 
     const sellIncrementList = [1, 5, 10];

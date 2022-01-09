@@ -43,8 +43,6 @@ import {
   UnlockKey
 } from '@/enum/Enums'
 
-const currency = ref(0);
-
 const personList : any = reactive({
   [PersonKey.LENNOX_OLD]: new Person(PersonKey.LENNOX_OLD, 'Lennox (1984)', 1984, 'Undergrads'),
   [PersonKey.LENNOX_YOUNG]: new Person(PersonKey.LENNOX_YOUNG, 'Lennox (1934)', 1934, 'Lab Partners'),
@@ -206,7 +204,6 @@ export default function useInitialize() {
   }
 
   return {
-    currency,
     deviceList,
     engineeringList,
     personList,

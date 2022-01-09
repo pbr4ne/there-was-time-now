@@ -7,7 +7,7 @@
       </n-space>
 
       <n-space width="209px">
-        <n-statistic label="Currency">
+        <n-statistic label="Budget">
           {{currency}}
         </n-statistic>
 
@@ -43,6 +43,7 @@ import {
   AccessTimeOutlined as TimeIcon
 } from '@vicons/material'
 
+import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { PersonKey } from '@/enum/Enums'
@@ -57,7 +58,8 @@ export default defineComponent({
     TimeIcon,
   },
   setup() {
-    const { currency, personList } = useInitialize();
+    const { currency } = useCurrency();
+    const { personList } = useInitialize();
     const { countdownTimer, expandConstant, timeLeft } = useTime();
 
     let titleValue = ref('TWTN');
