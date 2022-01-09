@@ -22,6 +22,11 @@ export default function useResearch() {
               expandTime(research.expand);
             }
           },200);
+          setTimeout(function() {
+            if(research.numWorkers > 0) {
+              incrementResearch(research);
+            }
+          }, 10000 / research.numWorkers);
         }
       },100);
     }

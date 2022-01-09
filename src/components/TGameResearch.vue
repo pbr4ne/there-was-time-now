@@ -173,6 +173,7 @@ export default defineComponent({
       if(canBuyWorker(research)) {
         research.numWorkers++;
         currency.value -= 5;
+        incrementResearch(research);
       }
     }
 
