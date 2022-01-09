@@ -21,8 +21,8 @@
                 Research
               </th>
               <th style="text-align: center;">
-                <n-button size="tiny">
-                  ×10
+                <n-button size="tiny" @click="changeSellIncrement()">
+                  ×{{sellIncrementList[sellIncrementIndex]}}
                 </n-button>
               </th>
               <th style="text-align: center;">
@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { NButton, NIcon, NButtonGroup, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import {
   MinusOutlined as MinusIcon,
@@ -114,8 +114,22 @@ export default defineComponent({
   setup() {
     let { incrementResearch } = useResearch();
 
+    const sellIncrementList = [1, 5, 10];
+    let sellIncrementIndex = ref(0);
+
+    function changeSellIncrement() {
+      console.log('change sell increment');
+      sellIncrementIndex.value++;
+      if(sellIncrementIndex.value > sellIncrementList.length - 1) {
+        sellIncrementIndex.value = 0;
+      }
+    }
+
     return {
+      changeSellIncrement,
       incrementResearch,
+      sellIncrementIndex,
+      sellIncrementList,
     }
   },
 })

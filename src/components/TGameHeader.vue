@@ -7,6 +7,10 @@
       </n-space>
 
       <n-space width="209px">
+        <n-statistic label="Currency">
+          {{currency}}
+        </n-statistic>
+
         <n-statistic label="Time Expansion" v-if="countdownTimer.isRunning()">
           {{expandConstant.toFixed(2)}}
         </n-statistic>
@@ -53,7 +57,7 @@ export default defineComponent({
     TimeIcon,
   },
   setup() {
-    const { personList } = useInitialize();
+    const { currency, personList } = useInitialize();
     const { countdownTimer, expandConstant, timeLeft } = useTime();
 
     let titleValue = ref('TWTN');
@@ -77,6 +81,7 @@ export default defineComponent({
 
     return {
       countdownTimer,
+      currency,
       expandConstant,
       timeLeft,
       titleFont,

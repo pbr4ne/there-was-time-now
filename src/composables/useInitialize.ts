@@ -1,4 +1,4 @@
-import { reactive, shallowRef } from 'vue'
+import { reactive, ref, shallowRef } from 'vue'
 
 import {
   Chip as QuantumComputingIcon,
@@ -42,6 +42,8 @@ import {
   ScienceKey, 
   UnlockKey
 } from '@/enum/Enums'
+
+const currency = ref(0);
 
 const personList : any = reactive({
   [PersonKey.LENNOX_OLD]: new Person(PersonKey.LENNOX_OLD, 'Lennox (1984)', 1984),
@@ -204,6 +206,7 @@ export default function useInitialize() {
   }
 
   return {
+    currency,
     deviceList,
     engineeringList,
     personList,
