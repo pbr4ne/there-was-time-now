@@ -36,6 +36,10 @@ const countdownTimer = {
     timer.restart(newTime);
   },
 
+  stop: function() {
+    timer.pause();
+  },
+
   secondsLeft: function() {
     return timer.seconds.value 
       + timer.minutes.value * 60 

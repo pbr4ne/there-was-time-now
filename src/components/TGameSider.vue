@@ -21,7 +21,6 @@
 </template>
 
 <script>
-/*eslint-disable*/
 import { computed, defineComponent, h, ref } from 'vue'
 import { NLayoutSider, NMenu } from 'naive-ui'
 import TGameSiderItem from '@/components/TGameSiderItem.vue'

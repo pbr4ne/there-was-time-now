@@ -104,6 +104,7 @@ export default {
         }
       });
       if(devicesUnlocked == devices.length) {
+        countdownTimer.stop();
         showWinModalRef.value = true;
       }
     });
