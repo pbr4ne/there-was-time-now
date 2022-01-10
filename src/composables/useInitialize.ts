@@ -3,44 +3,44 @@ import { reactive, shallowRef } from 'vue'
 import {
   AccumulationPrecipitation as DistillerIcon,
   Asset as AstronomyIcon,
-  BlochSphere as NepohualtzintzinIcon,
-  ChartBubblePacked as PhilosophersStoneIcon,
-  ChartTSne as ObsidianIcon,
+  Carbon as ChronomogrificationIcon,
   Chip as QuantumComputingIcon,
   Compass as TzolkinIcon,
   Dna as BiologyIcon,
-  Fire as ElementZeroIcon,
+  EdtLoop as QuantumComputerIcon,
+  Integration as CrystalSarcophagusIcon,
   MachineLearningModel as GeneticMemoryIcon,
-  WindyStrong as ChronomogrificationIcon,
+  NavaidNdb as NepohualtzintzinIcon,
+  NavaidVhfor as ElementZeroIcon,
 } from '@vicons/carbon'
 
 import {
-  GemRegular as CrystalSarcophagusIcon,
 } from '@vicons/fa'
 
 import {
+  Cube24Regular as ObsidianIcon,
   MathFormatProfessional24Regular as TimelessAlgebraIcon,
-  TimeAndWeather24Regular as TimehengeIcon,
 } from '@vicons/fluent'
 
 import {
   BodyOutline as OmegapersonIcon,
   FlaskOutline as AlchemyIcon,
   PlanetOutline as ZodiacTalismanIcon,
+  PrismOutline as PhilosophersStoneIcon,
 } from '@vicons/ionicons5'
 
 import {
-  ComputerOutlined as QuantumComputerIcon
 } from '@vicons/material'
 
 import {
   Atom as PhysicsIcon,
+  BuildingMonument as TimehengeIcon,
+  Circles as SarsenStonesIcon,
   CircleX as DefaultIcon,
   Diamond as ChronocrystalsIcon,
+  DropletHalf2 as TheFluidIcon,
   Dna as TelomereStretcherIcon,
-  Flask as TheFluidIcon,
   Math as MathematicsIcon,
-  ZodiacGemini as SarsenStonesIcon,
   ZodiacLeo as AethericHoroscopesIcon,
 } from '@vicons/tabler'
 
