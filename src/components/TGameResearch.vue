@@ -47,14 +47,7 @@
                 </t-game-research-button>
               </td>
               <td>
-                <n-popover trigger="hover" :disabled="!canSellResearch(research, sellIncrement())">
-                  <template #trigger>
-                    <n-button @click="sellResearch(research, sellIncrement())" :disabled="!canSellResearch(research, sellIncrement())">
-                      Sell
-                    </n-button>
-                  </template>
-                  <span>Sell {{research.label}} for {{sellResearchCost(research, sellIncrement())}}</span>
-                </n-popover>
+                <t-game-research-sell :research="research" />
               </td>
               <td>
                 <t-game-research-workers :research="research" />
@@ -68,13 +61,13 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import { NButton, NIcon, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
+import { defineComponent } from 'vue'
+import { NButton, NIcon,  NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import {
   BuildOutline as BuildIcon,
 } from '@vicons/ionicons5'
-
-import TGameResearchWorkers from '@/components/TGameResearchWorkers.vue'
+import TGameResearchSell from '@/components/TGameResearchSell'
+import TGameResearchWorkers from '@/components/TGameResearchWorkers'
 import useResearch from '@/composables/useResearch'
 import { Person } from '@/entities/Person'
 
@@ -83,11 +76,11 @@ export default defineComponent({
     BuildIcon,
     NButton,
     NIcon,
-    NPopover,
     NProgress,
     NScrollbar,
     NSpace,
     NTable,
+    TGameResearchSell,
     TGameResearchWorkers,
   },
   props: {
@@ -95,31 +88,12 @@ export default defineComponent({
     person: Person,
   },
   setup() {
-    let { canSellResearch, incrementResearch, sellResearch, sellResearchCost } = useResearch();
-
-    const sellIncrementList = [1, 5, 10];
-    let sellIncrementIndex = ref(0);
-
-    function changeSellIncrement() {
-      sellIncrementIndex.value++;
-      if(sellIncrementIndex.value > sellIncrementList.length - 1) {
-        sellIncrementIndex.value = 0;
-      }
-    }
-
-    function sellIncrement() {
-      return sellIncrementList[sellIncrementIndex.value];
-    }
+    const { changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
 
     return {
-      canSellResearch,
       changeSellIncrement,
       sellIncrement,
       incrementResearch,
-      sellIncrementIndex,
-      sellIncrementList,
-      sellResearch,
-      sellResearchCost,
     }
   },
 })

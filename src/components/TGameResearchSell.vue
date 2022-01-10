@@ -1,0 +1,38 @@
+<template>
+  <n-popover trigger="hover" :disabled="!canSellResearch(research, sellIncrement())">
+    <template #trigger>
+      <n-button @click="sellResearch(research, sellIncrement())" :disabled="!canSellResearch(research, sellIncrement())">
+        Sell
+      </n-button>
+    </template>
+    <span>Sell {{research.label}} for {{sellResearchCost(research, sellIncrement())}}</span>
+  </n-popover>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+import { NButton,  NPopover } from 'naive-ui'
+import useResearch from '@/composables/useResearch'
+import { Research } from '@/entities/Research'
+
+export default defineComponent({
+  components: {
+    NButton,
+    NPopover,
+  },
+  props: {
+    research: Research,
+  },
+  setup() {
+    const { canSellResearch, incrementResearch, sellIncrement, sellResearch, sellResearchCost } = useResearch();
+
+    return {
+      canSellResearch,
+      incrementResearch,
+      sellIncrement,
+      sellResearch,
+      sellResearchCost,
+    }    
+  },
+})
+</script>

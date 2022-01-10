@@ -1,7 +1,11 @@
+import { ref } from 'vue'
 import useCurrency from '@/composables/useCurrency'
 import useTime from '@/composables/useTime'
 import { Engineering } from '@/entities/Engineering'
 import { Research } from '@/entities/Research'
+
+const sellIncrementList = [1, 5, 10];
+const sellIncrementIndex = ref(0);
 
 export default function useResearch() {
   const { currency } = useCurrency();
@@ -61,6 +65,17 @@ export default function useResearch() {
     }
   }
 
+  const changeSellIncrement = () => {
+    sellIncrementIndex.value++;
+    if(sellIncrementIndex.value > sellIncrementList.length - 1) {
+      sellIncrementIndex.value = 0;
+    }
+  }
+
+  const sellIncrement = () => {
+    return sellIncrementList[sellIncrementIndex.value];
+  }
+
   const incrementResearch = (research: Research) => {
     //todo - yuck do this better
     if(!research.isIncrementing) {
@@ -91,10 +106,12 @@ export default function useResearch() {
   return {
     buyWorker,
     buyWorkerCost,
+    changeSellIncrement,
     canBuyWorker,
     canSellResearch,
     canSellWorker,
     incrementResearch,
+    sellIncrement,
     sellResearch,
     sellResearchCost,
     sellWorker,
