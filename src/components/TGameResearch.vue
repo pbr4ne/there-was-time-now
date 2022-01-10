@@ -19,15 +19,15 @@
         >
           <thead>
             <tr>
-              <th>
+              <th style="text-align: center;">
                 Research
               </th>
-              <th style="text-align: center;">
+              <th style="text-align: center;" v-if="sellFeatureEnabled">
                 <n-button size="tiny" @click="changeSellIncrement()">
                   ×{{sellIncrement()}}
                 </n-button>
               </th>
-              <th style="text-align: center;">
+              <th style="text-align: center;" v-if="sellFeatureEnabled">
                 {{person.workerTitle}}
               </th>
             </tr>
@@ -46,10 +46,10 @@
                   :research = "research">
                 </t-game-research-button>
               </td>
-              <td>
+              <td v-if="sellFeatureEnabled">
                 <t-game-research-sell :research="research" />
               </td>
-              <td>
+              <td v-if="sellFeatureEnabled">
                 <t-game-research-workers :research="research" />
               </td>
             </tr>
@@ -88,10 +88,11 @@ export default defineComponent({
     person: Person,
   },
   setup() {
-    const { changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
+    const { changeSellIncrement, incrementResearch, sellFeatureEnabled, sellIncrement } = useResearch();
 
     return {
       changeSellIncrement,
+      sellFeatureEnabled,
       sellIncrement,
       incrementResearch,
     }

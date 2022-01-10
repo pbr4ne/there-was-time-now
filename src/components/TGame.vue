@@ -27,8 +27,9 @@ import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
 import TGameTabs from '@/components/TGameTabs.vue'
 import useTime from '@/composables/useTime'
-import useUnlockWatch from '@/composables/useUnlockWatch'
 import useInitialize from '@/composables/useInitialize'
+import useResearch from '@/composables/useResearch'
+import useUnlockWatch from '@/composables/useUnlockWatch'
 import { Message } from '@/entities/Message'
 import { GameConstants } from '@/enum/Constants'
 import { EngineeringKey, PersonKey } from '@/enum/Enums'
@@ -46,6 +47,7 @@ export default {
     useUnlockWatch();
     const notification = useNotification();
     const { engineeringList, personList } = useInitialize();
+    const { sellFeatureEnabled } = useResearch();
     const { countdownTimer, timeElapsed } = useTime();
     const showGameOverModalRef = ref(false);
     let endOfWorld = false;
@@ -92,6 +94,10 @@ export default {
           duration: GameConstants.NOTIFICATION_DURATION,
         });
         personList[PersonKey.LENNOX_OLD].messageList.unshift(endOfWorldMessage);
+
+        //also unlock buy/sell?
+        sellFeatureEnabled.value = true;
+
         countdownTimer.start();
       }
     });

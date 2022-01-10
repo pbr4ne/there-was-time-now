@@ -1,4 +1,4 @@
-import { reactive, ref, shallowRef } from 'vue'
+import { reactive, shallowRef } from 'vue'
 
 import {
   Chip as QuantumComputingIcon,

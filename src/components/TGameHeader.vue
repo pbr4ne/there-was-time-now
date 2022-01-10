@@ -7,7 +7,7 @@
       </n-space>
 
       <n-space width="209px">
-        <n-statistic label="Budget">
+        <n-statistic label="Budget" v-if="sellFeatureEnabled">
           {{currency}}
         </n-statistic>
 
@@ -45,6 +45,7 @@ import {
 
 import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
+import useResearch from '@/composables/useResearch'
 import useTime from '@/composables/useTime'
 import { PersonKey } from '@/enum/Enums'
 
@@ -60,6 +61,7 @@ export default defineComponent({
   setup() {
     const { currency } = useCurrency();
     const { personList } = useInitialize();
+    const { sellFeatureEnabled } = useResearch();
     const { countdownTimer, expandConstant, timeLeft } = useTime();
 
     let titleValue = ref('TWTN');
@@ -85,6 +87,7 @@ export default defineComponent({
       countdownTimer,
       currency,
       expandConstant,
+      sellFeatureEnabled,
       timeLeft,
       titleFont,
       titleValue,
