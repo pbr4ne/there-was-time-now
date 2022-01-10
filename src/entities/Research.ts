@@ -11,6 +11,8 @@ export class Research {
   current: number = 0;
   isIncrementing: boolean = false;
   numWorkers: number = 0;
+  cost: number = 5; //todo - make configurable
+  workerCost: number = 5; //todo - make configurable
 
   unlocks: Array<Unlock> = new Array<Unlock>();
 

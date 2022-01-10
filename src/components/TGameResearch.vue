@@ -22,7 +22,7 @@
               </th>
               <th style="text-align: center;">
                 <n-button size="tiny" @click="changeSellIncrement()">
-                  ×{{sellIncrementList[sellIncrementIndex]}}
+                  ×{{sellIncrement()}}
                 </n-button>
               </th>
               <th style="text-align: center;">
@@ -45,13 +45,13 @@
                 </t-game-research-button>
               </td>
               <td>
-                <n-popover trigger="hover" :disabled="!canSellResearch(research)">
+                <n-popover trigger="hover" :disabled="!canSellResearch(research, sellIncrement())">
                   <template #trigger>
-                    <n-button @click="sellResearch(research)" :disabled="!canSellResearch(research)">
+                    <n-button @click="sellResearch(research, sellIncrement())" :disabled="!canSellResearch(research, sellIncrement())">
                       Sell
                     </n-button>
                   </template>
-                  <span>Sell {{research.label}} for {{sellResearchAmount(research)}}</span>
+                  <span>Sell {{research.label}} for {{sellResearchCost(research, sellIncrement())}}</span>
                 </n-popover>
               </td>
               <td>
@@ -64,7 +64,7 @@
                         </template>
                       </n-button>
                     </template>
-                    <span>Sell worker for {{sellWorkerAmount(research)}}</span>
+                    <span>Sell worker for {{sellWorkerCost(research)}}</span>
                   </n-popover>
                   <n-button style="width: 40px">
                     {{research.numWorkers}}
@@ -77,7 +77,7 @@
                         </template>
                       </n-button>
                     </template>
-                    <span>Buy worker for {{buyWorkerAmount(research)}}</span>
+                    <span>Buy worker for {{buyWorkerCost(research)}}</span>
                   </n-popover>
                 </n-button-group>
               </td>
@@ -97,7 +97,6 @@ import {
   MinusOutlined as MinusIcon,
   PlusOutlined as PlusIcon,
 } from '@vicons/material'
-import useCurrency from '@/composables/useCurrency'
 import useResearch from '@/composables/useResearch'
 import { Person } from '@/entities/Person'
 
@@ -120,8 +119,18 @@ export default defineComponent({
     person: Person,
   },
   setup() {
-    let { currency } = useCurrency();
-    let { incrementResearch } = useResearch();
+    let {
+      buyWorker,
+      buyWorkerCost,
+      canBuyWorker, 
+      canSellResearch, 
+      canSellWorker, 
+      incrementResearch, 
+      sellResearch, 
+      sellResearchCost,
+      sellWorker,
+      sellWorkerCost,
+    } = useResearch();
 
     const sellIncrementList = [1, 5, 10];
     let sellIncrementIndex = ref(0);
@@ -133,75 +142,25 @@ export default defineComponent({
       }
     }
 
-    function canSellResearch(research) {
-      const amount = sellIncrementList[sellIncrementIndex.value];
-      if(research.total < amount) {
-        return false;
-      }
-      return true;
-    }
-
-    function sellResearchAmount(research) {
-      return sellIncrementList[sellIncrementIndex.value] * 5; //todo - make this configurable per research
-    }
-
-    function sellResearch(research) {
-      const amount = sellIncrementList[sellIncrementIndex.value];
-      research.total -= amount;
-      currency.value += amount * 5;
-    }
-
-    function canBuyWorker(research) {
-      if(currency.value >= 5) {//todo - make this configurable per research
-        return true;
-      }
-      return false;
-    }
-
-    function canSellWorker(research) {
-      if(research.numWorkers > 0) {
-        return true;
-      }
-      return false;
-    }
-
-    function buyWorker(research) {
-      if(canBuyWorker(research)) {
-        research.numWorkers++;
-        currency.value -= 5;
-        incrementResearch(research);
-      }
-    }
-
-    function sellWorker(research) {
-      if(canSellWorker(research)){
-        research.numWorkers--
-        currency.value += 5;
-      }
-    }
-
-    function buyWorkerAmount(research) {
-      return 5;
-    }
-
-    function sellWorkerAmount(research) {
-      return 5;
+    function sellIncrement() {
+      return sellIncrementList[sellIncrementIndex.value];
     }
 
     return {
       buyWorker,
-      buyWorkerAmount,
+      buyWorkerCost,
       canBuyWorker,
       canSellResearch,
       canSellWorker,
       changeSellIncrement,
+      sellIncrement,
       incrementResearch,
       sellIncrementIndex,
       sellIncrementList,
       sellResearch,
-      sellResearchAmount,
+      sellResearchCost,
       sellWorker,
-      sellWorkerAmount,
+      sellWorkerCost,
     }
   },
 })
