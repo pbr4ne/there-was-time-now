@@ -19,7 +19,6 @@ export default function useUnlockWatch() {
 
   //todo - this seems inefficient
   watchEffect(() => {
-    console.log('watching for research thresholds to be reached');
     for(const researchKey in researchList){
       const research = researchList[researchKey];
       research.unlocks.forEach((unlock : Unlock) => {

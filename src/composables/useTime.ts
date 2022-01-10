@@ -13,6 +13,10 @@ const countupTimer = {
     + stopwatch.minutes.value * 60 
     + stopwatch.hours.value * 3600
     + stopwatch.days.value * 86400;
+  },
+
+  stop: function() {
+    stopwatch.pause();
   }
 }
 
@@ -24,6 +28,7 @@ const countdownTimer = {
   },
   
   start: function () {
+    stopwatch.pause();
     timer.start();
   },
 
