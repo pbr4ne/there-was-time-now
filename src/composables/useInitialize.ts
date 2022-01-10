@@ -1,8 +1,17 @@
 import { reactive, shallowRef } from 'vue'
 
 import {
+  AccumulationPrecipitation as DistillerIcon,
+  Asset as AstronomyIcon,
+  BlochSphere as NepohualtzintzinIcon,
+  ChartBubblePacked as PhilosophersStoneIcon,
+  ChartTSne as ObsidianIcon,
   Chip as QuantumComputingIcon,
-  Dna as BiologyIcon
+  Compass as TzolkinIcon,
+  Dna as BiologyIcon,
+  Fire as ElementZeroIcon,
+  MachineLearningModel as GeneticMemoryIcon,
+  WindyStrong as ChronomogrificationIcon,
 } from '@vicons/carbon'
 
 import {
@@ -11,11 +20,13 @@ import {
 
 import {
   MathFormatProfessional24Regular as TimelessAlgebraIcon,
+  TimeAndWeather24Regular as TimehengeIcon,
 } from '@vicons/fluent'
 
 import {
+  BodyOutline as OmegapersonIcon,
   FlaskOutline as AlchemyIcon,
-  TelescopeOutline as AstronomyIcon,
+  PlanetOutline as ZodiacTalismanIcon,
 } from '@vicons/ionicons5'
 
 import {
@@ -25,7 +36,11 @@ import {
 import {
   Atom as PhysicsIcon,
   CircleX as DefaultIcon,
+  Diamond as ChronocrystalsIcon,
+  Dna as TelomereStretcherIcon,
   Flask as TheFluidIcon,
+  Math as MathematicsIcon,
+  ZodiacGemini as SarsenStonesIcon,
   ZodiacLeo as AethericHoroscopesIcon,
 } from '@vicons/tabler'
 
@@ -54,39 +69,39 @@ const scienceList : any = reactive({
   [ScienceKey.QUANTUM_COMPUTING]: new Science('Quantum Computing', shallowRef(QuantumComputingIcon), '#B5179E', 5, 1),
 
   [ScienceKey.QUANTUM_COMPUTER]: new Science('Quantum Computer', shallowRef(QuantumComputerIcon), '#4361EE', 0.5, 1.1),
-  [ScienceKey.CHRONOCRYSTALS]: new Science('Chronocrystals', shallowRef(DefaultIcon), '#4CC9F0', 0.5, 1),
+  [ScienceKey.CHRONOCRYSTALS]: new Science('Chronocrystals', shallowRef(ChronocrystalsIcon), '#4CC9F0', 0.5, 1),
 
   [ScienceKey.BIOLOGY]: new Science('Biology', shallowRef(BiologyIcon), '#f4e285', 10, 1),
-  [ScienceKey.GENETIC_MEMORY]: new Science('Genetic Memory', shallowRef(DefaultIcon), '#FEFAE0', 5, 1),
+  [ScienceKey.GENETIC_MEMORY]: new Science('Genetic Memory', shallowRef(GeneticMemoryIcon), '#FEFAE0', 5, 1),
 
-  [ScienceKey.TELOMERE_STRETCHER]: new Science('Telomere Stretcher', shallowRef(DefaultIcon), '#606c38', 0.5, 1.1),
+  [ScienceKey.TELOMERE_STRETCHER]: new Science('Telomere Stretcher', shallowRef(TelomereStretcherIcon), '#606c38', 0.5, 1.1),
   [ScienceKey.THE_FLUID]: new Science('The Fluid', shallowRef(TheFluidIcon), '#bc6c25', 0.5, 1),
 
   [ScienceKey.ALCHEMY]: new Science('Alchemy', shallowRef(AlchemyIcon), '#bfc0c0', 10, 1),
-  [ScienceKey.CHRONOMOGRIFICATION]: new Science('Chronomogrification', shallowRef(DefaultIcon), '#FFFFFF', 5, 1),
+  [ScienceKey.CHRONOMOGRIFICATION]: new Science('Chronomogrification', shallowRef(ChronomogrificationIcon), '#FFFFFF', 5, 1),
 
-  [ScienceKey.DISTILLER]: new Science('Distiller', shallowRef(DefaultIcon), '#EF8354', 0.5, 1.1),
-  [ScienceKey.ELEMENT_ZERO]: new Science('Element Zero', shallowRef(DefaultIcon), '#4f5d75', 0.5, 1),
+  [ScienceKey.DISTILLER]: new Science('Distiller', shallowRef(DistillerIcon), '#EF8354', 0.5, 1.1),
+  [ScienceKey.ELEMENT_ZERO]: new Science('Element Zero', shallowRef(ElementZeroIcon), '#4f5d75', 0.5, 1),
 
-  [ScienceKey.MATHEMATICS]: new Science('Mathematics', shallowRef(DefaultIcon), '#48d7e7', 10, 1),
+  [ScienceKey.MATHEMATICS]: new Science('Mathematics', shallowRef(MathematicsIcon), '#48d7e7', 10, 1),
   [ScienceKey.TIMELESS_ALGEBRA]: new Science('Timeless Algebra', shallowRef(TimelessAlgebraIcon), '#f168a7', 5, 1),
 
-  [ScienceKey.NEPOHUALTZINTZIN]: new Science('Nepohualtzintzin', shallowRef(DefaultIcon), '#f1cbe6', 0.5, 1.1),
-  [ScienceKey.OBSIDIAN]: new Science('Obsidian', shallowRef(DefaultIcon), '#f9d567', 0.5, 1),
+  [ScienceKey.NEPOHUALTZINTZIN]: new Science('Nepohualtzintzin', shallowRef(NepohualtzintzinIcon), '#f1cbe6', 0.5, 1.1),
+  [ScienceKey.OBSIDIAN]: new Science('Obsidian', shallowRef(ObsidianIcon), '#f9d567', 0.5, 1),
 
   [ScienceKey.ASTRONOMY]: new Science('Astronomy', shallowRef(AstronomyIcon), '#2c7da0', 10, 1),
   [ScienceKey.AETHERIC_HOROSCOPES]: new Science('Aetheric Horoscopes', shallowRef(AethericHoroscopesIcon), '#468faf', 5, 1),
 
-  [ScienceKey.ZODIAC_TALISMAN]: new Science('Zodiac Talisman', shallowRef(DefaultIcon), '#61a5c2', 0.5, 1.1),
-  [ScienceKey.SARSEN_STONES]: new Science('Sarsen Stones', shallowRef(DefaultIcon), '#89c2d9', 0.5, 1),
+  [ScienceKey.ZODIAC_TALISMAN]: new Science('Zodiac Talisman', shallowRef(ZodiacTalismanIcon), '#61a5c2', 0.5, 1.1),
+  [ScienceKey.SARSEN_STONES]: new Science('Sarsen Stones', shallowRef(SarsenStonesIcon), '#89c2d9', 0.5, 1),
 });
 
 const deviceList : any = reactive({
   [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device('Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#e0c3fc', 0.25),
-  [DeviceKey.OMEGAPERSON]: new Device('Omegaperson', shallowRef(DefaultIcon), '#fb8500', 0.25),
-  [DeviceKey.PHILOSOPHERS_STONE]: new Device('Philosopher\'s Stone', shallowRef(DefaultIcon), '#d4af37', 0.25),
-  [DeviceKey.TZOLKIN]: new Device('Tzolk\'in', shallowRef(DefaultIcon), '#8cb369', 0.25),
-  [DeviceKey.TIMEHENGE]: new Device('Timehenge', shallowRef(DefaultIcon), '#a9d6e5', 0.25),
+  [DeviceKey.OMEGAPERSON]: new Device('Omegaperson', shallowRef(OmegapersonIcon), '#fb8500', 0.25),
+  [DeviceKey.PHILOSOPHERS_STONE]: new Device('Philosopher\'s Stone', shallowRef(PhilosophersStoneIcon), '#d4af37', 0.25),
+  [DeviceKey.TZOLKIN]: new Device('Tzolk\'in', shallowRef(TzolkinIcon), '#8cb369', 0.25),
+  [DeviceKey.TIMEHENGE]: new Device('Timehenge', shallowRef(TimehengeIcon), '#a9d6e5', 0.25),
 });
 
 const researchList : any = reactive({
