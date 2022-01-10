@@ -67,12 +67,18 @@ export default function useMessage() {
     personList[PersonKey.LENNOX_OLD].messageList.unshift(halfwayMessage);
   }
 
-  function sendUnlockMessage(unlock: Unlock, person: Person) {
-    const message = unlock.message;
+  function sendUnlockMessage(unlock: Unlock, person: Person, name: string) {
+    let message = unlock.message;
     //not every unlock needs a message
+    // if(!message) {
+    //   return;
+    // }
+
+    //default message?
     if(!message) {
-      return;
+      message = new Message(`${name} unlocked.`, `${name} unlocked.`);
     }
+
     if(!message.wasSent) {
       message.wasSent = true;
     }
@@ -83,6 +89,9 @@ export default function useMessage() {
     const d = new Date(person.year, 0);
     d.setDate(d.getDate() + timeElapsed.value);
     message.timestamp = d.toISOString().split('T')[0];
+    //todo - this is hacky
+    message.timestamp = message.timestamp.replace('1900-', '2524 BC ');
+
     notification.create({
       title: message.title,
       content: message.text,

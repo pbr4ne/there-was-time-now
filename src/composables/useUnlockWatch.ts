@@ -9,7 +9,7 @@ function unlockResearch(unlock: Unlock, researchList: any, personList: any, send
   if(!research.isUnlocked) {
     research.isUnlocked = true;
     const person = personList[unlock.person];
-    sendUnlockMessage(unlock, person);
+    sendUnlockMessage(unlock, person, research.label);
   }
 }
 
@@ -27,7 +27,7 @@ export default function useUnlockWatch() {
             const person = personList[unlock.key];
             if(!person.isUnlocked) {
               person.isUnlocked = true;
-              sendUnlockMessage(unlock, person);
+              sendUnlockMessage(unlock, person, person.name);
             }
           } else if(unlock.type === UnlockKey.SCIENCE) {
             unlockResearch(unlock, scienceList, personList, sendUnlockMessage);
@@ -37,7 +37,7 @@ export default function useUnlockWatch() {
             unlockResearch(unlock, deviceList, personList, sendUnlockMessage);
           } else if(unlock.type === UnlockKey.MESSAGE) {
             const person = personList[unlock.key];
-            sendUnlockMessage(unlock, person);
+            sendUnlockMessage(unlock, person, null!);
           }
         }
       });
