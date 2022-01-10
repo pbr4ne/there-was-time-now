@@ -15,7 +15,7 @@ function unlockResearch(unlock: Unlock, researchList: any, personList: any, send
 
 export default function useUnlockWatch() {
   const { sendUnlockMessage } = useMessage();
-  const { deviceList, engineeringList, personList, researchList, scienceList } = useInitialize();
+  const { deviceList, personList, researchList, scienceList } = useInitialize();
 
   //todo - this seems inefficient
   watchEffect(() => {
@@ -31,8 +31,6 @@ export default function useUnlockWatch() {
             }
           } else if(unlock.type === UnlockKey.SCIENCE) {
             unlockResearch(unlock, scienceList, personList, sendUnlockMessage);
-          } else if(unlock.type === UnlockKey.ENGINEERING) {
-            unlockResearch(unlock, engineeringList, personList, sendUnlockMessage);
           } else if(unlock.type === UnlockKey.DEVICE) {
             unlockResearch(unlock, deviceList, personList, sendUnlockMessage);
           } else if(unlock.type === UnlockKey.MESSAGE) {

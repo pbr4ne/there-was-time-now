@@ -1,5 +1,4 @@
 import { Device } from '@/entities/Device'
-import { Engineering } from '@/entities/Engineering'
 import { Science } from '@/entities/Science'
 import { Message } from '@/entities/Message'
 
@@ -9,7 +8,6 @@ export class Person {
   name: string;
   year: number;
   scienceList: Array<Science> = new Array<Science>();
-  engineeringList: Array<Engineering> = new Array<Engineering>();
   deviceList: Array<Device> = new Array<Device>();
   isUnlocked: boolean = false;
   messageList: Array<Message> = new Array<Message>();

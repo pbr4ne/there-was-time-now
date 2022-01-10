@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 import useCurrency from '@/composables/useCurrency'
 import useTime from '@/composables/useTime'
-import { Engineering } from '@/entities/Engineering'
 import { Research } from '@/entities/Research'
+import { Science } from '@/entities/Science'
 
 const sellIncrementList = [1, 5, 10];
 const sellIncrementIndex = ref(0);
@@ -90,7 +90,7 @@ export default function useResearch() {
             research.current = 0;
             research.total += 1;
             research.isIncrementing = false;
-            if(research instanceof Engineering) {
+            if(research instanceof Science) {
               expandTime(research.expand);
             }
           },200);

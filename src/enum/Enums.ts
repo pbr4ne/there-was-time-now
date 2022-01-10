@@ -1,7 +1,6 @@
 export enum UnlockKey {
     PERSON = "person",
     SCIENCE = "science",
-    ENGINEERING = "engineering",
     DEVICE = "device",
     MESSAGE = "message",
 }
@@ -17,33 +16,27 @@ export enum PersonKey {
 export enum ScienceKey {
   PHYSICS = "physics",
   QUANTUM_COMPUTING = "quantum-computing",
-
-  BIOLOGY = "biology",
-  GENETIC_MEMORY = "genetic-memory",
-
-  ALCHEMY = "alchemy",
-  CHRONOMOGRIFICATION = "chronomogrification",
-
-  MATHEMATICS = "mathematics",
-  TIMELESS_ALGEBRA = "timeless-algebra",
-
-  ASTRONOMY = "astronomy",
-  AETHERIC_HOROSCOPES = "aetheric-horoscopes",
-}
-
-export enum EngineeringKey {
   QUANTUM_COMPUTER = "quantum-computer",
   CHRONOCRYSTALS = "chronocrystals",
 
+  BIOLOGY = "biology",
+  GENETIC_MEMORY = "genetic-memory",
   TELOMERE_STRETCHER = "telomere-stretcher",
   THE_FLUID = "the-fluid",
 
+
+  ALCHEMY = "alchemy",
+  CHRONOMOGRIFICATION = "chronomogrification",
   DISTILLER = "distiller",
   ELEMENT_ZERO = "element-zero",
 
+  MATHEMATICS = "mathematics",
+  TIMELESS_ALGEBRA = "timeless-algebra",
   NEPOHUALTZINTZIN = "nepohualtzintzin",
   OBSIDIAN = "obsidian",
 
+  ASTRONOMY = "astronomy",
+  AETHERIC_HOROSCOPES = "aetheric-horoscopes",
   ZODIAC_TALISMAN = "zodiac-talisman",
   SARSEN_STONES = "sarsen-stones",
 }

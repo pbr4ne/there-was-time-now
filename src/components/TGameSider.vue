@@ -60,13 +60,6 @@ export default defineComponent({
             key: science.label,
             icon: renderIcon(science.icon, science.color),
           }));
-        person.engineeringList
-          .filter(engineering => engineering.isUnlocked)
-          .forEach(engineering => personResearchList.push({
-            label: renderLabel(engineering),
-            key: engineering.label,
-            icon: renderIcon(engineering.icon, engineering.color),
-          }));
         person.deviceList
           .filter(device => device.isUnlocked)
           .forEach(device => deviceGroup.push({

@@ -8,7 +8,6 @@
     >
       <n-space horizontal style="padding: 20px">
         <t-game-research :person="person" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
-        <!-- <t-game-research label="Engineering" :researchList="unlockedEngineeringList(person)" v-if="unlockedEngineeringList(person).length > 0" /> -->
       </n-space>
       <n-space horizontal style="padding: 20px">
         <t-game-tab-device v-if="unlockedDevice(person)" :device="unlockedDevice(person)" />
@@ -44,17 +43,8 @@ export default defineComponent({
   setup() {
     let { personList } = useInitialize();
 
-    function unlockedScienceList(person) {
-      return person.scienceList.filter(science => science.isUnlocked);
-    }
-
-    function unlockedEngineeringList(person) {
-      return person.engineeringList.filter(engineering => engineering.isUnlocked);
-    }
-
     function unlockedResearchList(person) {
-      return person.scienceList.filter(science => science.isUnlocked)
-        .concat(person.engineeringList.filter(engineering => engineering.isUnlocked));
+      return person.scienceList.filter(science => science.isUnlocked);
     }
 
     function unlockedDevice(person) {
@@ -65,9 +55,7 @@ export default defineComponent({
       personList,
       renderTab,
       unlockedDevice,
-      unlockedEngineeringList,
       unlockedResearchList,
-      unlockedScienceList,
     }
   },
 })

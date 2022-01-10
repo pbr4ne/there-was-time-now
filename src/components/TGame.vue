@@ -41,7 +41,7 @@ import useMessage from '@/composables/useMessage'
 import useResearch from '@/composables/useResearch'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import { GameConstants } from '@/enum/Constants'
-import { EngineeringKey, ScienceKey } from '@/enum/Enums'
+import { ScienceKey } from '@/enum/Enums'
 
 export default {
   components: {
@@ -54,7 +54,7 @@ export default {
   },
   setup () {
     useUnlockWatch();
-    const { deviceList, engineeringList, scienceList } = useInitialize();
+    const { deviceList, scienceList } = useInitialize();
     const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage } = useMessage();
     const { sellFeatureEnabled } = useResearch();
     const { countdownTimer } = useTime();
@@ -73,7 +73,7 @@ export default {
 
     //SPECIAL - when first quantum computer is built, start the end of world timer
     watchEffect(() => {
-      if(!endOfWorld && engineeringList[EngineeringKey.QUANTUM_COMPUTER].total == 1) {
+      if(!endOfWorld && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1) {
         endOfWorld = true;
         sendEndOfWorldMessage();
         countdownTimer.start();
