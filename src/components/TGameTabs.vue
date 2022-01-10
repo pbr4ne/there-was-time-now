@@ -1,18 +1,15 @@
 <template>
-  <n-tabs type="card" justify-content="space-evenly">
+  <n-tabs type="card">
     <n-tab-pane 
       v-for="person in (Object.values(personList).filter(person => person.isUnlocked))" 
       :key="person.key"
       :name="person.key" 
       :tab="renderTab(person)"
     >
-      <n-space horizontal style="padding: 20px">
+      <n-space style="padding: 20px">
         <t-game-research :person="person" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
       </n-space>
-      <n-space horizontal style="padding: 20px">
-        <t-game-tab-device v-if="unlockedDevice(person)" :device="unlockedDevice(person)" />
-      </n-space>
-
+      <t-game-tab-device v-if="unlockedDevice(person)" :device="unlockedDevice(person)" />
       <t-game-tab-messages :person="person" />
     </n-tab-pane>
   </n-tabs>
