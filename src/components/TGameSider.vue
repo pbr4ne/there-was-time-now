@@ -48,50 +48,50 @@ export default defineComponent({
     const sidebar = computed(() => {
       const sidebar = [];
       const unlockedPersonList = Object.values(personList).filter(person => person.isUnlocked);
-      const scienceGroup = [];
-      const engineeringGroup = [];
       const deviceGroup = [];
+      const personGroup = [];
 
-      unlockedPersonList.forEach(person => person.scienceList
+      unlockedPersonList.forEach(person => {
+        const personResearchList = [];
+        person.scienceList
           .filter(science => science.isUnlocked)
-          .forEach(science => scienceGroup.push({
+          .forEach(science => personResearchList.push({
             label: renderLabel(science),
             key: science.label,
             icon: renderIcon(science.icon, science.color),
-          }))
-        );
-
-      sidebar.push(...scienceGroup);
-      
-      unlockedPersonList.forEach(person => person.engineeringList
+          }));
+        person.engineeringList
           .filter(engineering => engineering.isUnlocked)
-          .forEach(engineering => engineeringGroup.push({
+          .forEach(engineering => personResearchList.push({
             label: renderLabel(engineering),
             key: engineering.label,
             icon: renderIcon(engineering.icon, engineering.color),
-          }))
-        );
-      
-      if(engineeringGroup.length > 0) {
-        sidebar.push({
-          key: 'divider-1',
-          type: 'divider',
-        });
-        sidebar.push(...engineeringGroup);
-      }
-
-      unlockedPersonList.forEach(person => person.deviceList
+          }));
+        person.deviceList
           .filter(device => device.isUnlocked)
           .forEach(device => deviceGroup.push({
             label: renderLabel(device),
             key: device.label,
             icon: renderIcon(device.icon, device.color),
-          }))
-        );
-      
+          }));
+        personGroup.push(personResearchList);
+      });
+
+      let i = 0;
+      personGroup.forEach(personResearchList => {
+        if(i > 0 && personResearchList.length > 0) {
+          sidebar.push({
+            key: 'divider-' + i,
+            type: 'divider',
+          });
+        }
+        sidebar.push(...personResearchList);
+        i++;
+      });
+
       if(deviceGroup.length > 0) {
         sidebar.push({
-          key: 'divider-2',
+          key: 'divider-device',
           type: 'divider',
         });
         sidebar.push(...deviceGroup);
