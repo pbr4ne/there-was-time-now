@@ -32,7 +32,7 @@ import useResearch from '@/composables/useResearch'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import { Message } from '@/entities/Message'
 import { GameConstants } from '@/enum/Constants'
-import { EngineeringKey, PersonKey } from '@/enum/Enums'
+import { EngineeringKey, PersonKey, ScienceKey } from '@/enum/Enums'
 
 export default {
   components: {
@@ -46,7 +46,7 @@ export default {
   setup () {
     useUnlockWatch();
     const notification = useNotification();
-    const { engineeringList, personList } = useInitialize();
+    const { engineeringList, personList, scienceList } = useInitialize();
     const { sellFeatureEnabled } = useResearch();
     const { countdownTimer, timeElapsed } = useTime();
     const showGameOverModalRef = ref(false);
@@ -95,10 +95,16 @@ export default {
         });
         personList[PersonKey.LENNOX_OLD].messageList.unshift(endOfWorldMessage);
 
-        //also unlock buy/sell?
-        sellFeatureEnabled.value = true;
+        
 
         countdownTimer.start();
+      }
+    });
+
+    //SPECIAL - when first quantum computing is researched, unlock buy/sell
+    watchEffect(() => {
+      if(scienceList[ScienceKey.QUANTUM_COMPUTING].total == 1) {
+        sellFeatureEnabled.value = true;
       }
     });
 
