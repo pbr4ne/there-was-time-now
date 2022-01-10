@@ -1,10 +1,10 @@
 <template>
   <n-space vertical style="padding: 20px;">
-      <n-switch v-model:value="show">
+      <n-switch v-model:value="showTimeline">
         <template #checked>Hide Timeline</template>
         <template #unchecked>Show Timeline</template>
       </n-switch>
-    <n-collapse-transition :show="show">
+    <n-collapse-transition :show="showTimeline">
       <n-timeline>
         <n-timeline-item 
           v-for="message in person.messageList" 
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 import { 
   NCollapseTransition,
@@ -29,6 +29,7 @@ import {
   NTimelineItem,
 } from 'naive-ui'
 
+import useMessage from '@/composables/useMessage'
 import { Person } from '@/entities/Person'
 
 export default defineComponent({
@@ -43,8 +44,10 @@ export default defineComponent({
     person: Person,
   },
   setup() {
+    const { showTimeline } = useMessage();
+    
     return {
-      show: ref(false),
+      showTimeline,
     }
   },
 })

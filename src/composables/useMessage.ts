@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import { useNotification } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
@@ -6,6 +7,8 @@ import { PersonKey } from '@/enum/Enums'
 import { Message } from '@/entities/Message'
 import { Person } from '@/entities/Person'
 import { Unlock } from '@/entities/Unlock'
+
+const showTimeline = ref(false);
 
 //todo - less code duplication
 export default function useMessage() {
@@ -106,5 +109,6 @@ export default function useMessage() {
     sendHalfwayMessage,
     sendInitialMessage,
     sendUnlockMessage,
+    showTimeline,
   }
 }
