@@ -5,7 +5,9 @@
       :percentage="researchList.slice().reverse().filter(research => research.isUnlocked).map(({ current }) => current)"
       :color="researchList.slice().reverse().filter(research => research.isUnlocked).map(({ color }) => color)"
     >
-      <h3>{{label}}</h3>
+      <n-icon size="40">
+        <build-icon />
+      </n-icon>
     </n-progress>
     <n-space vertical>
       <n-scrollbar x-scrollable>
@@ -94,6 +96,9 @@
 import { defineComponent, ref } from 'vue'
 import { NButton, NIcon, NButtonGroup, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import {
+  BuildOutline as BuildIcon,
+} from '@vicons/ionicons5'
+import {
   MinusOutlined as MinusIcon,
   PlusOutlined as PlusIcon,
 } from '@vicons/material'
@@ -102,6 +107,7 @@ import { Person } from '@/entities/Person'
 
 export default defineComponent({
   components: {
+    BuildIcon,
     MinusIcon,
     NButton,
     NButtonGroup,
@@ -114,7 +120,6 @@ export default defineComponent({
     PlusIcon,
   },
   props: {
-    label: String,
     researchList: Array,
     person: Person,
   },
