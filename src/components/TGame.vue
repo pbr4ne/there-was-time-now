@@ -12,10 +12,19 @@
     :mask-closable="false"
     preset="dialog"
     positive-text="Dang"
-    @positive-click="onPositiveClick"
+    @positive-click="onPositiveClickLose"
   >
     GAME OVER
     #OUTATIME
+  </n-modal>
+  <n-modal 
+    v-model:show="showWinModal"
+    :mask-closable="false"
+    preset="dialog"
+    positive-text="YAY"
+    @positive-click="onPositiveClickWin"
+  >
+    YOU WIN
   </n-modal>
 </template>
 
@@ -45,11 +54,12 @@ export default {
   },
   setup () {
     useUnlockWatch();
-    const { engineeringList, scienceList } = useInitialize();
+    const { deviceList, engineeringList, scienceList } = useInitialize();
     const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage } = useMessage();
     const { sellFeatureEnabled } = useResearch();
     const { countdownTimer } = useTime();
     const showGameOverModalRef = ref(false);
+    const showWinModalRef = ref(false);
     let endOfWorld = false;
 
     sendInitialMessage();
@@ -84,11 +94,29 @@ export default {
       }
     });
 
+    //SPECIAL - when you finish building all devices, you win
+    watchEffect(() => {
+      const devices = Object.values(deviceList);
+      let devicesUnlocked = 0;
+      Object.values(deviceList).forEach(device => {
+        if(device.total == 1) {
+          devicesUnlocked++
+        }
+      });
+      if(devicesUnlocked == devices.length) {
+        showWinModalRef.value = true;
+      }
+    });
+
     return {
-      onPositiveClick () {
+      onPositiveClickLose () {
         showGameOverModalRef.value = false;
       },
+      onPositiveClickWin() {
+        showWinModalRef.value = true;
+      },
       showGameOverModal: showGameOverModalRef,
+      showWinModal: showWinModalRef,
     };
   }
 }
