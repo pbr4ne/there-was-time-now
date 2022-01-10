@@ -57,31 +57,7 @@
                 </n-popover>
               </td>
               <td>
-                <n-button-group size="small">
-                  <n-popover trigger="hover" :disabled="!canSellWorker(research)">
-                    <template #trigger>
-                      <n-button round @click="sellWorker(research)" :disabled="!canSellWorker(research)">
-                        <template #icon>
-                          <n-icon><minus-icon /></n-icon>
-                        </template>
-                      </n-button>
-                    </template>
-                    <span>Sell worker for {{sellWorkerCost(research)}}</span>
-                  </n-popover>
-                  <n-button style="width: 40px">
-                    {{research.numWorkers}}
-                  </n-button>
-                  <n-popover trigger="hover" :disabled="!canBuyWorker(research)">
-                    <template #trigger>
-                      <n-button round @click="buyWorker(research)" :disabled="!canBuyWorker(research)" >
-                        <template #icon>
-                          <n-icon><plus-icon /></n-icon>
-                        </template>
-                      </n-button>
-                    </template>
-                    <span>Buy worker for {{buyWorkerCost(research)}}</span>
-                  </n-popover>
-                </n-button-group>
+                <t-game-research-workers :research="research" />
               </td>
             </tr>
           </tbody>
@@ -92,50 +68,34 @@
 </template>
 
 <script>
-/* eslint-disable */
 import { defineComponent, ref } from 'vue'
-import { NButton, NIcon, NButtonGroup, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
+import { NButton, NIcon, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import {
   BuildOutline as BuildIcon,
 } from '@vicons/ionicons5'
-import {
-  MinusOutlined as MinusIcon,
-  PlusOutlined as PlusIcon,
-} from '@vicons/material'
+
+import TGameResearchWorkers from '@/components/TGameResearchWorkers.vue'
 import useResearch from '@/composables/useResearch'
 import { Person } from '@/entities/Person'
 
 export default defineComponent({
   components: {
     BuildIcon,
-    MinusIcon,
     NButton,
-    NButtonGroup,
     NIcon,
     NPopover,
     NProgress,
     NScrollbar,
     NSpace,
     NTable,
-    PlusIcon,
+    TGameResearchWorkers,
   },
   props: {
     researchList: Array,
     person: Person,
   },
   setup() {
-    let {
-      buyWorker,
-      buyWorkerCost,
-      canBuyWorker, 
-      canSellResearch, 
-      canSellWorker, 
-      incrementResearch, 
-      sellResearch, 
-      sellResearchCost,
-      sellWorker,
-      sellWorkerCost,
-    } = useResearch();
+    let { canSellResearch, incrementResearch, sellResearch, sellResearchCost } = useResearch();
 
     const sellIncrementList = [1, 5, 10];
     let sellIncrementIndex = ref(0);
@@ -152,11 +112,7 @@ export default defineComponent({
     }
 
     return {
-      buyWorker,
-      buyWorkerCost,
-      canBuyWorker,
       canSellResearch,
-      canSellWorker,
       changeSellIncrement,
       sellIncrement,
       incrementResearch,
@@ -164,8 +120,6 @@ export default defineComponent({
       sellIncrementList,
       sellResearch,
       sellResearchCost,
-      sellWorker,
-      sellWorkerCost,
     }
   },
 })
