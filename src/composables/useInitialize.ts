@@ -74,8 +74,8 @@ const scienceList : any = reactive({
   [ScienceKey.BIOLOGY]: new Science('Biology', shallowRef(BiologyIcon), '#f4e285', 10, 1),
   [ScienceKey.GENETIC_MEMORY]: new Science('Genetic Memory', shallowRef(GeneticMemoryIcon), '#FEFAE0', 5, 1),
 
-  [ScienceKey.TELOMERE_STRETCHER]: new Science('Telomere Stretcher', shallowRef(TelomereStretcherIcon), '#606c38', 0.5, 1.1),
-  [ScienceKey.THE_FLUID]: new Science('The Fluid', shallowRef(TheFluidIcon), '#bc6c25', 0.5, 1),
+  [ScienceKey.TELOMERE_STRETCHER]: new Science('Telomere Stretcher', shallowRef(TelomereStretcherIcon), '#bc6c25', 0.5, 1.1),
+  [ScienceKey.THE_FLUID]: new Science('The Fluid', shallowRef(TheFluidIcon), '#606c38', 0.5, 1),
 
   [ScienceKey.ALCHEMY]: new Science('Alchemy', shallowRef(AlchemyIcon), '#bfc0c0', 10, 1),
   [ScienceKey.CHRONOMOGRIFICATION]: new Science('Chronomogrification', shallowRef(ChronomogrificationIcon), '#FFFFFF', 5, 1),
