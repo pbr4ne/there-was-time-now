@@ -38,6 +38,7 @@ import TGameTabs from '@/components/TGameTabs.vue'
 import useTime from '@/composables/useTime'
 import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
+import useSaveLoad from '@/composables/useSaveLoad'
 import useResearch from '@/composables/useResearch'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import { GameConstants } from '@/enum/Constants'
@@ -53,8 +54,11 @@ export default {
     TGameTabs,
   },
   setup () {
-    useUnlockWatch();
+    const { isLoading, load } = useSaveLoad();
     const { deviceList, scienceList } = useInitialize();
+
+    load();
+
     const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage } = useMessage();
     const { sellFeatureEnabled } = useResearch();
     const { countdownTimer } = useTime();
@@ -62,18 +66,19 @@ export default {
     const showWinModalRef = ref(false);
     let endOfWorld = false;
 
+    useUnlockWatch();
     sendInitialMessage();
 
     //SPECIAL - when countdown timer is expired, show end of game modal
     watchEffect(async() => {
-      if(countdownTimer.isExpired()) {
+      if(countdownTimer.isExpired() && !isLoading.value) {
         showGameOverModalRef.value = true;
       }
     });
 
     //SPECIAL - when first quantum computer is built, start the end of world timer
     watchEffect(() => {
-      if(!endOfWorld && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1) {
+      if(!endOfWorld && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
         endOfWorld = true;
         sendEndOfWorldMessage();
         countdownTimer.start();
@@ -82,20 +87,23 @@ export default {
 
     //SPECIAL - when first quantum computing is researched, unlock buy/sell
     watchEffect(() => {
-      if(scienceList[ScienceKey.QUANTUM_COMPUTING].total == 1) {
+      if(scienceList[ScienceKey.QUANTUM_COMPUTING].total == 1 && !isLoading.value) {
         sellFeatureEnabled.value = true;
       }
     });
 
     //SPECIAL - when time is halfway up, show message
     watchEffect(() => {
-      if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2){
+      if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
         sendHalfwayMessage();
       }
     });
 
     //SPECIAL - when you finish building all devices, you win
     watchEffect(() => {
+      if(isLoading.value) {
+        return;
+      }
       const devices = Object.values(deviceList);
       let devicesUnlocked = 0;
       Object.values(deviceList).forEach(device => {

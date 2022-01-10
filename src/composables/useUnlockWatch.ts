@@ -1,6 +1,7 @@
 import { watchEffect } from 'vue'
 import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
+import useSaveLoad from '@/composables/useSaveLoad'
 import { Unlock } from '@/entities/Unlock'
 import { UnlockKey } from '@/enum/Enums'
 
@@ -16,9 +17,13 @@ function unlockResearch(unlock: Unlock, researchList: any, personList: any, send
 export default function useUnlockWatch() {
   const { sendUnlockMessage } = useMessage();
   const { deviceList, personList, researchList, scienceList } = useInitialize();
+  const { isLoading } = useSaveLoad();
 
   //todo - this seems inefficient
   watchEffect(() => {
+    if (isLoading.value) {
+      return;
+    }
     for(const researchKey in researchList){
       const research = researchList[researchKey];
       research.unlocks.forEach((unlock : Unlock) => {
