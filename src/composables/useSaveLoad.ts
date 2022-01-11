@@ -16,7 +16,7 @@ localforage.config({
 export default function useSaveLoad() {
   const { currency } = useCurrency();
   const { countdownTriggered, deviceList, gameEnded, gameStarted, isLoading, personList, scienceList, sellFeatureEnabled } = useInitialize();
-  const { countdownTimer, expandConstant } = useTime();
+  const { countdownTimer, countupTimer, expandConstant } = useTime();
 
   const saveGameState = () => {
     console.log('saving...');
@@ -46,7 +46,8 @@ export default function useSaveLoad() {
     });
 
     const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameEnded.value, 
-      countdownTriggered.value, countdownTimer.secondsLeft(), 0, expandConstant.value, savedPeople, savedScience, savedDevice);
+      countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
+      savedPeople, savedScience, savedDevice);
 
     console.log('done saving');
     return localforage.setItem(SaveKey.GAME_STATE, gameState)
@@ -92,12 +93,16 @@ export default function useSaveLoad() {
       gameStarted.value = gameState.gameStarted;
       gameEnded.value = gameState.gameEnded;
       countdownTriggered.value = gameState.countdownTriggered;
+      countupTimer.create(gameState.countupSecondsPassed);
       if(countdownTriggered.value) {
         expandConstant.value = gameState.expandConstant;
         countdownTimer.create(gameState.countdownSecondsLeft);
         if(!gameEnded.value) {
           countdownTimer.start();
         }
+      } else {
+        //this isn't great, it will start and stop it 
+        countupTimer.stop();
       }
       isLoading.value = false;
       console.log('done loading');

@@ -4,8 +4,8 @@ import { GameConstants } from '@/enum/Constants'
 
 //todo - this is still a mess
 const countupTimer = {
-  create: function() {
-    stopwatch = useStopwatch(0, true);
+  create: function(existingTime: number) {
+    stopwatch = useStopwatch(existingTime, true);
   },
 
   secondsElapsed: function() {
@@ -65,7 +65,7 @@ const countdownTimer = {
 let timer : UseTimer;
 let stopwatch : ResUseStopwatch;
 countdownTimer.create(0);
-countupTimer.create();
+countupTimer.create(0);
 const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
 
 function expandTime(expand: number) {
