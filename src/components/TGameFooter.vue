@@ -4,7 +4,7 @@
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
           <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
+          <n-button strong circle #icon @click="about()">
             <n-icon><about-icon /></n-icon>
           </n-button>
         </template>
@@ -61,15 +61,15 @@
 
 <script>
 /*eslint-disable*/
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 import { 
   NButton,
   NIcon,
   NLayoutFooter,
-  NMenu,
   NSpace,
   NTooltip,
+  useDialog,
 } from 'naive-ui'
 
 import {
@@ -88,6 +88,7 @@ import {
   SaveOutlined as SaveIcon,
 } from '@vicons/material'
 
+import TGameAbout from '@/components/TGameAbout'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 
@@ -103,11 +104,21 @@ export default defineComponent({
     NTooltip,
     PauseIcon,
     RestartIcon,
+    TGameAbout,
     SaveIcon,
   },
   setup() {
+    const dialog = useDialog();
     const { gamePaused } = useInitialize();
     const { countdownTimer, countupTimer } = useTime();
+
+    const about = () => {
+      dialog.create({
+        title: 'About',
+        content: () => h(TGameAbout),
+        'show-icon': false,
+      })
+    }
 
     //todo - this isn't pausing the countdown properly
     const pause = () => {
@@ -117,6 +128,7 @@ export default defineComponent({
     }
 
     return {
+      about,
       gamePaused,
       pause,
     }
