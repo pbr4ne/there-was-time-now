@@ -106,11 +106,11 @@ const scienceList : any = reactive({
 });
 
 const deviceList : any = reactive({
-  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device('Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#e0c3fc', 0.25),
-  [DeviceKey.OMEGAPERSON]: new Device('Omegaperson', shallowRef(OmegapersonIcon), '#fb8500', 0.25),
-  [DeviceKey.PHILOSOPHERS_STONE]: new Device('Philosopher\'s Stone', shallowRef(PhilosophersStoneIcon), '#d4af37', 0.25),
-  [DeviceKey.TZOLKIN]: new Device('Tzolk\'in', shallowRef(TzolkinIcon), '#8cb369', 0.25),
-  [DeviceKey.TIMEHENGE]: new Device('Timehenge', shallowRef(TimehengeIcon), '#a9d6e5', 0.25),
+  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device('Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#e0c3fc', 0.25, []),
+  [DeviceKey.OMEGAPERSON]: new Device('Omegaperson', shallowRef(OmegapersonIcon), '#fb8500', 0.25, []),
+  [DeviceKey.PHILOSOPHERS_STONE]: new Device('Philosopher\'s Stone', shallowRef(PhilosophersStoneIcon), '#d4af37', 0.25, []),
+  [DeviceKey.TZOLKIN]: new Device('Tzolk\'in', shallowRef(TzolkinIcon), '#8cb369', 0.25, []),
+  [DeviceKey.TIMEHENGE]: new Device('Timehenge', shallowRef(TimehengeIcon), '#a9d6e5', 0.25, []),
 });
 
 const researchList : any = reactive({
