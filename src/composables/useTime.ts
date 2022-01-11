@@ -83,7 +83,7 @@ function expandTime(expand: number) {
     const newTime = new Date();
     newTime.setSeconds(newTime.getSeconds() + (secondsLeft * expand));
 
-    countdownTimer.restart(newTime.getTime());
+    countdownTimer.restart((secondsLeft * expand));
   }
 }
 

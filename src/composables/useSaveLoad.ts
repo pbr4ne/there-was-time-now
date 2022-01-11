@@ -19,6 +19,7 @@ export default function useSaveLoad() {
   const { countdownTimer, countupTimer, expandConstant } = useTime();
 
   //todo - missing initial message
+  //todo - the countup timer is getting messed up
   const clearGameState = () => {
     return localforage.setItem(SaveKey.GAME_STATE, null)
     .then(function() {
