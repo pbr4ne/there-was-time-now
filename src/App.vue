@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :theme="darkTheme">
+  <n-config-provider :theme="theme()">
     <n-dialog-provider>
       <n-notification-provider>
         <t-game />
@@ -16,7 +16,8 @@ import {
   NNotificationProvider,
 } from 'naive-ui'
 
-import TGame from './components/TGame.vue'
+import TGame from '@/components/TGame'
+import useTheme from '@/composables/useTheme'
 
 export default {
   name: 'App',
@@ -26,10 +27,17 @@ export default {
     NNotificationProvider,
     TGame,
   },
-  setup () {    
+  setup () {
+    const { lightMode } = useTheme(); 
+
     return {
-      darkTheme,
-      TGame,
+      theme: () => {
+        if(lightMode.value){
+          return null;
+        } else {
+          return darkTheme;
+        }
+      },
     };
   }
 }

@@ -13,11 +13,14 @@
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
           <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
-            <n-icon><light-mode-icon /></n-icon>
+          <n-button strong circle #icon @click="switchTheme">
+            <n-icon>
+              <light-mode-icon v-if="!lightMode"/>
+              <dark-mode-icon v-if="lightMode"/>
+            </n-icon>
           </n-button>
         </template>
-        <span>Light Mode (not implemented yet)</span>
+        <span>{{otherThemeName()}}</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -90,11 +93,13 @@ import {
 
 import TGameAbout from '@/components/TGameAbout'
 import useInitialize from '@/composables/useInitialize'
+import useTheme from '@/composables/useTheme'
 import useTime from '@/composables/useTime'
 
 export default defineComponent({
   components: {
     AboutIcon,
+    DarkModeIcon,
     LightModeIcon,
     LoadIcon,
     NButton,
@@ -110,6 +115,7 @@ export default defineComponent({
   setup() {
     const dialog = useDialog();
     const { gamePaused } = useInitialize();
+    const { lightMode, switchTheme } = useTheme();
     const { countdownTimer, countupTimer } = useTime();
 
     const about = () => {
@@ -127,10 +133,21 @@ export default defineComponent({
       gamePaused.value = true;
     }
 
+    const otherThemeName = () => {
+      if (lightMode.value) {
+        return 'Dark Mode';
+      } else {
+        return 'Light Mode';
+      }
+    }
+
     return {
       about,
       gamePaused,
+      lightMode,
+      otherThemeName,
       pause,
+      switchTheme,
     }
   },
 })
