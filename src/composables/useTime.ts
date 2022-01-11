@@ -21,9 +21,15 @@ const countupTimer = {
 }
 
 const countdownTimer = {
-  create: function() {
+  create: function(existingTime: number) {
     const time = new Date();
-    time.setSeconds(time.getSeconds() + GameConstants.INITIAL_TIME);
+    let seconds = time.getSeconds();
+    if(existingTime > 0) {
+      seconds += existingTime;
+    } else {
+      seconds += GameConstants.INITIAL_TIME;
+    }
+    time.setSeconds(seconds);
     timer = useTimer(time.getTime(), false);
   },
   
@@ -58,7 +64,7 @@ const countdownTimer = {
 
 let timer : UseTimer;
 let stopwatch : ResUseStopwatch;
-countdownTimer.create();
+countdownTimer.create(0);
 countupTimer.create();
 const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
 

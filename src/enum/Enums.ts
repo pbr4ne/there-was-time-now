@@ -48,3 +48,7 @@ export enum DeviceKey {
   TZOLKIN = "tzolkin",
   TIMEHENGE = "timehenge",
 }
+
+export enum SaveKey {
+  GAME_STATE = "gameState",
+}

@@ -6,7 +6,6 @@ import { Science } from '@/entities/Science'
 
 const sellIncrementList = [1, 5, 10];
 const sellIncrementIndex = ref(0);
-const sellFeatureEnabled = ref(false);
 
 export default function useResearch() {
   const { currency } = useCurrency();
@@ -112,7 +111,6 @@ export default function useResearch() {
     canSellResearch,
     canSellWorker,
     incrementResearch,
-    sellFeatureEnabled,
     sellIncrement,
     sellResearch,
     sellResearchCost,

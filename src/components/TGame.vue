@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { ref, watchEffect } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import { NLayout, NModal } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
@@ -39,7 +39,6 @@ import useTime from '@/composables/useTime'
 import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useSaveLoad from '@/composables/useSaveLoad'
-import useResearch from '@/composables/useResearch'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import { GameConstants } from '@/enum/Constants'
 import { ScienceKey } from '@/enum/Enums'
@@ -54,32 +53,35 @@ export default {
     TGameTabs,
   },
   setup () {
-    const { isLoading, load } = useSaveLoad();
-    const { deviceList, scienceList } = useInitialize();
-
-    load();
-
+    const { loadGameState, saveGameState } = useSaveLoad();
+    const { countdownTriggered, deviceList, gameEnded, gameStarted, isLoading, saveStopwatch, scienceList, sellFeatureEnabled } = useInitialize();
     const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage } = useMessage();
-    const { sellFeatureEnabled } = useResearch();
+
+    loadGameState().then(function() {
+      if(!gameStarted.value) {
+        sendInitialMessage();
+        gameStarted.value = true;
+      }
+    });
+
     const { countdownTimer } = useTime();
     const showGameOverModalRef = ref(false);
     const showWinModalRef = ref(false);
-    let endOfWorld = false;
 
     useUnlockWatch();
-    sendInitialMessage();
 
     //SPECIAL - when countdown timer is expired, show end of game modal
     watchEffect(async() => {
       if(countdownTimer.isExpired() && !isLoading.value) {
+        gameEnded.value = true;
         showGameOverModalRef.value = true;
       }
     });
 
     //SPECIAL - when first quantum computer is built, start the end of world timer
     watchEffect(() => {
-      if(!endOfWorld && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
-        endOfWorld = true;
+      if(!countdownTriggered.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
+        countdownTriggered.value = true;
         sendEndOfWorldMessage();
         countdownTimer.start();
       }
@@ -113,9 +115,19 @@ export default {
       });
       if(devicesUnlocked == devices.length) {
         countdownTimer.stop();
+        gameEnded.value = true;
         showWinModalRef.value = true;
       }
     });
+
+    //Autosave
+    setTimeout(function() {
+      watch(saveStopwatch.seconds, () => {
+        if((saveStopwatch.seconds.value % GameConstants.SAVE_INTERVAL === 0 && !isLoading.value)){
+          saveGameState();
+        }
+      });
+    }, GameConstants.SAVE_INTERVAL * 1000);
 
     return {
       onPositiveClickLose () {

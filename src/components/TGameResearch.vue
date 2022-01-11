@@ -63,11 +63,10 @@
 <script>
 import { defineComponent } from 'vue'
 import { NButton, NIcon,  NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
-import {
-  BuildOutline as BuildIcon,
-} from '@vicons/ionicons5'
+import { BuildOutline as BuildIcon } from '@vicons/ionicons5'
 import TGameResearchSell from '@/components/TGameResearchSell'
 import TGameResearchWorkers from '@/components/TGameResearchWorkers'
+import useInitialize from '@/composables/useInitialize'
 import useResearch from '@/composables/useResearch'
 import { Person } from '@/entities/Person'
 
@@ -88,7 +87,8 @@ export default defineComponent({
     person: Person,
   },
   setup() {
-    const { changeSellIncrement, incrementResearch, sellFeatureEnabled, sellIncrement } = useResearch();
+    const { sellFeatureEnabled } = useInitialize();
+    const { changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
 
     return {
       changeSellIncrement,

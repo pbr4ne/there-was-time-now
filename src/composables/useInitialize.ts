@@ -1,4 +1,5 @@
-import { reactive, shallowRef } from 'vue'
+import { reactive, ref, shallowRef } from 'vue'
+import { useStopwatch } from 'vue-timer-hook'
 
 import {
   AccumulationPrecipitation as DistillerIcon,
@@ -55,6 +56,13 @@ import {
   ScienceKey, 
   UnlockKey
 } from '@/enum/Enums'
+
+const gameStarted = ref(false);
+const gameEnded = ref(false);
+const countdownTriggered = ref(false);
+const isLoading = ref(true);
+const saveStopwatch = useStopwatch(0, true);
+const sellFeatureEnabled = ref(false);
 
 const personList : any = reactive({
   [PersonKey.LENNOX_OLD]: new Person(PersonKey.LENNOX_OLD, 'Lennox (1984)', 1984, 'Undergrads'),
@@ -214,9 +222,15 @@ export default function useInitialize() {
   }
 
   return {
+    countdownTriggered,
     deviceList,
+    gameEnded,
+    gameStarted,
+    isLoading,
     personList,
     researchList,
+    saveStopwatch,
     scienceList,
+    sellFeatureEnabled,
   }
 }
