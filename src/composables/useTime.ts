@@ -2,70 +2,76 @@ import { computed, ref } from 'vue'
 import { ResUseStopwatch, useStopwatch, useTimer, UseTimer} from 'vue-timer-hook'
 import { GameConstants } from '@/enum/Constants'
 
-//todo - this is still a mess
-const countupTimer = {
-  create: function(existingTime: number) {
-    stopwatch = useStopwatch(existingTime, true);
-  },
+class CountupTimer {
+  stopwatch: ResUseStopwatch;
 
-  secondsElapsed: function() {
-    return stopwatch.seconds.value 
-    + stopwatch.minutes.value * 60 
-    + stopwatch.hours.value * 3600
-    + stopwatch.days.value * 86400;
-  },
+  constructor() {
+    this.stopwatch = useStopwatch(0, true);
+  }
 
-  stop: function() {
-    stopwatch.pause();
+  restart(existingTime: number) {
+    this.stopwatch.reset(existingTime);
+  }
+
+  secondsElapsed() {
+    return this.stopwatch.seconds.value 
+    + this.stopwatch.minutes.value * 60 
+    + this.stopwatch.hours.value * 3600
+    + this.stopwatch.days.value * 86400;
+  }
+
+  start() {
+    this.stopwatch.start();
+  }
+
+  stop() {
+    this.stopwatch.pause();
   }
 }
 
-const countdownTimer = {
-  create: function(existingTime: number) {
+class CountdownTimer {
+  timer: UseTimer;
+
+  constructor() {
     const time = new Date();
-    let seconds = time.getSeconds();
-    if(existingTime > 0) {
-      seconds += existingTime;
-    } else {
-      seconds += GameConstants.INITIAL_TIME;
-    }
+    const seconds = time.getSeconds() + GameConstants.INITIAL_TIME;
     time.setSeconds(seconds);
-    timer = useTimer(time.getTime(), false);
-  },
+    this.timer = useTimer(time.getTime(), false);
+  }
   
-  start: function () {
-    stopwatch.pause();
-    timer.start();
-  },
+  start() {
+    this.timer.start();
+  }
 
-  restart: function(newTime: number) {
-    timer.restart(newTime);
-  },
+  restart(newTime: number) {
+    const time = new Date();
+    const seconds = time.getSeconds() + newTime;
+    time.setSeconds(seconds);
+    this.timer.restart(time.getTime(), true);
+  }
 
-  stop: function() {
-    timer.pause();
-  },
+  stop() {
+    this.timer.pause();
+  }
 
-  secondsLeft: function() {
-    return timer.seconds.value 
-      + timer.minutes.value * 60 
-      + timer.hours.value * 3600
-      + timer.days.value * 86400;
-  },
+  secondsLeft() {
+    return this.timer.seconds.value 
+      + this.timer.minutes.value * 60 
+      + this.timer.hours.value * 3600
+      + this.timer.days.value * 86400;
+  }
 
-  isExpired: function() {
-    return timer.isExpired.value;
-  },
+  isExpired() {
+    return this.timer.isExpired.value;
+  }
 
-  isRunning: function() {
-    return timer.isRunning.value;
+  isRunning() {
+    return this.timer.isRunning.value;
   }
 }
 
-let timer : UseTimer;
-let stopwatch : ResUseStopwatch;
-countdownTimer.create(0);
-countupTimer.create(0);
+const countdownTimer = new CountdownTimer();
+const countupTimer = new CountupTimer();
 const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
 
 function expandTime(expand: number) {

@@ -26,6 +26,15 @@
   >
     YOU WIN
   </n-modal>
+  <n-modal 
+    v-model:show="showPausedModal"
+    :mask-closable="false"
+    preset="dialog"
+    positive-text="Paused"
+    @positive-click="onPositiveClickUnpause"
+  >
+    There was time now... to go to the bathroom. The game is paused.
+  </n-modal>
 </template>
 
 <script>
@@ -54,7 +63,17 @@ export default {
   },
   setup () {
     const { loadGameState, saveGameState } = useSaveLoad();
-    const { countdownTriggered, deviceList, gameEnded, gameStarted, isLoading, saveStopwatch, scienceList, sellFeatureEnabled } = useInitialize();
+    const { 
+      countdownTriggered, 
+      deviceList, 
+      gameEnded, 
+      gamePaused, 
+      gameStarted, 
+      isLoading, 
+      saveStopwatch, 
+      scienceList, 
+      sellFeatureEnabled 
+    } = useInitialize();
     const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage } = useMessage();
 
     loadGameState().then(function() {
@@ -64,7 +83,7 @@ export default {
       }
     });
 
-    const { countdownTimer } = useTime();
+    const { countdownTimer, countupTimer } = useTime();
     const showGameOverModalRef = ref(false);
     const showWinModalRef = ref(false);
 
@@ -84,6 +103,7 @@ export default {
         countdownTriggered.value = true;
         sendEndOfWorldMessage();
         countdownTimer.start();
+        countupTimer.stop();
       }
     });
 
@@ -123,7 +143,7 @@ export default {
     //Autosave
     setTimeout(function() {
       watch(saveStopwatch.seconds, () => {
-        if((saveStopwatch.seconds.value % GameConstants.SAVE_INTERVAL === 0 && !isLoading.value)){
+        if((saveStopwatch.seconds.value % GameConstants.SAVE_INTERVAL === 0 && !isLoading.value && !gamePaused.value)){
           saveGameState();
         }
       });
@@ -136,8 +156,17 @@ export default {
       onPositiveClickWin() {
         showWinModalRef.value = true;
       },
+      onPositiveClickUnpause() {
+        gamePaused.value = false;
+        if(countdownTriggered.value) {
+          countdownTimer.start();
+        } else if(!gameEnded.value) {
+          countupTimer.start();
+        }
+      },
       showGameOverModal: showGameOverModalRef,
       showWinModal: showWinModalRef,
+      showPausedModal: gamePaused,
     };
   }
 }

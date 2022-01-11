@@ -78,16 +78,7 @@ import {
 } from '@vicons/antd'
 
 import {
-  // BookQuestionMark24Regular as AboutIcon,
-  // Pause24Regular as PauseIcon,
 } from '@vicons/fluent'
-
-import {
-  AlarmOutline as AlarmIcon,
-  ApertureOutline as ApertureIcon,
-  BulbOutline as BulbIcon,
-  SettingsOutline as SettingsIcon,
-} from '@vicons/ionicons5'
 
 import { 
   DarkModeOutlined as DarkModeIcon,
@@ -97,18 +88,17 @@ import {
   SaveOutlined as SaveIcon,
 } from '@vicons/material'
 
-import useIcon from '@/composables/useIcon'
+import useInitialize from '@/composables/useInitialize'
+import useTime from '@/composables/useTime'
 
 export default defineComponent({
   components: {
     AboutIcon,
-    BulbIcon,
     LightModeIcon,
     LoadIcon,
     NButton,
     NIcon,
     NLayoutFooter,
-    NMenu,
     NSpace,
     NTooltip,
     PauseIcon,
@@ -116,36 +106,19 @@ export default defineComponent({
     SaveIcon,
   },
   setup() {
-    const { renderIcon } = useIcon();
+    const { gamePaused } = useInitialize();
+    const { countdownTimer, countupTimer } = useTime();
 
-    const settings = [
-      {
-        label: 'Settings',
-        key: 'settings',
-        icon: renderIcon(SettingsIcon),
-        children: [
-          {
-            type: 'group',
-            label: 'Bwah',
-            key: 'bwah',
-            children: [
-              {
-                label: 'Setting 1',
-                key: 'setting-1',
-                icon: renderIcon(AlarmIcon),
-              },
-              {
-                label: 'Setting 2',
-                key: 'setting-2',
-                icon: renderIcon(ApertureIcon),
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    //todo - this isn't pausing the countdown properly
+    const pause = () => {
+      countdownTimer.stop();
+      countupTimer.stop();
+      gamePaused.value = true;
+    }
+
     return {
-      settings
+      gamePaused,
+      pause,
     }
   },
 })

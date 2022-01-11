@@ -93,15 +93,13 @@ export default function useSaveLoad() {
       gameStarted.value = gameState.gameStarted;
       gameEnded.value = gameState.gameEnded;
       countdownTriggered.value = gameState.countdownTriggered;
-      countupTimer.create(gameState.countupSecondsPassed);
+      countupTimer.restart(gameState.countupSecondsPassed);
       if(countdownTriggered.value) {
         expandConstant.value = gameState.expandConstant;
-        countdownTimer.create(gameState.countdownSecondsLeft);
         if(!gameEnded.value) {
-          countdownTimer.start();
+          console.log(gameState.countdownSecondsLeft);
+          countdownTimer.restart(gameState.countdownSecondsLeft);
         }
-      } else {
-        //this isn't great, it will start and stop it 
         countupTimer.stop();
       }
       isLoading.value = false;

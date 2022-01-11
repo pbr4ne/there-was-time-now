@@ -58,6 +58,7 @@ import {
 } from '@/enum/Enums'
 
 const gameStarted = ref(false);
+const gamePaused = ref(false);
 const gameEnded = ref(false);
 const countdownTriggered = ref(false);
 const isLoading = ref(true);
@@ -225,6 +226,7 @@ export default function useInitialize() {
     countdownTriggered,
     deviceList,
     gameEnded,
+    gamePaused,
     gameStarted,
     isLoading,
     personList,

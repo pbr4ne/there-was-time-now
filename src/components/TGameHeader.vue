@@ -7,6 +7,7 @@
       </n-space>
 
       <n-space width="209px">
+        {{countupTimer.secondsElapsed()}} {{countdownTimer.secondsLeft()}}
         <n-statistic label="Budget" v-if="sellFeatureEnabled">
           {{currency}}
         </n-statistic>
@@ -60,7 +61,7 @@ export default defineComponent({
   setup() {
     const { currency } = useCurrency();
     const { personList, sellFeatureEnabled } = useInitialize();
-    const { countdownTimer, expandConstant, timeLeft } = useTime();
+    const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
     let titleValue = ref('TWTN');
     if( window.innerWidth > 700) {
@@ -83,6 +84,7 @@ export default defineComponent({
 
     return {
       countdownTimer,
+      countupTimer,
       currency,
       expandConstant,
       sellFeatureEnabled,
