@@ -52,11 +52,11 @@
        <n-tooltip placement="top" trigger="hover">
         <template #trigger>
           <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
+          <n-button strong circle #icon @click="restart()">
             <n-icon><restart-icon /></n-icon>
           </n-button>
         </template>
-        <span>Restart (not implemented yet)</span>
+        <span>Restart</span>
       </n-tooltip>
     </n-space>
   </n-layout-footer>
@@ -93,6 +93,7 @@ import {
 
 import TGameAbout from '@/components/TGameAbout'
 import useInitialize from '@/composables/useInitialize'
+import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
 import useTime from '@/composables/useTime'
 
@@ -115,6 +116,7 @@ export default defineComponent({
   setup() {
     const dialog = useDialog();
     const { gamePaused } = useInitialize();
+    const { clearGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
     const { countdownTimer, countupTimer } = useTime();
 
@@ -141,12 +143,26 @@ export default defineComponent({
       }
     }
 
+    const restart = () => {
+      dialog.warning({
+        title: 'Restart Game?',
+        content: 'You will lose all of your progress!',
+        positiveText: 'I\'m going back to the start',
+        negativeText: 'Oops, never mind',
+        onPositiveClick: () => {
+          clearGameState();
+        }
+      })
+    }
+
     return {
       about,
+      clearGameState,
       gamePaused,
       lightMode,
       otherThemeName,
       pause,
+      restart,
       switchTheme,
     }
   },

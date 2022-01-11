@@ -7,7 +7,7 @@
       </n-space>
 
       <n-space width="209px">
-        {{countupTimer.secondsElapsed()}} {{countdownTimer.secondsLeft()}}
+        <!-- {{countupTimer.secondsElapsed()}} {{countdownTimer.secondsLeft()}} -->
         <n-statistic label="Budget" v-if="sellFeatureEnabled">
           {{currency}}
         </n-statistic>

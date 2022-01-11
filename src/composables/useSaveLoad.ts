@@ -7,7 +7,7 @@ import { GameStateDevice } from '@/dto/GameStateDevice'
 import { GameStatePerson } from '@/dto/GameStatePerson'
 import { GameStateScience } from '@/dto/GameStateScience'
 import { GameConstants } from '@/enum/Constants'
-import { SaveKey } from '@/enum/Enums'
+import { PersonKey, SaveKey, ScienceKey } from '@/enum/Enums'
 
 localforage.config({
   name: GameConstants.DB_NAME,
@@ -17,6 +17,48 @@ export default function useSaveLoad() {
   const { currency } = useCurrency();
   const { countdownTriggered, deviceList, gameEnded, gameStarted, isLoading, personList, scienceList, sellFeatureEnabled } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
+
+  //todo - missing initial message
+  const clearGameState = () => {
+    return localforage.setItem(SaveKey.GAME_STATE, null)
+    .then(function() {
+      Object.values(personList).forEach((person: any) => {
+        if(person.key != PersonKey.LENNOX_OLD) {
+          person.isUnlocked = false;
+        }
+        person.messageList = [];
+      });
+      Object.keys(scienceList).forEach((key: string) => {
+        const science = scienceList[key];
+        if(key != ScienceKey.PHYSICS) {
+          science.isUnlocked = false;
+        }
+        science.total = 0;
+        science.current = 0;
+        science.numWorkers = 0;
+      });
+      Object.keys(deviceList).forEach((key: string) => {
+        const device = deviceList[key];
+        device.isUnlocked = false;
+        device.total = 0;
+        device.current = 0;
+        device.numWorkers = 0;
+      });
+      currency.value = 0;
+      sellFeatureEnabled.value = false;
+      gameStarted.value = true;
+      gameEnded.value = false;
+      countdownTriggered.value = false;
+      expandConstant.value = GameConstants.INITIAL_EXPANSION_CONSTANT;
+      countdownTimer.restart(GameConstants.INITIAL_TIME);
+      countdownTimer.stop();
+      countupTimer.restart(0);
+      countupTimer.start();
+    })
+    .catch(function(err: any) {
+      console.log(`Error saving game state: ${err}`);
+    });
+  }
 
   const saveGameState = () => {
     console.log('saving...');
@@ -111,6 +153,7 @@ export default function useSaveLoad() {
   }
 
   return {
+    clearGameState,
     loadGameState,
     saveGameState,
   }
