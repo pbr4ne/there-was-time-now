@@ -8,7 +8,7 @@
             <n-icon><about-icon /></n-icon>
           </n-button>
         </template>
-        <span>About</span>
+        <span>About (not implemented yet)</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -17,7 +17,7 @@
             <n-icon><light-mode-icon /></n-icon>
           </n-button>
         </template>
-        <span>Light Mode</span>
+        <span>Light Mode (not implemented yet)</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -26,7 +26,7 @@
             <n-icon><pause-icon /></n-icon>
           </n-button>
         </template>
-        <span>Pause</span>
+        <span>Pause (not implemented yet)</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -35,7 +35,7 @@
             <n-icon><load-icon /></n-icon>
           </n-button>
         </template>
-        <span>Load</span>
+        <span>Load (not implemented yet)</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -44,7 +44,7 @@
             <n-icon><save-icon /></n-icon>
           </n-button>
         </template>
-        <span>Save</span>
+        <span>Save (not implemented yet)</span>
       </n-tooltip>
        <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -53,7 +53,7 @@
             <n-icon><restart-icon /></n-icon>
           </n-button>
         </template>
-        <span>Restart</span>
+        <span>Restart (not implemented yet)</span>
       </n-tooltip>
     </n-space>
   </n-layout-footer>
