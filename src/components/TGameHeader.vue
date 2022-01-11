@@ -154,4 +154,9 @@ export default defineComponent({
   .title2524BC {
     font-family: "2524 BC";
   }
+
+  .twtnHeader {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 </style>
