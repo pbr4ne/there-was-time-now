@@ -10,7 +10,7 @@
           v-for="message in person.messageList" 
           :key="message.title"
           :title="message.title"
-          :content="message.text"
+          :content= "renderMessageContent(message)"
           :time="message.timestamp"
         />
       </n-timeline>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 import { 
   NCollapseTransition,
@@ -29,6 +29,7 @@ import {
   NTimelineItem,
 } from 'naive-ui'
 
+import TGameMessage from '@/components/TGameMessage'
 import useMessage from '@/composables/useMessage'
 import { Person } from '@/entities/Person'
 
@@ -46,7 +47,12 @@ export default defineComponent({
   setup() {
     const { showTimeline } = useMessage();
     
+    const renderMessageContent = (message) => {
+      return h(TGameMessage, { messageSections: message.messageSections});
+    }
+
     return {
+      renderMessageContent,
       showTimeline,
     }
   },
