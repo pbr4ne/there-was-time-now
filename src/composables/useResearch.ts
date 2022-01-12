@@ -19,13 +19,13 @@ export default function useResearch() {
     return true;
   }
 
-  const sellResearchCost = (research: Research, units: number) => {
-    return units * research.cost;
+  const sellResearchPrice = (research: Research, units: number) => {
+    return units * research.price;
   }
 
   const sellResearch = (research: Research, units: number) => {
     research.total -= units;
-    const cost = sellResearchCost(research, units);
+    const cost = sellResearchPrice(research, units);
     currency.value += cost;
   }
 
@@ -116,7 +116,7 @@ export default function useResearch() {
     incrementResearch,
     sellIncrement,
     sellResearch,
-    sellResearchCost,
+    sellResearchPrice,
     sellWorker,
     sellWorkerCost,
   };

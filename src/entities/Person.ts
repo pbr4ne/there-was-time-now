@@ -1,5 +1,4 @@
 import { Message } from '@/entities/Message'
-import { Research } from '@/entities/Research'
 import { Unlockable } from '@/entities/Unlockable'
 
 export class Person extends Unlockable {

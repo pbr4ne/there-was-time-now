@@ -5,7 +5,7 @@
         Sell
       </n-button>
     </template>
-    <span>Sell {{research.label}} for {{sellResearchCost(research, sellIncrement())}}</span>
+    <span>Sell {{research.label}} for {{sellResearchPrice(research, sellIncrement())}}</span>
   </n-popover>
 </template>
 
@@ -24,14 +24,14 @@ export default defineComponent({
     research: Research,
   },
   setup() {
-    const { canSellResearch, incrementResearch, sellIncrement, sellResearch, sellResearchCost } = useResearch();
+    const { canSellResearch, incrementResearch, sellIncrement, sellResearch, sellResearchPrice } = useResearch();
 
     return {
       canSellResearch,
       incrementResearch,
       sellIncrement,
       sellResearch,
-      sellResearchCost,
+      sellResearchPrice,
     }    
   },
 })
