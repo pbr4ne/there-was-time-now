@@ -1,5 +1,6 @@
 import { watchEffect } from 'vue'
 import useInitialize from '@/composables/useInitialize'
+// @ts-ignore
 import useMessage from '@/composables/useMessage'
 import { Unlock } from '@/entities/Unlock'
 import { UnlockKey } from '@/enum/Enums'

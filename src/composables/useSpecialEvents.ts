@@ -1,6 +1,7 @@
 import { watchEffect } from 'vue'
 import { useDialog } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
+// @ts-ignore
 import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import { GameConstants } from '@/enum/Constants'
