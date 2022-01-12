@@ -7,16 +7,6 @@
     </n-layout>
     <t-game-footer />
   </n-layout>
-
-  <n-modal 
-    v-model:show="showWinModal"
-    :mask-closable="false"
-    preset="dialog"
-    positive-text="YAY"
-    @positive-click="onPositiveClickWin"
-  >
-    YOU WIN
-  </n-modal>
   <n-modal 
     v-model:show="showPausedModal"
     :mask-closable="false"
@@ -29,7 +19,7 @@
 </template>
 
 <script>
-import { ref, watch, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 import { NLayout, NModal } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
@@ -56,7 +46,6 @@ export default {
     const { loadGameState, saveGameState } = useSaveLoad();
     const { 
       countdownTriggered, 
-      deviceList, 
       gameEnded, 
       gamePaused, 
       gameStarted, 
@@ -78,25 +67,6 @@ export default {
 
     useSpecialEvents();
     useUnlockWatch();
-
-    //SPECIAL - when you finish building all devices, you win
-    watchEffect(() => {
-      if(isLoading.value) {
-        return;
-      }
-      const devices = Object.values(deviceList);
-      let devicesUnlocked = 0;
-      Object.values(deviceList).forEach(device => {
-        if(device.total == 1) {
-          devicesUnlocked++
-        }
-      });
-      if(devicesUnlocked == devices.length) {
-        countdownTimer.stop();
-        gameEnded.value = true;
-        showWinModalRef.value = true;
-      }
-    });
 
     //Autosave
     setTimeout(function() {

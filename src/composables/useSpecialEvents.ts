@@ -8,7 +8,7 @@ import { ScienceKey } from '@/enum/Enums'
 
 export default function useSpecialEvents() {
 
-  const { countdownTriggered, gameEnded, isLoading, scienceList, sellFeatureEnabled } = useInitialize();
+  const { countdownTriggered, deviceList, gameEnded, isLoading, scienceList, sellFeatureEnabled } = useInitialize();
   const { sendEndOfWorldMessage, sendHalfwayMessage, sendWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const dialog = useDialog();
@@ -35,6 +35,28 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
       sendHalfwayMessage();
+    }
+  });
+
+  //SPECIAL - when you finish building all devices, you win
+  watchEffect(() => {
+    if(isLoading.value) {
+      return;
+    }
+    const devices = Object.values(deviceList);
+    let devicesUnlocked = 0;
+    Object.values(deviceList).forEach((device: any) => {
+      if(device.total == 1) {
+        devicesUnlocked++
+      }
+    });
+    if(devicesUnlocked == devices.length) {
+      countdownTimer.stop();
+      gameEnded.value = true;
+      dialog.success({
+        title: 'Game Won',
+        content: 'You successfully stopped the end of the world!'
+      });
     }
   });
 
