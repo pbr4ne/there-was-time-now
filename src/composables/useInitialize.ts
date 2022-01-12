@@ -64,6 +64,7 @@ const countdownTriggered = ref(false);
 const isLoading = ref(true);
 const saveStopwatch = useStopwatch(0, true);
 const sellFeatureEnabled = ref(false);
+const slowdownEnabled = ref(false);
 
 const personList : any = reactive({
   [PersonKey.LENNOX_OLD]: new Person(PersonKey.LENNOX_OLD, 'Lennox (1984)', 1984, 'Undergrads'),
@@ -236,5 +237,6 @@ export default function useInitialize() {
     saveStopwatch,
     scienceList,
     sellFeatureEnabled,
+    slowdownEnabled,
   }
 }

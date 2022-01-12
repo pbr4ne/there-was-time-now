@@ -47,6 +47,7 @@ export default defineComponent({
   setup() {
     const { showTimeline } = useMessage();
     
+    //todo - this is spitting out warnings
     const renderMessageContent = (message) => {
       return h(TGameMessage, { messageSections: message.messageSections});
     }

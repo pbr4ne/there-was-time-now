@@ -91,6 +91,41 @@ export default function useMessage() {
     personList[PersonKey.LENNOX_OLD].messageList.unshift(endOfWorldMessage);
   }
 
+  function sendSlowdownMessage() {
+    const message = new Message(
+      'Unlocked slowdown', 
+      [
+        {
+          person: 'Undergrad',
+          text: 'Dr. Lennox. Dr. Lennox, take a look at this. It appears there is indeed a way to *add* more time before the Doomsday Event.',
+        },
+        {
+          person: 'Lennox',
+          text: 'I thought we were calling it the Doomsminute Event.',
+        },
+        {
+          person: 'Undergrad',
+          text: 'The media disagreed. What\'s important is that we can spend research to ADD time to the end of the clock. Buying us more time so that we can solve our time problem.',
+        },
+        {
+          person: 'Lennox',
+          text: 'Then it looks like it\'s time for the next phase.',
+        }
+      ]
+    );
+    const d = new Date(1984, 0);
+    d.setDate(d.getDate() + timeElapsed.value);
+    message.timestamp = d.toISOString().split('T')[0];
+
+    notification.create({
+      title: message.title,
+      content: () => h(TGameMessage, { messageSections: message.messageSections}),
+      meta: message.timestamp,
+      duration: GameConstants.NOTIFICATION_DURATION,
+    });
+    personList[PersonKey.LENNOX_OLD].messageList.unshift(message);
+  }
+
   function sendHalfwayMessage() {
     // const halfwayMessage = new Message(
     //   'HALFWAY THERE',
@@ -154,6 +189,7 @@ export default function useMessage() {
     sendEndOfWorldMessage,
     sendHalfwayMessage,
     sendInitialMessage,
+    sendSlowdownMessage,
     sendUnlockMessage,
     sendWorkersMessage,
     showTimeline,

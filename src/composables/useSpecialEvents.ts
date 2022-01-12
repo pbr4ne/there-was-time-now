@@ -6,14 +6,16 @@ import useTime from '@/composables/useTime'
 import { GameConstants } from '@/enum/Constants'
 import { ScienceKey } from '@/enum/Enums'
 
+
+//todo - some of this could probably be triggered other ways
 export default function useSpecialEvents() {
 
-  const { countdownTriggered, deviceList, gameEnded, isLoading, scienceList, sellFeatureEnabled } = useInitialize();
-  const { sendEndOfWorldMessage, sendHalfwayMessage, sendWorkersMessage } = useMessage();
+  const { countdownTriggered, deviceList, gameEnded, isLoading, scienceList, sellFeatureEnabled, slowdownEnabled } = useInitialize();
+  const { sendEndOfWorldMessage, sendHalfwayMessage, sendSlowdownMessage, sendWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const dialog = useDialog();
 
-  //SPECIAL - when first quantum computer is built, start the end of world timer
+  //When first quantum computer is built, start the end of world timer
   watchEffect(() => {
     if(!countdownTriggered.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
       countdownTriggered.value = true;
@@ -23,7 +25,7 @@ export default function useSpecialEvents() {
     }
   });
 
-  //SPECIAL - when fifth quantum computer is built, unlock buy/sell
+  //When fifth quantum computer is built, unlock buy/sell
   watchEffect(() => {
     if(!sellFeatureEnabled.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
@@ -31,14 +33,22 @@ export default function useSpecialEvents() {
     }
   });
 
-  //SPECIAL - when time is halfway up, show message
+  //When first worker is purchased, unlock slowdown
+  watchEffect(() => {
+    if(!slowdownEnabled.value && Object.values(scienceList).find((science: any) => science.numWorkers > 0)) {
+      slowdownEnabled.value = true;
+      sendSlowdownMessage();
+    }
+  });
+
+  //When time is halfway up, show message
   watchEffect(() => {
     if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
       sendHalfwayMessage();
     }
   });
 
-  //SPECIAL - when you finish building all devices, you win
+  //When you finish building all devices, you win
   watchEffect(() => {
     if(isLoading.value) {
       return;
@@ -60,7 +70,7 @@ export default function useSpecialEvents() {
     }
   });
 
-  //SPECIAL - when countdown timer is expired, show end of game modal
+  //When countdown timer is expired, show end of game modal
   watchEffect(async() => {
     if(countdownTimer.isExpired() && !isLoading.value) {
       gameEnded.value = true;
