@@ -66,7 +66,7 @@ export default {
       scienceList, 
       sellFeatureEnabled 
     } = useInitialize();
-    const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage, sendWorkersMessage } = useMessage();
+    const { sendHalfwayMessage, sendInitialMessage, sendWorkersMessage } = useMessage();
     
 
     loadGameState().then(function() {
@@ -81,16 +81,6 @@ export default {
 
     useSpecialEvents();
     useUnlockWatch();
-
-    //SPECIAL - when first quantum computer is built, start the end of world timer
-    watchEffect(() => {
-      if(!countdownTriggered.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
-        countdownTriggered.value = true;
-        sendEndOfWorldMessage();
-        countdownTimer.start();
-        countupTimer.stop();
-      }
-    });
 
     //SPECIAL - when fifth quantum computer is built, unlock buy/sell
     watchEffect(() => {
