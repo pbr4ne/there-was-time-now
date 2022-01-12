@@ -115,10 +115,10 @@ export default defineComponent({
   },
   setup() {
     const dialog = useDialog();
-    const { gamePaused } = useInitialize();
+    const { gameEnded, gamePaused } = useInitialize();
     const { clearGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
-    const { countdownTimer, countupTimer } = useTime();
+    const { countdownTimer, countdownTriggered, countupTimer } = useTime();
 
     const about = () => {
       dialog.create({
@@ -133,6 +133,20 @@ export default defineComponent({
       countdownTimer.stop();
       countupTimer.stop();
       gamePaused.value = true;
+
+      dialog.info({
+        title: 'Paused',
+        content: 'There was time now... to go to the bathroom.',
+        onClose: () => {
+          console.log('on close');
+          gamePaused.value = false;
+          if(countdownTriggered.value) {
+            countdownTimer.start();
+          } else if(!gameEnded.value) {
+            countupTimer.start();
+          }
+        }
+      })
     }
 
     const otherThemeName = () => {
