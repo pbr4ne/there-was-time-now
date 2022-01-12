@@ -87,9 +87,11 @@ export default function useResearch() {
         if(research.current >= 100) {
           clearInterval(timer);
           setTimeout(function() {
-            research.current = 0;
+            if(!research.isDevice) {
+              research.current = 0;
+              research.isIncrementing = false;
+            }
             research.total += 1;
-            research.isIncrementing = false;
             if(slowdownEnabled.value) {
               expandTime(research.expand);
             }
