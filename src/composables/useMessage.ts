@@ -1,6 +1,5 @@
-//todo - convert this file back to typescript
-import { h, ref } from 'vue'
-import { useNotification } from 'naive-ui'
+import { ComputedRef, h, ref } from 'vue'
+import { NotificationApi, useNotification } from 'naive-ui'
 import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
@@ -11,7 +10,7 @@ import { messages } from '@/locales/en'
 
 const showTimeline = ref(false);
 
-function createNotification(message, notification) {
+function createNotification(message: Message, notification: NotificationApi) {
   notification.create({
     title: message.title,
     content: () => h(TGameMessage, { messageSections: message.messageSections}),
@@ -20,7 +19,7 @@ function createNotification(message, notification) {
   });
 }
 
-function setTimestamp(message, year, timeElapsed) {
+function setTimestamp(message: Message, year: number, timeElapsed: ComputedRef<number>) {
   const d = new Date(year, 0);
   d.setDate(d.getDate() + timeElapsed.value);
   message.timestamp = d.toISOString().split('T')[0];
@@ -33,7 +32,7 @@ export default function useMessage() {
   const { personList } = useInitialize();
   const { timeElapsed } = useTime();
 
-  function sendMessage(message, person) {
+  function sendMessage(message: Message, person: { year: any; messageList: any[] }) {
     setTimestamp(message, person.year, timeElapsed);
     createNotification(message, notification);
     person.messageList.unshift(message);
@@ -45,7 +44,7 @@ export default function useMessage() {
   const sendUnlockSlowdownMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_SLOWDOWN], personList[PersonKey.LENNOX_OLD]);
   const sendHalfwayMessage = () => sendMessage(messages[UnlockMessageKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
 
-  function sendUnlockMessage(unlock, person, name) {
+  function sendUnlockMessage(unlock: { message: any }, person: { year: any; messageList: any[] }, name: any) {
     let message = unlock.message;
     //not every unlock needs a message
     // if(!message) {
