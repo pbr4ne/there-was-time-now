@@ -126,8 +126,41 @@ function associateUnlocksToResearch() {
     new Message('Unlock', [{text: 'You are now able to research Quantum Computing.'}])));
   scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 10, 
     new Message('Unlock', [{text: 'You should be able to build a Quantum Computer now.'}])));
-  //scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, null!));
-  //scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.BIOLOGY, PersonKey.LENNOX_YOUNG, 1, null!));
+  scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 10, 
+    new Message('Lost to Time', [
+      {
+        person: 'Lennox',
+        text: 'We\'ve done it. We\'ve found a way to stop the Doomsminute Event. We need to build THE DEVICE!'
+      },{
+        person: 'Undergrad',
+        text: 'Doctor. We\'ve got a problem. Our research indicates that, with the exception of quantum physics, the kind of research required to complete THE DEVICE has been lost.'
+      },{
+        person: 'Lennox',
+        text: 'Lost how?',
+      },{
+        person: 'Undergrad',
+        text: 'Lost to time.',
+      },{
+        person: 'Lennox',
+        text: 'What *kind* of research?',
+      },{
+        person: 'Undergrad',
+        text: 'Well. It appears that only one scientist, back in the 30s, was doing this kind of biological research…',
+      },{
+        person: 'Lennox',
+        text: 'WHO?',
+      },{
+        person: 'Undergrad',
+        text: 'Well…YOU, doctor!',
+      },{
+        person: 'Lennox',
+        text: 'By the Code!',
+      },{
+        person: 'Narrator',
+        text: 'And it was at that time that Lennox experienced a *flashback*',
+      },
+    ])));
+  scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.BIOLOGY, PersonKey.LENNOX_YOUNG, 10, null!));
 
   //Lennox (1934)
   scienceList[ScienceKey.BIOLOGY].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.GENETIC_MEMORY, PersonKey.LENNOX_YOUNG, 10, null!));
