@@ -4,7 +4,7 @@ import useInitialize from '@/composables/useInitialize'
 // @ts-ignore
 import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
-import useUnlocks from '@/composables/useUnlocks'
+import useFlags from '@/composables/useFlags'
 import { GameConstants } from '@/enum/Constants'
 import { ScienceKey } from '@/enum/Enums'
 
@@ -15,7 +15,7 @@ export default function useSpecialEvents() {
   const { deviceList, scienceList } = useInitialize();
   const { sendUnlockCountdownMessage, sendHalfwayMessage, sendSpeakToLennoxMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
-  const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useUnlocks();
+  const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useFlags();
   
 
   //When first quantum computer is built, start the end of world timer

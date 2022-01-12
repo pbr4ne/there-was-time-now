@@ -2,7 +2,7 @@ import * as localforage from 'localforage/dist/localforage.js'
 import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
-import useUnlocks from '@/composables/useUnlocks'
+import useFlags from '@/composables/useFlags'
 import { GameState } from '@/dto/GameState'
 import { GameStateDevice } from '@/dto/GameStateDevice'
 import { GameStatePerson } from '@/dto/GameStatePerson'
@@ -18,7 +18,7 @@ export default function useSaveLoad() {
   const { currency } = useCurrency();
   const { deviceList, personList, scienceList } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
-  const { countdownTriggered, gameEnded, gameStarted, isLoading, sellFeatureEnabled } = useUnlocks();
+  const { countdownTriggered, gameEnded, gameStarted, isLoading, sellFeatureEnabled } = useFlags();
 
   //todo - missing initial message
   //todo - the countup timer is getting messed up

@@ -20,7 +20,7 @@ import useMessage from '@/composables/useMessage'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useSpecialEvents from '@/composables/useSpecialEvents'
 import useUnlockWatch from '@/composables/useUnlockWatch'
-import useUnlocks from '@/composables/useUnlocks'
+import useFlags from '@/composables/useFlags'
 import { GameConstants } from '@/enum/Constants'
 
 export default {
@@ -34,7 +34,7 @@ export default {
   setup () {
     const { loadGameState, saveGameState } = useSaveLoad();
     const { sendInitialMessage } = useMessage();
-    const { gamePaused, gameStarted, isLoading, saveStopwatch } = useUnlocks();
+    const { gamePaused, gameStarted, isLoading, saveStopwatch } = useFlags();
     
     loadGameState().then(function() {
       if(!gameStarted.value) {
