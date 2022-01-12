@@ -7,21 +7,21 @@ const otherThemeName = ref('Light Mode');
 
 export default function useTheme() {
 
-  const { scienceList } = useInitialize();
+  const { researchList } = useInitialize();
 
   //todo - change colours more dynamically
   const switchTheme = () => {
     if(lightMode.value) {
       lightMode.value = false;
       otherThemeName.value = "Light Mode";
-      scienceList[ResearchKey.GENETIC_MEMORY].color = '#FEFAE0';
-      scienceList[ResearchKey.CHRONOMOGRIFICATION].color = '#FFFFFF';
+      researchList[ResearchKey.GENETIC_MEMORY].color = '#FEFAE0';
+      researchList[ResearchKey.CHRONOMOGRIFICATION].color = '#FFFFFF';
       
     } else {
       lightMode.value = true;
       otherThemeName.value = "Dark Mode";
-      scienceList[ResearchKey.GENETIC_MEMORY].color = '#826107';
-      scienceList[ResearchKey.CHRONOMOGRIFICATION].color = '#363431';
+      researchList[ResearchKey.GENETIC_MEMORY].color = '#826107';
+      researchList[ResearchKey.CHRONOMOGRIFICATION].color = '#363431';
     }
   }
 

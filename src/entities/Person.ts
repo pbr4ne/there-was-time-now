@@ -1,14 +1,12 @@
-import { Device } from '@/entities/Device'
-import { Unlockable } from '@/entities/Unlockable'
-import { Science } from '@/entities/Science'
 import { Message } from '@/entities/Message'
+import { Research } from '@/entities/Research'
+import { Unlockable } from '@/entities/Unlockable'
 
 export class Person extends Unlockable {
   key: string;
   name: string;
   year: number;
-  scienceList: Array<Science> = new Array<Science>();
-  deviceList: Array<Device> = new Array<Device>();
+  researchList: Array<Research> = new Array<Research>();
   messageList: Array<Message> = new Array<Message>();
   workerTitle: string;
 

@@ -4,9 +4,8 @@ import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
 import { GameState } from '@/dto/GameState'
-import { GameStateDevice } from '@/dto/GameStateDevice'
 import { GameStatePerson } from '@/dto/GameStatePerson'
-import { GameStateScience } from '@/dto/GameStateScience'
+import { GameStateResearch } from '@/dto/GameStateResearch'
 import { GameConstants } from '@/enum/Constants'
 import { PersonKey, SaveKey, ResearchKey } from '@/enum/Enums'
 
@@ -16,7 +15,7 @@ localforage.config({
 
 export default function useSaveLoad() {
   const { currency } = useCurrency();
-  const { deviceList, personList, scienceList } = useInitialize();
+  const { personList, researchList } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
   const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled } = useFlags();
 
@@ -31,21 +30,14 @@ export default function useSaveLoad() {
         }
         person.messageList = [];
       });
-      Object.keys(scienceList).forEach((key: string) => {
-        const science = scienceList[key];
+      Object.keys(researchList).forEach((key: string) => {
+        const research = researchList[key];
         if(key != ResearchKey.PHYSICS) {
-          science.isUnlocked = false;
+          research.isUnlocked = false;
         }
-        science.total = 0;
-        science.current = 0;
-        science.numWorkers = 0;
-      });
-      Object.keys(deviceList).forEach((key: string) => {
-        const device = deviceList[key];
-        device.isUnlocked = false;
-        device.total = 0;
-        device.current = 0;
-        device.numWorkers = 0;
+        research.total = 0;
+        research.current = 0;
+        research.numWorkers = 0;
       });
       currency.value = 0;
       sellFeatureEnabled.value = false;
@@ -77,23 +69,16 @@ export default function useSaveLoad() {
       savedPeople.push(gameStatePerson);
     });
 
-    const savedScience = new Array<GameStateScience>();
-    Object.keys(scienceList).forEach((key: string) => {
-      const science = scienceList[key];
-      const gameStateScience = new GameStateScience(key, science.isUnlocked, science.total, science.current, science.numWorkers);
-      savedScience.push(gameStateScience);
-    });
-
-    const savedDevice = new Array<GameStateDevice>();
-    Object.keys(deviceList).forEach((key: string) => {
-      const device = deviceList[key];
-      const gameStateDevice = new GameStateDevice(key, device.isUnlocked, device.total, device.current, device.numWorkers);
-      savedDevice.push(gameStateDevice);
+    const savedResearch = new Array<GameStateResearch>();
+    Object.keys(researchList).forEach((key: string) => {
+      const research = researchList[key];
+      const gameStateResearch = new GameStateResearch(key, research.isUnlocked, research.total, research.current, research.numWorkers);
+      savedResearch.push(gameStateResearch);
     });
 
     const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
-      savedPeople, savedScience, savedDevice);
+      savedPeople, savedResearch);
 
     console.log('done saving');
     return localforage.setItem(SaveKey.GAME_STATE, gameState)
@@ -118,20 +103,12 @@ export default function useSaveLoad() {
         person.messageList = JSON.parse(gameStatePerson.messageList);
       });
 
-      gameState.sciences.forEach((gameStateScience: GameStateScience) => {
-        const science = scienceList[gameStateScience.key];
-        science.isUnlocked = gameStateScience.isUnlocked;
-        science.total = gameStateScience.total;
-        science.current = gameStateScience.current;
-        science.numWorkers = gameStateScience.numWorkers;
-      });
-
-      gameState.devices.forEach((gameStateDevice: GameStateDevice) => {
-        const device = deviceList[gameStateDevice.key];
-        device.isUnlocked = gameStateDevice.isUnlocked;
-        device.total = gameStateDevice.total;
-        device.current = gameStateDevice.current;
-        device.numWorkers = gameStateDevice.numWorkers;
+      gameState.researches.forEach((gameStateResearch: GameStateResearch) => {
+        const research = researchList[gameStateResearch.key];
+        research.isUnlocked = gameStateResearch.isUnlocked;
+        research.total = gameStateResearch.total;
+        research.current = gameStateResearch.current;
+        research.numWorkers = gameStateResearch.numWorkers;
       });
 
       currency.value = gameState.currency;

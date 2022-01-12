@@ -5,6 +5,7 @@ import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
+import { Research } from '@/entities/Research'
 import { GameConstants } from '@/enum/Constants'
 import { ResearchKey } from '@/enum/Enums'
 
@@ -12,7 +13,7 @@ import { ResearchKey } from '@/enum/Enums'
 export default function useSpecialEvents() {
 
   const dialog = useDialog();
-  const { deviceList, researchList } = useInitialize();
+  const { researchList } = useInitialize();
   const { sendUnlockCountdownMessage, sendHalfwayMessage, sendSpeakToLennoxMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useFlags();
@@ -38,7 +39,7 @@ export default function useSpecialEvents() {
 
   //When first worker is purchased, unlock slowdown
   watchEffect(() => {
-    if(!slowdownEnabled.value && Object.values(researchList).find((science: any) => science.numWorkers > 0)) {
+    if(!slowdownEnabled.value && Object.values(researchList).find((research: any) => research.numWorkers > 0)) {
       slowdownEnabled.value = true;
       sendUnlockSlowdownMessage();
     }
@@ -63,14 +64,9 @@ export default function useSpecialEvents() {
     if(isLoading.value) {
       return;
     }
-    const devices = Object.values(deviceList);
-    let devicesUnlocked = 0;
-    Object.values(deviceList).forEach((device: any) => {
-      if(device.total == 1) {
-        devicesUnlocked++
-      }
-    });
-    if(devicesUnlocked == devices.length) {
+    const devices = Object.values(researchList).filter((research: any) => research.isDevice);
+    const devicesComplete = devices.filter((research: any) => research.total == 1);
+    if(devices.length == devicesComplete.length) {
       countdownTimer.stop();
       gameEnded.value = true;
       dialog.success({

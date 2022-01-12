@@ -7,7 +7,7 @@ import { PersonKey } from '@/enum/Enums'
 
 export default function useUnlockWatch() {
   const { sendPersonUnlockMessage, sendResearchUnlockMessage } = useMessage();
-  const { deviceList, personList, researchList, scienceList } = useInitialize();
+  const { personList, researchList, } = useInitialize();
   const { isLoading } = useFlags();
 
   //todo - this seems inefficient
@@ -15,14 +15,14 @@ export default function useUnlockWatch() {
     if (isLoading.value) {
       return;
     }
-    for(const ResearchKey in scienceList){
-      const science = scienceList[ResearchKey];
-      if(!science.isUnlocked) {
-        const unlock = researchList[science.unlockedBy];
-        const threshold = science.unlockThreshold;
+    for(const ResearchKey in researchList){
+      const research = researchList[ResearchKey];
+      if(!research.isUnlocked) {
+        const unlock = researchList[research.unlockedBy];
+        const threshold = research.unlockThreshold;
         if(unlock.total >= threshold) {
-          science.isUnlocked = true;
-          sendResearchUnlockMessage(science, personList[PersonKey.LENNOX_OLD])
+          research.isUnlocked = true;
+          sendResearchUnlockMessage(research, personList[PersonKey.LENNOX_OLD])
         }
       }
     }

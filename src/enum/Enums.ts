@@ -1,10 +1,3 @@
-export enum UnlockKey {
-  PERSON = "person",
-  SCIENCE = "science",
-  DEVICE = "device",
-  MESSAGE = "message",
-}
-
 export enum UnlockMessageKey {
   INITIAL = "initial",
   UNLOCK_WORKERS = "unlock-workers",

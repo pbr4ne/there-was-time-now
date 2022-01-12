@@ -1,15 +1,15 @@
 <template>
 <n-grid :cols="1" responsive="screen" style="padding-left: 20px; max-width: 75%;">
   <n-grid-item>
-    <n-card align="stretch" :title="device.label" @click="incrementDevice(device)" style="cursor: pointer;">
+    <n-card align="stretch" :title="research.label" @click="incrementResearch(research)" style="cursor: pointer;">
       <n-progress
           type="line"
-          :percentage="device.current"
+          :percentage="research.current"
           :height="24"
           :border-radius="4"
           :fill-border-radius="0"
           :indicator-placement="'inside-label'"
-          :color="device.color"
+          :color="research.color"
         />
     </n-card>
   </n-grid-item>
@@ -18,8 +18,8 @@
 <script>
 import { defineComponent } from 'vue'
 import { NCard, NGrid, NGridItem, NProgress } from 'naive-ui'
-import { Device } from '@/entities/Device'
-import useDevice from '@/composables/useDevice'
+import { Research } from '@/entities/Research'
+import useResearch from '@/composables/useResearch'
 
 export default defineComponent({
   components: {
@@ -29,13 +29,13 @@ export default defineComponent({
     NProgress,
   },
   props: {
-    device: Device,
+    research: Research,
   },
   setup() {
-    let { incrementDevice } = useDevice();
+    let { incrementResearch } = useResearch();
 
     return {
-      incrementDevice,
+      incrementResearch,
     }
   },
 })

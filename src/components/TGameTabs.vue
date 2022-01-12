@@ -9,7 +9,7 @@
       <n-space style="padding: 20px">
         <t-game-research :person="person" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
       </n-space>
-      <t-game-tab-device v-if="unlockedDevice(person)" :device="unlockedDevice(person)" />
+      <t-game-tab-device v-if="unlockedDevice(person)" :research="unlockedDevice(person)" />
       <t-game-tab-messages :person="person" />
     </n-tab-pane>
   </n-tabs>
@@ -43,11 +43,11 @@ export default defineComponent({
     let { personList } = useInitialize();
 
     function unlockedResearchList(person) {
-      return person.scienceList.filter(science => science.isUnlocked);
+      return person.researchList.filter(research => research.isUnlocked && !research.isDevice);
     }
 
     function unlockedDevice(person) {
-      return person.deviceList.find(device => device.isUnlocked);
+      return person.researchList.find(research => research.isUnlocked && research.isDevice);
     }
 
     return {

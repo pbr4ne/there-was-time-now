@@ -1,4 +1,4 @@
-export class GameStateDevice {
+export class GameStateResearch {
   key: string;
   isUnlocked: boolean;
   total: number;

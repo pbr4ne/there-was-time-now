@@ -52,19 +52,19 @@ export default defineComponent({
 
       unlockedPersonList.forEach(person => {
         const personResearchList = [];
-        person.scienceList
-          .filter(science => science.isUnlocked)
-          .forEach(science => personResearchList.push({
-            label: renderLabel(science),
-            key: science.label,
-            icon: renderIcon(science.icon, science.color),
+        person.researchList
+          .filter(research => research.isUnlocked && !research.isDevice)
+          .forEach(research => personResearchList.push({
+            label: renderLabel(research),
+            key: research.label,
+            icon: renderIcon(research.icon, research.color),
           }));
-        person.deviceList
-          .filter(device => device.isUnlocked)
-          .forEach(device => deviceGroup.push({
-            label: renderLabel(device),
-            key: device.label,
-            icon: renderIcon(device.icon, device.color),
+        person.researchList
+          .filter(research => research.isUnlocked && research.isDevice)
+          .forEach(research => deviceGroup.push({
+            label: renderLabel(research),
+            key: research.label,
+            icon: renderIcon(research.icon, research.color),
           }));
         personGroup.push(personResearchList);
       });
