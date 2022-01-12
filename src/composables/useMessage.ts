@@ -38,7 +38,7 @@ export default function useMessage() {
       meta: initialMessage.timestamp,
       duration: GameConstants.NOTIFICATION_DURATION,
     });
-    personList[PersonKey.LENNOX_OLD].messageList.push(initialMessage);
+    personList[PersonKey.LENNOX_OLD].messageList.unshift(initialMessage);
   }
 
   function sendWorkersMessage() {
@@ -60,7 +60,7 @@ export default function useMessage() {
       meta: workersMessage.timestamp,
       duration: GameConstants.NOTIFICATION_DURATION,
     });
-    personList[PersonKey.LENNOX_OLD].messageList.push(workersMessage);
+    personList[PersonKey.LENNOX_OLD].messageList.unshift(workersMessage);
   }
 
   function sendEndOfWorldMessage() {

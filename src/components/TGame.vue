@@ -7,16 +7,7 @@
     </n-layout>
     <t-game-footer />
   </n-layout>
-  <n-modal 
-    v-model:show="showGameOverModal"
-    :mask-closable="false"
-    preset="dialog"
-    positive-text="Dang"
-    @positive-click="onPositiveClickLose"
-  >
-    GAME OVER
-    #OUTATIME
-  </n-modal>
+
   <n-modal 
     v-model:show="showWinModal"
     :mask-closable="false"
@@ -48,6 +39,7 @@ import useTime from '@/composables/useTime'
 import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useSaveLoad from '@/composables/useSaveLoad'
+import useSpecialEvents from '@/composables/useSpecialEvents'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import { GameConstants } from '@/enum/Constants'
 import { ScienceKey } from '@/enum/Enums'
@@ -75,6 +67,7 @@ export default {
       sellFeatureEnabled 
     } = useInitialize();
     const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage, sendWorkersMessage } = useMessage();
+    
 
     loadGameState().then(function() {
       if(!gameStarted.value) {
@@ -84,18 +77,10 @@ export default {
     });
 
     const { countdownTimer, countupTimer } = useTime();
-    const showGameOverModalRef = ref(false);
     const showWinModalRef = ref(false);
 
+    useSpecialEvents();
     useUnlockWatch();
-
-    //SPECIAL - when countdown timer is expired, show end of game modal
-    watchEffect(async() => {
-      if(countdownTimer.isExpired() && !isLoading.value) {
-        gameEnded.value = true;
-        showGameOverModalRef.value = true;
-      }
-    });
 
     //SPECIAL - when first quantum computer is built, start the end of world timer
     watchEffect(() => {
@@ -151,9 +136,6 @@ export default {
     }, GameConstants.SAVE_INTERVAL * 1000);
 
     return {
-      onPositiveClickLose () {
-        showGameOverModalRef.value = false;
-      },
       onPositiveClickWin() {
         showWinModalRef.value = true;
       },
@@ -165,7 +147,6 @@ export default {
           countupTimer.start();
         }
       },
-      showGameOverModal: showGameOverModalRef,
       showWinModal: showWinModalRef,
       showPausedModal: gamePaused,
     };
