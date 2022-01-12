@@ -7,8 +7,8 @@ import { ScienceKey } from '@/enum/Enums'
 
 export default function useSpecialEvents() {
 
-  const { countdownTriggered, gameEnded, isLoading, scienceList } = useInitialize();
-  const { sendEndOfWorldMessage } = useMessage();
+  const { countdownTriggered, gameEnded, isLoading, scienceList, sellFeatureEnabled } = useInitialize();
+  const { sendEndOfWorldMessage, sendWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const dialog = useDialog();
 
@@ -22,6 +22,14 @@ export default function useSpecialEvents() {
     }
   });
 
+  //SPECIAL - when fifth quantum computer is built, unlock buy/sell
+  watchEffect(() => {
+    if(!sellFeatureEnabled.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
+      sellFeatureEnabled.value = true;
+      sendWorkersMessage();
+    }
+  });
+
   //SPECIAL - when countdown timer is expired, show end of game modal
   watchEffect(async() => {
     if(countdownTimer.isExpired() && !isLoading.value) {
@@ -31,7 +39,6 @@ export default function useSpecialEvents() {
         title: 'Game Over',
         content: '#OUTATIME'
       });
-
     }
   });
 }

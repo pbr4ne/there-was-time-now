@@ -42,7 +42,6 @@ import useSaveLoad from '@/composables/useSaveLoad'
 import useSpecialEvents from '@/composables/useSpecialEvents'
 import useUnlockWatch from '@/composables/useUnlockWatch'
 import { GameConstants } from '@/enum/Constants'
-import { ScienceKey } from '@/enum/Enums'
 
 export default {
   components: {
@@ -62,11 +61,9 @@ export default {
       gamePaused, 
       gameStarted, 
       isLoading, 
-      saveStopwatch, 
-      scienceList, 
-      sellFeatureEnabled 
+      saveStopwatch,  
     } = useInitialize();
-    const { sendHalfwayMessage, sendInitialMessage, sendWorkersMessage } = useMessage();
+    const { sendHalfwayMessage, sendInitialMessage } = useMessage();
     
 
     loadGameState().then(function() {
@@ -82,13 +79,7 @@ export default {
     useSpecialEvents();
     useUnlockWatch();
 
-    //SPECIAL - when fifth quantum computer is built, unlock buy/sell
-    watchEffect(() => {
-      if(!sellFeatureEnabled.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
-        sellFeatureEnabled.value = true;
-        sendWorkersMessage();
-      }
-    });
+
 
     //SPECIAL - when time is halfway up, show message
     watchEffect(() => {
