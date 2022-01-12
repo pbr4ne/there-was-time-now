@@ -92,7 +92,7 @@ import {
 } from '@vicons/material'
 
 import TGameAbout from '@/components/TGameAbout'
-import useInitialize from '@/composables/useInitialize'
+import useFlags from '@/composables/useFlags'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
 import useTime from '@/composables/useTime'
