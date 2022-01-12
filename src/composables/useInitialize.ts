@@ -45,7 +45,7 @@ import {
 } from '@vicons/tabler'
 
 import { Person } from '@/entities/Person'
-import { Research } from '@/entities/Research'
+import { Research, ResearchRequirement } from '@/entities/Research'
 import { ResearchKey, PersonKey } from '@/enum/Enums'
 
 const personList : any = reactive({
@@ -134,7 +134,12 @@ function associateUnlocks() {
   researchList[ResearchKey.TIMEHENGE].setUnlock(ResearchKey.ZODIAC_TALISMAN, 10);
 }
 
+function associateRequirements() {
+  researchList[ResearchKey.QUANTUM_COMPUTING].researchRequirementList.push(new ResearchRequirement(ResearchKey.PHYSICS, 1));
+}
+
 associateUnlocks();
+associateRequirements();
 
 export default function useInitialize() {
 
@@ -157,7 +162,6 @@ export default function useInitialize() {
     for(const research in researchList) {
       researchList[research].speed = 10;
       researchList[research].unlockThreshold = 1;
-      //researchList[research].unlocks.forEach((unlock: { threshold: number }) => unlock.threshold = 1);
     }
     for(const person in personList) {
       personList[person].unlockThreshold = 1;

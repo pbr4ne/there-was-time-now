@@ -1,14 +1,16 @@
 import { ref } from 'vue'
 import useCurrency from '@/composables/useCurrency'
+import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import useFlags from './useFlags'
-import { Research } from '@/entities/Research'
+import { Research, ResearchRequirement } from '@/entities/Research'
 
 const sellIncrementList = [1, 5, 10];
 const sellIncrementIndex = ref(0);
 
 export default function useResearch() {
   const { currency } = useCurrency();
+  const { researchList } = useInitialize();
   const { expandTime } = useTime();
   const { slowdownEnabled } = useFlags();
 
@@ -77,6 +79,12 @@ export default function useResearch() {
     return sellIncrementList[sellIncrementIndex.value];
   }
 
+  const canIncrementResearch = (research: Research) => {
+    return research.researchRequirementList.filter((researchRequirement: ResearchRequirement) => 
+      researchList[researchRequirement.researchKey].total < researchRequirement.quantity
+    ).length == 0
+  }
+
   const incrementResearch = (research: Research) => {
     //todo - yuck do this better
     if(!research.isIncrementing) {
@@ -109,10 +117,11 @@ export default function useResearch() {
   return {
     buyWorker,
     buyWorkerCost,
-    changeSellIncrement,
     canBuyWorker,
+    canIncrementResearch,
     canSellResearch,
     canSellWorker,
+    changeSellIncrement,
     incrementResearch,
     sellIncrement,
     sellResearch,

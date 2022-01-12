@@ -38,18 +38,7 @@
               :key="research.label"
             >
               <td>
-                <n-popover trigger="hover" placement="right" :style="{ maxWidth: '200px' }">
-                  <template #trigger>
-                    <t-game-research-button 
-                      ghost
-                      round
-                      :color="research.color"
-                      @click="incrementResearch(research)"
-                      :research = "research">
-                    </t-game-research-button>
-                  </template>
-                  <span>{{messages[research.key].messageSections[0].text}}</span>
-                </n-popover>
+                  <t-game-research-button :research = "research" />
               </td>
               <td v-if="sellFeatureEnabled">
                 <t-game-research-sell :research="research" />
@@ -66,8 +55,8 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { NButton, NIcon, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
+import { defineComponent, } from 'vue'
+import { NButton, NIcon,  NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import { BuildOutline as BuildIcon } from '@vicons/ionicons5'
 import TGameResearchSell from '@/components/TGameResearchSell'
 import TGameResearchWorkers from '@/components/TGameResearchWorkers'
@@ -81,7 +70,6 @@ export default defineComponent({
     BuildIcon,
     NButton,
     NIcon,
-    NPopover,
     NProgress,
     NScrollbar,
     NSpace,
@@ -95,9 +83,18 @@ export default defineComponent({
   },
   setup() {
     const { sellFeatureEnabled } = useFlags();
-    const { changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
+    const { canIncrementResearch, changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
+
+    // function getTooltip(research) {
+    //   if(canIncrementResearch(research)) {
+    //     return messages[research.key].messageSections[0].text;
+    //   } else {
+    //     return () => h(TGameResearchNeeds);
+    //   }
+    // }
 
     return {
+      canIncrementResearch,
       changeSellIncrement,
       sellFeatureEnabled,
       sellIncrement,

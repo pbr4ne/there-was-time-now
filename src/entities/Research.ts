@@ -8,6 +8,8 @@ export class Research extends Unlockable {
   color: string;
   speed: number;
   expand: number;
+  price: number;
+  workerCost: number;
   isDevice: boolean;
   personKey: PersonKey;
 
@@ -15,8 +17,7 @@ export class Research extends Unlockable {
   current: number = 0;
   isIncrementing: boolean = false;
   numWorkers: number = 0;
-  price: number = 5; //todo - make configurable
-  workerCost: number = 5; //todo - make configurable
+  researchRequirementList: Array<ResearchRequirement> = new Array<ResearchRequirement>();
 
   constructor(key: ResearchKey, label: string, icon: object, color: string, speed: number, expand: number, price: number, workerCost: number, isDevice: boolean, personKey: PersonKey) {
     super();
@@ -30,5 +31,15 @@ export class Research extends Unlockable {
     this.workerCost = workerCost;
     this.isDevice = isDevice;
     this.personKey = personKey;
+  }
+}
+
+export class ResearchRequirement {
+  researchKey: ResearchKey;
+  quantity: number;
+
+  constructor(researchKey: ResearchKey, quantity: number) {
+    this.researchKey = researchKey;
+    this.quantity = quantity;
   }
 }
