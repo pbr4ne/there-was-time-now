@@ -50,12 +50,8 @@ import { Person } from '@/entities/Person'
 import { Science } from '@/entities/Science'
 import { Message } from '@/entities/Message'
 import { Unlock } from '@/entities/Unlock'
-import { 
-  DeviceKey, 
-  PersonKey, 
-  ScienceKey, 
-  UnlockKey
-} from '@/enum/Enums'
+import { DeviceKey, PersonKey, ScienceKey, UnlockKey } from '@/enum/Enums'
+import { messages } from '@/locales/en'
 
 const gameStarted = ref(false);
 const gamePaused = ref(false);
@@ -122,8 +118,7 @@ const researchList : any = reactive({
 function associateUnlocksToResearch() {
 
   //Lennox (1984)
-  scienceList[ScienceKey.PHYSICS].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 10, 
-    new Message('Unlock', [{text: 'You are now able to research Quantum Computing.'}])));
+  scienceList[ScienceKey.PHYSICS].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 10, messages[ScienceKey.QUANTUM_COMPUTING]));
   scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 10, 
     new Message('Unlock', [{text: 'You should be able to build a Quantum Computer now.'}])));
   scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 10, 

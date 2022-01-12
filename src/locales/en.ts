@@ -1,5 +1,5 @@
 import { Message } from "@/entities/Message"
-import { UnlockMessageKey } from '@/enum/Enums'
+import { ScienceKey, UnlockMessageKey } from '@/enum/Enums'
 
 const messages = {
   [UnlockMessageKey.INITIAL]: new Message(
@@ -41,6 +41,11 @@ const messages = {
   [UnlockMessageKey.HALFWAY]: new Message(
     'Halfway there', [{
       text: 'Halfway to the end of the world',
+    }]
+  ),
+  [ScienceKey.QUANTUM_COMPUTING]: new Message(
+    'Unlocked Quantum Computing', [{
+      text: 'The study of how to use phenomena in quantum physics to create new ways of computing'
     }]
   ),
 }
