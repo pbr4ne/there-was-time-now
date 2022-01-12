@@ -1,5 +1,5 @@
 <template>
-  <n-tabs type="card">
+  <n-tabs type="card" v-model:value="currentPerson">
     <n-tab-pane 
       v-for="person in (Object.values(personList).filter(person => person.isUnlocked))" 
       :key="person.key"
@@ -22,6 +22,7 @@ import TGameTabCard from '@/components/TGameTabCard.vue'
 import TGameTabDevice from '@/components/TGameTabDevice.vue'
 import TGameTabMessages from '@/components/TGameTabMessages.vue'
 import TGameResearch from '@/components/TGameResearch.vue'
+import useFlags from '@/composables/useFlags'
 import useInitialize from '@/composables/useInitialize'
 
 function renderTab(person, name, numUnread) {
@@ -38,6 +39,7 @@ export default defineComponent({
     TGameResearch,
   },
   setup() {
+    let { currentPerson } = useFlags();
     let { personList } = useInitialize();
 
     function unlockedResearchList(person) {
@@ -49,6 +51,7 @@ export default defineComponent({
     }
 
     return {
+      currentPerson,
       personList,
       renderTab,
       unlockedDevice,

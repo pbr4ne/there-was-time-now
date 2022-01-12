@@ -18,7 +18,7 @@ export default function useSaveLoad() {
   const { currency } = useCurrency();
   const { deviceList, personList, scienceList } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
-  const { countdownTriggered, gameEnded, gameStarted, isLoading, sellFeatureEnabled } = useFlags();
+  const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled } = useFlags();
 
   //todo - missing initial message
   //todo - the countup timer is getting messed up
@@ -57,6 +57,7 @@ export default function useSaveLoad() {
       countdownTimer.stop();
       countupTimer.restart(0);
       countupTimer.start();
+      currentPerson.value = PersonKey.LENNOX_OLD;
     })
     .catch(function(err: any) {
       console.log(`Error saving game state: ${err}`);
