@@ -119,8 +119,7 @@ function associateUnlocksToResearch() {
 
   //Lennox (1984)
   scienceList[ScienceKey.PHYSICS].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTING, PersonKey.LENNOX_OLD, 10, messages[ScienceKey.QUANTUM_COMPUTING]));
-  scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 10, 
-    new Message('Unlock', [{text: 'You should be able to build a Quantum Computer now.'}])));
+  scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 10, messages[ScienceKey.QUANTUM_COMPUTER]));
   scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 10, 
     new Message('Lost to Time', [
       {
