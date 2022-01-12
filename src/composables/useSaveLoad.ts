@@ -143,7 +143,6 @@ export default function useSaveLoad() {
       if(countdownTriggered.value) {
         expandConstant.value = gameState.expandConstant;
         if(!gameEnded.value) {
-          console.log(gameState.countdownSecondsLeft);
           countdownTimer.restart(gameState.countdownSecondsLeft);
         }
         countupTimer.stop();

@@ -1,4 +1,3 @@
-import { Unlock } from '@/entities/Unlock'
 import { ResearchKey } from '@/enum/Enums'
 
 export class Research {

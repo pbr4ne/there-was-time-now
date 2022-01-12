@@ -3,17 +3,7 @@ import useInitialize from '@/composables/useInitialize'
 // @ts-ignore
 import useMessage from '@/composables/useMessage'
 import useFlags from '@/composables/useFlags'
-import { Unlock } from '@/entities/Unlock'
-import { PersonKey, UnlockKey } from '@/enum/Enums'
-
-//function unlockResearch(unlock: Unlock, researchList: any, personList: any, sendUnlockMessage: Function) {
-//   const research = researchList[unlock.key];
-//   if(!research.isUnlocked) {
-//     research.isUnlocked = true;
-//     const person = personList[unlock.person];
-//     sendUnlockMessage(unlock, person, research.label);
-//   }
-// }
+import { PersonKey } from '@/enum/Enums'
 
 export default function useUnlockWatch() {
   const { sendPersonUnlockMessage, sendResearchUnlockMessage } = useMessage();
@@ -47,26 +37,6 @@ export default function useUnlockWatch() {
         }
       }
     }
-
-      // research.unlocks.forEach((unlock : Unlock) => {
-      //   if(research.total >= unlock.threshold) {
-      //     if(unlock.type === UnlockKey.PERSON) {
-      //       const person = personList[unlock.key];
-      //       if(!person.isUnlocked) {
-      //         person.isUnlocked = true;
-      //         sendUnlockMessage(unlock, person, person.name);
-      //       }
-      //     } else if(unlock.type === UnlockKey.SCIENCE) {
-      //       unlockResearch(unlock, scienceList, personList, sendUnlockMessage);
-      //     } else if(unlock.type === UnlockKey.DEVICE) {
-      //       unlockResearch(unlock, deviceList, personList, sendUnlockMessage);
-      //     } else if(unlock.type === UnlockKey.MESSAGE) {
-      //       const person = personList[unlock.key];
-      //       sendUnlockMessage(unlock, person, null!);
-      //     }
-      //   }
-      // });
-    //}
   });
 
   return {
