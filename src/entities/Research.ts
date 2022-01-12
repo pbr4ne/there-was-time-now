@@ -18,7 +18,7 @@ export class Research extends Unlockable {
   price: number = 5; //todo - make configurable
   workerCost: number = 5; //todo - make configurable
 
-  constructor(key: ResearchKey, label: string, icon: object, color: string, speed: number, expand: number, isDevice: boolean, personKey: PersonKey) {
+  constructor(key: ResearchKey, label: string, icon: object, color: string, speed: number, expand: number, price: number, workerCost: number, isDevice: boolean, personKey: PersonKey) {
     super();
     this.key = key;
     this.label = label;
@@ -26,6 +26,8 @@ export class Research extends Unlockable {
     this.color = color;
     this.speed = speed;
     this.expand = expand;
+    this.price = price;
+    this.workerCost = workerCost;
     this.isDevice = isDevice;
     this.personKey = personKey;
   }
