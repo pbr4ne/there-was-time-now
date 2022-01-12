@@ -8,8 +8,18 @@ import { PersonKey } from '@/enum/Enums'
 import { Message } from '@/entities/Message'
 import { Person } from '@/entities/Person'
 import { Unlock } from '@/entities/Unlock'
+import { messages } from '@/locales/en'
 
 const showTimeline = ref(false);
+
+function createNotification(message: Message, notification: any) {
+  notification.create({
+    title: message.title,
+    content: () => h(TGameMessage, { messageSections: message.messageSections}),
+    meta: message.timestamp,
+    duration: GameConstants.NOTIFICATION_DURATION,
+  });
+}
 
 //todo - less code duplication
 export default function useMessage() {
@@ -18,27 +28,12 @@ export default function useMessage() {
   const { timeElapsed } = useTime();
 
   function sendInitialMessage() {
-    const initialMessage = new Message(
-      '1984',
-      [
-        {
-          text: 'The year is 1984. You are Lennox, a physicist researching the most cutting-edge technology: Quantum Computing! With enough research, you should be able to build your own Quantum Computer.'
-        }, 
-        {
-          text: 'Let\'s get started...',
-        },
-      ]
-    );
-    initialMessage.isRead = true;
-    initialMessage.timestamp = '1984-01-01';
+    const message = messages.initial;
+    message.isRead = true;
+    message.timestamp = '1984-01-01';
     
-    notification.create({
-      title: initialMessage.title,
-      content: () => h(TGameMessage, { messageSections: initialMessage.messageSections}),
-      meta: initialMessage.timestamp,
-      duration: GameConstants.NOTIFICATION_DURATION,
-    });
-    personList[PersonKey.LENNOX_OLD].messageList.unshift(initialMessage);
+    createNotification(message, notification);
+    personList[PersonKey.LENNOX_OLD].messageList.unshift(message);
   }
 
   function sendWorkersMessage() {
