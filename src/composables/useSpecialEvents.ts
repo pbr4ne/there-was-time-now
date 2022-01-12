@@ -12,7 +12,7 @@ import { ScienceKey } from '@/enum/Enums'
 export default function useSpecialEvents() {
 
   const { countdownTriggered, deviceList, gameEnded, isLoading, scienceList, sellFeatureEnabled, slowdownEnabled } = useInitialize();
-  const { sendEndOfWorldMessage, sendHalfwayMessage, sendSlowdownMessage, sendWorkersMessage } = useMessage();
+  const { sendUnlockCountdownMessage, sendHalfwayMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const dialog = useDialog();
 
@@ -20,7 +20,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!countdownTriggered.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
       countdownTriggered.value = true;
-      sendEndOfWorldMessage();
+      sendUnlockCountdownMessage();
       countdownTimer.start();
       countupTimer.stop();
     }
@@ -30,7 +30,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!sellFeatureEnabled.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
-      sendWorkersMessage();
+      sendUnlockWorkersMessage();
     }
   });
 
@@ -38,7 +38,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!slowdownEnabled.value && Object.values(scienceList).find((science: any) => science.numWorkers > 0)) {
       slowdownEnabled.value = true;
-      sendSlowdownMessage();
+      sendUnlockSlowdownMessage();
     }
   });
 

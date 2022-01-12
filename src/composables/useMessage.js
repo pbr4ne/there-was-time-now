@@ -20,10 +20,12 @@ function createNotification(message, notification) {
   });
 }
 
-function setTimestamp(message, timeElapsed) {
-  const d = new Date(1984, 0);
+function setTimestamp(message, year, timeElapsed) {
+  const d = new Date(year, 0);
   d.setDate(d.getDate() + timeElapsed.value);
   message.timestamp = d.toISOString().split('T')[0];
+  //todo - this is hacky
+  message.timestamp = message.timestamp.replace('1900-', '2524 BC ');
 }
 
 export default function useMessage() {
@@ -31,20 +33,17 @@ export default function useMessage() {
   const { personList } = useInitialize();
   const { timeElapsed } = useTime();
 
-  function sendMessage(key) {
-    const message = messages[key];
-    setTimestamp(message, timeElapsed);
-    message.isRead = true;
+  function sendMessage(message, person) {
+    setTimestamp(message, person.year, timeElapsed);
     createNotification(message, notification);
-    personList[PersonKey.LENNOX_OLD].messageList.unshift(message);
-    return message;
+    person.messageList.unshift(message);
   }
 
-  const sendInitialMessage = () => sendMessage(UnlockMessageKey.INITIAL);
-  const sendWorkersMessage = () => sendMessage(UnlockMessageKey.UNLOCK_WORKERS);
-  const sendEndOfWorldMessage = () => sendMessage(UnlockMessageKey.UNLOCK_COUNTDOWN);
-  const sendSlowdownMessage = () => sendMessage(UnlockMessageKey.UNLOCK_SLOWDOWN);
-  const sendHalfwayMessage = () => sendMessage(UnlockMessageKey.HALFWAY);
+  const sendInitialMessage = () => sendMessage(messages[UnlockMessageKey.INITIAL], personList[PersonKey.LENNOX_OLD]);
+  const sendUnlockWorkersMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_WORKERS], personList[PersonKey.LENNOX_OLD]);
+  const sendUnlockCountdownMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_COUNTDOWN], personList[PersonKey.LENNOX_OLD]);
+  const sendUnlockSlowdownMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_SLOWDOWN], personList[PersonKey.LENNOX_OLD]);
+  const sendHalfwayMessage = () => sendMessage(messages[UnlockMessageKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
 
   function sendUnlockMessage(unlock, person, name) {
     let message = unlock.message;
@@ -72,28 +71,17 @@ export default function useMessage() {
       return;
     }
 
-    const d = new Date(person.year, 0);
-    d.setDate(d.getDate() + timeElapsed.value);
-    message.timestamp = d.toISOString().split('T')[0];
-    //todo - this is hacky
-    message.timestamp = message.timestamp.replace('1900-', '2524 BC ');
-
-    notification.create({
-      title: message.title,
-      content: () => h(TGameMessage, { messageSections: message.messageSections}),
-      meta: message.timestamp,
-      duration: GameConstants.NOTIFICATION_DURATION,
-    })
-    person.messageList.unshift(message);
+    sendMessage(message, person);
   }
 
   return {
-    sendEndOfWorldMessage,
+    sendMessage,
+    sendUnlockCountdownMessage,
     sendHalfwayMessage,
     sendInitialMessage,
-    sendSlowdownMessage,
+    sendUnlockSlowdownMessage,
     sendUnlockMessage,
-    sendWorkersMessage,
+    sendUnlockWorkersMessage,
     showTimeline,
   }
 }
