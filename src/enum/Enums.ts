@@ -22,7 +22,7 @@ export enum PersonKey {
   NECHTAN = "nechtan",
 }
 
-export enum ScienceKey {
+export enum ResearchKey {
   PHYSICS = "physics",
   QUANTUM_COMPUTING = "quantum-computing",
   QUANTUM_COMPUTER = "quantum-computer",
@@ -48,9 +48,7 @@ export enum ScienceKey {
   AETHERIC_HOROSCOPES = "aetheric-horoscopes",
   ZODIAC_TALISMAN = "zodiac-talisman",
   SARSEN_STONES = "sarsen-stones",
-}
 
-export enum DeviceKey {
   CRYSTAL_SARCOPHAGUS = "crystal-sarcophagus",
   OMEGAPERSON = "omegaperson",
   PHILOSOPHERS_STONE = "philosophers-stone",

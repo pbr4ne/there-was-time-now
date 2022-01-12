@@ -1,7 +1,8 @@
 import { Unlock } from '@/entities/Unlock'
+import { ResearchKey } from '@/enum/Enums'
 
 export class Research {
-  key: string;
+  key: ResearchKey;
   label: string;
   icon: object;
   color: string;
@@ -15,13 +16,21 @@ export class Research {
   cost: number = 5; //todo - make configurable
   workerCost: number = 5; //todo - make configurable
 
-  unlocks: Array<Unlock> = new Array<Unlock>();
+  unlockedBy: string = null!;
+  unlockThreshold: number = 0;
+  // unlocks: Array<Unlock> = new Array<Unlock>();
 
-  constructor(key: string, label: string, icon: object, color: string, speed: number) {
+  constructor(key: ResearchKey, label: string, icon: object, color: string, speed: number) {
     this.key = key;
     this.label = label;
     this.icon = icon;
     this.color = color;
     this.speed = speed;
   }
+
+  setUnlock(unlockedBy: string, unlockThreshold: number) {
+    this.unlockedBy = unlockedBy;
+    this.unlockThreshold = unlockThreshold;
+  }
+
 }

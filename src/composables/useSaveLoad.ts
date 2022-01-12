@@ -8,7 +8,7 @@ import { GameStateDevice } from '@/dto/GameStateDevice'
 import { GameStatePerson } from '@/dto/GameStatePerson'
 import { GameStateScience } from '@/dto/GameStateScience'
 import { GameConstants } from '@/enum/Constants'
-import { PersonKey, SaveKey, ScienceKey } from '@/enum/Enums'
+import { PersonKey, SaveKey, ResearchKey } from '@/enum/Enums'
 
 localforage.config({
   name: GameConstants.DB_NAME,
@@ -33,7 +33,7 @@ export default function useSaveLoad() {
       });
       Object.keys(scienceList).forEach((key: string) => {
         const science = scienceList[key];
-        if(key != ScienceKey.PHYSICS) {
+        if(key != ResearchKey.PHYSICS) {
           science.isUnlocked = false;
         }
         science.total = 0;

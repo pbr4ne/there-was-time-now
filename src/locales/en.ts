@@ -1,5 +1,5 @@
 import { Message } from "@/entities/Message"
-import { DeviceKey, PersonKey, ScienceKey, UnlockMessageKey } from '@/enum/Enums'
+import { PersonKey, ResearchKey, UnlockMessageKey } from '@/enum/Enums'
 
 const messages = {
   //Special Events
@@ -92,105 +92,105 @@ const messages = {
   ),
 
   //Sciences
-  [ScienceKey.PHYSICS]: new Message('Unlocked Physics', [{
+  [ResearchKey.PHYSICS]: new Message('Unlocked Physics', [{
       text: 'The particulars of particles.'
     }]
   ),
-  [ScienceKey.QUANTUM_COMPUTING]: new Message('Unlocked Quantum Computing', [{
+  [ResearchKey.QUANTUM_COMPUTING]: new Message('Unlocked Quantum Computing', [{
       text: 'The study of how to use phenomena in quantum physics to create new ways of computing.'
     }]
   ),
-  [ScienceKey.QUANTUM_COMPUTER]: new Message('Unlocked Quantum Computer', [{
+  [ResearchKey.QUANTUM_COMPUTER]: new Message('Unlocked Quantum Computer', [{
       text: 'You\'ve made a quantum leap in the field of computing!'
     }]
   ),
-  [ScienceKey.CHRONOCRYSTALS]: new Message('Unlocked Chronocrystals', [{
+  [ResearchKey.CHRONOCRYSTALS]: new Message('Unlocked Chronocrystals', [{
       text: 'I\'m sure in 2022 time crystals are available in every corner drug store, but in 1984 they\'re a little hard to come by.'
     }],
   ),
-  [ScienceKey.BIOLOGY]: new Message('Unlocked Biology', [{
+  [ResearchKey.BIOLOGY]: new Message('Unlocked Biology', [{
       text: 'The study of living stuff, and stuff.'
     }],
   ),
-  [ScienceKey.GENETIC_MEMORY]: new Message('Unlocked Genetic Memory', [{
+  [ResearchKey.GENETIC_MEMORY]: new Message('Unlocked Genetic Memory', [{
       text: 'Remember the memories.'
     }],
   ),
-  [ScienceKey.TELOMERE_STRETCHER]: new Message('Unlocked Telomere Stretcher', [{
+  [ResearchKey.TELOMERE_STRETCHER]: new Message('Unlocked Telomere Stretcher', [{
       text: 'It\'s a bit of a stretch, but you believe that prolonging a lifespan might be related to lengthening time.'
     }],
   ),
-  [ScienceKey.THE_FLUID]: new Message('Unlocked The Fluid', [{
+  [ResearchKey.THE_FLUID]: new Message('Unlocked The Fluid', [{
       text: 'The Fluid! Lennox, I must have the Fluid!'
     }],
   ),
-  [ScienceKey.ALCHEMY]: new Message('Unlocked Alchemy', [{
+  [ResearchKey.ALCHEMY]: new Message('Unlocked Alchemy', [{
       text: 'Sure it seems like a romantic pastime, but it\'s mostly mercury poisoning when you get down to it.'
     }],
   ),
-  [ScienceKey.CHRONOMOGRIFICATION]: new Message('Unlocked Chronomogrification', [{
+  [ResearchKey.CHRONOMOGRIFICATION]: new Message('Unlocked Chronomogrification', [{
       text: 'You can transmogrify and now you can chronomogrify, but can you ever just mogrify?'
     }],
   ),
-  [ScienceKey.DISTILLER]: new Message('Unlocked Distiller', [{
+  [ResearchKey.DISTILLER]: new Message('Unlocked Distiller', [{
       text: 'I know you\'re tempted, but this is for science, not hooch.'
     }],
   ),
-  [ScienceKey.ELEMENT_ZERO]: new Message('Unlocked Element Zero', [{
+  [ResearchKey.ELEMENT_ZERO]: new Message('Unlocked Element Zero', [{
       text: 'Is this trademarked?'
     }],
   ),
-  [ScienceKey.MATHEMATICS]: new Message('Unlocked Mathematics', [{
+  [ResearchKey.MATHEMATICS]: new Message('Unlocked Mathematics', [{
       text: 'The purest of the sciences, except for economics.'
     }],
   ),
-  [ScienceKey.TIMELESS_ALGEBRA]: new Message('Unlocked Timeless Algebra', [{
+  [ResearchKey.TIMELESS_ALGEBRA]: new Message('Unlocked Timeless Algebra', [{
       text: 'Classic.'
     }],
   ),
-  [ScienceKey.NEPOHUALTZINTZIN]: new Message('Unlocked Nepohuatlzintzin', [{
+  [ResearchKey.NEPOHUALTZINTZIN]: new Message('Unlocked Nepohuatlzintzin', [{
       text: 'Eat your heart out, abacus.'
     }],
   ),
-  [ScienceKey.OBSIDIAN]: new Message('Unlocked Obsidian', [{
+  [ResearchKey.OBSIDIAN]: new Message('Unlocked Obsidian', [{
       text: 'Coal\'s sexier cousin'
     }],
   ),
-  [ScienceKey.ASTRONOMY]: new Message('Unlocked Astronomy', [{
+  [ResearchKey.ASTRONOMY]: new Message('Unlocked Astronomy', [{
       text: 'Astronomy compels the soul to look upward, and...oh sorry, wrong game.'
     }],
   ),
-  [ScienceKey.AETHERIC_HOROSCOPES]: new Message('Unlocked Aetheric Horoscopes', [{
+  [ResearchKey.AETHERIC_HOROSCOPES]: new Message('Unlocked Aetheric Horoscopes', [{
       text: 'Astronomy, astrology...what\'s the difference?'
     }],
   ),
-  [ScienceKey.ZODIAC_TALISMAN]: new Message('Unlocked Zodiac Talisman', [{
+  [ResearchKey.ZODIAC_TALISMAN]: new Message('Unlocked Zodiac Talisman', [{
       text: 'Comes in 12 varieties'
     }],
   ),
-  [ScienceKey.SARSEN_STONES]: new Message('Unlocked Sarsen Stones', [{
+  [ResearchKey.SARSEN_STONES]: new Message('Unlocked Sarsen Stones', [{
       text: '90% sandstone, 10% "how the heck did they move those massive things?"'
     }],
   ),
 
   //Devices
-  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Message('Unlocked Crystal Sarcophagus', [{
+  [ResearchKey.CRYSTAL_SARCOPHAGUS]: new Message('Unlocked Crystal Sarcophagus', [{
       text: 'The final stage of the DEVICE. Why a sarcophagus? Because \'Crystal Crypt\' doesn\'t roll off the tongue.'
     }],
   ),
-  [DeviceKey.OMEGAPERSON]: new Message('Unlocked Omegaperson', [{
+  [ResearchKey.OMEGAPERSON]: new Message('Unlocked Omegaperson', [{
       text: 'Not the Charlton Heston version.'
     }],
   ),  
-  [DeviceKey.PHILOSOPHERS_STONE]: new Message('Unlocked Philosopher\'s Stone', [{
+  [ResearchKey.PHILOSOPHERS_STONE]: new Message('Unlocked Philosopher\'s Stone', [{
     text: 'Definitely not a Sorcerer\'s Stone. That\'s not even a real thing.'
     }],
   ),
-  [DeviceKey.TZOLKIN]: new Message('Unlocked Tzolk\'in', [{
+  [ResearchKey.TZOLKIN]: new Message('Unlocked Tzolk\'in', [{
     text: '"The division of days." Whatever you do, do NOT divide them by zero.'
     }],
   ),
-  [DeviceKey.TIMEHENGE]: new Message('Unlocked Timehenge', [{
+  [ResearchKey.TIMEHENGE]: new Message('Unlocked Timehenge', [{
     text: 'The name says it all.'
     }],
   ),

@@ -4,19 +4,19 @@ import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useFlags from '@/composables/useFlags'
 import { Unlock } from '@/entities/Unlock'
-import { UnlockKey } from '@/enum/Enums'
+import { PersonKey, UnlockKey } from '@/enum/Enums'
 
-function unlockResearch(unlock: Unlock, researchList: any, personList: any, sendUnlockMessage: Function) {
-  const research = researchList[unlock.key];
-  if(!research.isUnlocked) {
-    research.isUnlocked = true;
-    const person = personList[unlock.person];
-    sendUnlockMessage(unlock, person, research.label);
-  }
-}
+//function unlockResearch(unlock: Unlock, researchList: any, personList: any, sendUnlockMessage: Function) {
+//   const research = researchList[unlock.key];
+//   if(!research.isUnlocked) {
+//     research.isUnlocked = true;
+//     const person = personList[unlock.person];
+//     sendUnlockMessage(unlock, person, research.label);
+//   }
+// }
 
 export default function useUnlockWatch() {
-  const { sendUnlockMessage } = useMessage();
+  const { sendPersonUnlockMessage, sendResearchUnlockMessage } = useMessage();
   const { deviceList, personList, researchList, scienceList } = useInitialize();
   const { isLoading } = useFlags();
 
@@ -25,27 +25,48 @@ export default function useUnlockWatch() {
     if (isLoading.value) {
       return;
     }
-    for(const researchKey in researchList){
-      const research = researchList[researchKey];
-      research.unlocks.forEach((unlock : Unlock) => {
-        if(research.total >= unlock.threshold) {
-          if(unlock.type === UnlockKey.PERSON) {
-            const person = personList[unlock.key];
-            if(!person.isUnlocked) {
-              person.isUnlocked = true;
-              sendUnlockMessage(unlock, person, person.name);
-            }
-          } else if(unlock.type === UnlockKey.SCIENCE) {
-            unlockResearch(unlock, scienceList, personList, sendUnlockMessage);
-          } else if(unlock.type === UnlockKey.DEVICE) {
-            unlockResearch(unlock, deviceList, personList, sendUnlockMessage);
-          } else if(unlock.type === UnlockKey.MESSAGE) {
-            const person = personList[unlock.key];
-            sendUnlockMessage(unlock, person, null!);
-          }
+    for(const ResearchKey in scienceList){
+      const science = scienceList[ResearchKey];
+      if(!science.isUnlocked) {
+        const unlock = researchList[science.unlockedBy];
+        const threshold = science.unlockThreshold;
+        if(unlock.total >= threshold) {
+          science.isUnlocked = true;
+          sendResearchUnlockMessage(science, personList[PersonKey.LENNOX_OLD])
         }
-      });
+      }
     }
+    for(const personKey in personList) {
+      const person = personList[personKey];
+      if(!person.isUnlocked) {
+        const unlock = researchList[person.unlockedBy];
+        const threshold = person.unlockThreshold;
+        if(unlock.total >= threshold) {
+          person.isUnlocked = true;
+          sendPersonUnlockMessage(person);
+        }
+      }
+    }
+
+      // research.unlocks.forEach((unlock : Unlock) => {
+      //   if(research.total >= unlock.threshold) {
+      //     if(unlock.type === UnlockKey.PERSON) {
+      //       const person = personList[unlock.key];
+      //       if(!person.isUnlocked) {
+      //         person.isUnlocked = true;
+      //         sendUnlockMessage(unlock, person, person.name);
+      //       }
+      //     } else if(unlock.type === UnlockKey.SCIENCE) {
+      //       unlockResearch(unlock, scienceList, personList, sendUnlockMessage);
+      //     } else if(unlock.type === UnlockKey.DEVICE) {
+      //       unlockResearch(unlock, deviceList, personList, sendUnlockMessage);
+      //     } else if(unlock.type === UnlockKey.MESSAGE) {
+      //       const person = personList[unlock.key];
+      //       sendUnlockMessage(unlock, person, null!);
+      //     }
+      //   }
+      // });
+    //}
   });
 
   return {

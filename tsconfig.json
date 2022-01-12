@@ -34,7 +34,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/composables/useMessage.js"  ],
   "exclude": [
     "node_modules"
   ]

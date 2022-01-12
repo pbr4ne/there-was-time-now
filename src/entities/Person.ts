@@ -1,9 +1,9 @@
 import { Device } from '@/entities/Device'
+import { Research } from '@/entities/Research'
 import { Science } from '@/entities/Science'
 import { Message } from '@/entities/Message'
 
 export class Person {
-  //todo - do i even need this field
   key: string;
   name: string;
   year: number;
@@ -12,12 +12,19 @@ export class Person {
   isUnlocked: boolean = false;
   messageList: Array<Message> = new Array<Message>();
   workerTitle: string;
+  unlockedBy: string = null!;
+  unlockThreshold: number = 0;
 
   constructor(key: string, name: string, year: number, workerTitle: string,) {
     this.key = key;
     this.name = name;
     this.year = year;
     this.workerTitle = workerTitle;
+  }
+
+  setUnlock(unlockedBy: string, unlockThreshold: number) {
+    this.unlockedBy = unlockedBy;
+    this.unlockThreshold = unlockThreshold;
   }
 
   numUnread() {

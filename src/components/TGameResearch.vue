@@ -71,7 +71,7 @@ import { NButton, NIcon, NPopover, NProgress, NScrollbar, NSpace, NTable } from 
 import { BuildOutline as BuildIcon } from '@vicons/ionicons5'
 import TGameResearchSell from '@/components/TGameResearchSell'
 import TGameResearchWorkers from '@/components/TGameResearchWorkers'
-import useInitialize from '@/composables/useInitialize'
+import useFlags from '@/composables/useFlags'
 import useResearch from '@/composables/useResearch'
 import { Person } from '@/entities/Person'
 import { messages } from '@/locales/en'
@@ -94,7 +94,7 @@ export default defineComponent({
     person: Person,
   },
   setup() {
-    const { sellFeatureEnabled } = useInitialize();
+    const { sellFeatureEnabled } = useFlags();
     const { changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
 
     return {

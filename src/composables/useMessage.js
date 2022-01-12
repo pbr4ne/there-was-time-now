@@ -1,16 +1,16 @@
-import { ComputedRef, h, ref } from 'vue'
-import { NotificationApi, useNotification } from 'naive-ui'
+import { h, ref } from 'vue'
+import { useNotification } from 'naive-ui'
 import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { GameConstants } from '@/enum/Constants'
-import { PersonKey, UnlockMessageKey } from '@/enum/Enums'
+import { PersonKey,  UnlockMessageKey } from '@/enum/Enums'
 import { Message } from '@/entities/Message'
 import { messages } from '@/locales/en'
 
 const showTimeline = ref(false);
 
-function createNotification(message: Message, notification: NotificationApi) {
+function createNotification(message, notification) {
   notification.create({
     title: message.title,
     content: () => h(TGameMessage, { messageSections: message.messageSections}),
@@ -19,7 +19,7 @@ function createNotification(message: Message, notification: NotificationApi) {
   });
 }
 
-function setTimestamp(message: Message, year: number, timeElapsed: ComputedRef<number>) {
+function setTimestamp(message, year, timeElapsed) {
   const d = new Date(year, 0);
   d.setDate(d.getDate() + timeElapsed.value);
   message.timestamp = d.toISOString().split('T')[0];
@@ -32,7 +32,7 @@ export default function useMessage() {
   const { personList } = useInitialize();
   const { timeElapsed } = useTime();
 
-  function sendMessage(message: Message, person: { year: any; messageList: any[] }) {
+  function sendMessage(message, person) {
     setTimestamp(message, person.year, timeElapsed);
     createNotification(message, notification);
     person.messageList.unshift(message);
@@ -45,8 +45,8 @@ export default function useMessage() {
   const sendSpeakToLennoxMessage = () => sendMessage(messages[UnlockMessageKey.SPEAK_TO_LENNOX], personList[PersonKey.LENNOX_YOUNG]);
   const sendHalfwayMessage = () => sendMessage(messages[UnlockMessageKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
 
-  function sendUnlockMessage(unlock: { message: any }, person: { year: any; messageList: any[] }, name: any) {
-    let message = unlock.message;
+  function sendResearchUnlockMessage(research, person) {
+    let message = messages[research.key];
     //not every unlock needs a message
     // if(!message) {
     //   return;
@@ -58,7 +58,36 @@ export default function useMessage() {
         `Unlock`,
         [
           {
-            text: `${name} unlocked.`
+            text: `${research.label} unlocked.`
+          }
+        ],
+      );
+    }
+
+    if(!message.wasSent) {
+      message.wasSent = true;
+    }
+    else {
+      return;
+    }
+
+    sendMessage(message, person);
+  }
+
+  function sendPersonUnlockMessage(person) {
+    let message = messages[person.key];
+    //not every unlock needs a message
+    // if(!message) {
+    //   return;
+    // }
+
+    //default message?
+    if(!message) {
+      message = new Message(
+        `Unlock`,
+        [
+          {
+            text: `${person.name} unlocked.`
           }
         ],
       );
@@ -81,7 +110,8 @@ export default function useMessage() {
     sendInitialMessage,
     sendSpeakToLennoxMessage,
     sendUnlockSlowdownMessage,
-    sendUnlockMessage,
+    sendPersonUnlockMessage,
+    sendResearchUnlockMessage,
     sendUnlockWorkersMessage,
     showTimeline,
   }

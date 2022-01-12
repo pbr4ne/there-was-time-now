@@ -48,6 +48,7 @@ import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { PersonKey } from '@/enum/Enums'
+import useFlags from '@/composables/useFlags'
 
 export default defineComponent({
   components: {
@@ -60,7 +61,8 @@ export default defineComponent({
   },
   setup() {
     const { currency } = useCurrency();
-    const { personList, sellFeatureEnabled } = useInitialize();
+    const { sellFeatureEnabled } = useFlags();
+    const { personList } = useInitialize();
     const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
     let titleValue = ref('TWTN');

@@ -115,7 +115,7 @@ export default defineComponent({
   },
   setup() {
     const dialog = useDialog();
-    const { gameEnded, gamePaused } = useInitialize();
+    const { gameEnded, gamePaused } = useFlags();
     const { clearGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
     const { countdownTimer, countdownTriggered, countupTimer } = useTime();

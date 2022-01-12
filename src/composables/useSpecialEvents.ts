@@ -6,13 +6,13 @@ import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
 import { GameConstants } from '@/enum/Constants'
-import { ScienceKey } from '@/enum/Enums'
+import { ResearchKey } from '@/enum/Enums'
 
 //todo - some of this could probably be triggered other ways
 export default function useSpecialEvents() {
 
   const dialog = useDialog();
-  const { deviceList, scienceList } = useInitialize();
+  const { deviceList, researchList } = useInitialize();
   const { sendUnlockCountdownMessage, sendHalfwayMessage, sendSpeakToLennoxMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useFlags();
@@ -20,7 +20,7 @@ export default function useSpecialEvents() {
 
   //When first quantum computer is built, start the end of world timer
   watchEffect(() => {
-    if(!countdownTriggered.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
+    if(!countdownTriggered.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
       countdownTriggered.value = true;
       sendUnlockCountdownMessage();
       countdownTimer.start();
@@ -30,7 +30,7 @@ export default function useSpecialEvents() {
 
   //When fifth quantum computer is built, unlock buy/sell
   watchEffect(() => {
-    if(!sellFeatureEnabled.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
+    if(!sellFeatureEnabled.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
       sendUnlockWorkersMessage();
     }
@@ -38,14 +38,14 @@ export default function useSpecialEvents() {
 
   //When first worker is purchased, unlock slowdown
   watchEffect(() => {
-    if(!slowdownEnabled.value && Object.values(scienceList).find((science: any) => science.numWorkers > 0)) {
+    if(!slowdownEnabled.value && Object.values(researchList).find((science: any) => science.numWorkers > 0)) {
       slowdownEnabled.value = true;
       sendUnlockSlowdownMessage();
     }
   });
 
   watchEffect(() => {
-    if(!spokeToLennox.value && scienceList[ScienceKey.BIOLOGY].total == 5 && !isLoading.value){
+    if(!spokeToLennox.value && researchList[ResearchKey.BIOLOGY].total == 5 && !isLoading.value){
       spokeToLennox.value = true;
       sendSpeakToLennoxMessage();
     }
