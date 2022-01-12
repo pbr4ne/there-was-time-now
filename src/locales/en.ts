@@ -105,15 +105,15 @@ const messages = {
       text: 'Astronomy compels the soul to look upward, and...oh sorry, wrong game.'
     }],
   ),
-  [ScienceKey.OBSIDIAN]: new Message('Unlocked Aetheric Horoscopes', [{
+  [ScienceKey.AETHERIC_HOROSCOPES]: new Message('Unlocked Aetheric Horoscopes', [{
       text: 'Astronomy, astrology...what\'s the difference?'
     }],
   ),
-  [ScienceKey.OBSIDIAN]: new Message('Unlocked Zodiac Talisman', [{
+  [ScienceKey.ZODIAC_TALISMAN]: new Message('Unlocked Zodiac Talisman', [{
       text: 'Comes in 12 varieties'
     }],
   ),
-  [ScienceKey.OBSIDIAN]: new Message('Unlocked Sarsen Stones', [{
+  [ScienceKey.SARSEN_STONES]: new Message('Unlocked Sarsen Stones', [{
       text: '90% sandstone, 10% "how the heck did they move those massive things?"'
     }],
   ),
