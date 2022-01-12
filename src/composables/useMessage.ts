@@ -41,6 +41,28 @@ export default function useMessage() {
     personList[PersonKey.LENNOX_OLD].messageList.push(initialMessage);
   }
 
+  function sendWorkersMessage() {
+    const workersMessage = new Message(
+      '1984',
+      [
+        {
+          text: 'Eureka! If I reroute the nanoseconds through the quantum flux thingamajig in the compumatrix, I *should* be able to slow time down. If only I had some undergrads to help, this is a lot of work and I haven\'t even had time to order a pizza - the most important element of research!'
+        }, 
+      ]
+    );
+    const d = new Date(1984, 0);
+    d.setDate(d.getDate() + timeElapsed.value);
+    workersMessage.timestamp = d.toISOString().split('T')[0];
+    
+    notification.create({
+      title: workersMessage.title,
+      content: () => h(TGameMessage, { messageSections: workersMessage.messageSections}),
+      meta: workersMessage.timestamp,
+      duration: GameConstants.NOTIFICATION_DURATION,
+    });
+    personList[PersonKey.LENNOX_OLD].messageList.push(workersMessage);
+  }
+
   function sendEndOfWorldMessage() {
     //todo - this message stuff should probably have been done via a normal unlock, idk
     const endOfWorldMessage = new Message(
@@ -133,6 +155,7 @@ export default function useMessage() {
     sendHalfwayMessage,
     sendInitialMessage,
     sendUnlockMessage,
+    sendWorkersMessage,
     showTimeline,
   }
 }

@@ -125,8 +125,8 @@ function associateUnlocksToResearch() {
     new Message('Unlock', [{text: 'You are now able to research Quantum Computing.'}])));
   scienceList[ScienceKey.QUANTUM_COMPUTING].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.QUANTUM_COMPUTER, PersonKey.LENNOX_OLD, 10, 
     new Message('Unlock', [{text: 'You should be able to build a Quantum Computer now.'}])));
-  scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, null!));
-  scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.BIOLOGY, PersonKey.LENNOX_YOUNG, 1, null!));
+  //scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.PERSON, PersonKey.LENNOX_YOUNG, PersonKey.LENNOX_YOUNG, 1, null!));
+  //scienceList[ScienceKey.QUANTUM_COMPUTER].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.BIOLOGY, PersonKey.LENNOX_YOUNG, 1, null!));
 
   //Lennox (1934)
   scienceList[ScienceKey.BIOLOGY].unlocks.push(new Unlock(UnlockKey.SCIENCE, ScienceKey.GENETIC_MEMORY, PersonKey.LENNOX_YOUNG, 10, null!));

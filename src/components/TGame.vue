@@ -74,7 +74,7 @@ export default {
       scienceList, 
       sellFeatureEnabled 
     } = useInitialize();
-    const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage } = useMessage();
+    const { sendEndOfWorldMessage, sendHalfwayMessage, sendInitialMessage, sendWorkersMessage } = useMessage();
 
     loadGameState().then(function() {
       if(!gameStarted.value) {
@@ -107,10 +107,11 @@ export default {
       }
     });
 
-    //SPECIAL - when first quantum computing is researched, unlock buy/sell
+    //SPECIAL - when fifth quantum computer is built, unlock buy/sell
     watchEffect(() => {
-      if(scienceList[ScienceKey.QUANTUM_COMPUTING].total == 1 && !isLoading.value) {
+      if(!sellFeatureEnabled.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
         sellFeatureEnabled.value = true;
+        sendWorkersMessage();
       }
     });
 
