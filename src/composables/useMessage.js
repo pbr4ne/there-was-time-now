@@ -5,7 +5,7 @@ import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { GameConstants } from '@/enum/Constants'
-import { PersonKey } from '@/enum/Enums'
+import { PersonKey, UnlockMessageKey } from '@/enum/Enums'
 import { Message } from '@/entities/Message'
 import { messages } from '@/locales/en'
 
@@ -40,11 +40,11 @@ export default function useMessage() {
     return message;
   }
 
-  const sendInitialMessage = () => sendMessage('initial');
-  const sendWorkersMessage = () => sendMessage('unlockWorkers');
-  const sendEndOfWorldMessage = () => sendMessage('unlockCountdown');
-  const sendSlowdownMessage = () => sendMessage('unlockSlowdown');
-  const sendHalfwayMessage = () => sendMessage('halfway');
+  const sendInitialMessage = () => sendMessage(UnlockMessageKey.INITIAL);
+  const sendWorkersMessage = () => sendMessage(UnlockMessageKey.UNLOCK_WORKERS);
+  const sendEndOfWorldMessage = () => sendMessage(UnlockMessageKey.UNLOCK_COUNTDOWN);
+  const sendSlowdownMessage = () => sendMessage(UnlockMessageKey.UNLOCK_SLOWDOWN);
+  const sendHalfwayMessage = () => sendMessage(UnlockMessageKey.HALFWAY);
 
   function sendUnlockMessage(unlock, person, name) {
     let message = unlock.message;

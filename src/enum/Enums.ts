@@ -1,8 +1,16 @@
 export enum UnlockKey {
-    PERSON = "person",
-    SCIENCE = "science",
-    DEVICE = "device",
-    MESSAGE = "message",
+  PERSON = "person",
+  SCIENCE = "science",
+  DEVICE = "device",
+  MESSAGE = "message",
+}
+
+export enum UnlockMessageKey {
+  INITIAL = "initial",
+  UNLOCK_WORKERS = "unlock-workers",
+  UNLOCK_COUNTDOWN = "unlock-countdown",
+  UNLOCK_SLOWDOWN = "unlock-slowdown",
+  HALFWAY = "halfway",
 }
 
 export enum PersonKey {
