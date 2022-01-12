@@ -40,6 +40,56 @@ const messages = {
       text: 'Halfway to the end of the world.',
     }]
   ),
+  [UnlockMessageKey.SPEAK_TO_LENNOX]: new Message('The Flashback', [{
+      person: 'Young Lennox',
+      text: 'Yessirma\'am, it is indeed an ordinary type day in the ordinary present in which I do my EXTRAORDINARY RESEARCH. It sure is quiet and lonely doing research of the singularly unique type to which I am accustomed to doing. Maybe the radio will help motivate me to greater heights of genius...'
+    },{
+      person: 'Narrator',
+      text: 'And then, as Young Lennox fiddled with the radio dial...'
+    },{
+      person: 'Lennox',
+      text: '(Speaking through the radio): Hello? Hello me, can you hear me?'
+    },{
+      person: 'Young Lennox',
+      text: 'What an interesting program. They must be experimenting with something more interactive'
+    },{
+      person: 'Lennox',
+      text: 'No, you fool! I am speaking to you through the radio and, more importantly, through time!'
+    },{
+      person: 'Young Lennox',
+      text: 'Inconceivable!'
+    },{
+      person: 'Lennox',
+      text: 'Not so! Merely improbable! But time is short and you... I mean, I, must listen to me! Your research! You mustn\'t quit!'
+    },{
+      person: 'Young Lennox',
+      text: 'I wasn’t planning on it!'
+    },{
+      person: 'Lennox',
+      text: 'Yes you are! In approximately three days you will lose most of your funding. But you must carry on! I am you from the future and I come with a dire warning... a quantum doomsday event is coming and I need your assistance to stop it... will you help me?'
+    },{
+      person: 'Young Lennox',
+      text: 'As completely improbable, fantastical, and downright impossible as this all sounds... yes, I will help you... me. But if I continue my research, won\'t that change the trajectory of my future?'
+    },{
+      person: 'Lennox',
+      text: '...'
+    },{
+      person: 'Young Lennox',
+      text: '...'
+    },{
+      person: 'Lennox',
+      text: '...let\'s not overthink this. Just carry on with your research and forward me the data.'
+    },{
+      person: 'Young Lennox',
+      text: '...how?'
+    },{
+      person: 'Young Lennox',
+      text: 'I suppose, just bury it in my backyard and time will take its course!'
+    },{
+      person: 'Young Lennox',
+      text: 'Of course!'
+    }]
+  ),
 
   //Sciences
   [ScienceKey.QUANTUM_COMPUTING]: new Message('Unlocked Quantum Computing', [{
@@ -142,7 +192,7 @@ const messages = {
   ),
 
   //People
-  [PersonKey.LENNOX_YOUNG]: new Message('Lost to Time', [{
+  [PersonKey.LENNOX_YOUNG]: new Message('The Discovery of the Device.', [{
       person: 'Lennox',
       text: 'We\'ve done it. We\'ve found a way to stop the Doomsminute Event. We need to build THE DEVICE!'
     },{

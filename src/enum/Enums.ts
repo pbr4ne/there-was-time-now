@@ -11,6 +11,7 @@ export enum UnlockMessageKey {
   UNLOCK_COUNTDOWN = "unlock-countdown",
   UNLOCK_SLOWDOWN = "unlock-slowdown",
   HALFWAY = "halfway",
+  SPEAK_TO_LENNOX = "speak-to-lennox",
 }
 
 export enum PersonKey {

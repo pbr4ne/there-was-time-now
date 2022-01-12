@@ -11,8 +11,8 @@ import { ScienceKey } from '@/enum/Enums'
 //todo - some of this could probably be triggered other ways
 export default function useSpecialEvents() {
 
-  const { countdownTriggered, deviceList, gameEnded, isLoading, scienceList, sellFeatureEnabled, slowdownEnabled } = useInitialize();
-  const { sendUnlockCountdownMessage, sendHalfwayMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
+  const { countdownTriggered, deviceList, gameEnded, isLoading, scienceList, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useInitialize();
+  const { sendUnlockCountdownMessage, sendHalfwayMessage, sendSpeakToLennoxMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const dialog = useDialog();
 
@@ -39,6 +39,13 @@ export default function useSpecialEvents() {
     if(!slowdownEnabled.value && Object.values(scienceList).find((science: any) => science.numWorkers > 0)) {
       slowdownEnabled.value = true;
       sendUnlockSlowdownMessage();
+    }
+  });
+
+  watchEffect(() => {
+    if(!spokeToLennox.value && scienceList[ScienceKey.BIOLOGY].total == 5 && !isLoading.value){
+      spokeToLennox.value = true;
+      sendSpeakToLennoxMessage();
     }
   });
 
