@@ -63,7 +63,7 @@ export default {
       isLoading, 
       saveStopwatch,  
     } = useInitialize();
-    const { sendHalfwayMessage, sendInitialMessage } = useMessage();
+    const { sendInitialMessage } = useMessage();
     
 
     loadGameState().then(function() {
@@ -78,15 +78,6 @@ export default {
 
     useSpecialEvents();
     useUnlockWatch();
-
-
-
-    //SPECIAL - when time is halfway up, show message
-    watchEffect(() => {
-      if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
-        sendHalfwayMessage();
-      }
-    });
 
     //SPECIAL - when you finish building all devices, you win
     watchEffect(() => {

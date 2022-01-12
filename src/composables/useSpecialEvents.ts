@@ -3,12 +3,13 @@ import { useDialog } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
+import { GameConstants } from '@/enum/Constants'
 import { ScienceKey } from '@/enum/Enums'
 
 export default function useSpecialEvents() {
 
   const { countdownTriggered, gameEnded, isLoading, scienceList, sellFeatureEnabled } = useInitialize();
-  const { sendEndOfWorldMessage, sendWorkersMessage } = useMessage();
+  const { sendEndOfWorldMessage, sendHalfwayMessage, sendWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const dialog = useDialog();
 
@@ -27,6 +28,13 @@ export default function useSpecialEvents() {
     if(!sellFeatureEnabled.value && scienceList[ScienceKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
       sendWorkersMessage();
+    }
+  });
+
+  //SPECIAL - when time is halfway up, show message
+  watchEffect(() => {
+    if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
+      sendHalfwayMessage();
     }
   });
 
