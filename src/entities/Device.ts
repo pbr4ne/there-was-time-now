@@ -4,8 +4,8 @@ export class Device extends Research {
 
   cost: any;
 
-  constructor(label: string, icon: Object, color: string, speed: number, cost: any) {
-    super(label, icon, color, speed);
+  constructor(key: string, label: string, icon: Object, color: string, speed: number, cost: any) {
+    super(key, label, icon, color, speed);
     this.cost = cost;
   }
 }

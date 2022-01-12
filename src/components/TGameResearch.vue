@@ -38,13 +38,18 @@
               :key="research.label"
             >
               <td>
-                <t-game-research-button 
-                  ghost
-                  round
-                  :color="research.color"
-                  @click="incrementResearch(research)"
-                  :research = "research">
-                </t-game-research-button>
+                <n-popover trigger="hover" placement="right" :style="{ maxWidth: '200px' }">
+                  <template #trigger>
+                    <t-game-research-button 
+                      ghost
+                      round
+                      :color="research.color"
+                      @click="incrementResearch(research)"
+                      :research = "research">
+                    </t-game-research-button>
+                  </template>
+                  <span>{{messages[research.key].messageSections[0].text}}</span>
+                </n-popover>
               </td>
               <td v-if="sellFeatureEnabled">
                 <t-game-research-sell :research="research" />
@@ -62,19 +67,21 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { NButton, NIcon,  NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
+import { NButton, NIcon, NPopover, NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import { BuildOutline as BuildIcon } from '@vicons/ionicons5'
 import TGameResearchSell from '@/components/TGameResearchSell'
 import TGameResearchWorkers from '@/components/TGameResearchWorkers'
 import useInitialize from '@/composables/useInitialize'
 import useResearch from '@/composables/useResearch'
 import { Person } from '@/entities/Person'
+import { messages } from '@/locales/en'
 
 export default defineComponent({
   components: {
     BuildIcon,
     NButton,
     NIcon,
+    NPopover,
     NProgress,
     NScrollbar,
     NSpace,
@@ -95,6 +102,7 @@ export default defineComponent({
       sellFeatureEnabled,
       sellIncrement,
       incrementResearch,
+      messages,
     }
   },
 })

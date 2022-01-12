@@ -4,8 +4,8 @@ export class Science extends Research {
 
 expand: number;
 
-constructor(label: string, icon: Object, color: string, speed: number, expand: number) {
-    super(label, icon, color, speed);
+constructor(key: string, label: string, icon: Object, color: string, speed: number, expand: number) {
+    super(key, label, icon, color, speed);
     this.expand = expand;
   }
 }

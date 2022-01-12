@@ -71,38 +71,38 @@ const personList : any = reactive({
 });
 
 const scienceList : any = reactive({
-  [ScienceKey.PHYSICS]: new Science('Physics', shallowRef(PhysicsIcon), '#F72585', 10, 1),
-  [ScienceKey.QUANTUM_COMPUTING]: new Science('Quantum Computing', shallowRef(QuantumComputingIcon), '#B5179E', 5, 1),
-  [ScienceKey.QUANTUM_COMPUTER]: new Science('Quantum Computer', shallowRef(QuantumComputerIcon), '#4361EE', 0.5, 1.1),
-  [ScienceKey.CHRONOCRYSTALS]: new Science('Chronocrystals', shallowRef(ChronocrystalsIcon), '#4CC9F0', 0.5, 1),
+  [ScienceKey.PHYSICS]: new Science(ScienceKey.PHYSICS, 'Physics', shallowRef(PhysicsIcon), '#F72585', 10, 1),
+  [ScienceKey.QUANTUM_COMPUTING]: new Science(ScienceKey.QUANTUM_COMPUTING, 'Quantum Computing', shallowRef(QuantumComputingIcon), '#B5179E', 5, 1),
+  [ScienceKey.QUANTUM_COMPUTER]: new Science(ScienceKey.QUANTUM_COMPUTER, 'Quantum Computer', shallowRef(QuantumComputerIcon), '#4361EE', 0.5, 1.1),
+  [ScienceKey.CHRONOCRYSTALS]: new Science(ScienceKey.CHRONOCRYSTALS, 'Chronocrystals', shallowRef(ChronocrystalsIcon), '#4CC9F0', 0.5, 1),
 
-  [ScienceKey.BIOLOGY]: new Science('Biology', shallowRef(BiologyIcon), '#f4e285', 10, 1),
-  [ScienceKey.GENETIC_MEMORY]: new Science('Genetic Memory', shallowRef(GeneticMemoryIcon), '#FEFAE0', 5, 1),
-  [ScienceKey.TELOMERE_STRETCHER]: new Science('Telomere Stretcher', shallowRef(TelomereStretcherIcon), '#bc6c25', 0.5, 1.1),
-  [ScienceKey.THE_FLUID]: new Science('The Fluid', shallowRef(TheFluidIcon), '#606c38', 0.5, 1),
+  [ScienceKey.BIOLOGY]: new Science(ScienceKey.BIOLOGY, 'Biology', shallowRef(BiologyIcon), '#f4e285', 10, 1),
+  [ScienceKey.GENETIC_MEMORY]: new Science(ScienceKey.GENETIC_MEMORY, 'Genetic Memory', shallowRef(GeneticMemoryIcon), '#FEFAE0', 5, 1),
+  [ScienceKey.TELOMERE_STRETCHER]: new Science(ScienceKey.TELOMERE_STRETCHER, 'Telomere Stretcher', shallowRef(TelomereStretcherIcon), '#bc6c25', 0.5, 1.1),
+  [ScienceKey.THE_FLUID]: new Science(ScienceKey.THE_FLUID, 'The Fluid', shallowRef(TheFluidIcon), '#606c38', 0.5, 1),
 
-  [ScienceKey.ALCHEMY]: new Science('Alchemy', shallowRef(AlchemyIcon), '#bfc0c0', 10, 1),
-  [ScienceKey.CHRONOMOGRIFICATION]: new Science('Chronomogrification', shallowRef(ChronomogrificationIcon), '#FFFFFF', 5, 1),
-  [ScienceKey.DISTILLER]: new Science('Distiller', shallowRef(DistillerIcon), '#EF8354', 0.5, 1.1),
-  [ScienceKey.ELEMENT_ZERO]: new Science('Element Zero', shallowRef(ElementZeroIcon), '#4f5d75', 0.5, 1),
+  [ScienceKey.ALCHEMY]: new Science(ScienceKey.ALCHEMY, 'Alchemy', shallowRef(AlchemyIcon), '#bfc0c0', 10, 1),
+  [ScienceKey.CHRONOMOGRIFICATION]: new Science(ScienceKey.CHRONOMOGRIFICATION, 'Chronomogrification', shallowRef(ChronomogrificationIcon), '#FFFFFF', 5, 1),
+  [ScienceKey.DISTILLER]: new Science(ScienceKey.DISTILLER, 'Distiller', shallowRef(DistillerIcon), '#EF8354', 0.5, 1.1),
+  [ScienceKey.ELEMENT_ZERO]: new Science(ScienceKey.ELEMENT_ZERO, 'Element Zero', shallowRef(ElementZeroIcon), '#4f5d75', 0.5, 1),
 
-  [ScienceKey.MATHEMATICS]: new Science('Mathematics', shallowRef(MathematicsIcon), '#48d7e7', 10, 1),
-  [ScienceKey.TIMELESS_ALGEBRA]: new Science('Timeless Algebra', shallowRef(TimelessAlgebraIcon), '#f168a7', 5, 1),
-  [ScienceKey.NEPOHUALTZINTZIN]: new Science('Nepohualtzintzin', shallowRef(NepohualtzintzinIcon), '#f1cbe6', 0.5, 1.1),
-  [ScienceKey.OBSIDIAN]: new Science('Obsidian', shallowRef(ObsidianIcon), '#f9d567', 0.5, 1),
+  [ScienceKey.MATHEMATICS]: new Science(ScienceKey.MATHEMATICS, 'Mathematics', shallowRef(MathematicsIcon), '#48d7e7', 10, 1),
+  [ScienceKey.TIMELESS_ALGEBRA]: new Science(ScienceKey.TIMELESS_ALGEBRA, 'Timeless Algebra', shallowRef(TimelessAlgebraIcon), '#f168a7', 5, 1),
+  [ScienceKey.NEPOHUALTZINTZIN]: new Science(ScienceKey.NEPOHUALTZINTZIN, 'Nepohualtzintzin', shallowRef(NepohualtzintzinIcon), '#f1cbe6', 0.5, 1.1),
+  [ScienceKey.OBSIDIAN]: new Science(ScienceKey.OBSIDIAN, 'Obsidian', shallowRef(ObsidianIcon), '#f9d567', 0.5, 1),
 
-  [ScienceKey.ASTRONOMY]: new Science('Astronomy', shallowRef(AstronomyIcon), '#2c7da0', 10, 1),
-  [ScienceKey.AETHERIC_HOROSCOPES]: new Science('Aetheric Horoscopes', shallowRef(AethericHoroscopesIcon), '#468faf', 5, 1),
-  [ScienceKey.ZODIAC_TALISMAN]: new Science('Zodiac Talisman', shallowRef(ZodiacTalismanIcon), '#61a5c2', 0.5, 1.1),
-  [ScienceKey.SARSEN_STONES]: new Science('Sarsen Stones', shallowRef(SarsenStonesIcon), '#89c2d9', 0.5, 1),
+  [ScienceKey.ASTRONOMY]: new Science(ScienceKey.ASTRONOMY, 'Astronomy', shallowRef(AstronomyIcon), '#2c7da0', 10, 1),
+  [ScienceKey.AETHERIC_HOROSCOPES]: new Science(ScienceKey.AETHERIC_HOROSCOPES, 'Aetheric Horoscopes', shallowRef(AethericHoroscopesIcon), '#468faf', 5, 1),
+  [ScienceKey.ZODIAC_TALISMAN]: new Science(ScienceKey.ZODIAC_TALISMAN, 'Zodiac Talisman', shallowRef(ZodiacTalismanIcon), '#61a5c2', 0.5, 1.1),
+  [ScienceKey.SARSEN_STONES]: new Science(ScienceKey.SARSEN_STONES, 'Sarsen Stones', shallowRef(SarsenStonesIcon), '#89c2d9', 0.5, 1),
 });
 
 const deviceList : any = reactive({
-  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device('Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#e0c3fc', 0.25, []),
-  [DeviceKey.OMEGAPERSON]: new Device('Omegaperson', shallowRef(OmegapersonIcon), '#fb8500', 0.25, []),
-  [DeviceKey.PHILOSOPHERS_STONE]: new Device('Philosopher\'s Stone', shallowRef(PhilosophersStoneIcon), '#d4af37', 0.25, []),
-  [DeviceKey.TZOLKIN]: new Device('Tzolk\'in', shallowRef(TzolkinIcon), '#8cb369', 0.25, []),
-  [DeviceKey.TIMEHENGE]: new Device('Timehenge', shallowRef(TimehengeIcon), '#a9d6e5', 0.25, []),
+  [DeviceKey.CRYSTAL_SARCOPHAGUS]: new Device(DeviceKey.CRYSTAL_SARCOPHAGUS, 'Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#e0c3fc', 0.25, []),
+  [DeviceKey.OMEGAPERSON]: new Device(DeviceKey.OMEGAPERSON, 'Omegaperson', shallowRef(OmegapersonIcon), '#fb8500', 0.25, []),
+  [DeviceKey.PHILOSOPHERS_STONE]: new Device(DeviceKey.PHILOSOPHERS_STONE, 'Philosopher\'s Stone', shallowRef(PhilosophersStoneIcon), '#d4af37', 0.25, []),
+  [DeviceKey.TZOLKIN]: new Device(DeviceKey.TZOLKIN, 'Tzolk\'in', shallowRef(TzolkinIcon), '#8cb369', 0.25, []),
+  [DeviceKey.TIMEHENGE]: new Device(DeviceKey.TIMEHENGE, 'Timehenge', shallowRef(TimehengeIcon), '#a9d6e5', 0.25, []),
 });
 
 const researchList : any = reactive({

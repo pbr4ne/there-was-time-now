@@ -92,6 +92,10 @@ const messages = {
   ),
 
   //Sciences
+  [ScienceKey.PHYSICS]: new Message('Unlocked Physics', [{
+      text: 'The particulars of particles.'
+    }]
+  ),
   [ScienceKey.QUANTUM_COMPUTING]: new Message('Unlocked Quantum Computing', [{
       text: 'The study of how to use phenomena in quantum physics to create new ways of computing.'
     }]

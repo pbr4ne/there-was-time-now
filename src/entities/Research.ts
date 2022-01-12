@@ -1,6 +1,7 @@
 import { Unlock } from '@/entities/Unlock'
 
 export class Research {
+  key: string;
   label: string;
   icon: object;
   color: string;
@@ -16,7 +17,8 @@ export class Research {
 
   unlocks: Array<Unlock> = new Array<Unlock>();
 
-  constructor(label: string, icon: object, color: string, speed: number) {
+  constructor(key: string, label: string, icon: object, color: string, speed: number) {
+    this.key = key;
     this.label = label;
     this.icon = icon;
     this.color = color;
