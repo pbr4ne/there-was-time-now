@@ -57,36 +57,41 @@ const personList : any = reactive({
 });
 
 const researchList : any = reactive({
-  [ResearchKey.PHYSICS]: new Research(ResearchKey.PHYSICS, 'Physics', shallowRef(PhysicsIcon), '#F72585', 10, 1, false),
-  [ResearchKey.QUANTUM_COMPUTING]: new Research(ResearchKey.QUANTUM_COMPUTING, 'Quantum Computing', shallowRef(QuantumComputingIcon), '#B5179E', 5, 1, false),
-  [ResearchKey.QUANTUM_COMPUTER]: new Research(ResearchKey.QUANTUM_COMPUTER, 'Quantum Computer', shallowRef(QuantumComputerIcon), '#4361EE', 0.5, 1.1, false),
-  [ResearchKey.CHRONOCRYSTALS]: new Research(ResearchKey.CHRONOCRYSTALS, 'Chronocrystals', shallowRef(ChronocrystalsIcon), '#4CC9F0', 0.5, 1, false),
+  [ResearchKey.PHYSICS]: new Research(ResearchKey.PHYSICS, 'Physics', shallowRef(PhysicsIcon), '#F72585', 10, 1, false, PersonKey.LENNOX_OLD),
+  [ResearchKey.QUANTUM_COMPUTING]: new Research(ResearchKey.QUANTUM_COMPUTING, 'Quantum Computing', shallowRef(QuantumComputingIcon), '#B5179E', 5, 1, false, PersonKey.LENNOX_OLD),
+  [ResearchKey.QUANTUM_COMPUTER]: new Research(ResearchKey.QUANTUM_COMPUTER, 'Quantum Computer', shallowRef(QuantumComputerIcon), '#4361EE', 0.5, 1.1, false, PersonKey.LENNOX_OLD),
+  [ResearchKey.CHRONOCRYSTALS]: new Research(ResearchKey.CHRONOCRYSTALS, 'Chronocrystals', shallowRef(ChronocrystalsIcon), '#4CC9F0', 0.5, 1, false, PersonKey.LENNOX_OLD),
 
-  [ResearchKey.BIOLOGY]: new Research(ResearchKey.BIOLOGY, 'Biology', shallowRef(BiologyIcon), '#f4e285', 10, 1, false),
-  [ResearchKey.GENETIC_MEMORY]: new Research(ResearchKey.GENETIC_MEMORY, 'Genetic Memory', shallowRef(GeneticMemoryIcon), '#FEFAE0', 5, 1, false),
-  [ResearchKey.TELOMERE_STRETCHER]: new Research(ResearchKey.TELOMERE_STRETCHER, 'Telomere Stretcher', shallowRef(TelomereStretcherIcon), '#bc6c25', 0.5, 1.1, false),
-  [ResearchKey.THE_FLUID]: new Research(ResearchKey.THE_FLUID, 'The Fluid', shallowRef(TheFluidIcon), '#606c38', 0.5, 1, false),
+  [ResearchKey.BIOLOGY]: new Research(ResearchKey.BIOLOGY, 'Biology', shallowRef(BiologyIcon), '#f4e285', 10, 1, false, PersonKey.LENNOX_YOUNG),
+  [ResearchKey.GENETIC_MEMORY]: new Research(ResearchKey.GENETIC_MEMORY, 'Genetic Memory', shallowRef(GeneticMemoryIcon), '#FEFAE0', 5, 1, false, PersonKey.LENNOX_YOUNG),
+  [ResearchKey.TELOMERE_STRETCHER]: new Research(ResearchKey.TELOMERE_STRETCHER, 'Telomere Stretcher', shallowRef(TelomereStretcherIcon), '#bc6c25', 0.5, 1.1, false, PersonKey.LENNOX_YOUNG),
+  [ResearchKey.THE_FLUID]: new Research(ResearchKey.THE_FLUID, 'The Fluid', shallowRef(TheFluidIcon), '#606c38', 0.5, 1, false, PersonKey.LENNOX_YOUNG),
 
-  [ResearchKey.ALCHEMY]: new Research(ResearchKey.ALCHEMY, 'Alchemy', shallowRef(AlchemyIcon), '#bfc0c0', 10, 1, false),
-  [ResearchKey.CHRONOMOGRIFICATION]: new Research(ResearchKey.CHRONOMOGRIFICATION, 'Chronomogrification', shallowRef(ChronomogrificationIcon), '#FFFFFF', 5, 1, false),
-  [ResearchKey.DISTILLER]: new Research(ResearchKey.DISTILLER, 'Distiller', shallowRef(DistillerIcon), '#EF8354', 0.5, 1.1, false),
-  [ResearchKey.ELEMENT_ZERO]: new Research(ResearchKey.ELEMENT_ZERO, 'Element Zero', shallowRef(ElementZeroIcon), '#4f5d75', 0.5, 1, false),
+  [ResearchKey.ALCHEMY]: new Research(ResearchKey.ALCHEMY, 'Alchemy', shallowRef(AlchemyIcon), '#bfc0c0', 10, 1, false, PersonKey.SAMA),
+  [ResearchKey.CHRONOMOGRIFICATION]: new Research(ResearchKey.CHRONOMOGRIFICATION, 'Chronomogrification', shallowRef(ChronomogrificationIcon), '#FFFFFF', 5, 1, false, PersonKey.SAMA),
+  [ResearchKey.DISTILLER]: new Research(ResearchKey.DISTILLER, 'Distiller', shallowRef(DistillerIcon), '#EF8354', 0.5, 1.1, false, PersonKey.SAMA),
+  [ResearchKey.ELEMENT_ZERO]: new Research(ResearchKey.ELEMENT_ZERO, 'Element Zero', shallowRef(ElementZeroIcon), '#4f5d75', 0.5, 1, false, PersonKey.SAMA),
 
-  [ResearchKey.MATHEMATICS]: new Research(ResearchKey.MATHEMATICS, 'Mathematics', shallowRef(MathematicsIcon), '#48d7e7', 10, 1, false),
-  [ResearchKey.TIMELESS_ALGEBRA]: new Research(ResearchKey.TIMELESS_ALGEBRA, 'Timeless Algebra', shallowRef(TimelessAlgebraIcon), '#f168a7', 5, 1, false),
-  [ResearchKey.NEPOHUALTZINTZIN]: new Research(ResearchKey.NEPOHUALTZINTZIN, 'Nepohualtzintzin', shallowRef(NepohualtzintzinIcon), '#f1cbe6', 0.5, 1.1, false),
-  [ResearchKey.OBSIDIAN]: new Research(ResearchKey.OBSIDIAN, 'Obsidian', shallowRef(ObsidianIcon), '#f9d567', 0.5, 1, false),
+  [ResearchKey.MATHEMATICS]: new Research(ResearchKey.MATHEMATICS, 'Mathematics', shallowRef(MathematicsIcon), '#48d7e7', 10, 1, false, PersonKey.ITOTIA),
+  [ResearchKey.TIMELESS_ALGEBRA]: new Research(ResearchKey.TIMELESS_ALGEBRA, 'Timeless Algebra', shallowRef(TimelessAlgebraIcon), '#f168a7', 5, 1, false, PersonKey.ITOTIA),
+  [ResearchKey.NEPOHUALTZINTZIN]: new Research(ResearchKey.NEPOHUALTZINTZIN, 'Nepohualtzintzin', shallowRef(NepohualtzintzinIcon), '#f1cbe6', 0.5, 1.1, false, PersonKey.ITOTIA),
+  [ResearchKey.OBSIDIAN]: new Research(ResearchKey.OBSIDIAN, 'Obsidian', shallowRef(ObsidianIcon), '#f9d567', 0.5, 1, false, PersonKey.ITOTIA),
 
-  [ResearchKey.ASTRONOMY]: new Research(ResearchKey.ASTRONOMY, 'Astronomy', shallowRef(AstronomyIcon), '#2c7da0', 10, 1, false),
-  [ResearchKey.AETHERIC_HOROSCOPES]: new Research(ResearchKey.AETHERIC_HOROSCOPES, 'Aetheric Horoscopes', shallowRef(AethericHoroscopesIcon), '#468faf', 5, 1, false),
-  [ResearchKey.ZODIAC_TALISMAN]: new Research(ResearchKey.ZODIAC_TALISMAN, 'Zodiac Talisman', shallowRef(ZodiacTalismanIcon), '#61a5c2', 0.5, 1.1, false),
-  [ResearchKey.SARSEN_STONES]: new Research(ResearchKey.SARSEN_STONES, 'Sarsen Stones', shallowRef(SarsenStonesIcon), '#89c2d9', 0.5, 1, false),
+  [ResearchKey.ASTRONOMY]: new Research(ResearchKey.ASTRONOMY, 'Astronomy', shallowRef(AstronomyIcon), '#2c7da0', 10, 1, false, PersonKey.NECHTAN),
+  [ResearchKey.AETHERIC_HOROSCOPES]: new Research(ResearchKey.AETHERIC_HOROSCOPES, 'Aetheric Horoscopes', shallowRef(AethericHoroscopesIcon), '#468faf', 5, 1, false, PersonKey.NECHTAN),
+  [ResearchKey.ZODIAC_TALISMAN]: new Research(ResearchKey.ZODIAC_TALISMAN, 'Zodiac Talisman', shallowRef(ZodiacTalismanIcon), '#61a5c2', 0.5, 1.1, false, PersonKey.NECHTAN),
+  [ResearchKey.SARSEN_STONES]: new Research(ResearchKey.SARSEN_STONES, 'Sarsen Stones', shallowRef(SarsenStonesIcon), '#89c2d9', 0.5, 1, false, PersonKey.NECHTAN),
 
-  [ResearchKey.CRYSTAL_SARCOPHAGUS]: new Research(ResearchKey.CRYSTAL_SARCOPHAGUS, 'Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#e0c3fc', 0.25, 1, true),
-  [ResearchKey.OMEGAPERSON]: new Research(ResearchKey.OMEGAPERSON, 'Omegaperson', shallowRef(OmegapersonIcon), '#fb8500', 0.25, 1, true),
-  [ResearchKey.PHILOSOPHERS_STONE]: new Research(ResearchKey.PHILOSOPHERS_STONE, 'Philosopher\'s Stone', shallowRef(PhilosophersStoneIcon), '#d4af37', 0.25, 1, true),
-  [ResearchKey.TZOLKIN]: new Research(ResearchKey.TZOLKIN, 'Tzolk\'in', shallowRef(TzolkinIcon), '#8cb369', 0.25, 1, true),
-  [ResearchKey.TIMEHENGE]: new Research(ResearchKey.TIMEHENGE, 'Timehenge', shallowRef(TimehengeIcon), '#a9d6e5', 0.25, 1, true),
+  [ResearchKey.CRYSTAL_SARCOPHAGUS]: new Research(ResearchKey.CRYSTAL_SARCOPHAGUS, 'Crystal Sarcophagus', shallowRef(CrystalSarcophagusIcon), '#e0c3fc', 0.25, 1, true, PersonKey.LENNOX_OLD),
+  [ResearchKey.OMEGAPERSON]: new Research(ResearchKey.OMEGAPERSON, 'Omegaperson', shallowRef(OmegapersonIcon), '#fb8500', 0.25, 1, true, PersonKey.LENNOX_YOUNG),
+  [ResearchKey.PHILOSOPHERS_STONE]: new Research(ResearchKey.PHILOSOPHERS_STONE, 'Philosopher\'s Stone', shallowRef(PhilosophersStoneIcon), '#d4af37', 0.25, 1, true, PersonKey.SAMA),
+  [ResearchKey.TZOLKIN]: new Research(ResearchKey.TZOLKIN, 'Tzolk\'in', shallowRef(TzolkinIcon), '#8cb369', 0.25, 1, true, PersonKey.ITOTIA),
+  [ResearchKey.TIMEHENGE]: new Research(ResearchKey.TIMEHENGE, 'Timehenge', shallowRef(TimehengeIcon), '#a9d6e5', 0.25, 1, true, PersonKey.NECHTAN),
+});
+
+const unlockableList : any = reactive({
+  ...personList,
+  ...researchList,
 });
 
 function associateUnlocks() {
@@ -129,39 +134,6 @@ function associateUnlocks() {
   researchList[ResearchKey.TIMEHENGE].setUnlock(ResearchKey.ZODIAC_TALISMAN, 10);
 }
 
-function associateResearchToPeople() {
-  personList[PersonKey.LENNOX_OLD].researchList.push(researchList[ResearchKey.PHYSICS]);
-  personList[PersonKey.LENNOX_OLD].researchList.push(researchList[ResearchKey.QUANTUM_COMPUTING]);
-  personList[PersonKey.LENNOX_OLD].researchList.push(researchList[ResearchKey.QUANTUM_COMPUTER]);
-  personList[PersonKey.LENNOX_OLD].researchList.push(researchList[ResearchKey.CHRONOCRYSTALS]);
-  personList[PersonKey.LENNOX_OLD].researchList.push(researchList[ResearchKey.CRYSTAL_SARCOPHAGUS]);
-  
-  personList[PersonKey.LENNOX_YOUNG].researchList.push(researchList[ResearchKey.BIOLOGY]);
-  personList[PersonKey.LENNOX_YOUNG].researchList.push(researchList[ResearchKey.GENETIC_MEMORY]);
-  personList[PersonKey.LENNOX_YOUNG].researchList.push(researchList[ResearchKey.TELOMERE_STRETCHER]);
-  personList[PersonKey.LENNOX_YOUNG].researchList.push(researchList[ResearchKey.THE_FLUID]);
-  personList[PersonKey.LENNOX_YOUNG].researchList.push(researchList[ResearchKey.OMEGAPERSON]);
-
-  personList[PersonKey.SAMA].researchList.push(researchList[ResearchKey.ALCHEMY]);
-  personList[PersonKey.SAMA].researchList.push(researchList[ResearchKey.CHRONOMOGRIFICATION]);
-  personList[PersonKey.SAMA].researchList.push(researchList[ResearchKey.DISTILLER]);
-  personList[PersonKey.SAMA].researchList.push(researchList[ResearchKey.ELEMENT_ZERO]);
-  personList[PersonKey.SAMA].researchList.push(researchList[ResearchKey.PHILOSOPHERS_STONE]);
-
-  personList[PersonKey.ITOTIA].researchList.push(researchList[ResearchKey.MATHEMATICS]);
-  personList[PersonKey.ITOTIA].researchList.push(researchList[ResearchKey.TIMELESS_ALGEBRA]);
-  personList[PersonKey.ITOTIA].researchList.push(researchList[ResearchKey.NEPOHUALTZINTZIN]);
-  personList[PersonKey.ITOTIA].researchList.push(researchList[ResearchKey.OBSIDIAN]);
-  personList[PersonKey.ITOTIA].researchList.push(researchList[ResearchKey.TZOLKIN]);
-
-  personList[PersonKey.NECHTAN].researchList.push(researchList[ResearchKey.ASTRONOMY]);
-  personList[PersonKey.NECHTAN].researchList.push(researchList[ResearchKey.AETHERIC_HOROSCOPES]);
-  personList[PersonKey.NECHTAN].researchList.push(researchList[ResearchKey.ZODIAC_TALISMAN]);
-  personList[PersonKey.NECHTAN].researchList.push(researchList[ResearchKey.SARSEN_STONES]);
-  personList[PersonKey.NECHTAN].researchList.push(researchList[ResearchKey.TIMEHENGE]);
-}
-
-associateResearchToPeople();
 associateUnlocks();
 
 export default function useInitialize() {
@@ -195,5 +167,6 @@ export default function useInitialize() {
   return {
     personList,
     researchList,
+    unlockableList,
   }
 }

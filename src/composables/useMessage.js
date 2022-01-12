@@ -5,7 +5,6 @@ import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { GameConstants } from '@/enum/Constants'
 import { PersonKey,  UnlockMessageKey } from '@/enum/Enums'
-import { Message } from '@/entities/Message'
 import { messages } from '@/locales/en'
 
 const showTimeline = ref(false);
@@ -45,52 +44,10 @@ export default function useMessage() {
   const sendSpeakToLennoxMessage = () => sendMessage(messages[UnlockMessageKey.SPEAK_TO_LENNOX], personList[PersonKey.LENNOX_YOUNG]);
   const sendHalfwayMessage = () => sendMessage(messages[UnlockMessageKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
 
-  function sendResearchUnlockMessage(research, person) {
-    let message = messages[research.key];
-    //not every unlock needs a message
-    // if(!message) {
-    //   return;
-    // }
-
-    //default message?
+  function sendUnlockMessage(key, person) {
+    let message = messages[key];
     if(!message) {
-      message = new Message(
-        `Unlock`,
-        [
-          {
-            text: `${research.label} unlocked.`
-          }
-        ],
-      );
-    }
-
-    if(!message.wasSent) {
-      message.wasSent = true;
-    }
-    else {
       return;
-    }
-
-    sendMessage(message, person);
-  }
-
-  function sendPersonUnlockMessage(person) {
-    let message = messages[person.key];
-    //not every unlock needs a message
-    // if(!message) {
-    //   return;
-    // }
-
-    //default message?
-    if(!message) {
-      message = new Message(
-        `Unlock`,
-        [
-          {
-            text: `${person.name} unlocked.`
-          }
-        ],
-      );
     }
 
     if(!message.wasSent) {
@@ -110,8 +67,7 @@ export default function useMessage() {
     sendInitialMessage,
     sendSpeakToLennoxMessage,
     sendUnlockSlowdownMessage,
-    sendPersonUnlockMessage,
-    sendResearchUnlockMessage,
+    sendUnlockMessage,
     sendUnlockWorkersMessage,
     showTimeline,
   }

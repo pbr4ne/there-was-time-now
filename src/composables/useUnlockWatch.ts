@@ -3,37 +3,32 @@ import useInitialize from '@/composables/useInitialize'
 // @ts-ignore
 import useMessage from '@/composables/useMessage'
 import useFlags from '@/composables/useFlags'
-import { PersonKey } from '@/enum/Enums'
+import { Person } from '@/entities/Person'
+import { Research } from '@/entities/Research'
 
 export default function useUnlockWatch() {
-  const { sendPersonUnlockMessage, sendResearchUnlockMessage } = useMessage();
-  const { personList, researchList, } = useInitialize();
+  const { sendUnlockMessage } = useMessage();
+  const { personList, researchList, unlockableList } = useInitialize();
   const { isLoading } = useFlags();
 
-  //todo - this seems inefficient
   watchEffect(() => {
     if (isLoading.value) {
       return;
     }
-    for(const ResearchKey in researchList){
-      const research = researchList[ResearchKey];
-      if(!research.isUnlocked) {
-        const unlock = researchList[research.unlockedBy];
-        const threshold = research.unlockThreshold;
-        if(unlock.total >= threshold) {
-          research.isUnlocked = true;
-          sendResearchUnlockMessage(research, personList[PersonKey.LENNOX_OLD])
-        }
+    for(const key in unlockableList){
+      const unlockable = unlockableList[key];
+      let person = null;
+      if(unlockable instanceof Person) {
+        person = unlockable;
+      } else if(unlockable instanceof Research) {
+        person = personList[unlockable.personKey];
       }
-    }
-    for(const personKey in personList) {
-      const person = personList[personKey];
-      if(!person.isUnlocked) {
-        const unlock = researchList[person.unlockedBy];
-        const threshold = person.unlockThreshold;
+      if(!unlockable.isUnlocked) {
+        const unlock = researchList[unlockable.unlockedBy];
+        const threshold = unlockable.unlockThreshold;
         if(unlock.total >= threshold) {
-          person.isUnlocked = true;
-          sendPersonUnlockMessage(person);
+          unlockable.isUnlocked = true;
+          sendUnlockMessage(key, person)
         }
       }
     }

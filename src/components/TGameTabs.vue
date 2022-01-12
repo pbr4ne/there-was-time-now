@@ -40,14 +40,14 @@ export default defineComponent({
   },
   setup() {
     let { currentPerson } = useFlags();
-    let { personList } = useInitialize();
+    let { personList, researchList } = useInitialize();
 
     function unlockedResearchList(person) {
-      return person.researchList.filter(research => research.isUnlocked && !research.isDevice);
+      return Object.values(researchList).filter(research => research.isUnlocked && !research.isDevice && research.personKey == person.key);
     }
 
     function unlockedDevice(person) {
-      return person.researchList.find(research => research.isUnlocked && research.isDevice);
+      return Object.values(researchList).find(research => research.isUnlocked && research.isDevice && research.personKey == person.key);
     }
 
     return {

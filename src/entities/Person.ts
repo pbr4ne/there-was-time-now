@@ -6,7 +6,6 @@ export class Person extends Unlockable {
   key: string;
   name: string;
   year: number;
-  researchList: Array<Research> = new Array<Research>();
   messageList: Array<Message> = new Array<Message>();
   workerTitle: string;
 

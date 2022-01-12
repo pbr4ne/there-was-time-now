@@ -37,7 +37,7 @@ export default defineComponent({
     NMenu,
   },
   setup() {
-    const { personList } = useInitialize();
+    const { personList, researchList } = useInitialize();
     const { renderIcon } = useIcon();
 
     //initially collapse the sider for smol windows
@@ -52,15 +52,15 @@ export default defineComponent({
 
       unlockedPersonList.forEach(person => {
         const personResearchList = [];
-        person.researchList
-          .filter(research => research.isUnlocked && !research.isDevice)
+        Object.values(researchList)
+          .filter(research => research.isUnlocked && !research.isDevice && research.personKey == person.key)
           .forEach(research => personResearchList.push({
             label: renderLabel(research),
             key: research.label,
             icon: renderIcon(research.icon, research.color),
           }));
-        person.researchList
-          .filter(research => research.isUnlocked && research.isDevice)
+        Object.values(researchList)
+          .filter(research => research.isUnlocked && research.isDevice && research.personKey == person.key)
           .forEach(research => deviceGroup.push({
             label: renderLabel(research),
             key: research.label,

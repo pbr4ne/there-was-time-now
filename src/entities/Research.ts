@@ -1,5 +1,5 @@
 import { Unlockable } from '@/entities/Unlockable'
-import { ResearchKey } from '@/enum/Enums'
+import { PersonKey, ResearchKey } from '@/enum/Enums'
 
 export class Research extends Unlockable {
   key: ResearchKey;
@@ -9,6 +9,7 @@ export class Research extends Unlockable {
   speed: number;
   expand: number;
   isDevice: boolean;
+  personKey: PersonKey;
 
   total: number = 0;
   current: number = 0;
@@ -17,7 +18,7 @@ export class Research extends Unlockable {
   cost: number = 5; //todo - make configurable
   workerCost: number = 5; //todo - make configurable
 
-  constructor(key: ResearchKey, label: string, icon: object, color: string, speed: number, expand: number, isDevice: boolean) {
+  constructor(key: ResearchKey, label: string, icon: object, color: string, speed: number, expand: number, isDevice: boolean, personKey: PersonKey) {
     super();
     this.key = key;
     this.label = label;
@@ -26,5 +27,6 @@ export class Research extends Unlockable {
     this.speed = speed;
     this.expand = expand;
     this.isDevice = isDevice;
+    this.personKey = personKey;
   }
 }
