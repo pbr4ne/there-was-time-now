@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import useCurrency from '@/composables/useCurrency'
-import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
+import useUnlocks from './useUnlocks'
 import { Research } from '@/entities/Research'
 import { Science } from '@/entities/Science'
 
@@ -10,8 +10,8 @@ const sellIncrementIndex = ref(0);
 
 export default function useResearch() {
   const { currency } = useCurrency();
-  const { slowdownEnabled } = useInitialize();
   const { expandTime } = useTime();
+  const { slowdownEnabled } = useUnlocks();
 
   const canSellResearch = (research: Research, units: number) => {
     if(research.total < units) {

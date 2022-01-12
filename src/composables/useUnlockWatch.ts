@@ -2,6 +2,7 @@ import { watchEffect } from 'vue'
 import useInitialize from '@/composables/useInitialize'
 // @ts-ignore
 import useMessage from '@/composables/useMessage'
+import useUnlocks from '@/composables/useUnlocks'
 import { Unlock } from '@/entities/Unlock'
 import { UnlockKey } from '@/enum/Enums'
 
@@ -16,7 +17,8 @@ function unlockResearch(unlock: Unlock, researchList: any, personList: any, send
 
 export default function useUnlockWatch() {
   const { sendUnlockMessage } = useMessage();
-  const { deviceList, isLoading, personList, researchList, scienceList } = useInitialize();
+  const { deviceList, personList, researchList, scienceList } = useInitialize();
+  const { isLoading } = useUnlocks();
 
   //todo - this seems inefficient
   watchEffect(() => {

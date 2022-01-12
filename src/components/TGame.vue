@@ -16,11 +16,11 @@ import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
 import TGameTabs from '@/components/TGameTabs.vue'
-import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useSpecialEvents from '@/composables/useSpecialEvents'
 import useUnlockWatch from '@/composables/useUnlockWatch'
+import useUnlocks from '@/composables/useUnlocks'
 import { GameConstants } from '@/enum/Constants'
 
 export default {
@@ -33,8 +33,8 @@ export default {
   },
   setup () {
     const { loadGameState, saveGameState } = useSaveLoad();
-    const { gamePaused, gameStarted, isLoading, saveStopwatch } = useInitialize();
     const { sendInitialMessage } = useMessage();
+    const { gamePaused, gameStarted, isLoading, saveStopwatch } = useUnlocks();
     
     loadGameState().then(function() {
       if(!gameStarted.value) {
