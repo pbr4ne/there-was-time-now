@@ -12,11 +12,11 @@
           {{currency}}
         </n-statistic>
 
-        <n-statistic label="Time Expansion" v-if="countdownTimer.isRunning()">
+        <n-statistic label="Time Expansion" v-if="slowdownEnabled">
           {{expandConstant.toFixed(2)}}
         </n-statistic>
 
-        <n-statistic label="Days Left" v-if="countdownTimer.isRunning()">
+        <n-statistic label="Days Left" v-if="countdownTriggered">
           {{timeLeft}}
         </n-statistic>
 
@@ -61,7 +61,7 @@ export default defineComponent({
   },
   setup() {
     const { currency } = useCurrency();
-    const { sellFeatureEnabled } = useFlags();
+    const { countdownTriggered, sellFeatureEnabled, slowdownEnabled } = useFlags();
     const { personList } = useInitialize();
     const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
@@ -84,9 +84,11 @@ export default defineComponent({
     return {
       countdownTimer,
       countupTimer,
+      countdownTriggered,
       currency,
       expandConstant,
       sellFeatureEnabled,
+      slowdownEnabled,
       timeLeft,
       titleFont,
       titleValue,
