@@ -45,19 +45,20 @@ export default {
         gameStarted.value = true;
       }
 
-      useSpecialEvents();
-      useUnlockWatch();
-      startIncrements();
-
-      //Autosave
-      setTimeout(function() {
-        watch(saveStopwatch.seconds, () => {
-          if((saveStopwatch.seconds.value % GameConstants.SAVE_INTERVAL === 0 && !isLoading.value && !gamePaused.value)){
-            saveGameState();
-          }
-        });
-      }, GameConstants.SAVE_INTERVAL * 1000);
     });
+
+    useSpecialEvents();
+    useUnlockWatch();
+    startIncrements();
+
+    //Autosave
+    setTimeout(function() {
+      watch(saveStopwatch.seconds, () => {
+        if((saveStopwatch.seconds.value % GameConstants.SAVE_INTERVAL === 0 && !isLoading.value && !gamePaused.value)){
+          saveGameState();
+        }
+      });
+    }, GameConstants.SAVE_INTERVAL * 1000);
 
     return {
     };
