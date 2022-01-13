@@ -8,7 +8,7 @@
             <n-icon><about-icon /></n-icon>
           </n-button>
         </template>
-        <span>About (not implemented yet)</span>
+        <span>About</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>

@@ -1,14 +1,18 @@
 <template>
   made for the new year's incremental game jam (2022)
   <br /><br />
-  programming by pbrane
+  this is a game about "science" and "time"
   <br /><br />
-  writing by james
+  programming by <span style="color: #00FF00">pbrane</span>
+  <br /><br />
+  writing by James Funfer <a href="https://jamesfunfer.com/" style="color: #F72585">author page</a>
   <br /><br />
   special thanks to: 
   <div class="indent">
-    good_jukel
+    GoodJukel
   </div>
+  <br />
+  <span>v0.1</span>
 </template>
 <script>
 import { defineComponent } from 'vue'
