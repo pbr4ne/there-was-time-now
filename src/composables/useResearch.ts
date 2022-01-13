@@ -113,7 +113,7 @@ export default function useResearch() {
             }
           },200);
           setTimeout(function() {
-            if(research.numWorkers > 0) {
+            if(research.numWorkers > 0 && canIncrementResearch(research)) {
               incrementResearch(research);
             }
           }, 10000 / research.numWorkers);

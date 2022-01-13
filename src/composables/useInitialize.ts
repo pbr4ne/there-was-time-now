@@ -95,7 +95,7 @@ const unlockableList : any = reactive({
 
 function associateUnlocks() {
   //Lennox (1984)
-  researchList[ResearchKey.QUANTUM_COMPUTING].setUnlock(ResearchKey.PHYSICS, 1);
+  researchList[ResearchKey.QUANTUM_COMPUTING].setUnlock(ResearchKey.PHYSICS, 10);
   researchList[ResearchKey.QUANTUM_COMPUTER].setUnlock(ResearchKey.QUANTUM_COMPUTING, 10);
   researchList[ResearchKey.CHRONOCRYSTALS].setUnlock(ResearchKey.TELOMERE_STRETCHER, 10);
   researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].setUnlock(ResearchKey.TELOMERE_STRETCHER, 10);
@@ -221,11 +221,11 @@ export default function useInitialize() {
   }
   if(params['QUICK_MODE'] === "true") {
     for(const research in researchList) {
-      researchList[research].speed = 10;
-      researchList[research].unlockThreshold = 1;
+      researchList[research].speed = 100;
+      //researchList[research].unlockThreshold = 1;
     }
     for(const person in personList) {
-      personList[person].unlockThreshold = 1;
+      //personList[person].unlockThreshold = 1;
     }
   }
 
