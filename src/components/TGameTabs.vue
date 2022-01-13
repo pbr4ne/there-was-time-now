@@ -10,7 +10,7 @@
         <t-game-research :person="person" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
       </n-space>
       <t-game-device v-if="unlockedDevice(person)" :research="unlockedDevice(person)" />
-      <t-game-timeline :person="person" />
+      <t-game-timeline v-if="countdownTriggered" :person="person" />
     </n-tab-pane>
   </n-tabs>
 </template>
@@ -39,7 +39,7 @@ export default defineComponent({
     TGameResearch,
   },
   setup() {
-    let { currentPerson } = useFlags();
+    let { countdownTriggered, currentPerson } = useFlags();
     let { personList, researchList } = useInitialize();
 
     function unlockedResearchList(person) {
@@ -51,6 +51,7 @@ export default defineComponent({
     }
 
     return {
+      countdownTriggered,
       currentPerson,
       personList,
       renderTab,
