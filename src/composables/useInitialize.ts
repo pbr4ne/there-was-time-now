@@ -104,99 +104,110 @@ function associateUnlocks() {
   //Lennox (1934)
   // personList[PersonKey.LENNOX_YOUNG].setUnlock(ResearchKey.QUANTUM_COMPUTER, 10); these happen as special events
   // researchList[ResearchKey.BIOLOGY].setUnlock(ResearchKey.QUANTUM_COMPUTER, 10);
-  researchList[ResearchKey.GENETIC_MEMORY].setUnlock(ResearchKey.BIOLOGY, 10);
-  researchList[ResearchKey.TELOMERE_STRETCHER].setUnlock(ResearchKey.GENETIC_MEMORY, 10);
+  researchList[ResearchKey.GENETIC_MEMORY].setUnlock(ResearchKey.BIOLOGY, 20);
+  researchList[ResearchKey.TELOMERE_STRETCHER].setUnlock(ResearchKey.GENETIC_MEMORY, 20);
   // researchList[ResearchKey.THE_FLUID].setUnlock(ResearchKey.CHRONOCRYSTALS, 10);
   // researchList[ResearchKey.OMEGAPERSON].setUnlock(ResearchKey.CHRONOCRYSTALS, 10);
 
   //Sama (904)
   // personList[PersonKey.SAMA].setUnlock(ResearchKey.THE_FLUID, 10);
   // researchList[ResearchKey.ALCHEMY].setUnlock(ResearchKey.THE_FLUID, 10);
-  researchList[ResearchKey.CHRONOMOGRIFICATION].setUnlock(ResearchKey.ALCHEMY, 10);
-  researchList[ResearchKey.DISTILLER].setUnlock(ResearchKey.CHRONOMOGRIFICATION, 10);
+  researchList[ResearchKey.CHRONOMOGRIFICATION].setUnlock(ResearchKey.ALCHEMY, 30);
+  researchList[ResearchKey.DISTILLER].setUnlock(ResearchKey.CHRONOMOGRIFICATION, 30);
   // researchList[ResearchKey.ELEMENT_ZERO].setUnlock(ResearchKey.DISTILLER, 10);
   // researchList[ResearchKey.PHILOSOPHERS_STONE].setUnlock(ResearchKey.DISTILLER, 10);
 
   //Itotia (374)
   // personList[PersonKey.ITOTIA].setUnlock(ResearchKey.ELEMENT_ZERO, 10);
   // researchList[ResearchKey.MATHEMATICS].setUnlock(ResearchKey.ELEMENT_ZERO, 10);
-  researchList[ResearchKey.TIMELESS_ALGEBRA].setUnlock(ResearchKey.MATHEMATICS, 10);
-  researchList[ResearchKey.NEPOHUALTZINTZIN].setUnlock(ResearchKey.TIMELESS_ALGEBRA, 10);
+  researchList[ResearchKey.TIMELESS_ALGEBRA].setUnlock(ResearchKey.MATHEMATICS, 40);
+  researchList[ResearchKey.NEPOHUALTZINTZIN].setUnlock(ResearchKey.TIMELESS_ALGEBRA, 40);
   // researchList[ResearchKey.OBSIDIAN].setUnlock(ResearchKey.NEPOHUALTZINTZIN, 10);
   // researchList[ResearchKey.TZOLKIN].setUnlock(ResearchKey.NEPOHUALTZINTZIN, 10);
 
   //Nechtan (2524 BC)
   // personList[PersonKey.NECHTAN].setUnlock(ResearchKey.OBSIDIAN, 10);
   // researchList[ResearchKey.ASTRONOMY].setUnlock(ResearchKey.OBSIDIAN, 10);
-  researchList[ResearchKey.AETHERIC_HOROSCOPES].setUnlock(ResearchKey.ASTRONOMY, 10);
-  researchList[ResearchKey.ZODIAC_TALISMAN].setUnlock(ResearchKey.AETHERIC_HOROSCOPES, 10);
-  researchList[ResearchKey.SARSEN_STONES].setUnlock(ResearchKey.ZODIAC_TALISMAN, 10);
-  researchList[ResearchKey.TIMEHENGE].setUnlock(ResearchKey.ZODIAC_TALISMAN, 10);
+  researchList[ResearchKey.AETHERIC_HOROSCOPES].setUnlock(ResearchKey.ASTRONOMY, 50);
+  researchList[ResearchKey.ZODIAC_TALISMAN].setUnlock(ResearchKey.AETHERIC_HOROSCOPES, 50);
+  researchList[ResearchKey.SARSEN_STONES].setUnlock(ResearchKey.ZODIAC_TALISMAN, 50);
+  researchList[ResearchKey.TIMEHENGE].setUnlock(ResearchKey.ZODIAC_TALISMAN, 50);
 }
 
 function associateRequirements() {
    //Lennox (1984)
   researchList[ResearchKey.QUANTUM_COMPUTING].researchRequirementList.push(new ResearchRequirement(ResearchKey.PHYSICS, 1));
-  researchList[ResearchKey.QUANTUM_COMPUTER].researchRequirementList.push(new ResearchRequirement(ResearchKey.QUANTUM_COMPUTING, 1));
-  researchList[ResearchKey.CHRONOCRYSTALS].researchRequirementList.push(new ResearchRequirement(ResearchKey.QUANTUM_COMPUTER, 1));
-  researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].researchRequirementList.push(new ResearchRequirement(ResearchKey.CHRONOCRYSTALS, 1));
+  researchList[ResearchKey.QUANTUM_COMPUTER].researchRequirementList.push(new ResearchRequirement(ResearchKey.QUANTUM_COMPUTING, 2));
+  researchList[ResearchKey.CHRONOCRYSTALS].researchRequirementList.push(new ResearchRequirement(ResearchKey.QUANTUM_COMPUTER, 3));
+  researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].researchRequirementList.push(new ResearchRequirement(ResearchKey.CHRONOCRYSTALS, 5));
+  researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].researchRequirementList.push(new ResearchRequirement(ResearchKey.QUANTUM_COMPUTER, 5));
 
   //Lennox (1934)
   researchList[ResearchKey.GENETIC_MEMORY].researchRequirementList.push(new ResearchRequirement(ResearchKey.BIOLOGY, 1));
-  researchList[ResearchKey.TELOMERE_STRETCHER].researchRequirementList.push(new ResearchRequirement(ResearchKey.GENETIC_MEMORY, 1));
-  researchList[ResearchKey.THE_FLUID].researchRequirementList.push(new ResearchRequirement(ResearchKey.TELOMERE_STRETCHER, 1));
-  researchList[ResearchKey.OMEGAPERSON].researchRequirementList.push(new ResearchRequirement(ResearchKey.THE_FLUID, 1));
+  researchList[ResearchKey.TELOMERE_STRETCHER].researchRequirementList.push(new ResearchRequirement(ResearchKey.GENETIC_MEMORY, 2));
+  researchList[ResearchKey.THE_FLUID].researchRequirementList.push(new ResearchRequirement(ResearchKey.TELOMERE_STRETCHER, 3));
+  researchList[ResearchKey.OMEGAPERSON].researchRequirementList.push(new ResearchRequirement(ResearchKey.THE_FLUID, 5));
+  researchList[ResearchKey.OMEGAPERSON].researchRequirementList.push(new ResearchRequirement(ResearchKey.TELOMERE_STRETCHER, 5));
 
   //Sama (904)
   researchList[ResearchKey.CHRONOMOGRIFICATION].researchRequirementList.push(new ResearchRequirement(ResearchKey.ALCHEMY, 1));
-  researchList[ResearchKey.DISTILLER].researchRequirementList.push(new ResearchRequirement(ResearchKey.CHRONOMOGRIFICATION, 1));
-  researchList[ResearchKey.ELEMENT_ZERO].researchRequirementList.push(new ResearchRequirement(ResearchKey.DISTILLER, 1));
-  researchList[ResearchKey.PHILOSOPHERS_STONE].researchRequirementList.push(new ResearchRequirement(ResearchKey.ELEMENT_ZERO, 1));
+  researchList[ResearchKey.DISTILLER].researchRequirementList.push(new ResearchRequirement(ResearchKey.CHRONOMOGRIFICATION, 2));
+  researchList[ResearchKey.ELEMENT_ZERO].researchRequirementList.push(new ResearchRequirement(ResearchKey.DISTILLER, 3));
+  researchList[ResearchKey.PHILOSOPHERS_STONE].researchRequirementList.push(new ResearchRequirement(ResearchKey.ELEMENT_ZERO, 5));
+  researchList[ResearchKey.PHILOSOPHERS_STONE].researchRequirementList.push(new ResearchRequirement(ResearchKey.DISTILLER, 5));
 
   //Itotia (374)
   researchList[ResearchKey.TIMELESS_ALGEBRA].researchRequirementList.push(new ResearchRequirement(ResearchKey.MATHEMATICS, 1));
-  researchList[ResearchKey.NEPOHUALTZINTZIN].researchRequirementList.push(new ResearchRequirement(ResearchKey.TIMELESS_ALGEBRA, 1));
-  researchList[ResearchKey.OBSIDIAN].researchRequirementList.push(new ResearchRequirement(ResearchKey.NEPOHUALTZINTZIN, 1));
-  researchList[ResearchKey.TZOLKIN].researchRequirementList.push(new ResearchRequirement(ResearchKey.OBSIDIAN, 1));
+  researchList[ResearchKey.NEPOHUALTZINTZIN].researchRequirementList.push(new ResearchRequirement(ResearchKey.TIMELESS_ALGEBRA, 2));
+  researchList[ResearchKey.OBSIDIAN].researchRequirementList.push(new ResearchRequirement(ResearchKey.NEPOHUALTZINTZIN, 3));
+  researchList[ResearchKey.TZOLKIN].researchRequirementList.push(new ResearchRequirement(ResearchKey.OBSIDIAN, 5));
+  researchList[ResearchKey.TZOLKIN].researchRequirementList.push(new ResearchRequirement(ResearchKey.NEPOHUALTZINTZIN, 5));
 
   //Nechtan (2524 BC)
   researchList[ResearchKey.AETHERIC_HOROSCOPES].researchRequirementList.push(new ResearchRequirement(ResearchKey.ASTRONOMY, 1));
-  researchList[ResearchKey.ZODIAC_TALISMAN].researchRequirementList.push(new ResearchRequirement(ResearchKey.AETHERIC_HOROSCOPES, 1));
-  researchList[ResearchKey.SARSEN_STONES].researchRequirementList.push(new ResearchRequirement(ResearchKey.ZODIAC_TALISMAN, 1));
-  researchList[ResearchKey.TIMEHENGE].researchRequirementList.push(new ResearchRequirement(ResearchKey.SARSEN_STONES, 1));
+  researchList[ResearchKey.ZODIAC_TALISMAN].researchRequirementList.push(new ResearchRequirement(ResearchKey.AETHERIC_HOROSCOPES, 2));
+  researchList[ResearchKey.SARSEN_STONES].researchRequirementList.push(new ResearchRequirement(ResearchKey.ZODIAC_TALISMAN, 3));
+  researchList[ResearchKey.TIMEHENGE].researchRequirementList.push(new ResearchRequirement(ResearchKey.SARSEN_STONES, 5));
+  researchList[ResearchKey.TIMEHENGE].researchRequirementList.push(new ResearchRequirement(ResearchKey.ZODIAC_TALISMAN, 5));
 }
 
 //todo - this is stupid but it makes it easier to tweak the numbers as i go
+//speed, expand, price, workerCost
 function setNumbers() {
   //Lennox (1984)
-  researchList[ResearchKey.QUANTUM_COMPUTING].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.QUANTUM_COMPUTER].setNumbers(5, 1.2, 5, 5);
-  researchList[ResearchKey.CHRONOCRYSTALS].setNumbers(0.5, 1, 5, 5);
-  researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].setNumbers(0.25, 1, 5, 5);
+  researchList[ResearchKey.PHYSICS].setNumbers(10, 1, 5, 5);
+  researchList[ResearchKey.QUANTUM_COMPUTING].setNumbers(10, 1, 6, 6);
+  researchList[ResearchKey.QUANTUM_COMPUTER].setNumbers(5, 1.05, 7, 7);
+  researchList[ResearchKey.CHRONOCRYSTALS].setNumbers(0.5, 1, 8, 8);
+  researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].setNumbers(0.25, 1, 0, 0);
 
   //Lennox (1934)
-  researchList[ResearchKey.GENETIC_MEMORY].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.TELOMERE_STRETCHER].setNumbers(5, 1.2, 5, 5);
-  researchList[ResearchKey.THE_FLUID].setNumbers(0.5, 1, 5, 5);
-  researchList[ResearchKey.OMEGAPERSON].setNumbers(0.25, 1, 5, 5);
+  researchList[ResearchKey.BIOLOGY].setNumbers(10, 1, 9, 9);
+  researchList[ResearchKey.GENETIC_MEMORY].setNumbers(5, 1, 10, 10);
+  researchList[ResearchKey.TELOMERE_STRETCHER].setNumbers(2.5, 1.06, 11, 11);
+  researchList[ResearchKey.THE_FLUID].setNumbers(1, 1, 12, 12);
+  researchList[ResearchKey.OMEGAPERSON].setNumbers(0.125, 1, 0, 0);
 
   //Sama (904)
-  researchList[ResearchKey.CHRONOMOGRIFICATION].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.DISTILLER].setNumbers(5, 1.2, 5, 5);
-  researchList[ResearchKey.ELEMENT_ZERO].setNumbers(0.5, 1, 5, 5);
-  researchList[ResearchKey.PHILOSOPHERS_STONE].setNumbers(0.25, 1, 5, 5);
+  researchList[ResearchKey.ALCHEMY].setNumbers(10, 1, 13, 13);
+  researchList[ResearchKey.CHRONOMOGRIFICATION].setNumbers(2.5, 1, 14, 14);
+  researchList[ResearchKey.DISTILLER].setNumbers(1, 1.07, 15, 15);
+  researchList[ResearchKey.ELEMENT_ZERO].setNumbers(0.5, 1, 16, 16);
+  researchList[ResearchKey.PHILOSOPHERS_STONE].setNumbers(0.0625, 1, 0, 0);
 
   //Itotia (374)
-  researchList[ResearchKey.TIMELESS_ALGEBRA].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.NEPOHUALTZINTZIN].setNumbers(5, 1.2, 5, 5);
-  researchList[ResearchKey.OBSIDIAN].setNumbers(0.5, 1, 5, 5);
-  researchList[ResearchKey.TZOLKIN].setNumbers(0.25, 1, 5, 5);
+  researchList[ResearchKey.MATHEMATICS].setNumbers(10, 1, 17, 17);
+  researchList[ResearchKey.TIMELESS_ALGEBRA].setNumbers(1, 1, 18, 18);
+  researchList[ResearchKey.NEPOHUALTZINTZIN].setNumbers(0.5, 1.08, 19, 19);
+  researchList[ResearchKey.OBSIDIAN].setNumbers(0.25, 1, 20, 20);
+  researchList[ResearchKey.TZOLKIN].setNumbers(0.0625, 1, 0, 0);
 
   //Nechtan (2524 BC)
-  researchList[ResearchKey.AETHERIC_HOROSCOPES].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.ZODIAC_TALISMAN].setNumbers(5, 1.2, 5, 5);
-  researchList[ResearchKey.SARSEN_STONES].setNumbers(0.5, 1, 5, 5);
-  researchList[ResearchKey.TIMEHENGE].setNumbers(0.25, 1, 5, 5);
+  researchList[ResearchKey.ASTRONOMY].setNumbers(10, 1, 21, 21);
+  researchList[ResearchKey.AETHERIC_HOROSCOPES].setNumbers(0.5, 1, 22, 22);
+  researchList[ResearchKey.ZODIAC_TALISMAN].setNumbers(0.25, 1.09, 23, 23);
+  researchList[ResearchKey.SARSEN_STONES].setNumbers(0.1, 1, 24, 24);
+  researchList[ResearchKey.TIMEHENGE].setNumbers(0.03125, 1, 0, 0);
 }
 
 associateUnlocks();
