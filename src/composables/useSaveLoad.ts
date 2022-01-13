@@ -81,8 +81,8 @@ export default function useSaveLoad() {
 
     const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
-      spokeToLennox.value, spokeToSama.value, slowdownEnabled.value, savedPeople, savedResearch);
-
+      slowdownEnabled.value, spokeToLennox.value, spokeToSama.value, savedPeople, savedResearch);
+    
     console.log('done saving');
     return localforage.setItem(SaveKey.GAME_STATE, gameState)
       .catch(function(err: any) {
