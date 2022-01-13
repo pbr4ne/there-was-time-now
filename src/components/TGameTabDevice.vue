@@ -1,34 +1,22 @@
 <template>
 <n-grid :cols="1" responsive="screen" style="padding-left: 20px; max-width: 75%;">
   <n-grid-item>
-    <n-card align="stretch" @click="incrementResearch(research)" style="cursor: pointer;">
-      <n-h2 type="info" :style="{ color: research.color }">{{research.label}}</n-h2>
-      <n-progress
-          type="line"
-          :percentage="research.current"
-          :height="24"
-          :border-radius="4"
-          :fill-border-radius="0"
-          :indicator-placement="'inside-label'"
-          :color="research.color"
-        />
-    </n-card>
+    <t-game-device-card :research="research" />
   </n-grid-item>
 </n-grid>
 </template>
 <script>
 import { defineComponent } from 'vue'
-import { NCard, NH2, NGrid, NGridItem, NProgress } from 'naive-ui'
-import { Research } from '@/entities/Research'
+import { NGrid, NGridItem } from 'naive-ui'
+import TGameDeviceCard from '@/components/TGameDeviceCard'
 import useResearch from '@/composables/useResearch'
+import { Research } from '@/entities/Research'
 
 export default defineComponent({
   components: {
-    NCard,
-    NH2,
     NGrid,
     NGridItem,
-    NProgress,
+    TGameDeviceCard,
   },
   props: {
     research: Research,
