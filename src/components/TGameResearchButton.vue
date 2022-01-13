@@ -4,7 +4,6 @@ import { NButton, NPopover } from 'naive-ui'
 import TGameResearchNeeds from '@/components/TGameResearchNeeds'
 import useResearch from '@/composables/useResearch'
 import { Research } from '@/entities/Research'
-import { messages } from '@/locales/en'
 
 export default defineComponent({
   props: {
@@ -13,14 +12,6 @@ export default defineComponent({
   },
   setup(props) {
     const { canIncrementResearch, incrementResearch } = useResearch();
-
-    function getTooltip(research) {
-      if(canIncrementResearch(research)) {
-        return messages[research.key].messageSections[0].text;
-      } else {
-        return h(TGameResearchNeeds, { research: props.research });
-      }
-    }
 
     return () => 
       h(NPopover, {
@@ -41,7 +32,7 @@ export default defineComponent({
             default: () => props.research.label,
           }
         ),
-        default: () => getTooltip(props.research)
+        default: () => h(TGameResearchNeeds, { research: props.research })
       }
     )
   },
