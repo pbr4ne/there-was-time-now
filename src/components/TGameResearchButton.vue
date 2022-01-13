@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, h, reactive } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NButton, NPopover } from 'naive-ui'
 import TGameResearchNeeds from '@/components/TGameResearchNeeds'
 import useFlags from '@/composables/useFlags'
@@ -19,7 +19,7 @@ export default defineComponent({
       icon: () => h(props.research.icon),
     }
     if(window.innerWidth > 700 || !sellFeatureEnabled.value) {
-      buttonSlots.default = reactive(props.research.label);
+      buttonSlots.default = () => h('span', null, props.research.label);
     }
 
     return () => 
