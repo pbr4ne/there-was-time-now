@@ -53,11 +53,11 @@ export default function useSpecialEvents() {
   });
 
   //When time is halfway up, show message
-  watchEffect(() => {
-    if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
-      sendHalfwayMessage();
-    }
-  });
+  // watchEffect(() => {
+  //   if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
+  //     sendHalfwayMessage();
+  //   }
+  // });
 
   //When you finish building all devices, you win
   watchEffect(() => {
