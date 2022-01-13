@@ -122,6 +122,15 @@ export default function useResearch() {
     }
   };
 
+  const startIncrements = () => {
+    Object.values(researchList).forEach((research: any) => {
+      if(research.numWorkers > 0 && canIncrementResearch(research)){
+          incrementResearch(research);
+        }
+      }
+    )
+  }
+
   return {
     buyWorker,
     buyWorkerCost,
@@ -136,5 +145,6 @@ export default function useResearch() {
     sellResearchPrice,
     sellWorker,
     sellWorkerCost,
+    startIncrements,
   };
 }

@@ -1,8 +1,10 @@
 import * as localforage from 'localforage/dist/localforage.js'
 import useCurrency from '@/composables/useCurrency'
-import useInitialize from '@/composables/useInitialize'
-import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
+import useInitialize from '@/composables/useInitialize'
+// @ts-ignore
+import useMessage from '@/composables/useMessage'
+import useTime from '@/composables/useTime'
 import { GameState } from '@/dto/GameState'
 import { GameStatePerson } from '@/dto/GameStatePerson'
 import { GameStateResearch } from '@/dto/GameStateResearch'
@@ -15,9 +17,10 @@ localforage.config({
 
 export default function useSaveLoad() {
   const { currency } = useCurrency();
-  const { personList, researchList } = useInitialize();
-  const { countdownTimer, countupTimer, expandConstant } = useTime();
   const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
+  const { personList, researchList } = useInitialize();
+  const { sendInitialMessage } = useMessage();
+  const { countdownTimer, countupTimer, expandConstant } = useTime();
 
   //todo - missing initial message
   //todo - the countup timer is getting messed up
@@ -53,6 +56,7 @@ export default function useSaveLoad() {
       countupTimer.restart(0);
       countupTimer.start();
       currentPerson.value = PersonKey.LENNOX_OLD;
+      sendInitialMessage();
     })
     .catch(function(err: any) {
       console.log(`Error saving game state: ${err}`);
