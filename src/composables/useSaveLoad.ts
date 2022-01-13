@@ -134,6 +134,7 @@ export default function useSaveLoad() {
       console.log('done loading');
     })
     .catch(function(err: any) {
+      isLoading.value = false;
       console.log(`Error loading gameStarted: ${err}`);
     });
   }
