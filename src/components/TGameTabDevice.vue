@@ -1,7 +1,8 @@
 <template>
 <n-grid :cols="1" responsive="screen" style="padding-left: 20px; max-width: 75%;">
   <n-grid-item>
-    <n-card align="stretch" :title="research.label" @click="incrementResearch(research)" style="cursor: pointer;">
+    <n-card align="stretch" @click="incrementResearch(research)" style="cursor: pointer;">
+      <n-h2 type="info" :style="{ color: research.color }">{{research.label}}</n-h2>
       <n-progress
           type="line"
           :percentage="research.current"
@@ -17,13 +18,14 @@
 </template>
 <script>
 import { defineComponent } from 'vue'
-import { NCard, NGrid, NGridItem, NProgress } from 'naive-ui'
+import { NCard, NH2, NGrid, NGridItem, NProgress } from 'naive-ui'
 import { Research } from '@/entities/Research'
 import useResearch from '@/composables/useResearch'
 
 export default defineComponent({
   components: {
     NCard,
+    NH2,
     NGrid,
     NGridItem,
     NProgress,
