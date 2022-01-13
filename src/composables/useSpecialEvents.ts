@@ -62,7 +62,7 @@ export default function useSpecialEvents() {
     }
   });
 
-  //When first telomere stretcher is researched, unlock sama, crystal sarcophagus, chronocrystals, omegaperson, the fluid
+  //When first telomere stretcher is researched, unlock sama, alchemy, crystal sarcophagus, chronocrystals, omegaperson, the fluid
   watchEffect(() => {
     if(!personList[PersonKey.SAMA].isUnlocked && researchList[ResearchKey.TELOMERE_STRETCHER].total == 1 && !isLoading.value){
       personList[PersonKey.SAMA].isUnlocked = true;
@@ -91,6 +91,18 @@ export default function useSpecialEvents() {
       researchList[ResearchKey.PHILOSOPHERS_STONE].isUnlocked = true;
       researchList[ResearchKey.ELEMENT_ZERO].isUnlocked = true;
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_ITOTIA]);
+    }
+  });
+
+  
+  //When first nepohualtzintzin is researched, unlock nechtan, astronomy, tzolk'in, obsidian
+  watchEffect(() => {
+    if(!personList[PersonKey.NECHTAN].isUnlocked && researchList[ResearchKey.NEPOHUALTZINTZIN].total == 1 && !isLoading.value){
+      personList[PersonKey.NECHTAN].isUnlocked = true;
+      researchList[ResearchKey.ASTRONOMY].isUnlocked = true;
+      researchList[ResearchKey.TZOLKIN].isUnlocked = true;
+      researchList[ResearchKey.OBSIDIAN].isUnlocked = true;
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_NECHTAN]);
     }
   });
 

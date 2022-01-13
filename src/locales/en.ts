@@ -208,6 +208,11 @@ const messages = {
       text: 'Not according to *our* calendars...'
     }]
   ),
+  [NarrativeKey.UNLOCK_NECHTAN]: new Message('The Final Countdown', [{
+      person: 'Itotia',
+      text: 'The calculation is almost complete, Lennox. Now we must look to the stars.'
+    }]
+  ),
 
   //Sciences
   [ResearchKey.PHYSICS]: new Message('Unlocked Physics', [{
