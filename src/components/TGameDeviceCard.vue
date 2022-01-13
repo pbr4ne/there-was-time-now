@@ -11,7 +11,15 @@ export default defineComponent({
     research: Research
   },
   setup(props) {
-    const { incrementResearch } = useResearch();
+    const { canIncrementResearch, incrementResearch } = useResearch();
+
+    const research = (research) => {
+      if(canIncrementResearch(research)) {
+        return incrementResearch(research);
+      } else {
+        return;
+      }
+    }
 
     return () => 
     h(
@@ -25,8 +33,10 @@ export default defineComponent({
         trigger: () => h(
           NCard, 
           { 
-            style: { cursor: "pointer" },
-            onClick: () => incrementResearch(props.research)
+            style: { 
+              cursor: canIncrementResearch(props.research) || props.research.total == 1 ? "pointer" : "not-allowed"
+            },
+            onClick: () => research(props.research)
           },
           {
             default: () => h(TGameDeviceProgress, { research: props.research })
