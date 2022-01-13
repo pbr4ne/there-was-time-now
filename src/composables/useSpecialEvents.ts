@@ -62,6 +62,19 @@ export default function useSpecialEvents() {
     }
   });
 
+  //When first telomere stretcher is researched, unlock sama, crystal sarcophagus, omegaperson
+  watchEffect(() => {
+    if(!personList[PersonKey.SAMA].isUnlocked && researchList[ResearchKey.TELOMERE_STRETCHER].total == 1 && !isLoading.value){
+      personList[PersonKey.SAMA].isUnlocked = true;
+      researchList[ResearchKey.ALCHEMY].isUnlocked = true;
+      researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].isUnlocked = true;
+      researchList[ResearchKey.CHRONOCRYSTALS].isUnlocked = true;
+      researchList[ResearchKey.OMEGAPERSON].isUnlocked = true;
+      researchList[ResearchKey.THE_FLUID].isUnlocked = true;
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_SAMA]);
+    }
+  });
+
   //When time is halfway up, show message
   watchEffect(() => {
     if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
