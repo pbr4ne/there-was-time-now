@@ -7,7 +7,6 @@
       </n-space>
 
       <n-space width="209px">
-        <!-- {{countupTimer.secondsElapsed()}} {{countdownTimer.secondsLeft()}} -->
         <n-statistic label="Budget" v-if="sellFeatureEnabled">
           {{currency}}
         </n-statistic>
@@ -16,9 +15,14 @@
           {{expandConstant.toFixed(2)}}
         </n-statistic>
 
-        <n-statistic label="Days Left" v-if="countdownTriggered">
-          {{timeLeft}}
-        </n-statistic>
+        <n-popover trigger="hover">
+          <template #trigger>
+            <n-statistic label="Days Left" v-if="countdownTriggered">
+              {{timeLeft}}
+            </n-statistic>
+          </template>
+          <span>{{countdownTimer.realPeopleTimeLeft()}} Real People Time™ left</span>
+        </n-popover>
 
         <!-- eslint-disable-next-line vue/valid-v-slot -->
         <n-spin #icon style="vertical-align: middle;" v-if="countdownTimer.isRunning()">
@@ -31,19 +35,8 @@
 
 <script>
 import { computed, defineComponent, ref } from 'vue'
-
-import { 
-  NIcon,
-  NLayoutHeader,
-  NSpace,
-  NSpin,
-  NStatistic,
-} from 'naive-ui'
-
-import {
-  AccessTimeOutlined as TimeIcon
-} from '@vicons/material'
-
+import { NIcon, NLayoutHeader, NPopover, NSpace, NSpin, NStatistic} from 'naive-ui'
+import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
@@ -54,6 +47,7 @@ export default defineComponent({
   components: {
     NIcon,
     NLayoutHeader,
+    NPopover,
     NSpace,
     NSpin,
     NStatistic,

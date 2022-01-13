@@ -170,32 +170,32 @@ function associateRequirements() {
 function setNumbers() {
   //Lennox (1984)
   researchList[ResearchKey.QUANTUM_COMPUTING].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.QUANTUM_COMPUTER].setNumbers(5, 1, 5, 5);
-  researchList[ResearchKey.CHRONOCRYSTALS].setNumbers(0.5, 1.1, 5, 5);
+  researchList[ResearchKey.QUANTUM_COMPUTER].setNumbers(5, 1.2, 5, 5);
+  researchList[ResearchKey.CHRONOCRYSTALS].setNumbers(0.5, 1, 5, 5);
   researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].setNumbers(0.25, 1, 5, 5);
 
   //Lennox (1934)
   researchList[ResearchKey.GENETIC_MEMORY].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.TELOMERE_STRETCHER].setNumbers(5, 1, 5, 5);
-  researchList[ResearchKey.THE_FLUID].setNumbers(0.5, 1.1, 5, 5);
+  researchList[ResearchKey.TELOMERE_STRETCHER].setNumbers(5, 1.2, 5, 5);
+  researchList[ResearchKey.THE_FLUID].setNumbers(0.5, 1, 5, 5);
   researchList[ResearchKey.OMEGAPERSON].setNumbers(0.25, 1, 5, 5);
 
   //Sama (904)
   researchList[ResearchKey.CHRONOMOGRIFICATION].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.DISTILLER].setNumbers(5, 1, 5, 5);
-  researchList[ResearchKey.ELEMENT_ZERO].setNumbers(0.5, 1.1, 5, 5);
+  researchList[ResearchKey.DISTILLER].setNumbers(5, 1.2, 5, 5);
+  researchList[ResearchKey.ELEMENT_ZERO].setNumbers(0.5, 1, 5, 5);
   researchList[ResearchKey.PHILOSOPHERS_STONE].setNumbers(0.25, 1, 5, 5);
 
   //Itotia (374)
   researchList[ResearchKey.TIMELESS_ALGEBRA].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.NEPOHUALTZINTZIN].setNumbers(5, 1, 5, 5);
-  researchList[ResearchKey.OBSIDIAN].setNumbers(0.5, 1.1, 5, 5);
+  researchList[ResearchKey.NEPOHUALTZINTZIN].setNumbers(5, 1.2, 5, 5);
+  researchList[ResearchKey.OBSIDIAN].setNumbers(0.5, 1, 5, 5);
   researchList[ResearchKey.TZOLKIN].setNumbers(0.25, 1, 5, 5);
 
   //Nechtan (2524 BC)
   researchList[ResearchKey.AETHERIC_HOROSCOPES].setNumbers(10, 1, 5, 5);
-  researchList[ResearchKey.ZODIAC_TALISMAN].setNumbers(5, 1, 5, 5);
-  researchList[ResearchKey.SARSEN_STONES].setNumbers(0.5, 1.1, 5, 5);
+  researchList[ResearchKey.ZODIAC_TALISMAN].setNumbers(5, 1.2, 5, 5);
+  researchList[ResearchKey.SARSEN_STONES].setNumbers(0.5, 1, 5, 5);
   researchList[ResearchKey.TIMEHENGE].setNumbers(0.25, 1, 5, 5);
 }
 

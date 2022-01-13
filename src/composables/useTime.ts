@@ -54,6 +54,14 @@ class CountdownTimer {
     this.timer.pause();
   }
 
+  realPeopleTimeLeft() {
+    const days = this.timer.days.value > 0 ? " " + this.timer.days.value + " days" : "";
+    const hours = this.timer.hours.value > 0 ? " " + this.timer.hours.value + " hours" : "";
+    const minutes = this.timer.minutes.value > 0 ? " " + this.timer.minutes.value + " minutes" : ""
+    const seconds = this.timer.seconds.value > 0 ? " " + this.timer.seconds.value + " seconds" : ""
+    return days + hours + minutes + seconds;
+  }
+
   secondsLeft() {
     return this.timer.seconds.value 
       + this.timer.minutes.value * 60 
