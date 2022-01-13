@@ -16,7 +16,7 @@ export default function useSpecialEvents() {
   const { personList, researchList } = useInitialize();
   const { sendNarrativeMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
-  const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useFlags();
+  const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
   
 
   //When first quantum computer is built, start the end of world timer
@@ -72,6 +72,14 @@ export default function useSpecialEvents() {
       researchList[ResearchKey.OMEGAPERSON].isUnlocked = true;
       researchList[ResearchKey.THE_FLUID].isUnlocked = true;
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_SAMA]);
+    }
+  });
+
+  //When fifth alchemy is researched, send message
+  watchEffect(() => {
+    if(!spokeToSama.value && researchList[ResearchKey.ALCHEMY].total == 5 && !isLoading.value){
+      spokeToSama.value = true;
+      sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_SAMA]);
     }
   });
 

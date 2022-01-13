@@ -12,6 +12,7 @@ const saveStopwatch = useStopwatch(0, true);
 const sellFeatureEnabled = ref(false);
 const slowdownEnabled = ref(false);
 const spokeToLennox = ref(false);
+const spokeToSama = ref(false);
 //todo - this isn't a flag
 const currentPerson = ref(PersonKey.LENNOX_OLD)
 
@@ -27,5 +28,6 @@ export default function useFlags() {
     sellFeatureEnabled,
     slowdownEnabled,
     spokeToLennox,
+    spokeToSama,
   }
 }

@@ -17,7 +17,7 @@ export default function useSaveLoad() {
   const { currency } = useCurrency();
   const { personList, researchList } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
-  const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled, slowdownEnabled } = useFlags();
+  const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
 
   //todo - missing initial message
   //todo - the countup timer is getting messed up
@@ -45,6 +45,9 @@ export default function useSaveLoad() {
       gameEnded.value = false;
       countdownTriggered.value = false;
       expandConstant.value = GameConstants.INITIAL_EXPANSION_CONSTANT;
+      slowdownEnabled.value = false;
+      spokeToLennox.value = false;
+      spokeToSama.value = false;
       countdownTimer.restart(GameConstants.INITIAL_TIME);
       countdownTimer.stop();
       countupTimer.restart(0);
@@ -78,7 +81,7 @@ export default function useSaveLoad() {
 
     const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
-      slowdownEnabled.value, savedPeople, savedResearch);
+      spokeToLennox.value, spokeToSama.value, slowdownEnabled.value, savedPeople, savedResearch);
 
     console.log('done saving');
     return localforage.setItem(SaveKey.GAME_STATE, gameState)
@@ -118,6 +121,8 @@ export default function useSaveLoad() {
       countdownTriggered.value = gameState.countdownTriggered;
       countupTimer.restart(gameState.countupSecondsPassed);
       slowdownEnabled.value = gameState.slowdownEnabled;
+      spokeToLennox.value = gameState.spokeToLennox;
+      spokeToSama.value = gameState.spokeToSama;
       if(countdownTriggered.value) {
         expandConstant.value = gameState.expandConstant;
         if(!gameEnded.value) {

@@ -145,6 +145,32 @@ const messages = {
       text: 'Then I know what I must do.'
     }]
   ),
+  [NarrativeKey.SPEAK_TO_SAMA]: new Message('Enter the Alchemist.', [{
+    person: 'Narrator',
+    text: 'Using a Quantum Computer, Lennox sends an image even further back in time - to the golden age of alchemy.'
+  },{
+    person: 'Lennox',
+    text: 'Can you hear me, oh great scientist?'
+  },{
+    person: 'Sama',
+    text: 'I can *see* you! What is this strange projection before me? Surely I am not having a religious experience?'
+  },{
+    person: 'Lennox',
+    text: 'That depends on how you feel about the heroics of saving the world. Sama. Great alchemist of a golden age - I beg your wisdom. You once sought a philosopher\'s stone but abandoned that research in favour of...'
+  },{
+    person: 'Sama',
+    text: 'I have abandoned nothing!'
+  },{
+    person: 'Lennox',
+    text: 'But you will! Hear me, for although time is abundant for you, for me it is precious and brief. I beg you not to abandon your studies. An experiment of mine has caused time to SKEW into a tangent... time itself is about to end. We need a philosopher\'s stone if we are ever to solve this problem, and only YOU can build one. And…bury it somewhere that only I can find it.'
+  },{
+    person: 'Sama',
+    text: '...I\'m gonna need a bigger workshop. What do I get out of this?'
+  },{
+    person: 'Lennox',
+    text: '...massive prestige long after you\'re dead?'
+  }]
+),
 
   //Sciences
   [ResearchKey.PHYSICS]: new Message('Unlocked Physics', [{

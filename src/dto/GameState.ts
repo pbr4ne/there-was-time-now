@@ -11,11 +11,14 @@ export class GameState {
   countupSecondsPassed: number;
   expandConstant: number;
   slowdownEnabled: boolean;
+  spokeToLennox: boolean;
+  spokeToSama: boolean;
   people: Array<GameStatePerson>;
   researches: Array<GameStateResearch>;
 
   constructor(currency: number, sellFeatureEnabled: boolean, gameStarted: boolean, gameEnded: boolean, countdownTriggered: boolean, 
-    countdownSecondsLeft: number, countupSecondsPassed: number, expandConstant: number, slowdownEnabled: boolean, people: Array<any>, researches: Array<any>) {
+    countdownSecondsLeft: number, countupSecondsPassed: number, expandConstant: number, slowdownEnabled: boolean, 
+    spokeToLennox: boolean, spokeToSama: boolean, people: Array<any>, researches: Array<any>) {
     this.currency = currency;
     this.sellFeatureEnabled = sellFeatureEnabled;
     this.gameStarted = gameStarted;
@@ -25,6 +28,8 @@ export class GameState {
     this.countupSecondsPassed = countupSecondsPassed;
     this.expandConstant = expandConstant;
     this.slowdownEnabled = slowdownEnabled;
+    this.spokeToLennox = spokeToLennox;
+    this.spokeToSama = spokeToSama;
     this.people = people;
     this.researches = researches;
   }
