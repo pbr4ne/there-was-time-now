@@ -4,7 +4,7 @@ import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { GameConstants } from '@/enum/Constants'
-import { PersonKey,  UnlockMessageKey } from '@/enum/Enums'
+import { PersonKey,  NarrativeKey } from '@/enum/Enums'
 import { messages } from '@/locales/en'
 //todo convert back to typescript
 const showTimeline = ref(false);
@@ -37,7 +37,7 @@ export default function useMessage() {
     person.messageList.unshift(message);
   }
 
-  const sendInitialMessage = () => sendMessage(messages[UnlockMessageKey.INITIAL], personList[PersonKey.LENNOX_OLD]);
+  const sendInitialMessage = () => sendMessage(messages[NarrativeKey.INITIAL], personList[PersonKey.LENNOX_OLD]);
 
   function sendUnlockMessage(key, person) {
     let message = messages[key];

@@ -1,20 +1,20 @@
 import { Message } from "@/entities/Message"
-import { PersonKey, ResearchKey, UnlockMessageKey } from '@/enum/Enums'
+import { NarrativeKey, ResearchKey } from '@/enum/Enums'
 
 const messages = {
   //Special Events
-  [UnlockMessageKey.INITIAL]: new Message('Intro', [{
+  [NarrativeKey.INITIAL]: new Message('Intro', [{
       text: 'The year is 1984. You are Lennox, a physicist researching the most cutting-edge technology: Quantum Computing! With enough research, you should be able to build your own Quantum Computer.'
     }, {
       text: 'Let\'s get started...',
     }]
   ),
-  [UnlockMessageKey.UNLOCK_WORKERS]: new Message('A Breakthrough.', [{
+  [NarrativeKey.UNLOCK_WORKERS]: new Message('A Breakthrough.', [{
       person: 'Lennox',
       text: 'Eureka! If I reroute the nanoseconds through the quantum flux thingamajig in the compumatrix, I *should* be able to slow time down. If only I had some undergrads to help, this is a lot of work and I haven\'t even had time to order a pizza - the most important element of research!'
     }]
   ),
-  [UnlockMessageKey.UNLOCK_COUNTDOWN]: new Message('You fire up your very first supercomputer.', [{
+  [NarrativeKey.UNLOCK_COUNTDOWN]: new Message('You fire up your very first supercomputer.', [{
       person: 'Quantum Computer',
       text: 'Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.',
     },{
@@ -22,7 +22,7 @@ const messages = {
       text: 'Great Scott! What am I going to do? I\'ll need to invent a way to slow down time so that I have enough time to fix time!',
     }]
   ),
-  [UnlockMessageKey.UNLOCK_SLOWDOWN]: new Message('Unlocked slowdown', [{
+  [NarrativeKey.UNLOCK_SLOWDOWN]: new Message('Unlocked slowdown', [{
       person: 'Undergrad',
       text: 'Dr. Lennox. Dr. Lennox, take a look at this. It appears there is indeed a way to *add* more time before the Doomsday Event.',
     },{
@@ -36,7 +36,7 @@ const messages = {
       text: 'Then it looks like it\'s time for the next phase.',
     }]
   ),
-  [UnlockMessageKey.UNLOCK_YOUNG_LENNOX]: new Message('The Discovery of the Device.', [{
+  [NarrativeKey.UNLOCK_YOUNG_LENNOX]: new Message('The Discovery of the Device.', [{
       person: 'Lennox',
       text: 'We\'ve done it. We\'ve found a way to stop the Doomsminute Event. We need to build THE DEVICE!'
     },{
@@ -68,11 +68,11 @@ const messages = {
       text: 'And it was at that time that Lennox experienced a *flashback*',
     },
   ]),
-  [UnlockMessageKey.HALFWAY]: new Message('Halfway there', [{
+  [NarrativeKey.HALFWAY]: new Message('Halfway there', [{
       text: 'Halfway to the end of the world.',
     }]
   ),
-  [UnlockMessageKey.SPEAK_TO_LENNOX]: new Message('The Flashback', [{
+  [NarrativeKey.SPEAK_TO_LENNOX]: new Message('The Flashback', [{
       person: 'Young Lennox',
       text: 'Yessirma\'am, it is indeed an ordinary type day in the ordinary present in which I do my EXTRAORDINARY RESEARCH. It sure is quiet and lonely doing research of the singularly unique type to which I am accustomed to doing. Maybe the radio will help motivate me to greater heights of genius...'
     },{
@@ -83,7 +83,7 @@ const messages = {
       text: '(Speaking through the radio): Hello? Hello me, can you hear me?'
     },{
       person: 'Young Lennox',
-      text: 'What an interesting program. They must be experimenting with something more interactive'
+      text: 'What an interesting program. They must be experimenting with something more interactive.'
     },{
       person: 'Lennox',
       text: 'No, you fool! I am speaking to you through the radio and, more importantly, through time!'
@@ -95,7 +95,7 @@ const messages = {
       text: 'Not so! Merely improbable! But time is short and you... I mean, I, must listen to me! Your research! You mustn\'t quit!'
     },{
       person: 'Young Lennox',
-      text: 'I wasn’t planning on it!'
+      text: 'I wasn\'t planning on it!'
     },{
       person: 'Lennox',
       text: 'Yes you are! In approximately three days you will lose most of your funding. But you must carry on! I am you from the future and I come with a dire warning... a quantum doomsday event is coming and I need your assistance to stop it... will you help me?'
@@ -120,6 +120,29 @@ const messages = {
     },{
       person: 'Young Lennox',
       text: 'Of course!'
+    }]
+  ),
+  [NarrativeKey.BREAKTHROUGH_2]: new Message('Breakthrough #2', [{
+      person: 'Lennox',
+      text: 'Younger me! I am once again contacting you through the science of quantum radio! Have you made any breakthroughs, perchance?'
+    },{
+      person: 'Young Lennox',
+      text: 'As a matter of fact, I have! But you may not fancy the conclusion. My research has led me to conclude that only an immortal will be able to withstand the rigors necessary to save us from our time crisis. Once they are created, being immortal, they should be able to move through time normally to your present (my future) and save us from the Doomsminute Event. However, they will require a special chamber through which to manipulate the quantum mechanics - that is...'
+    },{
+      person: 'Lennox',
+      text: 'You don\'t mean...?'
+    },{
+      person: 'Young Lennox',
+      text: 'I do.'
+    },{
+      person: 'Lennox',
+      text: 'A crystal sarcophagus! I always said it couldn\'t be done - and now, it must! Well, improbable as this may be, it is not an impossible task…I daresay I *do* fancy the challenge, my young self!'
+    },{
+      person: 'Young Lennox',
+      text: 'But there is more, my wrinkled replica. In order to create this immortal, I must do more than stretch mere telomeres. Only one body of study from the ancient past, long forgotten, can solve a mystery for us and provide a key ingredient: a Philosopher\'s Stone!'
+    },{
+      person: 'Lennox',
+      text: 'Then I know what I must do.'
     }]
   ),
 

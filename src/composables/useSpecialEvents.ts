@@ -6,7 +6,7 @@ import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
 import { GameConstants } from '@/enum/Constants'
-import { PersonKey, ResearchKey, UnlockMessageKey } from '@/enum/Enums'
+import { NarrativeKey, PersonKey, ResearchKey } from '@/enum/Enums'
 import { messages } from '@/locales/en'
 
 //todo - some of this could probably be triggered other ways
@@ -23,7 +23,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!countdownTriggered.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
       countdownTriggered.value = true;
-      sendMessage(messages[UnlockMessageKey.UNLOCK_COUNTDOWN], personList[PersonKey.LENNOX_OLD]);
+      sendMessage(messages[NarrativeKey.UNLOCK_COUNTDOWN], personList[PersonKey.LENNOX_OLD]);
       countdownTimer.start();
       countupTimer.stop();
     }
@@ -33,7 +33,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!sellFeatureEnabled.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
-      sendMessage(messages[UnlockMessageKey.UNLOCK_WORKERS], personList[PersonKey.LENNOX_OLD]);
+      sendMessage(messages[NarrativeKey.UNLOCK_WORKERS], personList[PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -41,7 +41,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!slowdownEnabled.value && Object.values(researchList).find((research: any) => research.numWorkers > 0)) {
       slowdownEnabled.value = true;
-      sendMessage(messages[UnlockMessageKey.UNLOCK_SLOWDOWN], personList[PersonKey.LENNOX_OLD]);
+      sendMessage(messages[NarrativeKey.UNLOCK_SLOWDOWN], personList[PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -50,7 +50,7 @@ export default function useSpecialEvents() {
     if(!personList[PersonKey.LENNOX_YOUNG].isUnlocked && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 10 && slowdownEnabled.value) {
       personList[PersonKey.LENNOX_YOUNG].isUnlocked = true;
       researchList[ResearchKey.BIOLOGY].isUnlocked = true;
-      sendMessage(messages[UnlockMessageKey.UNLOCK_YOUNG_LENNOX], personList[PersonKey.LENNOX_OLD]);
+      sendMessage(messages[NarrativeKey.UNLOCK_YOUNG_LENNOX], personList[PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -58,14 +58,14 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!spokeToLennox.value && researchList[ResearchKey.BIOLOGY].total == 5 && !isLoading.value){
       spokeToLennox.value = true;
-      sendMessage(messages[UnlockMessageKey.SPEAK_TO_LENNOX], personList[PersonKey.LENNOX_YOUNG]);
+      sendMessage(messages[NarrativeKey.SPEAK_TO_LENNOX], personList[PersonKey.LENNOX_YOUNG]);
     }
   });
 
   //When time is halfway up, show message
   // watchEffect(() => {
   //   if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
-  //     sendMessage(messages[UnlockMessageKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
+  //     sendMessage(messages[NarrativeKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
   //   }
   // });
 

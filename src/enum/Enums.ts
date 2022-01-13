@@ -1,11 +1,13 @@
-export enum UnlockMessageKey {
+export enum NarrativeKey {
   INITIAL = "initial",
   UNLOCK_WORKERS = "unlock-workers",
   UNLOCK_COUNTDOWN = "unlock-countdown",
   UNLOCK_SLOWDOWN = "unlock-slowdown",
   UNLOCK_YOUNG_LENNOX = "unlock-young-lennox",
+  UNLOCK_SAMA = "unlock-sama",
   HALFWAY = "halfway",
   SPEAK_TO_LENNOX = "speak-to-lennox",
+  BREAKTHROUGH_2 = "breakthrough-2",
 }
 
 export enum PersonKey {
