@@ -36,6 +36,38 @@ const messages = {
       text: 'Then it looks like it\'s time for the next phase.',
     }]
   ),
+  [UnlockMessageKey.UNLOCK_YOUNG_LENNOX]: new Message('The Discovery of the Device.', [{
+      person: 'Lennox',
+      text: 'We\'ve done it. We\'ve found a way to stop the Doomsminute Event. We need to build THE DEVICE!'
+    },{
+      person: 'Undergrad',
+      text: 'Doctor. We\'ve got a problem. Our research indicates that, with the exception of quantum physics, the kind of research required to complete THE DEVICE has been lost.'
+    },{
+      person: 'Lennox',
+      text: 'Lost how?',
+    },{
+      person: 'Undergrad',
+      text: 'Lost to time.',
+    },{
+      person: 'Lennox',
+      text: 'What *kind* of research?',
+    },{
+      person: 'Undergrad',
+      text: 'Well. It appears that only one scientist, back in the 30s, was doing this kind of biological research…',
+    },{
+      person: 'Lennox',
+      text: 'WHO?',
+    },{
+      person: 'Undergrad',
+      text: 'Well…YOU, doctor!',
+    },{
+      person: 'Lennox',
+      text: 'By the Code!',
+    },{
+      person: 'Narrator',
+      text: 'And it was at that time that Lennox experienced a *flashback*',
+    },
+  ]),
   [UnlockMessageKey.HALFWAY]: new Message('Halfway there', [{
       text: 'Halfway to the end of the world.',
     }]
@@ -194,40 +226,6 @@ const messages = {
     text: 'The name says it all.'
     }],
   ),
-
-  //People
-  [PersonKey.LENNOX_YOUNG]: new Message('The Discovery of the Device.', [{
-      person: 'Lennox',
-      text: 'We\'ve done it. We\'ve found a way to stop the Doomsminute Event. We need to build THE DEVICE!'
-    },{
-      person: 'Undergrad',
-      text: 'Doctor. We\'ve got a problem. Our research indicates that, with the exception of quantum physics, the kind of research required to complete THE DEVICE has been lost.'
-    },{
-      person: 'Lennox',
-      text: 'Lost how?',
-    },{
-      person: 'Undergrad',
-      text: 'Lost to time.',
-    },{
-      person: 'Lennox',
-      text: 'What *kind* of research?',
-    },{
-      person: 'Undergrad',
-      text: 'Well. It appears that only one scientist, back in the 30s, was doing this kind of biological research…',
-    },{
-      person: 'Lennox',
-      text: 'WHO?',
-    },{
-      person: 'Undergrad',
-      text: 'Well…YOU, doctor!',
-    },{
-      person: 'Lennox',
-      text: 'By the Code!',
-    },{
-      person: 'Narrator',
-      text: 'And it was at that time that Lennox experienced a *flashback*',
-    },
-  ]),
 }
 
 export { messages }

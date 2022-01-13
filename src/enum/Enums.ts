@@ -3,6 +3,7 @@ export enum UnlockMessageKey {
   UNLOCK_WORKERS = "unlock-workers",
   UNLOCK_COUNTDOWN = "unlock-countdown",
   UNLOCK_SLOWDOWN = "unlock-slowdown",
+  UNLOCK_YOUNG_LENNOX = "unlock-young-lennox",
   HALFWAY = "halfway",
   SPEAK_TO_LENNOX = "speak-to-lennox",
 }
@@ -25,7 +26,6 @@ export enum ResearchKey {
   GENETIC_MEMORY = "genetic-memory",
   TELOMERE_STRETCHER = "telomere-stretcher",
   THE_FLUID = "the-fluid",
-
 
   ALCHEMY = "alchemy",
   CHRONOMOGRIFICATION = "chronomogrification",

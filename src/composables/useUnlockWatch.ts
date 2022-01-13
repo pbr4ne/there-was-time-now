@@ -25,10 +25,12 @@ export default function useUnlockWatch() {
       }
       if(!unlockable.isUnlocked) {
         const unlock = researchList[unlockable.unlockedBy];
-        const threshold = unlockable.unlockThreshold;
-        if(unlock.total >= threshold) {
-          unlockable.isUnlocked = true;
-          sendUnlockMessage(key, person)
+        if(unlock) {
+          const threshold = unlockable.unlockThreshold;
+          if(unlock.total >= threshold) {
+            unlockable.isUnlocked = true;
+            sendUnlockMessage(key, person)
+          }
         }
       }
     }

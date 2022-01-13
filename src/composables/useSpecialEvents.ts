@@ -7,14 +7,14 @@ import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
 import { Research } from '@/entities/Research'
 import { GameConstants } from '@/enum/Constants'
-import { ResearchKey } from '@/enum/Enums'
+import { PersonKey, ResearchKey } from '@/enum/Enums'
 
 //todo - some of this could probably be triggered other ways
 export default function useSpecialEvents() {
 
   const dialog = useDialog();
-  const { researchList } = useInitialize();
-  const { sendUnlockCountdownMessage, sendHalfwayMessage, sendSpeakToLennoxMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
+  const { personList, researchList } = useInitialize();
+  const { sendUnlockCountdownMessage, sendHalfwayMessage, sendSpeakToLennoxMessage, sendUnlockLennoxMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useFlags();
   
@@ -45,6 +45,16 @@ export default function useSpecialEvents() {
     }
   });
 
+  //When tenth quantum computer is built and slowdown is enabled, unlock young lennox
+  watchEffect(() => {
+    if(!personList[PersonKey.LENNOX_YOUNG].isUnlocked && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 10 && slowdownEnabled.value) {
+      personList[PersonKey.LENNOX_YOUNG].isUnlocked = true;
+      researchList[ResearchKey.BIOLOGY].isUnlocked = true;
+      sendUnlockLennoxMessage();
+    }
+  });
+
+  //When fifth biology is researched, send message
   watchEffect(() => {
     if(!spokeToLennox.value && researchList[ResearchKey.BIOLOGY].total == 5 && !isLoading.value){
       spokeToLennox.value = true;

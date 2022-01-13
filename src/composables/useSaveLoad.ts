@@ -17,7 +17,7 @@ export default function useSaveLoad() {
   const { currency } = useCurrency();
   const { personList, researchList } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
-  const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled } = useFlags();
+  const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled, slowdownEnabled } = useFlags();
 
   //todo - missing initial message
   //todo - the countup timer is getting messed up
@@ -78,7 +78,7 @@ export default function useSaveLoad() {
 
     const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
-      savedPeople, savedResearch);
+      slowdownEnabled.value, savedPeople, savedResearch);
 
     console.log('done saving');
     return localforage.setItem(SaveKey.GAME_STATE, gameState)
@@ -117,6 +117,7 @@ export default function useSaveLoad() {
       gameEnded.value = gameState.gameEnded;
       countdownTriggered.value = gameState.countdownTriggered;
       countupTimer.restart(gameState.countupSecondsPassed);
+      slowdownEnabled.value = gameState.slowdownEnabled;
       if(countdownTriggered.value) {
         expandConstant.value = gameState.expandConstant;
         if(!gameEnded.value) {
