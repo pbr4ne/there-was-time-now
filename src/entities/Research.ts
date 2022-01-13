@@ -6,12 +6,13 @@ export class Research extends Unlockable {
   label: string;
   icon: object;
   color: string;
-  speed: number;
-  expand: number;
-  price: number;
-  workerCost: number;
   isDevice: boolean;
   personKey: PersonKey;
+
+  speed: number = 10;
+  expand: number = 1;
+  price: number = 5;
+  workerCost: number = 5;
 
   total: number = 0;
   current: number = 0;
@@ -19,18 +20,23 @@ export class Research extends Unlockable {
   numWorkers: number = 0;
   researchRequirementList: Array<ResearchRequirement> = new Array<ResearchRequirement>();
 
-  constructor(key: ResearchKey, label: string, icon: object, color: string, speed: number, expand: number, price: number, workerCost: number, isDevice: boolean, personKey: PersonKey) {
+  constructor(key: ResearchKey, label: string, icon: object, color: string, isDevice: boolean, personKey: PersonKey) {
     super();
     this.key = key;
     this.label = label;
     this.icon = icon;
     this.color = color;
+
+    this.isDevice = isDevice;
+    this.personKey = personKey;
+  }
+
+  //todo - this is stupid but it makes it easier to tweak the numbers as i go
+  setNumbers(speed: number, expand: number, price: number, workerCost: number) {
     this.speed = speed;
     this.expand = expand;
     this.price = price;
     this.workerCost = workerCost;
-    this.isDevice = isDevice;
-    this.personKey = personKey;
   }
 }
 
