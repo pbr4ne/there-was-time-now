@@ -85,11 +85,19 @@ export default function useResearch() {
     ).length == 0
   }
 
+  const consumeResearch = (researchRequirementList: Array<ResearchRequirement>) => {
+    researchRequirementList.forEach((researchRequirement : ResearchRequirement) => {
+      researchList[researchRequirement.researchKey].total -= researchRequirement.quantity;
+    });
+  }
+
   const incrementResearch = (research: Research) => {
     //todo - yuck do this better
     if(!research.isIncrementing) {
+      consumeResearch(research.researchRequirementList);
       const timer = setInterval(function() {
         research.isIncrementing = true;
+
         //todo - figure out how I want the progress bars to work
         research.current += research.speed;
         if(research.current >= 100) {

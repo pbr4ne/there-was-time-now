@@ -18,7 +18,7 @@ export default defineComponent({
       if(canIncrementResearch(research)) {
         return messages[research.key].messageSections[0].text;
       } else {
-        return h(TGameResearchNeeds);
+        return h(TGameResearchNeeds, { research: props.research });
       }
     }
 
