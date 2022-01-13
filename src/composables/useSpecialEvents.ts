@@ -5,16 +5,16 @@ import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
-import { Research } from '@/entities/Research'
 import { GameConstants } from '@/enum/Constants'
-import { PersonKey, ResearchKey } from '@/enum/Enums'
+import { PersonKey, ResearchKey, UnlockMessageKey } from '@/enum/Enums'
+import { messages } from '@/locales/en'
 
 //todo - some of this could probably be triggered other ways
 export default function useSpecialEvents() {
 
   const dialog = useDialog();
   const { personList, researchList } = useInitialize();
-  const { sendUnlockCountdownMessage, sendHalfwayMessage, sendSpeakToLennoxMessage, sendUnlockLennoxMessage, sendUnlockSlowdownMessage, sendUnlockWorkersMessage } = useMessage();
+  const { sendMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox } = useFlags();
   
@@ -23,7 +23,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!countdownTriggered.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
       countdownTriggered.value = true;
-      sendUnlockCountdownMessage();
+      sendMessage(messages[UnlockMessageKey.UNLOCK_COUNTDOWN], personList[PersonKey.LENNOX_OLD]);
       countdownTimer.start();
       countupTimer.stop();
     }
@@ -33,7 +33,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!sellFeatureEnabled.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
-      sendUnlockWorkersMessage();
+      sendMessage(messages[UnlockMessageKey.UNLOCK_WORKERS], personList[PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -41,7 +41,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!slowdownEnabled.value && Object.values(researchList).find((research: any) => research.numWorkers > 0)) {
       slowdownEnabled.value = true;
-      sendUnlockSlowdownMessage();
+      sendMessage(messages[UnlockMessageKey.UNLOCK_SLOWDOWN], personList[PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -50,7 +50,7 @@ export default function useSpecialEvents() {
     if(!personList[PersonKey.LENNOX_YOUNG].isUnlocked && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 10 && slowdownEnabled.value) {
       personList[PersonKey.LENNOX_YOUNG].isUnlocked = true;
       researchList[ResearchKey.BIOLOGY].isUnlocked = true;
-      sendUnlockLennoxMessage();
+      sendMessage(messages[UnlockMessageKey.UNLOCK_YOUNG_LENNOX], personList[PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -58,14 +58,14 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!spokeToLennox.value && researchList[ResearchKey.BIOLOGY].total == 5 && !isLoading.value){
       spokeToLennox.value = true;
-      sendSpeakToLennoxMessage();
+      sendMessage(messages[UnlockMessageKey.SPEAK_TO_LENNOX], personList[PersonKey.LENNOX_YOUNG]);
     }
   });
 
   //When time is halfway up, show message
   // watchEffect(() => {
   //   if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
-  //     sendHalfwayMessage();
+  //     sendMessage(messages[UnlockMessageKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
   //   }
   // });
 

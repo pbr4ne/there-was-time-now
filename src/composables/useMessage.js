@@ -38,12 +38,6 @@ export default function useMessage() {
   }
 
   const sendInitialMessage = () => sendMessage(messages[UnlockMessageKey.INITIAL], personList[PersonKey.LENNOX_OLD]);
-  const sendUnlockWorkersMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_WORKERS], personList[PersonKey.LENNOX_OLD]);
-  const sendUnlockCountdownMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_COUNTDOWN], personList[PersonKey.LENNOX_OLD]);
-  const sendUnlockSlowdownMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_SLOWDOWN], personList[PersonKey.LENNOX_OLD]);
-  const sendUnlockLennoxMessage = () => sendMessage(messages[UnlockMessageKey.UNLOCK_YOUNG_LENNOX], personList[PersonKey.LENNOX_OLD]);
-  const sendSpeakToLennoxMessage = () => sendMessage(messages[UnlockMessageKey.SPEAK_TO_LENNOX], personList[PersonKey.LENNOX_YOUNG]);
-  const sendHalfwayMessage = () => sendMessage(messages[UnlockMessageKey.HALFWAY], personList[PersonKey.LENNOX_OLD]);
 
   function sendUnlockMessage(key, person) {
     let message = messages[key];
@@ -62,15 +56,9 @@ export default function useMessage() {
   }
 
   return {
-    sendMessage,
-    sendUnlockCountdownMessage,
-    sendHalfwayMessage,
     sendInitialMessage,
-    sendSpeakToLennoxMessage,
-    sendUnlockLennoxMessage,
-    sendUnlockSlowdownMessage,
+    sendMessage,
     sendUnlockMessage,
-    sendUnlockWorkersMessage,
     showTimeline,
   }
 }
