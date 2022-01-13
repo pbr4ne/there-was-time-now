@@ -9,8 +9,8 @@
       <n-space style="padding: 20px">
         <t-game-research :person="person" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
       </n-space>
-      <t-game-tab-device v-if="unlockedDevice(person)" :research="unlockedDevice(person)" />
-      <t-game-tab-messages :person="person" />
+      <t-game-device v-if="unlockedDevice(person)" :research="unlockedDevice(person)" />
+      <t-game-messages :person="person" />
     </n-tab-pane>
   </n-tabs>
 </template>
@@ -19,8 +19,8 @@
 import { defineComponent, h } from 'vue'
 import { NSpace, NTabs, NTabPane } from 'naive-ui'
 import TGameTabCard from '@/components/TGameTabCard.vue'
-import TGameTabDevice from '@/components/TGameTabDevice.vue'
-import TGameTabMessages from '@/components/TGameTabMessages.vue'
+import TGameDevice from '@/components/TGameDevice.vue'
+import TGameMessages from '@/components/TGameMessages.vue'
 import TGameResearch from '@/components/TGameResearch.vue'
 import useFlags from '@/composables/useFlags'
 import useInitialize from '@/composables/useInitialize'
@@ -34,8 +34,8 @@ export default defineComponent({
     NTabs,
     NTabPane,
     NSpace,
-    TGameTabDevice,
-    TGameTabMessages,
+    TGameDevice,
+    TGameMessages,
     TGameResearch,
   },
   setup() {
