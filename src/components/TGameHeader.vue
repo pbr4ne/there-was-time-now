@@ -65,10 +65,7 @@ export default defineComponent({
     const { personList } = useInitialize();
     const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
-    let titleValue = ref('TWTN');
-    if( window.innerWidth > 700) {
-      titleValue = ref('There Was Time Now');
-    }
+    const titleValue = window.innerWidth > 700 ? ref('There Was Time Now') : ref('TWTN');
 
     const titleFont = computed(() => {
       if(personList[PersonKey.NECHTAN].isUnlocked) {

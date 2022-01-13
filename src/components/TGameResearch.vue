@@ -85,14 +85,6 @@ export default defineComponent({
     const { sellFeatureEnabled } = useFlags();
     const { canIncrementResearch, changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
 
-    // function getTooltip(research) {
-    //   if(canIncrementResearch(research)) {
-    //     return messages[research.key].messageSections[0].text;
-    //   } else {
-    //     return () => h(TGameResearchNeeds);
-    //   }
-    // }
-
     return {
       canIncrementResearch,
       changeSellIncrement,
