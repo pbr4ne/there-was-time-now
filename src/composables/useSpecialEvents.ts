@@ -62,7 +62,7 @@ export default function useSpecialEvents() {
     }
   });
 
-  //When first telomere stretcher is researched, unlock sama, crystal sarcophagus, omegaperson
+  //When first telomere stretcher is researched, unlock sama, crystal sarcophagus, chronocrystals, omegaperson, the fluid
   watchEffect(() => {
     if(!personList[PersonKey.SAMA].isUnlocked && researchList[ResearchKey.TELOMERE_STRETCHER].total == 1 && !isLoading.value){
       personList[PersonKey.SAMA].isUnlocked = true;
@@ -80,6 +80,17 @@ export default function useSpecialEvents() {
     if(!spokeToSama.value && researchList[ResearchKey.ALCHEMY].total == 5 && !isLoading.value){
       spokeToSama.value = true;
       sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_SAMA]);
+    }
+  });
+
+  //When first distiller stretcher is researched, unlock itotia, philosopher's stone, eezo
+  watchEffect(() => {
+    if(!personList[PersonKey.ITOTIA].isUnlocked && researchList[ResearchKey.DISTILLER].total == 1 && !isLoading.value){
+      personList[PersonKey.ITOTIA].isUnlocked = true;
+      researchList[ResearchKey.MATHEMATICS].isUnlocked = true;
+      researchList[ResearchKey.PHILOSOPHERS_STONE].isUnlocked = true;
+      researchList[ResearchKey.ELEMENT_ZERO].isUnlocked = true;
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_ITOTIA]);
     }
   });
 

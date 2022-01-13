@@ -146,31 +146,68 @@ const messages = {
     }]
   ),
   [NarrativeKey.SPEAK_TO_SAMA]: new Message('Enter the Alchemist.', [{
-    person: 'Narrator',
-    text: 'Using a Quantum Computer, Lennox sends an image even further back in time - to the golden age of alchemy.'
-  },{
-    person: 'Lennox',
-    text: 'Can you hear me, oh great scientist?'
-  },{
-    person: 'Sama',
-    text: 'I can *see* you! What is this strange projection before me? Surely I am not having a religious experience?'
-  },{
-    person: 'Lennox',
-    text: 'That depends on how you feel about the heroics of saving the world. Sama. Great alchemist of a golden age - I beg your wisdom. You once sought a philosopher\'s stone but abandoned that research in favour of...'
-  },{
-    person: 'Sama',
-    text: 'I have abandoned nothing!'
-  },{
-    person: 'Lennox',
-    text: 'But you will! Hear me, for although time is abundant for you, for me it is precious and brief. I beg you not to abandon your studies. An experiment of mine has caused time to SKEW into a tangent... time itself is about to end. We need a philosopher\'s stone if we are ever to solve this problem, and only YOU can build one. And…bury it somewhere that only I can find it.'
-  },{
-    person: 'Sama',
-    text: '...I\'m gonna need a bigger workshop. What do I get out of this?'
-  },{
-    person: 'Lennox',
-    text: '...massive prestige long after you\'re dead?'
-  }]
-),
+      person: 'Narrator',
+      text: 'Using a Quantum Computer, Lennox sends an image even further back in time - to the golden age of alchemy.'
+    },{
+      person: 'Lennox',
+      text: 'Can you hear me, oh great scientist?'
+    },{
+      person: 'Sama',
+      text: 'I can *see* you! What is this strange projection before me? Surely I am not having a religious experience?'
+    },{
+      person: 'Lennox',
+      text: 'That depends on how you feel about the heroics of saving the world. Sama. Great alchemist of a golden age - I beg your wisdom. You once sought a philosopher\'s stone but abandoned that research in favour of...'
+    },{
+      person: 'Sama',
+      text: 'I have abandoned nothing!'
+    },{
+      person: 'Lennox',
+      text: 'But you will! Hear me, for although time is abundant for you, for me it is precious and brief. I beg you not to abandon your studies. An experiment of mine has caused time to SKEW into a tangent... time itself is about to end. We need a philosopher\'s stone if we are ever to solve this problem, and only YOU can build one. And…bury it somewhere that only I can find it.'
+    },{
+      person: 'Sama',
+      text: '...I\'m gonna need a bigger workshop. What do I get out of this?'
+    },{
+      person: 'Lennox',
+      text: '...massive prestige long after you\'re dead?'
+    }]
+  ),
+  [NarrativeKey.UNLOCK_ITOTIA]: new Message('Mathematical!', [{
+      person: 'Lennox',
+      text: 'How is progress, my medieval compatriot?'
+    },{
+      person: 'Sama',
+      text: 'Medieval? What does that even mean...?'
+    },{
+      person: 'Lennox',
+      text: '...never mind.'
+    },{
+      person: 'Sama',
+      text: 'You are a strange apparition. Progress continues but I have encountered a problem. The stone must be... configured.'
+    },{
+      person: 'Lennox',
+      text: 'Configured how?'
+    },{
+      person: 'Sama',
+      text: 'Mathematically. Surely in your advanced time you can find a way.'
+    },{
+      person: 'Lennox',
+      text: 'Or I could make the logical choice, and contact the greatest mathematicians ever!'
+    },{
+      text: 'And so...'
+    },{
+      person: 'Lennox',
+      text: '...so will you help me, ancient Mayan?'
+    },{
+      person: 'Itotia',
+      text: 'My name is Itotia. And yes. I will help you, even though your civilization is ending in 28 years.'
+    },{
+      person: 'Lennox',
+      text: 'I just told you - it\'s ending far sooner!'
+    },{
+      person: 'Itotia',
+      text: 'Not according to *our* calendars...'
+    }]
+  ),
 
   //Sciences
   [ResearchKey.PHYSICS]: new Message('Unlocked Physics', [{
