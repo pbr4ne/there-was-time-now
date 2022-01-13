@@ -1,9 +1,9 @@
 <template>
-<n-grid :cols="1" responsive="screen" style="padding-left: 20px; max-width: 75%;">
-  <n-grid-item>
-    <t-game-device-card :research="research" />
-  </n-grid-item>
-</n-grid>
+  <n-grid :cols="1" responsive="screen" style="padding-left: 20px; max-width: 75%;">
+    <n-grid-item>
+      <t-game-device-card :research="research" />
+    </n-grid-item>
+  </n-grid>
 </template>
 <script>
 import { defineComponent } from 'vue'
