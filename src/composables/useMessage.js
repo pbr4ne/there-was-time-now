@@ -32,12 +32,14 @@ export default function useMessage() {
   const { timeElapsed } = useTime();
 
   function sendMessage(message, person) {
-    setTimestamp(message, person.year, timeElapsed);
-    createNotification(message, notification);
-    person.messageList.unshift(message);
+    if(!message.wasSent){
+      setTimestamp(message, person.year, timeElapsed);
+      createNotification(message, notification);
+      person.messageList.unshift(message);
+    }
   }
 
-  const sendInitialMessage = () => sendMessage(messages[NarrativeKey.INITIAL], personList[PersonKey.LENNOX_OLD]);
+  const sendInitialMessage = () => sendNarrativeMessage(messages[NarrativeKey.INTRO]);
 
   function sendUnlockMessage(key, person) {
     let message = messages[key];
@@ -47,17 +49,20 @@ export default function useMessage() {
 
     if(!message.wasSent) {
       message.wasSent = true;
+      sendMessage(message, person);
     }
     else {
       return;
     }
+  }
 
-    sendMessage(message, person);
+  function sendNarrativeMessage(message) {
+    sendMessage(message, personList[PersonKey.LENNOX_OLD]);
   }
 
   return {
     sendInitialMessage,
-    sendMessage,
+    sendNarrativeMessage,
     sendUnlockMessage,
     showTimeline,
   }

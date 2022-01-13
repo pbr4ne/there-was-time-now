@@ -1,13 +1,15 @@
 export enum NarrativeKey {
-  INITIAL = "initial",
+  INTRO = "initial",
   UNLOCK_WORKERS = "unlock-workers",
   UNLOCK_COUNTDOWN = "unlock-countdown",
   UNLOCK_SLOWDOWN = "unlock-slowdown",
   UNLOCK_YOUNG_LENNOX = "unlock-young-lennox",
-  UNLOCK_SAMA = "unlock-sama",
   HALFWAY = "halfway",
   SPEAK_TO_LENNOX = "speak-to-lennox",
-  BREAKTHROUGH_2 = "breakthrough-2",
+  UNLOCK_SAMA = "unlock-sama",
+  SPEAK_TO_SAMA = "speak-to-sama",
+  UNLOCK_ITOTIA = "unlock-itotia",
+  UNLOCK_NECHTAN = "unlock-nechtan",
 }
 
 export enum PersonKey {

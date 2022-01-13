@@ -3,15 +3,10 @@ import { NarrativeKey, ResearchKey } from '@/enum/Enums'
 
 const messages = {
   //Special Events
-  [NarrativeKey.INITIAL]: new Message('Intro', [{
+  [NarrativeKey.INTRO]: new Message('Intro', [{
       text: 'The year is 1984. You are Lennox, a physicist researching the most cutting-edge technology: Quantum Computing! With enough research, you should be able to build your own Quantum Computer.'
     }, {
       text: 'Let\'s get started...',
-    }]
-  ),
-  [NarrativeKey.UNLOCK_WORKERS]: new Message('A Breakthrough.', [{
-      person: 'Lennox',
-      text: 'Eureka! If I reroute the nanoseconds through the quantum flux thingamajig in the compumatrix, I *should* be able to slow time down. If only I had some undergrads to help, this is a lot of work and I haven\'t even had time to order a pizza - the most important element of research!'
     }]
   ),
   [NarrativeKey.UNLOCK_COUNTDOWN]: new Message('You fire up your very first supercomputer.', [{
@@ -20,6 +15,11 @@ const messages = {
     },{
       person: 'Lennox',
       text: 'Great Scott! What am I going to do? I\'ll need to invent a way to slow down time so that I have enough time to fix time!',
+    }]
+  ),
+  [NarrativeKey.UNLOCK_WORKERS]: new Message('A Breakthrough.', [{
+      person: 'Lennox',
+      text: 'Eureka! If I reroute the nanoseconds through the quantum flux thingamajig in the compumatrix, I *should* be able to slow time down. If only I had some undergrads to help, this is a lot of work and I haven\'t even had time to order a pizza - the most important element of research!'
     }]
   ),
   [NarrativeKey.UNLOCK_SLOWDOWN]: new Message('Unlocked slowdown', [{
@@ -66,8 +66,8 @@ const messages = {
     },{
       person: 'Narrator',
       text: 'And it was at that time that Lennox experienced a *flashback*',
-    },
-  ]),
+    }]
+  ),
   [NarrativeKey.HALFWAY]: new Message('Halfway there', [{
       text: 'Halfway to the end of the world.',
     }]
@@ -122,7 +122,7 @@ const messages = {
       text: 'Of course!'
     }]
   ),
-  [NarrativeKey.BREAKTHROUGH_2]: new Message('Breakthrough #2', [{
+  [NarrativeKey.UNLOCK_SAMA]: new Message('Breakthrough #2', [{
       person: 'Lennox',
       text: 'Younger me! I am once again contacting you through the science of quantum radio! Have you made any breakthroughs, perchance?'
     },{
