@@ -19,7 +19,8 @@
         >
           <thead>
             <tr>
-              <th style="text-align: center;">
+              <th style="text-align: center;" :style="{width: '205px', maxWidth: '205px'}"
+>
                 Research
               </th>
               <th style="text-align: center;" v-if="sellFeatureEnabled">
@@ -37,8 +38,8 @@
               v-for="research in researchList.filter(research => research.isUnlocked)"
               :key="research.label"
             >
-              <td>
-                  <t-game-research-button :research = "research" />
+              <td @mouseover="currentResearch = research" @mouseleave="currentResearch = null">
+                  <t-game-research-button :research = "research"  />
               </td>
               <td v-if="sellFeatureEnabled">
                 <t-game-research-sell :research="research" />
@@ -48,6 +49,13 @@
               </td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <td :style="{maxWidth: '205px', height: '100px', wordWrap: 'break-word'}" :colspan="sellFeatureEnabled? 3 : 1">
+                <t-game-research-needs :research="currentResearch" />
+              </td>
+            </tr>
+          </tfoot>
         </n-table>
       </n-scrollbar>
     </n-space>
@@ -55,9 +63,10 @@
 </template>
 
 <script>
-import { defineComponent, } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { NButton, NIcon,  NProgress, NScrollbar, NSpace, NTable } from 'naive-ui'
 import { BuildOutline as BuildIcon } from '@vicons/ionicons5'
+import TGameResearchNeeds from '@/components/TGameResearchNeeds'
 import TGameResearchSell from '@/components/TGameResearchSell'
 import TGameResearchWorkers from '@/components/TGameResearchWorkers'
 import useFlags from '@/composables/useFlags'
@@ -74,6 +83,7 @@ export default defineComponent({
     NScrollbar,
     NSpace,
     NTable,
+    TGameResearchNeeds,
     TGameResearchSell,
     TGameResearchWorkers,
   },
@@ -85,7 +95,10 @@ export default defineComponent({
     const { sellFeatureEnabled } = useFlags();
     const { canIncrementResearch, changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
 
-    return {
+    const currentResearch = ref(null);
+
+  return {
+      currentResearch,
       canIncrementResearch,
       changeSellIncrement,
       sellFeatureEnabled,

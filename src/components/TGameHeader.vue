@@ -11,15 +11,19 @@
           {{currency}}
         </n-statistic>
 
-        <n-statistic label="Time Expansion" v-if="slowdownEnabled">
+        <n-statistic label="Time Expansion" v-if="slowdownEnabled && !gameEnded">
           {{expandConstant.toFixed(2)}}
         </n-statistic>
-
         <n-popover trigger="hover">
           <template #trigger>
-            <n-statistic label="Days Left" v-if="countdownTriggered">
-              {{timeLeft}}
-            </n-statistic>
+            <div>
+              <n-statistic label="Days Left" v-if="gameEnded">
+                0
+              </n-statistic>
+              <n-statistic label="Days Left" v-else-if="countdownTriggered">
+                {{timeLeft}}
+              </n-statistic>
+            </div>
           </template>
           <span>{{countdownTimer.realPeopleTimeLeft()}} Real People Time™ left</span>
         </n-popover>
@@ -55,7 +59,7 @@ export default defineComponent({
   },
   setup() {
     const { currency } = useCurrency();
-    const { countdownTriggered, sellFeatureEnabled, slowdownEnabled } = useFlags();
+    const { countdownTriggered, gameEnded, sellFeatureEnabled, slowdownEnabled } = useFlags();
     const { personList } = useInitialize();
     const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
@@ -80,6 +84,7 @@ export default defineComponent({
       countupTimer,
       countdownTriggered,
       currency,
+      gameEnded,
       expandConstant,
       sellFeatureEnabled,
       slowdownEnabled,

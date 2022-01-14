@@ -11,7 +11,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { NButton,  NPopover } from 'naive-ui'
+import { NButton, NPopover } from 'naive-ui'
 import useResearch from '@/composables/useResearch'
 import { Research } from '@/entities/Research'
 
