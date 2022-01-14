@@ -3,7 +3,7 @@
 
     <n-space justify="space-between" class="twtnHeader">
       <n-space style="padding-left: 5px;" width="100%">
-        <span class="titleText" :class="[titleFont]">{{titleValue}}</span>
+        <span :class="[titleText, titleFont]">{{titleValue}}</span>
       </n-space>
 
       <n-space width="209px">
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+/*eslint-disable*/
 import { computed, defineComponent, ref } from 'vue'
 import { NIcon, NLayoutHeader, NPopover, NSpace, NSpin, NStatistic} from 'naive-ui'
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
@@ -65,6 +66,7 @@ export default defineComponent({
 
     const titleValue = window.innerWidth > 700 ? ref('There Was Time Now') : ref('TWTN');
 
+    //todo - this is so stupid how i did this, fix this eventually!
     const titleFont = computed(() => {
       if(personList[PersonKey.NECHTAN].isUnlocked) {
         return "title2524BC"
@@ -79,6 +81,22 @@ export default defineComponent({
       }
     });
 
+    const titleText = computed(() => {
+      if(window.innerWidth > 900) {
+        return "titleTextBig";
+      } else if(personList[PersonKey.NECHTAN].isUnlocked) {
+        return "titleText2524BC"
+      } else if(personList[PersonKey.ITOTIA].isUnlocked) {
+        return "titleText374";
+      } else if(personList[PersonKey.SAMA].isUnlocked) {
+        return "titleText904";
+      } else if(personList[PersonKey.LENNOX_YOUNG].isUnlocked) {
+        return "titleText1934"
+      } else {
+        return "titleText1984";
+      }
+    });
+
     return {
       countdownTimer,
       countupTimer,
@@ -90,11 +108,13 @@ export default defineComponent({
       slowdownEnabled,
       timeLeft,
       titleFont,
+      titleText,
       titleValue,
     }
   },
 })
 </script>
+<!--todo I apparently need to learn how CSS works-->
 <style scoped>
   @font-face {
     font-family: "1984";
@@ -131,8 +151,28 @@ export default defineComponent({
     format("truetype");
   }
 
-  .titleText {
+  .titleTextBig {
     font-size: 40px;
+  }
+
+  .titleText1984 {
+    font-size: 30px;
+  }
+
+  .titleText1934 {
+    font-size: 30px;
+  }
+
+  .titleText904 {
+    font-size: 30px;
+  }
+
+  .titleText374 {
+    font-size: 15px;
+  }
+
+  .titleText2524BC {
+    font-size: 20px;
   }
 
   .title1984 {
