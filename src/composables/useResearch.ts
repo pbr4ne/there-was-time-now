@@ -112,15 +112,19 @@ export default function useResearch() {
               expandTime(research.expand);
             }
           },200);
-          setTimeout(function() {
-            if(research.numWorkers > 0 && canIncrementResearch(research)) {
-              incrementResearch(research);
-            }
-          }, 10000 / research.numWorkers);
+          setTimeout(() => restartIncrement(research), 10000);
         }
       },100);
     }
   };
+
+  const restartIncrement = (research: Research) => {
+    if(research.numWorkers > 0 && canIncrementResearch(research)) {
+      incrementResearch(research);
+    } else {
+      setTimeout(() => restartIncrement(research), 10000);
+    }
+  }
 
   const startIncrements = () => {
     Object.values(researchList).forEach((research: any) => {
