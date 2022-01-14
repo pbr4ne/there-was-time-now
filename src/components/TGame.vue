@@ -44,12 +44,12 @@ export default {
         sendInitialMessage();
         gameStarted.value = true;
       }
-
+    }).finally(function() {
+        startIncrements();
     });
 
     useSpecialEvents();
     useUnlockWatch();
-    startIncrements();
 
     //Autosave
     setTimeout(function() {
