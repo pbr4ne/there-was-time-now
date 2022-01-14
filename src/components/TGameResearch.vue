@@ -16,11 +16,11 @@
           :single-line="true" 
           :single-column="true" 
           :size="'small'"
+          :style="tableStyle"
         >
           <thead>
             <tr>
-              <th style="text-align: center;" :style="{width: '205px', maxWidth: '205px'}"
->
+              <th style="text-align: center;">
                 Research
               </th>
               <th style="text-align: center;" v-if="sellFeatureEnabled">
@@ -51,7 +51,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td :style="{maxWidth: '205px', height: '100px', wordWrap: 'break-word'}" :colspan="sellFeatureEnabled? 3 : 1">
+              <td :style="{ maxWidth: '205px', height: '100px', wordWrap: 'break-word' }" :colspan="sellFeatureEnabled? 3 : 1">
                 <t-game-research-needs :research="currentResearch" />
               </td>
             </tr>
@@ -96,8 +96,11 @@ export default defineComponent({
     const { canIncrementResearch, changeSellIncrement, incrementResearch, sellIncrement } = useResearch();
 
     const currentResearch = ref(null);
+    const tableStyle = {
+      maxWidth: window.innerWidth > 700 || !sellFeatureEnabled.value ? '205px' : '36px'
+    }
 
-  return {
+    return {
       currentResearch,
       canIncrementResearch,
       changeSellIncrement,
@@ -105,6 +108,7 @@ export default defineComponent({
       sellIncrement,
       incrementResearch,
       messages,
+      tableStyle,
     }
   },
 })
