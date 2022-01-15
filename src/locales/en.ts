@@ -211,6 +211,47 @@ const messages = {
   [NarrativeKey.UNLOCK_NECHTAN]: new Message('The Final Countdown', [{
       person: 'Itotia',
       text: 'The calculation is almost complete, Lennox. Now we must look to the stars.'
+    },{
+      person: 'Lennox',
+      text: 'What do the stars have to...'
+    },{
+      person: 'Itotia',
+      text: 'You future people spend too much time looking inward and not enough time looking up. Stop questioning everything.'
+    },{
+      person: 'Lennox',
+      text: 'Like the lack of language barrier?'
+    },{
+      person: 'Itotia',
+      text: 'Exactly. Neither should you question the need to create a massive series of stone pillars, to align the energy of the stars. My calculations point to this - it will be needed or the math will mean nothing. But we lack the resources to complete this. Surely in your time, massive stones are aplenty.'
+    },{
+      person: 'Lennox',
+      text: 'An alignment of stone pillars, you say?. I know just the civilization...'
+    },{
+      text: 'And so...'
+    },{
+      person: 'Lennox',
+      text: '...so that\'s what I need from your people, Nechtan. What do you say?'
+    },{
+      person: 'Itotia',
+      text: 'I say we\'re gonna need a bigger boat. For the stones... y\'know.'
+    }]
+  ),
+  [NarrativeKey.SUCCESS]: new Message('Device Completion', [{
+    text: "And so, as the last stone rises on the ancient plain, Nechtan records the alignment of the stars and inscribes the information on a cavern wall..."
+  },{
+    text: "...solving the final riddle of Itotia's calculation, which is recorded on a calendar..."
+  },{
+    text: "...which Sama then uses to configure the philosopher's stone, which is buried in a box..."
+  },{
+    text: "...dug up by Young Lennox's archaeology team and fed to the volunteer Omegaperson..."
+  },{
+    text: "...who, in 1984, steps into the Crystal Sarcophagus in order to solve the TIME PARADOX! Congratulations, There Is Time Now!..."
+    }]
+  ),
+  [NarrativeKey.FAILURE]: new Message('Failure', [{
+    text: "As you watch the final seconds of the clock run out and drain the last drops of your whiskey, listening to the final throes of the undergrad's desperate bacchanal, you wonder: \"did I not click things quickly enough?\""
+    },{
+    text: "#outatime"
     }]
   ),
 

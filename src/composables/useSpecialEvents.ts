@@ -123,10 +123,7 @@ export default function useSpecialEvents() {
     if(devices.length == devicesComplete.length) {
       countdownTimer.stop();
       gameEnded.value = true;
-      dialog.success({
-        title: 'Game Won',
-        content: 'You successfully stopped the end of the world!'
-      });
+      sendNarrativeMessage(messages[NarrativeKey.SUCCESS]);
     }
   });
 
@@ -134,11 +131,7 @@ export default function useSpecialEvents() {
   watchEffect(async() => {
     if(countdownTimer.isExpired() && !isLoading.value) {
       gameEnded.value = true;
-
-      dialog.error({
-        title: 'Game Over',
-        content: '#OUTATIME'
-      });
+      sendNarrativeMessage(messages[NarrativeKey.FAILURE]);
     }
   });
 }

@@ -10,6 +10,8 @@ export enum NarrativeKey {
   SPEAK_TO_SAMA = "speak-to-sama",
   UNLOCK_ITOTIA = "unlock-itotia",
   UNLOCK_NECHTAN = "unlock-nechtan",
+  SUCCESS = "success",
+  FAILURE = "failure",
 }
 
 export enum PersonKey {
