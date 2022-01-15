@@ -22,7 +22,7 @@ const messages = {
       text: 'Eureka! If I reroute the nanoseconds through the quantum flux thingamajig in the compumatrix, I *should* be able to slow time down. If only I had some undergrads to help, this is a lot of work and I haven\'t even had time to order a pizza - the most important element of research!'
     }]
   ),
-  [NarrativeKey.UNLOCK_SLOWDOWN]: new Message('Unlocked slowdown', [{
+  [NarrativeKey.UNLOCK_SLOWDOWN]: new Message('The Undergrads make themselves useful.', [{
       person: 'Undergrad',
       text: 'Dr. Lennox. Dr. Lennox, take a look at this. It appears there is indeed a way to *add* more time before the Doomsday Event.',
     },{
@@ -276,7 +276,7 @@ const messages = {
     }],
   ),
   [ResearchKey.OBSIDIAN]: new Message('Unlocked Obsidian', [{
-      text: 'Coal\'s sexier cousin'
+      text: 'Coal\'s sexier cousin.'
     }],
   ),
   [ResearchKey.ASTRONOMY]: new Message('Unlocked Astronomy', [{
