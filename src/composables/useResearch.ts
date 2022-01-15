@@ -57,7 +57,7 @@ export default function useResearch() {
     if(canBuyWorker(research)) {
       research.numWorkers++;
       currency.value -= 5;
-      incrementResearch(research);
+      autoIncrement(research);
     }
   }
 
@@ -91,17 +91,17 @@ export default function useResearch() {
     });
   }
 
-  const incrementResearch = (research: Research) => {
+  const incrementResearch = (research: Research, fromWorker?: boolean) => {
     //todo - yuck do this better
     if(!research.isIncrementing) {
       consumeResearch(research.researchRequirementList);
       const timer = setInterval(function() {
         research.isIncrementing = true;
-
-        //todo - figure out how I want the progress bars to work
         research.current += research.speed;
         if(research.current >= 100) {
           clearInterval(timer);
+
+          //after 200 ms, show the total as 1
           setTimeout(function() {
             if(!research.isDevice) {
               research.current = 0;
@@ -112,24 +112,31 @@ export default function useResearch() {
               expandTime(research.expand);
             }
           },200);
-          setTimeout(() => restartIncrement(research), 10000);
+
+          //after 10 seconds, restart research
+          if(fromWorker) {
+            setTimeout(() => autoIncrement(research), 10000);
+          }
         }
       },100);
     }
   };
 
-  const restartIncrement = (research: Research) => {
-    if(research.numWorkers > 0 && canIncrementResearch(research)) {
-      incrementResearch(research);
-    } else {
-      setTimeout(() => restartIncrement(research), 10000);
+  //
+  const autoIncrement = (research: Research) => {
+    if(research.numWorkers > 0) {
+      if(canIncrementResearch(research)) {
+        incrementResearch(research, true);
+      } else {
+        setTimeout(() => autoIncrement(research), 10000);
+      }
     }
   }
 
   const startIncrements = () => {
     Object.values(researchList).forEach((research: any) => {
       if(research.numWorkers > 0 && canIncrementResearch(research)){
-          incrementResearch(research);
+          incrementResearch(research, true);
         }
       }
     )
