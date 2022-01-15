@@ -12,7 +12,7 @@
         </n-statistic>
 
         <n-statistic label="Time Expansion" v-if="slowdownEnabled && !gameEnded">
-          {{expandConstant.toFixed(2)}}
+          {{expandConstantFormatted()}}
         </n-statistic>
         <n-popover trigger="hover">
           <template #trigger>
@@ -97,13 +97,21 @@ export default defineComponent({
       }
     });
 
+    function expandConstantFormatted() {
+      if(expandConstant.value < 100) {
+        return expandConstant.value.toFixed(2);
+      } else {
+        return expandConstant.value.toFixed(0);
+      }
+    }
+
     return {
       countdownTimer,
       countupTimer,
       countdownTriggered,
       currency,
       gameEnded,
-      expandConstant,
+      expandConstantFormatted,
       sellFeatureEnabled,
       slowdownEnabled,
       timeLeft,
