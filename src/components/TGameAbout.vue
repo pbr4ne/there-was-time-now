@@ -9,7 +9,13 @@
   <br /><br />
   special thanks to: 
   <div class="indent">
-    GoodJukel
+    goodjukel<br />
+    mystic<br />
+    j9<br />
+    grape tomato<br />
+    lady julz<br />
+    zelda<br />
+    dish court boohbahs
   </div>
   <br />
   <span>v0.1</span>
