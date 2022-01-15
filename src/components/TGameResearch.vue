@@ -51,7 +51,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td :style="{ maxWidth: '205px', height: '100px', wordWrap: 'break-word' }" :colspan="sellFeatureEnabled? 3 : 1">
+              <td :style="extraStyle" :colspan="sellFeatureEnabled? 3 : 1">
                 <t-game-research-needs :research="currentResearch" :person="person" />
               </td>
             </tr>
@@ -99,11 +99,17 @@ export default defineComponent({
     const tableStyle = {
       maxWidth: window.innerWidth > 700 || !sellFeatureEnabled.value ? '205px' : '36px'
     }
+    const extraStyle = {
+      maxWidth: '205px', 
+      height: !sellFeatureEnabled.value ? '150px' : '125px', 
+      wordWrap: 'break-word'
+    }
 
     return {
       currentResearch,
       canIncrementResearch,
       changeSellIncrement,
+      extraStyle,
       sellFeatureEnabled,
       sellIncrement,
       incrementResearch,
