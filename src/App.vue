@@ -2,7 +2,9 @@
   <n-config-provider :theme="theme()">
     <n-dialog-provider>
       <n-notification-provider>
-        <t-game />
+        <n-message-provider>
+          <t-game />
+        </n-message-provider>
       </n-notification-provider>
     </n-dialog-provider>
   </n-config-provider>
@@ -13,6 +15,7 @@ import {
   darkTheme,
   NConfigProvider,
   NDialogProvider,
+  NMessageProvider,
   NNotificationProvider,
 } from 'naive-ui'
 
@@ -24,6 +27,7 @@ export default {
   components: {
     NConfigProvider,
     NDialogProvider,
+    NMessageProvider,
     NNotificationProvider,
     TGame,
   },
