@@ -57,7 +57,9 @@ export default function useResearch() {
     if(canBuyWorker(research)) {
       research.numWorkers++;
       currency.value -= 5;
-      autoIncrement(research);
+      if(research.numWorkers == 1){
+        autoIncrement(research);
+      }
     }
   }
 
@@ -97,7 +99,7 @@ export default function useResearch() {
       consumeResearch(research.researchRequirementList);
       const timer = setInterval(function() {
         research.isIncrementing = true;
-        research.current += research.speed;
+        research.current += (research.speed * (1 + (research.numWorkers/100)));
         if(research.current >= 100) {
           clearInterval(timer);
 
@@ -115,7 +117,9 @@ export default function useResearch() {
 
           //after 10 seconds, restart research
           if(fromWorker) {
-            setTimeout(() => autoIncrement(research), 10000);
+            if(research.numWorkers > 0) {
+              setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
+            }
           }
         }
       },100);
@@ -135,11 +139,8 @@ export default function useResearch() {
 
   const startIncrements = () => {
     Object.values(researchList).forEach((research: any) => {
-      if(research.numWorkers > 0 && canIncrementResearch(research)){
-          incrementResearch(research, true);
-        }
-      }
-    )
+      autoIncrement(research)
+    });
   }
 
   return {
