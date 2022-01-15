@@ -15,9 +15,11 @@ const spokeToLennox = ref(false);
 const spokeToSama = ref(false);
 //todo - this isn't a flag
 const currentPerson = ref(PersonKey.LENNOX_OLD)
+const confetti = ref(false);
 
 export default function useFlags() {
   return {
+    confetti,
     countdownTriggered,
     currentPerson,
     gameEnded,

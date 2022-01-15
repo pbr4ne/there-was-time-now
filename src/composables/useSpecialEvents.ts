@@ -16,7 +16,7 @@ export default function useSpecialEvents() {
   const { personList, researchList } = useInitialize();
   const { sendNarrativeMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
-  const { countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
+  const { confetti, countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
   
 
   //When first quantum computer is built, start the end of world timer
@@ -123,6 +123,7 @@ export default function useSpecialEvents() {
     if(!gameEnded.value && devices.length == devicesComplete.length) {
       countdownTimer.stop();
       gameEnded.value = true;
+      confetti.value = true;
       sendNarrativeMessage(messages[NarrativeKey.SUCCESS]);
     }
   });

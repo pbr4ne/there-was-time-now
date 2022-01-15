@@ -6,6 +6,15 @@
         <span :class="[titleText, titleFont]">{{titleValue}}</span>
       </n-space>
 
+      <ConfettiExplosion
+        v-if="confetti"
+        :particleCount="200"
+        :duration="5000"
+        :stageHeight="confettiHeight"
+        :stageWidth="confettiWidth"
+        :colors="['#F72585', '#B5179E', '#4361EE', '#4CC9F0']"
+      />
+
       <n-space width="209px">
         <n-statistic label="Budget" v-if="sellFeatureEnabled">
           {{currency}}
@@ -41,6 +50,7 @@
 /*eslint-disable*/
 import { computed, defineComponent, ref } from 'vue'
 import { NIcon, NLayoutHeader, NPopover, NSpace, NSpin, NStatistic} from 'naive-ui'
+import ConfettiExplosion from 'vue-confetti-explosion'
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
@@ -50,6 +60,7 @@ import useFlags from '@/composables/useFlags'
 
 export default defineComponent({
   components: {
+    ConfettiExplosion,
     NIcon,
     NLayoutHeader,
     NPopover,
@@ -60,7 +71,7 @@ export default defineComponent({
   },
   setup() {
     const { currency } = useCurrency();
-    const { countdownTriggered, gameEnded, sellFeatureEnabled, slowdownEnabled } = useFlags();
+    const { confetti, countdownTriggered, gameEnded, sellFeatureEnabled, slowdownEnabled } = useFlags();
     const { personList } = useInitialize();
     const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
@@ -106,6 +117,9 @@ export default defineComponent({
     }
 
     return {
+      confetti,
+      confettiHeight: window.innerHeight,
+      confettiWidth: window.innerWidth,
       countdownTimer,
       countupTimer,
       countdownTriggered,
