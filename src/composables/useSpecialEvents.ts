@@ -107,11 +107,11 @@ export default function useSpecialEvents() {
   });
 
   //When time is halfway up, show message
-  watchEffect(() => {
-    if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
-      sendNarrativeMessage(messages[NarrativeKey.HALFWAY]);
-    }
-  });
+  // watchEffect(() => {
+  //   if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
+  //     sendNarrativeMessage(messages[NarrativeKey.HALFWAY]);
+  //   }
+  // });
 
   //When you finish building all devices, you win
   watchEffect(() => {
