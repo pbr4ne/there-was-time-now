@@ -1,7 +1,7 @@
 <template>
   <n-popover trigger="hover" :placement="placement()" :style="{ maxWidth: '200px' }">
    <template #trigger>
-      <div>
+      <div @click="changeTab()">
         {{research.label}} <b :style="{ color: research.color }">{{research.total}}</b>
       </div>
    </template>
@@ -17,6 +17,7 @@ import { defineComponent } from 'vue'
 import { NPopover } from 'naive-ui'
 import { Research } from '@/entities/Research'
 import { messages } from '@/locales/en'
+import useFlags from '@/composables/useFlags'
 
 export default defineComponent({
   components: {
@@ -25,9 +26,16 @@ export default defineComponent({
   props: {
     research: Research,
   },
-  setup () {
+  setup (props) {
+    const { currentPerson } = useFlags();
     const placement = () => window.innerWidth > 700 ? "right" : "bottom";
+
+    const changeTab = () => {
+      currentPerson.value = props.research.personKey;
+    }
+
     return {
+      changeTab,
       messages,
       placement,
     }
