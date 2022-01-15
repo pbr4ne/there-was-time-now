@@ -120,16 +120,16 @@ export default function useSpecialEvents() {
     }
     const devices = Object.values(researchList).filter((research: any) => research.isDevice);
     const devicesComplete = devices.filter((research: any) => research.total == 1);
-    if(devices.length == devicesComplete.length) {
+    if(!gameEnded.value && devices.length == devicesComplete.length) {
       countdownTimer.stop();
       gameEnded.value = true;
       sendNarrativeMessage(messages[NarrativeKey.SUCCESS]);
     }
   });
 
-  //When countdown timer is expired, show end of game modal
+  //When countdown timer is expired, you lose
   watchEffect(async() => {
-    if(countdownTimer.isExpired() && !isLoading.value) {
+    if(!gameEnded.value && countdownTimer.isExpired() && !isLoading.value) {
       gameEnded.value = true;
       sendNarrativeMessage(messages[NarrativeKey.FAILURE]);
     }
