@@ -31,7 +31,8 @@ import {
 
 import TGameMessage from '@/components/TGameMessage'
 import useMessage from '@/composables/useMessage'
-import { Person } from '@/entities/Person'
+import useInitialize from '@/composables/useInitialize'
+import { PersonKey } from '@/enum/Enums'
 
 export default defineComponent({
   components: {
@@ -42,17 +43,21 @@ export default defineComponent({
     NTimelineItem,
   },
   props: {
-    person: Person,
+    //person: Person,
   },
   setup() {
     const { showTimeline } = useMessage();
-    
+    const { personList } = useInitialize();
+
     //todo - this is spitting out warnings
     const renderMessageContent = (message) => {
       return h(TGameMessage, { messageSections: message.messageSections});
     }
 
+    const person = personList[PersonKey.LENNOX_OLD];
+
     return {
+      person,
       renderMessageContent,
       showTimeline,
     }
