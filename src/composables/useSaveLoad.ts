@@ -64,7 +64,7 @@ export default function useSaveLoad() {
   }
 
   const saveGameState = () => {
-    console.log('saving...');
+    console.log('saving');
     if(isLoading.value) {
       console.log('busy loading, will skip saving'); //todo - lol this is lazy
       return;
@@ -87,7 +87,6 @@ export default function useSaveLoad() {
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
       slowdownEnabled.value, spokeToLennox.value, spokeToSama.value, savedPeople, savedResearch);
     
-    console.log('done saving');
     return localforage.setItem(SaveKey.GAME_STATE, gameState)
       .catch(function(err: any) {
         console.log(`Error saving game state: ${err}`);
