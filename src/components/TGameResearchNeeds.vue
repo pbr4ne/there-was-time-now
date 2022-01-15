@@ -22,6 +22,8 @@
   </div>
   <div v-else>
     Click on a button to start researching!
+    <div v-if="sellFeatureEnabled">Sell research to increase your budget.<br />{{paymentName()}} {{person.workerTitle}} may speed up your research!</div>
+    <div v-if="slowdownEnabled">Some research may slow down time...</div>
   </div>
 </template>
 
@@ -30,22 +32,31 @@ import { defineComponent } from 'vue'
 import useFlags from '@/composables/useFlags'
 import useInitialize from '@/composables/useInitialize'
 import useResearch from '@/composables/useResearch'
+import { Person } from '@/entities/Person'
 import { Research } from '@/entities/Research'
 import { messages } from '@/locales/en'
 
 export default defineComponent({
   props: {
     research: Research,
+    person: Person,
   },
   setup() {
-    const { slowdownEnabled } = useFlags();
+    const { sellFeatureEnabled, slowdownEnabled } = useFlags();
     const { researchList } = useInitialize();
     const { canIncrementResearch } = useResearch();
+
+    //could make this dynamic
+    const paymentName = () => {
+      return 'Bribing';
+    }
 
     return {
       canIncrementResearch,
       messages,
+      paymentName,
       researchList,
+      sellFeatureEnabled,
       slowdownEnabled,
     }
   },

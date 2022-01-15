@@ -52,7 +52,7 @@
           <tfoot>
             <tr>
               <td :style="{ maxWidth: '205px', height: '100px', wordWrap: 'break-word' }" :colspan="sellFeatureEnabled? 3 : 1">
-                <t-game-research-needs :research="currentResearch" />
+                <t-game-research-needs :research="currentResearch" :person="person" />
               </td>
             </tr>
           </tfoot>
