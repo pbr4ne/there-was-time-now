@@ -96,10 +96,12 @@ export default function useResearch() {
   const incrementResearch = (research: Research, fromWorker?: boolean) => {
     //todo - yuck do this better
     if(!research.isIncrementing) {
-      consumeResearch(research.researchRequirementList);
+      if(!research.isDevice) {
+        consumeResearch(research.researchRequirementList);
+      }
       const timer = setInterval(function() {
         research.isIncrementing = true;
-        research.current += (research.speed * (1 + (research.numWorkers/100)));
+        research.current += (research.speed * (1 + (research.numWorkers/50)));
         if(research.current >= 100) {
           clearInterval(timer);
 
