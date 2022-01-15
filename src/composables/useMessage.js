@@ -1,20 +1,21 @@
 import { h, ref } from 'vue'
-import { useNotification } from 'naive-ui'
+import { useDialog, NIcon } from 'naive-ui'
+import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
-import { GameConstants } from '@/enum/Constants'
 import { PersonKey,  NarrativeKey } from '@/enum/Enums'
 import { messages } from '@/locales/en'
 //todo convert back to typescript
 const showTimeline = ref(false);
 
-function createNotification(message, notification) {
-  notification.create({
+function createNotification(message, dialog) {
+  dialog.create({
     title: message.title,
     content: () => h(TGameMessage, { messageSections: message.messageSections}),
-    meta: message.timestamp,
-    duration: GameConstants.NOTIFICATION_DURATION,
+    positiveText: "OK!",
+    maskClosable: false,
+    icon: () => h(NIcon, null, { default: () => h(TimeIcon) })
   });
 }
 
@@ -27,14 +28,14 @@ function setTimestamp(message, year, timeElapsed) {
 }
 
 export default function useMessage() {
-  const notification = useNotification();
+  const dialog = useDialog();
   const { personList } = useInitialize();
   const { timeElapsed } = useTime();
 
   function sendMessage(message, person) {
     if(!message.wasSent){
       setTimestamp(message, person.year, timeElapsed);
-      createNotification(message, notification);
+      createNotification(message, dialog);
       person.messageList.unshift(message);
     }
   }
