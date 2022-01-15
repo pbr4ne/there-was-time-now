@@ -10,9 +10,10 @@
         v-for="researchRequirement in research.researchRequirementList" 
         :key="researchRequirement.researchKey" 
       >
-        <span :style="{color: '#4f5d75'}">Needs: </span>
+        <span :style="{color: '#969696'}">Needs: </span>
         <span :style= "{color: researchList[researchRequirement.researchKey].color}">
-          {{researchRequirement.quantity}} {{researchList[researchRequirement.researchKey].label}}
+          <span v-if="!researchList[researchRequirement.researchKey].isUnlocked">???</span>
+          <span v-else>{{researchRequirement.quantity}} {{researchList[researchRequirement.researchKey].label}}</span>
         </span>
         <span v-if="research.expand != 1 && slowdownEnabled">
           <br /><i>This will slow down time by {{research.expand}}%</i>

@@ -69,7 +69,7 @@ const messages = {
     }]
   ),
   [NarrativeKey.HALFWAY]: new Message('Halfway there', [{
-      text: 'Halfway to the end of the world.',
+      text: 'Whooooa we\'re halfway there whoooooa livin on software... click some more and we\'ll make it I swear...',
     }]
   ),
   [NarrativeKey.SPEAK_TO_LENNOX]: new Message('The Flashback', [{
