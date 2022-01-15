@@ -56,7 +56,7 @@ export default function useResearch() {
   const buyWorker = (research: Research) => {
     if(canBuyWorker(research)) {
       research.numWorkers++;
-      currency.value -= 5;
+      currency.value -= research.workerCost;
       if(research.numWorkers == 1){
         autoIncrement(research);
       }
@@ -66,7 +66,7 @@ export default function useResearch() {
   const sellWorker = (research: Research) => {
     if(canSellWorker(research)){
       research.numWorkers--
-      currency.value += 5;
+      currency.value += research.workerCost;
     }
   }
 
