@@ -123,6 +123,10 @@ export default function useResearch() {
           }
         }
       },100);
+    } else if(fromWorker) {
+      if(research.numWorkers > 0) {
+        setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
+      }
     }
   };
 
@@ -132,7 +136,7 @@ export default function useResearch() {
       if(canIncrementResearch(research)) {
         incrementResearch(research, true);
       } else {
-        setTimeout(() => autoIncrement(research), 10000);
+        setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
       }
     }
   }
