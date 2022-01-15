@@ -5,7 +5,7 @@
     collapse-mode="width"
     :collapsed-width="64"
     :collapsed="collapsed"
-    :width="240"
+    :width="245"
     :native-scrollbar="false"
     @collapse="collapsed = true"
     @expand="collapsed = false" 
