@@ -84,6 +84,10 @@ const expandConstant = ref(GameConstants.INITIAL_EXPANSION_CONSTANT);
 
 function expandTime(expand: number) {
   if(countdownTimer.isRunning()) {
+    //hard cap
+    if(expandConstant.value > 1000) {
+      return;
+    }
     expandConstant.value *= expand;
 
     const secondsLeft = countdownTimer.secondsLeft();
