@@ -184,7 +184,7 @@ function setNumbers() {
   researchList[ResearchKey.QUANTUM_COMPUTING].setNumbers(7.5, 1, 6, 6);
   researchList[ResearchKey.QUANTUM_COMPUTER].setNumbers(5, 1.02, 7, 7);
   researchList[ResearchKey.CHRONOCRYSTALS].setNumbers(0.5, 1, 8, 8);
-  researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].setNumbers(0.25, 1, 0, 0);
+  researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].setNumbers(0.125, 1, 0, 0);
 
   //Lennox (1934)
   researchList[ResearchKey.BIOLOGY].setNumbers(10, 1, 9, 9);
@@ -198,21 +198,21 @@ function setNumbers() {
   researchList[ResearchKey.CHRONOMOGRIFICATION].setNumbers(2.5, 1, 14, 14);
   researchList[ResearchKey.DISTILLER].setNumbers(1, 1.02, 15, 15);
   researchList[ResearchKey.ELEMENT_ZERO].setNumbers(0.5, 1, 16, 16);
-  researchList[ResearchKey.PHILOSOPHERS_STONE].setNumbers(0.0625, 1, 0, 0);
+  researchList[ResearchKey.PHILOSOPHERS_STONE].setNumbers(0.125, 1, 0, 0);
 
   //Itotia (374)
   researchList[ResearchKey.MATHEMATICS].setNumbers(10, 1, 17, 17);
   researchList[ResearchKey.TIMELESS_ALGEBRA].setNumbers(1, 1, 18, 18);
   researchList[ResearchKey.NEPOHUALTZINTZIN].setNumbers(0.5, 1.02, 19, 19);
   researchList[ResearchKey.OBSIDIAN].setNumbers(0.25, 1, 20, 20);
-  researchList[ResearchKey.TZOLKIN].setNumbers(0.0625, 1, 0, 0);
+  researchList[ResearchKey.TZOLKIN].setNumbers(0.125, 1, 0, 0);
 
   //Nechtan (2524 BC)
   researchList[ResearchKey.ASTRONOMY].setNumbers(10, 1, 21, 21);
   researchList[ResearchKey.AETHERIC_HOROSCOPES].setNumbers(0.5, 1, 22, 22);
   researchList[ResearchKey.ZODIAC_TALISMAN].setNumbers(0.25, 1.02, 23, 23);
   researchList[ResearchKey.SARSEN_STONES].setNumbers(0.1, 1, 24, 24);
-  researchList[ResearchKey.TIMEHENGE].setNumbers(0.03125, 1, 0, 0);
+  researchList[ResearchKey.TIMEHENGE].setNumbers(0.125, 1, 0, 0);
 }
 
 associateUnlocks();
