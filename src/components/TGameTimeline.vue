@@ -6,10 +6,11 @@
       </n-switch>
     <n-collapse-transition :show="showTimeline">
       <n-timeline>
-        <n-timeline-item 
+        <n-timeline-item
           v-for="message in person.messageList" 
           :key="message.title"
           :title="message.title"
+          :color="'#63e2b7'"
           :content= "renderMessageContent(message)"
           :time="message.timestamp"
         />
@@ -28,7 +29,6 @@ import {
   NTimeline,
   NTimelineItem,
 } from 'naive-ui'
-
 import TGameMessage from '@/components/TGameMessage'
 import useMessage from '@/composables/useMessage'
 import useInitialize from '@/composables/useInitialize'
