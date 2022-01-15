@@ -9,7 +9,7 @@ const messages = {
       text: 'Let\'s get started...',
     }]
   ),
-  [NarrativeKey.UNLOCK_COUNTDOWN]: new Message('You fire up your very first supercomputer.', [{
+  [NarrativeKey.UNLOCK_COUNTDOWN]: new Message('You fire up your very first quantum computer.', [{
       person: 'Quantum Computer',
       text: 'Beep Boop. Detecting timelines. ALERT. ALERT. YOUR QUANTUM REALITY HAS SKEWED INTO A TANGENT. TIME IS ENDING. DOOMSDAY IMMINENT.',
     },{
