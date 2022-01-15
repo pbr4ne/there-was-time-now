@@ -97,7 +97,7 @@ export default defineComponent({
 
     const currentResearch = ref(null);
     const tableStyle = {
-      maxWidth: window.innerWidth > 700 || !sellFeatureEnabled.value ? '205px' : '36px'
+      width: window.innerWidth > 700 || !sellFeatureEnabled.value ? '205px' : '36px'
     }
     const extraStyle = {
       maxWidth: '205px', 
