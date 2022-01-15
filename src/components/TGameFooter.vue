@@ -38,7 +38,7 @@
             <n-icon><load-icon /></n-icon>
           </n-button>
         </template>
-        <span>Load (not implemented yet)</span>
+        <span>Import (not implemented yet)</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -47,7 +47,7 @@
             <n-icon><save-icon /></n-icon>
           </n-button>
         </template>
-        <span>Save (not implemented yet)</span>
+        <span>Export (not implemented yet)</span>
       </n-tooltip>
        <n-tooltip placement="top" trigger="hover">
         <template #trigger>
