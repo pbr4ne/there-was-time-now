@@ -118,9 +118,8 @@ export default function useSpecialEvents() {
     if(isLoading.value) {
       return;
     }
-    const devices = Object.values(researchList).filter((research: any) => research.isDevice);
-    const devicesComplete = devices.filter((research: any) => research.total == 1);
-    if(!gameEnded.value && devices.length == devicesComplete.length) {
+    const crystalSarcophagus = researchList[ResearchKey.CRYSTAL_SARCOPHAGUS];
+    if(!gameEnded.value && crystalSarcophagus.total > 0) {
       countdownTimer.stop();
       gameEnded.value = true;
       confetti.value = true;
