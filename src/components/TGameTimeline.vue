@@ -29,7 +29,7 @@ import {
   NTimeline,
   NTimelineItem,
 } from 'naive-ui'
-import TGameMessage from '@/components/TGameMessage'
+import TGameMessage from '@/components/TGameMessage.vue'
 import useMessage from '@/composables/useMessage'
 import useInitialize from '@/composables/useInitialize'
 import { PersonKey } from '@/enum/Enums'

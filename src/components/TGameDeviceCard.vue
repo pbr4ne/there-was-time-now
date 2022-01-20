@@ -1,8 +1,8 @@
 <script>
 import { defineComponent, h } from 'vue'
 import { NCard, NPopover } from 'naive-ui'
-import TGameDeviceProgress from '@/components/TGameDeviceProgress'
-import TGameResearchNeeds from '@/components/TGameResearchNeeds'
+import TGameDeviceProgress from '@/components/TGameDeviceProgress.vue'
+import TGameResearchNeeds from '@/components/TGameResearchNeeds.vue'
 import useResearch from '@/composables/useResearch'
 import { Research } from '@/entities/Research'
 

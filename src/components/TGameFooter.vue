@@ -91,7 +91,7 @@ import {
   SaveOutlined as SaveIcon,
 } from '@vicons/material'
 
-import TGameAbout from '@/components/TGameAbout'
+import TGameAbout from '@/components/TGameAbout.vue'
 import useFlags from '@/composables/useFlags'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'

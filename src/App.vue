@@ -19,7 +19,7 @@ import {
   NNotificationProvider,
 } from 'naive-ui'
 
-import TGame from '@/components/TGame'
+import TGame from '@/components/TGame.vue'
 import useTheme from '@/composables/useTheme'
 
 export default {
