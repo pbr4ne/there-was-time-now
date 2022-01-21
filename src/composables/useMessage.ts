@@ -6,10 +6,12 @@ import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { PersonKey,  NarrativeKey } from '@/enum/Enums'
 import { messages } from '@/locales/en'
-//todo convert back to typescript
+import { Message } from '@/entities/Message'
+import { DialogApiInjection } from 'naive-ui/lib/dialog/src/DialogProvider'
+import { Person } from '@/entities/Person'
 const showTimeline = ref(false);
 
-function createNotification(message, dialog) {
+function createNotification(message: Message, dialog: DialogApiInjection) {
   dialog.create({
     title: message.title,
     content: () => h(TGameMessage, { messageSections: message.messageSections}),
@@ -19,7 +21,7 @@ function createNotification(message, dialog) {
   });
 }
 
-function setTimestamp(message, year, timeElapsed) {
+function setTimestamp(message: Message, year: number, timeElapsed: any) {
   const d = new Date(year, 0);
   d.setDate(d.getDate() + timeElapsed.value);
   message.timestamp = d.toISOString().split('T')[0];
@@ -32,7 +34,7 @@ export default function useMessage() {
   const { personList } = useInitialize();
   const { timeElapsed } = useTime();
 
-  function sendMessage(message, person) {
+  function sendMessage(message: Message, person: Person) {
     if(!message.wasSent){
       setTimestamp(message, person.year, timeElapsed);
       createNotification(message, dialog);
@@ -42,8 +44,8 @@ export default function useMessage() {
 
   const sendInitialMessage = () => sendNarrativeMessage(messages[NarrativeKey.INTRO]);
 
-  function sendUnlockMessage(key, person) {
-    let message = messages[key];
+  function sendUnlockMessage(key: string, person: Person) {
+    const message = messages[key];
     if(!message) {
       return;
     }
@@ -57,7 +59,7 @@ export default function useMessage() {
     }
   }
 
-  function sendNarrativeMessage(message) {
+  function sendNarrativeMessage(message: Message) {
     sendMessage(message, personList[PersonKey.LENNOX_OLD]);
   }
 

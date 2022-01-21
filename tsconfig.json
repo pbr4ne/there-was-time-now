@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors": true,
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
@@ -31,7 +32,6 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx", 
-    "src/composables/useMessage.js"
   ],
   "exclude": [
     "node_modules"
