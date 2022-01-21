@@ -3,57 +3,63 @@
     <n-space justify="end" style="padding: 5px;">
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon @click="about()">
-            <n-icon><about-icon /></n-icon>
+          <n-button strong circle @click="about()">
+            <template #icon>
+              <n-icon><about-icon /></n-icon>
+            </template>
           </n-button>
         </template>
         <span>About</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon @click="switchTheme">
-            <n-icon>
-              <light-mode-icon v-if="!lightMode"/>
-              <dark-mode-icon v-if="lightMode"/>
-            </n-icon>
+          <n-button strong circle @click="switchTheme">
+            <template #icon>
+              <n-icon>
+                <light-mode-icon v-if="!lightMode" />
+                <dark-mode-icon v-if="lightMode" />
+              </n-icon>
+            </template>
           </n-button>
         </template>
-        <span>{{otherThemeName()}}</span>
+        <span>{{ otherThemeName() }}</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
-            <n-icon><pause-icon /></n-icon>
+          <n-button strong circle>
+            <template #icon>
+              <n-icon><pause-icon /></n-icon>
+            </template>
           </n-button>
         </template>
         <span>Pause (not implemented yet)</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
-            <n-icon><load-icon /></n-icon>
+          <n-button strong circle>
+            <template #icon>
+              <n-icon><load-icon /></n-icon>
+            </template>
           </n-button>
         </template>
         <span>Import (not implemented yet)</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
-            <n-icon><save-icon /></n-icon>
+          <n-button strong circle>
+            <template #icon>
+              <n-icon><save-icon /></n-icon>
+            </template>
           </n-button>
         </template>
         <span>Export (not implemented yet)</span>
       </n-tooltip>
-       <n-tooltip placement="top" trigger="hover">
+      <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon @click="restart()">
-            <n-icon><restart-icon /></n-icon>
+          <n-button strong circle @click="restart()">
+            <template #icon>
+              <n-icon><restart-icon /></n-icon>
+            </template>
           </n-button>
         </template>
         <span>Restart</span>
@@ -63,7 +69,6 @@
 </template>
 
 <script>
-/*eslint-disable*/
 import { defineComponent, h } from 'vue'
 
 import { 
@@ -80,9 +85,6 @@ import {
   PauseOutlined as PauseIcon,
 } from '@vicons/antd'
 
-import {
-} from '@vicons/fluent'
-
 import { 
   DarkModeOutlined as DarkModeIcon,
   FileUploadOutlined as LoadIcon,
@@ -93,6 +95,7 @@ import {
 
 import TGameAbout from '@/components/TGameAbout.vue'
 import useFlags from '@/composables/useFlags'
+import useMessage from '@/composables/useMessage'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
 import useTime from '@/composables/useTime'
@@ -110,12 +113,12 @@ export default defineComponent({
     NTooltip,
     PauseIcon,
     RestartIcon,
-    TGameAbout,
     SaveIcon,
   },
   setup() {
     const dialog = useDialog();
     const { gameEnded, gamePaused } = useFlags();
+    const { sendInitialMessage } = useMessage();
     const { clearGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
     const { countdownTimer, countdownTriggered, countupTimer } = useTime();
@@ -164,7 +167,7 @@ export default defineComponent({
         positiveText: 'I\'m going back to the start',
         negativeText: 'Oops, never mind',
         onPositiveClick: () => {
-          clearGameState();
+          clearGameState().then(sendInitialMessage());
         }
       })
     }

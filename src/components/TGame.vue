@@ -37,17 +37,13 @@ export default {
     const { gamePaused, gameStarted, isLoading, saveStopwatch } = useFlags();
     const { sendInitialMessage } = useMessage();
     const { startIncrements } = useResearch();
-    const { loadGameState, saveGameState } = useSaveLoad();
+    const { saveGameState } = useSaveLoad();
     
-    loadGameState().then(function() {
-      if(!gameStarted.value) {
-        sendInitialMessage();
-        gameStarted.value = true;
-      }
-    }).finally(function() {
-        startIncrements();
-    });
+    if(!gameStarted.value) {
+      sendInitialMessage();
+    }
 
+    startIncrements();
     useSpecialEvents();
     useUnlockWatch();
 

@@ -3,7 +3,7 @@
     <n-dialog-provider>
       <n-notification-provider>
         <n-message-provider>
-          <t-game />
+          <t-game v-if="enableGame" />
         </n-message-provider>
       </n-notification-provider>
     </n-dialog-provider>
@@ -19,7 +19,9 @@ import {
   NNotificationProvider,
 } from 'naive-ui'
 
+import { ref } from 'vue'
 import TGame from '@/components/TGame.vue'
+import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
 
 export default {
@@ -33,8 +35,15 @@ export default {
   },
   setup () {
     const { lightMode } = useTheme(); 
+    const enableGame = ref(false);
+    const { loadGameState } = useSaveLoad();
+
+    loadGameState().finally(function() {
+      enableGame.value = true;
+   });
 
     return {
+      enableGame,
       theme: () => {
         if(lightMode.value){
           return null;
