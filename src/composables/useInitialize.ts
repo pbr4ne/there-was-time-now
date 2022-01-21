@@ -234,15 +234,14 @@ export default function useInitialize() {
     }
     for(const research in researchList) {
       researchList[research].isUnlocked = true;
+      if(research != ResearchKey.CRYSTAL_SARCOPHAGUS){
+        researchList[research].total = 100;
+      }
     }
   }
   if(params['QUICK_MODE'] === "true") {
     for(const research in researchList) {
       researchList[research].speed = 100;
-      //researchList[research].unlockThreshold = 1;
-    }
-    for(const person in personList) {
-      //personList[person].unlockThreshold = 1;
     }
   }
 
