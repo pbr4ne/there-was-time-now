@@ -41,6 +41,7 @@ export default {
     
     if(!gameStarted.value) {
       sendInitialMessage();
+      gameStarted.value = true;
     }
 
     startIncrements();
