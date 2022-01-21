@@ -15,8 +15,8 @@ export default function useSpecialEvents() {
   const { personList, researchList } = useInitialize();
   const { sendNarrativeMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
-  const { confetti, countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
-  
+  const { confetti, countdownTriggered, gameEnded, gameWon, isLoading, sellFeatureEnabled, slowdownEnabled, 
+          spokeToLennox, spokeToSama } = useFlags();
 
   //When first quantum computer is built, start the end of world timer
   watchEffect(() => {
@@ -121,6 +121,7 @@ export default function useSpecialEvents() {
     if(!gameEnded.value && crystalSarcophagus.total > 0) {
       countdownTimer.stop();
       gameEnded.value = true;
+      gameWon.value = true;
       confetti.value = true;
       sendNarrativeMessage(messages[NarrativeKey.SUCCESS]);
     }
@@ -130,6 +131,7 @@ export default function useSpecialEvents() {
   watchEffect(async() => {
     if(!gameEnded.value && countdownTimer.isExpired() && !isLoading.value) {
       gameEnded.value = true;
+      gameWon.value = false;
       sendNarrativeMessage(messages[NarrativeKey.FAILURE]);
     }
   });

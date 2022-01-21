@@ -40,8 +40,14 @@
             <n-icon><time-icon /></n-icon>
           </template>
         </n-spin>
-        <n-icon v-if="gamePaused" color="#63e2b7" size="40">
+        <n-icon v-if="gamePaused && !gameEnded" color="#63e2b7" size="40">
           <pause-icon />
+        </n-icon>
+        <n-icon v-if="gameEnded && !gameWon" color="#63e2b7" size="40">
+          <lost-icon />
+        </n-icon>
+        <n-icon v-if="gameEnded && gameWon" color="#63e2b7" size="40">
+          <won-icon />
         </n-icon>
       </n-space>
     </n-space>
@@ -53,6 +59,8 @@ import { computed, defineComponent, ref } from 'vue'
 import { NIcon, NLayoutHeader, NPopover, NSpace, NSpin, NStatistic} from 'naive-ui'
 import ConfettiExplosion from 'vue-confetti-explosion'
 import { PauseOutlined as PauseIcon } from '@vicons/antd'
+import { CrownOutlined as WonIcon } from '@vicons/antd'
+import { SkullOutline as LostIcon } from '@vicons/ionicons5'
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
@@ -63,6 +71,7 @@ import useFlags from '@/composables/useFlags'
 export default defineComponent({
   components: {
     ConfettiExplosion,
+    LostIcon,
     NIcon,
     NLayoutHeader,
     NPopover,
@@ -71,10 +80,11 @@ export default defineComponent({
     NStatistic,
     PauseIcon,
     TimeIcon,
+    WonIcon,
   },
   setup() {
     const { currency } = useCurrency();
-    const { confetti, countdownTriggered, gameEnded, gamePaused, sellFeatureEnabled, slowdownEnabled } = useFlags();
+    const { confetti, countdownTriggered, gameEnded, gamePaused, gameWon, sellFeatureEnabled, slowdownEnabled } = useFlags();
     const { personList } = useInitialize();
     const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
@@ -130,6 +140,7 @@ export default defineComponent({
       expandConstantFormatted,
       gameEnded,
       gamePaused,
+      gameWon,
       sellFeatureEnabled,
       slowdownEnabled,
       timeLeft,

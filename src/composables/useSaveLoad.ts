@@ -15,7 +15,8 @@ localforage.config({
 
 export default function useSaveLoad() {
   const { currency } = useCurrency();
-  const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
+  const { countdownTriggered, currentPerson, gameEnded, gameStarted, gameWon, isLoading, sellFeatureEnabled, slowdownEnabled, 
+          spokeToLennox, spokeToSama } = useFlags();
   const { personList, researchList } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
 
@@ -42,6 +43,7 @@ export default function useSaveLoad() {
       currency.value = 0;
       sellFeatureEnabled.value = false;
       gameStarted.value = true;
+      gameWon.value = false;
       gameEnded.value = false;
       countdownTriggered.value = false;
       expandConstant.value = GameConstants.INITIAL_EXPANSION_CONSTANT;
@@ -79,7 +81,7 @@ export default function useSaveLoad() {
       savedResearch.push(gameStateResearch);
     });
 
-    const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameEnded.value, 
+    const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameWon.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
       slowdownEnabled.value, spokeToLennox.value, spokeToSama.value, savedPeople, savedResearch);
     
@@ -116,6 +118,7 @@ export default function useSaveLoad() {
       currency.value = gameState.currency;
       sellFeatureEnabled.value = gameState.sellFeatureEnabled;
       gameStarted.value = gameState.gameStarted;
+      gameWon.value = gameState.gameWon;
       gameEnded.value = gameState.gameEnded;
       countdownTriggered.value = gameState.countdownTriggered;
       countupTimer.restart(gameState.countupSecondsPassed);
