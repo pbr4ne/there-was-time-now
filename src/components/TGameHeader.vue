@@ -1,6 +1,5 @@
 <template>
   <n-layout-header bordered style="padding-top: 5px;">
-
     <n-space justify="space-between" class="twtnHeader">
       <n-space style="padding-left: 5px;" width="100%">
         <span :class="[titleText, titleFont]">{{titleValue}}</span>
@@ -16,41 +15,44 @@
       />
 
       <n-space width="209px">
-        <n-statistic label="Budget" v-if="sellFeatureEnabled">
-          {{currency}}
+        <n-statistic v-if="sellFeatureEnabled" label="Budget">
+          {{ currency }}
         </n-statistic>
 
-        <n-statistic label="Time Expansion" v-if="slowdownEnabled && !gameEnded">
-          {{expandConstantFormatted()}}
+        <n-statistic v-if="slowdownEnabled && !gameEnded" label="Time Expansion">
+          {{ expandConstantFormatted() }}
         </n-statistic>
         <n-popover trigger="hover">
           <template #trigger>
             <div>
-              <n-statistic label="Days Left" v-if="gameEnded">
+              <n-statistic v-if="gameEnded" label="Days Left">
                 0
               </n-statistic>
-              <n-statistic label="Days Left" v-else-if="countdownTriggered">
-                {{timeLeft}}
+              <n-statistic v-else-if="countdownTriggered" label="Days Left">
+                {{ timeLeft }}
               </n-statistic>
             </div>
           </template>
-          <span>{{countdownTimer.realPeopleTimeLeft()}} Real People Time™ left</span>
+          <span>{{ countdownTimer.realPeopleTimeLeft() }} Real People Time™ left</span>
         </n-popover>
-
-        <!-- eslint-disable-next-line vue/valid-v-slot -->
-        <n-spin #icon style="vertical-align: middle;" v-if="countdownTimer.isRunning()">
-          <n-icon><time-icon /></n-icon>
+        <n-spin v-if="countdownTimer.isRunning()" size="large" style="vertical-align: middle;">
+          <template #icon>
+            <n-icon><time-icon /></n-icon>
+          </template>
         </n-spin>
+        <n-icon v-if="gamePaused" color="#63e2b7" size="40">
+          <pause-icon />
+        </n-icon>
       </n-space>
     </n-space>
   </n-layout-header>
 </template>
 
 <script>
-/*eslint-disable*/
 import { computed, defineComponent, ref } from 'vue'
 import { NIcon, NLayoutHeader, NPopover, NSpace, NSpin, NStatistic} from 'naive-ui'
 import ConfettiExplosion from 'vue-confetti-explosion'
+import { PauseOutlined as PauseIcon } from '@vicons/antd'
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import useCurrency from '@/composables/useCurrency'
 import useInitialize from '@/composables/useInitialize'
@@ -67,11 +69,12 @@ export default defineComponent({
     NSpace,
     NSpin,
     NStatistic,
+    PauseIcon,
     TimeIcon,
   },
   setup() {
     const { currency } = useCurrency();
-    const { confetti, countdownTriggered, gameEnded, sellFeatureEnabled, slowdownEnabled } = useFlags();
+    const { confetti, countdownTriggered, gameEnded, gamePaused, sellFeatureEnabled, slowdownEnabled } = useFlags();
     const { personList } = useInitialize();
     const { countdownTimer, countupTimer, expandConstant, timeLeft } = useTime();
 
@@ -124,8 +127,9 @@ export default defineComponent({
       countupTimer,
       countdownTriggered,
       currency,
-      gameEnded,
       expandConstantFormatted,
+      gameEnded,
+      gamePaused,
       sellFeatureEnabled,
       slowdownEnabled,
       timeLeft,
