@@ -39,6 +39,10 @@ class CountdownTimer {
     this.timer = useTimer(time.getTime(), false);
   }
   
+  resume() {
+    this.timer.resume();
+  }
+
   start() {
     this.timer.start();
   }

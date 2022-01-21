@@ -26,7 +26,7 @@
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <n-button strong circle>
+          <n-button strong circle @click="pause()">
             <template #icon>
               <n-icon><pause-icon /></n-icon>
             </template>
@@ -117,11 +117,11 @@ export default defineComponent({
   },
   setup() {
     const dialog = useDialog();
-    const { gameEnded, gamePaused } = useFlags();
+    const { countdownTriggered, gameEnded, gamePaused } = useFlags();
     const { sendInitialMessage } = useMessage();
     const { clearGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
-    const { countdownTimer, countdownTriggered, countupTimer } = useTime();
+    const { countdownTimer, countupTimer } = useTime();
 
     const about = () => {
       dialog.create({
@@ -140,11 +140,13 @@ export default defineComponent({
       dialog.info({
         title: 'Paused',
         content: 'There was time now... to go to the bathroom.',
-        onClose: () => {
-          console.log('on close');
+        positiveText: 'Back to it!',
+        maskClosable: false,
+        closable: false,
+        onPositiveClick:  () => {
           gamePaused.value = false;
           if(countdownTriggered.value) {
-            countdownTimer.start();
+            countdownTimer.resume();
           } else if(!gameEnded.value) {
             countupTimer.start();
           }
