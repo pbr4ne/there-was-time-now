@@ -3,6 +3,7 @@ import { useDialog, NIcon } from 'naive-ui'
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'
+import usePause from '@/composables/usePause'
 import useTime from '@/composables/useTime'
 import { PersonKey,  NarrativeKey } from '@/enum/Enums'
 import { messages } from '@/locales/en'
@@ -14,6 +15,7 @@ const showTimeline = ref(false);
 export default function useMessage() {
   const dialog = useDialog();
   const { personList } = useInitialize();
+  const { pause, unpause } = usePause();
   const { timeElapsed } = useTime();
 
   function sendMessage(message: Message, person: Person) {
@@ -25,13 +27,15 @@ export default function useMessage() {
   }
 
   function createNotification(message: Message) {
+    pause();
     dialog.create({
       title: message.title,
       content: () => h(TGameMessage, { messageSections: message.messageSections}),
-      positiveText: "OK!",
+      icon: () => h(NIcon, null, { default: () => h(TimeIcon) }),
       maskClosable: false,
       closable: false,
-      icon: () => h(NIcon, null, { default: () => h(TimeIcon) })
+      positiveText: "OK!",
+      onPositiveClick: unpause,
     });
   }
   

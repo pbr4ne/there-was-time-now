@@ -26,13 +26,13 @@
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <n-button strong circle @click="pause()">
+          <n-button strong circle @click="pauseTime()">
             <template #icon>
               <n-icon><pause-icon /></n-icon>
             </template>
           </n-button>
         </template>
-        <span>Pause (not implemented yet)</span>
+        <span>Pause</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -94,11 +94,10 @@ import {
 } from '@vicons/material'
 
 import TGameAbout from '@/components/TGameAbout.vue'
-import useFlags from '@/composables/useFlags'
 import useMessage from '@/composables/useMessage'
+import usePause from '@/composables/usePause'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
-import useTime from '@/composables/useTime'
 
 export default defineComponent({
   components: {
@@ -117,11 +116,10 @@ export default defineComponent({
   },
   setup() {
     const dialog = useDialog();
-    const { countdownTriggered, gameEnded, gamePaused } = useFlags();
     const { sendInitialMessage } = useMessage();
+    const { pause, unpause } = usePause();
     const { clearGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
-    const { countdownTimer, countupTimer } = useTime();
 
     const about = () => {
       dialog.create({
@@ -131,26 +129,15 @@ export default defineComponent({
       })
     }
 
-    //todo - this isn't pausing the countdown properly
-    const pause = () => {
-      countdownTimer.stop();
-      countupTimer.stop();
-      gamePaused.value = true;
-
+    const pauseTime = () => {
+      pause();
       dialog.info({
         title: 'Paused',
         content: 'There was time now... to go to the bathroom.',
         positiveText: 'Back to it!',
         maskClosable: false,
         closable: false,
-        onPositiveClick:  () => {
-          gamePaused.value = false;
-          if(countdownTriggered.value) {
-            countdownTimer.resume();
-          } else if(!gameEnded.value) {
-            countupTimer.start();
-          }
-        }
+        onPositiveClick: unpause,
       })
     }
 
@@ -177,10 +164,9 @@ export default defineComponent({
     return {
       about,
       clearGameState,
-      gamePaused,
       lightMode,
       otherThemeName,
-      pause,
+      pauseTime,
       restart,
       switchTheme,
     }

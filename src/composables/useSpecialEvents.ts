@@ -22,9 +22,9 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!countdownTriggered.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
       countdownTriggered.value = true;
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_COUNTDOWN]);
       countdownTimer.start();
       countupTimer.stop();
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_COUNTDOWN]);
     }
   });
 
