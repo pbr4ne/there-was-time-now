@@ -30,6 +30,7 @@ export default function useMessage() {
       content: () => h(TGameMessage, { messageSections: message.messageSections}),
       positiveText: "OK!",
       maskClosable: false,
+      closable: false,
       icon: () => h(NIcon, null, { default: () => h(TimeIcon) })
     });
   }
