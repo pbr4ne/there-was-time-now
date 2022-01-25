@@ -2,26 +2,26 @@
   <n-button-group size="small">
     <n-popover trigger="hover" :disabled="!canSellWorker(research)">
       <template #trigger>
-        <n-button round @click="sellWorker(research)" :disabled="!canSellWorker(research)">
+        <n-button round :disabled="!canSellWorker(research)" @click="sellWorker(research)">
           <template #icon>
             <n-icon><minus-icon /></n-icon>
           </template>
         </n-button>
       </template>
-      <span>Sell worker for {{sellWorkerCost(research)}}</span>
+      <span>Sell worker for {{ sellWorkerCost(research) }}</span>
     </n-popover>
     <n-button style="width: 40px">
-      {{research.numWorkers}}
+      {{ research.numWorkers }}
     </n-button>
     <n-popover trigger="hover" :disabled="!canBuyWorker(research)">
       <template #trigger>
-        <n-button round @click="buyWorker(research)" :disabled="!canBuyWorker(research)" >
+        <n-button round :disabled="!canBuyWorker(research)" @click="buyWorker(research)">
           <template #icon>
             <n-icon><plus-icon /></n-icon>
           </template>
         </n-button>
       </template>
-      <span>Buy worker for {{buyWorkerCost(research)}}</span>
+      <span>Buy worker for {{ buyWorkerCost(research) }}</span>
     </n-popover>
   </n-button-group>
 </template>

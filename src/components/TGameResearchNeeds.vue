@@ -1,30 +1,34 @@
 <template>
   <div v-if="research != null">
-    <span :style="{color: research.color}">{{research.label}}</span><br />
+    <span :style="{color: research.color}">{{ research.label }}</span><br>
     <div v-if="research.isDevice && research.total == 1">
       Complete!
     </div>
     <div v-else>
-     {{messages[research.key]?.messageSections[0]?.text}}
+      {{ messages[research.key]?.messageSections[0]?.text }}
       <div 
         v-for="researchRequirement in research.researchRequirementList" 
         :key="researchRequirement.researchKey" 
       >
         <span :style="{color: '#969696'}">Needs: </span>
-        <span :style= "{color: researchList[researchRequirement.researchKey].color}">
+        <span :style="{color: researchList[researchRequirement.researchKey].color}">
           <span v-if="!researchList[researchRequirement.researchKey].isUnlocked">???</span>
-          <span v-else>{{researchRequirement.quantity}} {{researchList[researchRequirement.researchKey].label}}</span>
+          <span v-else>{{ researchRequirement.quantity }} {{ researchList[researchRequirement.researchKey].label }}</span>
         </span>
         <span v-if="research.expand != 1 && slowdownEnabled">
-          <br /><i>This will slow down time by {{research.expand}}%</i>
+          <br><i>This will slow down time by {{ research.expand }}%</i>
         </span>
       </div>
     </div>
   </div>
   <div v-else>
     Click on a button to start researching!
-    <div v-if="sellFeatureEnabled">Sell research to increase your budget.<br />{{paymentName()}} {{person.workerTitle}} may speed up your research!</div>
-    <div v-if="slowdownEnabled">Some research may slow down time...</div>
+    <div v-if="sellFeatureEnabled">
+      Sell research to increase your budget.<br>{{ paymentName() }} {{ person.workerTitle }} may speed up your research!
+    </div>
+    <div v-if="slowdownEnabled">
+      Some research may slow down time...
+    </div>
   </div>
 </template>
 

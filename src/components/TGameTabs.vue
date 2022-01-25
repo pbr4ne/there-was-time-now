@@ -1,5 +1,5 @@
 <template>
-  <n-tabs type="card" v-model:value="currentPerson">
+  <n-tabs v-model:value="currentPerson" type="card">
     <n-tab-pane 
       v-for="person in (Object.values(personList).filter(person => person.isUnlocked))" 
       :key="person.key"
@@ -7,7 +7,7 @@
       :tab="renderTab(person)"
     >
       <n-space style="padding: 20px">
-        <t-game-research :person="person" :researchList="unlockedResearchList(person)" v-if="unlockedResearchList(person).length > 0" />
+        <t-game-research v-if="unlockedResearchList(person).length > 0" :person="person" :research-list="unlockedResearchList(person)" />
       </n-space>
       <t-game-device v-if="unlockedDevice(person)" :research="unlockedDevice(person)" />
       <t-game-timeline v-if="countdownTriggered" :person="person" />

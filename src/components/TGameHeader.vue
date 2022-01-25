@@ -2,15 +2,15 @@
   <n-layout-header bordered style="padding-top: 5px;">
     <n-space justify="space-between" class="twtnHeader">
       <n-space style="padding-left: 5px;" width="100%">
-        <span :class="[titleText, titleFont]">{{titleValue}}</span>
+        <span :class="[titleText, titleFont]">{{ titleValue }}</span>
       </n-space>
 
       <ConfettiExplosion
         v-if="confetti"
-        :particleCount="200"
+        :particle-count="200"
         :duration="5000"
-        :stageHeight="confettiHeight"
-        :stageWidth="confettiWidth"
+        :stage-height="confettiHeight"
+        :stage-width="confettiWidth"
         :colors="['#F72585', '#B5179E', '#4361EE', '#4CC9F0']"
       />
 

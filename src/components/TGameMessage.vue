@@ -4,12 +4,12 @@
     :key="section.text"
   >
     <span class="person">
-      {{section.person? section.person + ": " : null}}
+      {{ section.person? section.person + ": " : null }}
     </span>
     <span>
-      {{section.text}}
+      {{ section.text }}
     </span>
-    <br /><br />
+    <br><br>
   </div>
 </template>
 
@@ -20,7 +20,10 @@ export default defineComponent({
   components: {
   },
   props: {
-    messageSections: Array,
+    messageSections: {
+      type: Array,
+      required: true,
+    },
   },
   setup() {
   },

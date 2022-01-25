@@ -1,24 +1,24 @@
 <template>
   made for the new year's incremental game jam (2022)
-  <br /><br />
+  <br><br>
   this is a game about "science" and "time"
-  <br /><br />
+  <br><br>
   programming by <span style="color: #00FF00">pbrane</span>
-  <br /><br />
+  <br><br>
   writing by James Funfer <a href="https://jamesfunfer.com/" style="color: #F72585">author page</a>
-  <br /><br />
+  <br><br>
   special thanks to: 
   <div class="indent">
-    goodjukel<br />
-    mystic<br />
-    j9<br />
-    grape tomato<br />
-    kyrr∂<br />
-    lady julz<br />
-    zelda<br />
+    goodjukel<br>
+    mystic<br>
+    j9<br>
+    grape tomato<br>
+    kyrr∂<br>
+    lady julz<br>
+    zelda<br>
     dish court boohbahs
   </div>
-  <br />
+  <br>
   <span>v0.1</span>
 </template>
 <script>

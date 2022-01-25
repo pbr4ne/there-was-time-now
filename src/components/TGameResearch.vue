@@ -23,13 +23,13 @@
               <th style="text-align: center;">
                 Research
               </th>
-              <th style="text-align: center;" v-if="sellFeatureEnabled">
+              <th v-if="sellFeatureEnabled" style="text-align: center;">
                 <n-button size="tiny" @click="changeSellIncrement()">
-                  ×{{sellIncrement()}}
+                  ×{{ sellIncrement() }}
                 </n-button>
               </th>
-              <th style="text-align: center;" v-if="sellFeatureEnabled">
-                {{person.workerTitle}}
+              <th v-if="sellFeatureEnabled" style="text-align: center;">
+                {{ person.workerTitle }}
               </th>
             </tr>
           </thead>
@@ -39,7 +39,7 @@
               :key="research.label"
             >
               <td @mouseover="currentResearch = research" @mouseleave="currentResearch = null">
-                  <t-game-research-button :research = "research"  />
+                <t-game-research-button :research="research" />
               </td>
               <td v-if="sellFeatureEnabled">
                 <t-game-research-sell :research="research" />
@@ -88,7 +88,10 @@ export default defineComponent({
     TGameResearchWorkers,
   },
   props: {
-    researchList: Array,
+    researchList: {
+      type: Array,
+      required: true,
+    },
     person: Person,
   },
   setup() {
