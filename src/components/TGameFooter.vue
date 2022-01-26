@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 
 import { 
   NButton,
@@ -145,16 +145,22 @@ export default defineComponent({
 
     const importGame = () => {
       pause();
+      const importError = ref(false);
       const importDialog = dialog.warning({
         title: 'Import Game',
         content: () => h(TGameImport, { 
+          importError,
           onCancelImport: () => { 
             unpause(); 
             importDialog.destroy(); 
           },
           onImportString: $event => {
-            importGameState($event.value);
-            importDialog.destroy();
+            const successfulImport = importGameState($event.value);
+            if(successfulImport) {
+              importDialog.destroy();
+            } else {
+              importError.value = true;
+            }
           },
         }),
         maskClosable: false,

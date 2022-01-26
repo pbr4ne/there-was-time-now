@@ -1,6 +1,7 @@
 <template>
   <n-space vertical>
     <span><i>This will overwrite your progress!</i></span>
+    <span v-if="importError.value" :style="{color: '#FF4136'}">Error importing game.</span>
     <n-input 
       v-model:value="imp"
       :autosize="{minRows: 10, maxRows: 10}"
@@ -27,6 +28,12 @@ export default defineComponent({
     NButton,
     NInput,
     NSpace,
+  },
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    importError: {
+      type: Object,
+    }
   },
   emits: ['cancel-import', 'import-string'],
   setup(_, { emit }) {
