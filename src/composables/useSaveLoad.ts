@@ -61,12 +61,7 @@ export default function useSaveLoad() {
     });
   }
 
-  const saveGameState = () => {
-    console.log(`saving to ${localforage.driver()}`);
-    if(isLoading.value) {
-      console.log('busy loading, will skip saving'); //todo - lol this is lazy
-      return;
-    }
+  const populateGameStateFromRuntime = () => {
     const savedPeople = new Array<GameStatePerson>();
     Object.values(personList)
       .forEach((person: any) => {
@@ -84,11 +79,55 @@ export default function useSaveLoad() {
     const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameWon.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
       slowdownEnabled.value, spokeToLennox.value, spokeToSama.value, savedPeople, savedResearch);
+
+    return gameState;
+  }
+
+  const saveGameState = () => {
+    console.log(`saving to ${localforage.driver()}`);
+    if(isLoading.value) {
+      console.log('busy loading, will skip saving'); //todo - lol this is lazy
+      return;
+    }
     
-    return localforage.setItem(SaveKey.GAME_STATE, gameState)
+    return localforage.setItem(SaveKey.GAME_STATE, populateGameStateFromRuntime())
       .catch(function(err: any) {
         console.log(`Error saving game state: ${err}`);
       });
+  }
+
+  const populateRuntimeFromGameState = (gameState: GameState) => {
+    gameState.people.forEach((gameStatePerson: GameStatePerson) => {
+      const person = personList[gameStatePerson.key];
+      person.isUnlocked = gameStatePerson.isUnlocked;
+      person.messageList = JSON.parse(gameStatePerson.messageList);
+    });
+
+    gameState.researches.forEach((gameStateResearch: GameStateResearch) => {
+      const research = researchList[gameStateResearch.key];
+      research.isUnlocked = gameStateResearch.isUnlocked;
+      research.total = gameStateResearch.total;
+      research.current = gameStateResearch.current;
+      research.numWorkers = gameStateResearch.numWorkers;
+    });
+
+    currency.value = gameState.currency;
+    sellFeatureEnabled.value = gameState.sellFeatureEnabled;
+    gameStarted.value = gameState.gameStarted;
+    gameWon.value = gameState.gameWon;
+    gameEnded.value = gameState.gameEnded;
+    countdownTriggered.value = gameState.countdownTriggered;
+    countupTimer.restart(gameState.countupSecondsPassed);
+    slowdownEnabled.value = gameState.slowdownEnabled;
+    spokeToLennox.value = gameState.spokeToLennox;
+    spokeToSama.value = gameState.spokeToSama;
+    if(countdownTriggered.value) {
+      expandConstant.value = gameState.expandConstant;
+      if(!gameEnded.value) {
+        countdownTimer.restart(gameState.countdownSecondsLeft);
+      }
+      countupTimer.stop();
+    }
   }
 
   const loadGameInternal = () => {
@@ -101,37 +140,7 @@ export default function useSaveLoad() {
         console.log('didn\'t end up loading');
         return;
       }
-      gameState.people.forEach((gameStatePerson: GameStatePerson) => {
-        const person = personList[gameStatePerson.key];
-        person.isUnlocked = gameStatePerson.isUnlocked;
-        person.messageList = JSON.parse(gameStatePerson.messageList);
-      });
-
-      gameState.researches.forEach((gameStateResearch: GameStateResearch) => {
-        const research = researchList[gameStateResearch.key];
-        research.isUnlocked = gameStateResearch.isUnlocked;
-        research.total = gameStateResearch.total;
-        research.current = gameStateResearch.current;
-        research.numWorkers = gameStateResearch.numWorkers;
-      });
-
-      currency.value = gameState.currency;
-      sellFeatureEnabled.value = gameState.sellFeatureEnabled;
-      gameStarted.value = gameState.gameStarted;
-      gameWon.value = gameState.gameWon;
-      gameEnded.value = gameState.gameEnded;
-      countdownTriggered.value = gameState.countdownTriggered;
-      countupTimer.restart(gameState.countupSecondsPassed);
-      slowdownEnabled.value = gameState.slowdownEnabled;
-      spokeToLennox.value = gameState.spokeToLennox;
-      spokeToSama.value = gameState.spokeToSama;
-      if(countdownTriggered.value) {
-        expandConstant.value = gameState.expandConstant;
-        if(!gameEnded.value) {
-          countdownTimer.restart(gameState.countdownSecondsLeft);
-        }
-        countupTimer.stop();
-      }
+      populateRuntimeFromGameState(gameState);
       isLoading.value = false;
       console.log('done loading');
     })
@@ -145,8 +154,24 @@ export default function useSaveLoad() {
     return localforage.ready().then(loadGameInternal);
   }
 
+  const importGameState = (value: string) => {
+    console.log('import game state');
+    try {
+      populateRuntimeFromGameState(JSON.parse(atob(value)));
+      return true;
+    } catch (exception) {
+      return false;
+    }
+  }
+
+  const exportGameState = () => {
+    return btoa(JSON.stringify(populateGameStateFromRuntime()));
+  }
+
   return {
     clearGameState,
+    exportGameState,
+    importGameState,
     loadGameState,
     saveGameState,
   }

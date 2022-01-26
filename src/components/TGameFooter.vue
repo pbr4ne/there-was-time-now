@@ -36,23 +36,23 @@
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <n-button strong circle>
+          <n-button strong circle @click="importGame()">
             <template #icon>
               <n-icon><load-icon /></n-icon>
             </template>
           </n-button>
         </template>
-        <span>Import (not implemented yet)</span>
+        <span>Import</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <n-button strong circle>
+          <n-button strong circle @click="exportGame()">
             <template #icon>
               <n-icon><save-icon /></n-icon>
             </template>
           </n-button>
         </template>
-        <span>Export (not implemented yet)</span>
+        <span>Export</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -74,6 +74,7 @@ import { defineComponent, h } from 'vue'
 import { 
   NButton,
   NIcon,
+  NInput,
   NLayoutFooter,
   NSpace,
   NTooltip,
@@ -94,6 +95,7 @@ import {
 } from '@vicons/material'
 
 import TGameAbout from '@/components/TGameAbout.vue'
+import TGameImport from '@/components/TGameImport.vue'
 import useMessage from '@/composables/useMessage'
 import usePause from '@/composables/usePause'
 import useSaveLoad from '@/composables/useSaveLoad'
@@ -118,7 +120,7 @@ export default defineComponent({
     const dialog = useDialog();
     const { sendInitialMessage } = useMessage();
     const { pause, unpause } = usePause();
-    const { clearGameState } = useSaveLoad();
+    const { clearGameState, exportGameState, importGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
 
     const about = () => {
@@ -126,7 +128,7 @@ export default defineComponent({
         title: 'About',
         content: () => h(TGameAbout),
         'show-icon': false,
-      })
+      });
     }
 
     const pauseTime = () => {
@@ -138,7 +140,42 @@ export default defineComponent({
         maskClosable: false,
         closable: false,
         onPositiveClick: unpause,
-      })
+      });
+    }
+
+    const importGame = () => {
+      pause();
+      const importDialog = dialog.warning({
+        title: 'Import Game',
+        content: () => h(TGameImport, { 
+          onCancelImport: () => { 
+            unpause(); 
+            importDialog.destroy(); 
+          },
+          onImportString: $event => {
+            importGameState($event.value);
+            importDialog.destroy();
+          },
+        }),
+        maskClosable: false,
+        closable: false,
+      });
+    }
+
+    const exportGame = () => {
+      pause();
+      dialog.info({
+        title: 'Export Game',
+        content: () => h(NInput, { 
+          autosize: { maxRows: 10 }, 
+          type: 'textarea',
+          value: exportGameState() 
+        }),
+        positiveText: 'Done!',
+        maskClosable: false,
+        closable: false,
+        onPositiveClick: unpause,
+      });
     }
 
     const otherThemeName = () => {
@@ -158,12 +195,14 @@ export default defineComponent({
         onPositiveClick: () => {
           clearGameState().then(sendInitialMessage());
         }
-      })
+      });
     }
 
     return {
       about,
       clearGameState,
+      exportGame,
+      importGame,
       lightMode,
       otherThemeName,
       pauseTime,
