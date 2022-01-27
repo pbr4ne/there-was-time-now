@@ -199,14 +199,13 @@ export default defineComponent({
         positiveText: 'I\'m going back to the start',
         negativeText: 'Oops, never mind',
         onPositiveClick: () => {
-          clearGameState().then(sendInitialMessage());
+          clearGameState().then(sendInitialMessage);
         }
       });
     }
 
     return {
       about,
-      clearGameState,
       exportGame,
       importGame,
       lightMode,

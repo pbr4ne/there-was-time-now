@@ -53,7 +53,6 @@ export default function useSaveLoad() {
       countdownTimer.restart(GameConstants.INITIAL_TIME);
       countdownTimer.stop();
       countupTimer.restart(0);
-      countupTimer.start();
       currentPerson.value = PersonKey.LENNOX_OLD;
     })
     .catch(function(err: any) {
