@@ -10,9 +10,9 @@ const sellIncrementIndex = ref(0);
 
 export default function useResearch() {
   const { currency } = useCurrency();
+  const { gamePaused, slowdownEnabled } = useFlags();
   const { researchList } = useInitialize();
   const { expandTime } = useTime();
-  const { slowdownEnabled } = useFlags();
 
   const canSellResearch = (research: Research, units: number) => {
     if(research.total < units) {
@@ -102,26 +102,28 @@ export default function useResearch() {
         consumeResearch(research.researchRequirementList);
       }
       const timer = setInterval(function() {
-        research.current += (research.speed * (1 + (research.numWorkers/50)));
-        if(research.current >= 100) {
-          clearInterval(timer);
+        if(!gamePaused.value) {
+          research.current += (research.speed * (1 + (research.numWorkers/50)));
+          if(research.current >= 100) {
+            clearInterval(timer);
 
-          //after 200 ms, show the total as 1
-          setTimeout(function() {
-            if(!research.isDevice) {
-              research.current = 0;
-              research.isIncrementing = false;
-            }
-            research.total += 1;
-            if(slowdownEnabled.value) {
-              expandTime(research.expand);
-            }
-          },200);
+            //after 200 ms, show the total as 1
+            setTimeout(function() {
+              if(!research.isDevice) {
+                research.current = 0;
+                research.isIncrementing = false;
+              }
+              research.total += 1;
+              if(slowdownEnabled.value) {
+                expandTime(research.expand);
+              }
+            },200);
 
-          //after 10 seconds, restart research
-          if(fromWorker) {
-            if(research.numWorkers > 0) {
-              setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
+            //after 10 seconds, restart research
+            if(fromWorker) {
+              if(research.numWorkers > 0) {
+                setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
+              }
             }
           }
         }
