@@ -124,10 +124,15 @@ export default defineComponent({
     const { lightMode, switchTheme } = useTheme();
 
     const about = () => {
+      pause();
       dialog.create({
         title: 'About',
         content: () => h(TGameAbout),
         'show-icon': false,
+        positiveText: 'Neat',
+        onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
       });
     }
 
@@ -137,9 +142,9 @@ export default defineComponent({
         title: 'Paused',
         content: 'There was time now... to go to the bathroom.',
         positiveText: 'Back to it!',
-        maskClosable: false,
-        closable: false,
         onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
       });
     }
 
@@ -163,8 +168,8 @@ export default defineComponent({
             }
           },
         }),
-        maskClosable: false,
-        closable: false,
+        onMaskClick: unpause,
+        onClose: unpause,
       });
     }
 
@@ -178,9 +183,9 @@ export default defineComponent({
           value: exportGameState() 
         }),
         positiveText: 'Done!',
-        maskClosable: false,
-        closable: false,
         onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
       });
     }
 
@@ -193,6 +198,7 @@ export default defineComponent({
     }
 
     const restart = () => {
+      pause();
       dialog.warning({
         title: 'Restart Game?',
         content: 'You will lose all of your progress!',
@@ -200,7 +206,10 @@ export default defineComponent({
         negativeText: 'Oops, never mind',
         onPositiveClick: () => {
           clearGameState().then(sendInitialMessage);
-        }
+        },
+        onNegativeClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
       });
     }
 
