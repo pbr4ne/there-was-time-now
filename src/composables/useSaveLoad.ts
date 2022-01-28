@@ -156,7 +156,7 @@ export default function useSaveLoad() {
   const importGameState = (value: string) => {
     console.log('import game state');
     try {
-      populateRuntimeFromGameState(JSON.parse(atob(value)));
+      populateRuntimeFromGameState(JSON.parse(decodeURIComponent(atob(value))));
       return true;
     } catch (exception) {
       return false;
@@ -164,7 +164,7 @@ export default function useSaveLoad() {
   }
 
   const exportGameState = () => {
-    return btoa(JSON.stringify(populateGameStateFromRuntime()));
+    return btoa(encodeURIComponent(JSON.stringify(populateGameStateFromRuntime())));
   }
 
   return {
