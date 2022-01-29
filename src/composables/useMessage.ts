@@ -18,15 +18,6 @@ export default function useMessage() {
   const { pause, unpause } = usePause();
   const { timeElapsed } = useTime();
 
-  function sendMessage(message: Message, person: Person) {
-    if(!message.wasSent){
-      message.wasSent = true;
-      setTimestamp(message, person.year, timeElapsed);
-      createNotification(message);
-      person.messageList.unshift(message);
-    }
-  }
-
   function createNotification(message: Message) {
     pause();
     dialog.create({
@@ -56,11 +47,21 @@ export default function useMessage() {
       return;
     }
 
-    sendMessage(message, person);
+    message.wasSent = true;
+    createNotification(message);
+
+    setTimestamp(message, person.year, timeElapsed);
+    person.messageList.unshift(message);
   }
 
   function sendNarrativeMessage(message: Message) {
-    sendMessage(message, personList[PersonKey.LENNOX_OLD]);
+    const person = personList[PersonKey.LENNOX_OLD]
+    
+    message.wasSent = true;
+    createNotification(message);
+
+    setTimestamp(message, person.year, timeElapsed);
+    person.messageList.unshift(message);
   }
 
   return {
