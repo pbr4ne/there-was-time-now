@@ -1,4 +1,6 @@
-# there-was-time-now
+# There Was Time Now
+
+A game about "science" and "time".
 
 ## Project setup
 ```
