@@ -86,6 +86,14 @@ export default defineComponent({
           key: 'divider-device',
           type: 'divider',
         });
+        sidebar.push({
+          key: 'devices',
+          label: 'D E V I C E S'
+        });
+        sidebar.push({
+          key: 'divider-device2',
+          type: 'divider',
+        });
         sidebar.push(...deviceGroup);
       }
 
