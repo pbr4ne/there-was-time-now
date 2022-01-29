@@ -19,7 +19,7 @@
     dish court boohbahs
   </div>
   <br>
-  <span>v0.1</span>
+  <span>v0.3</span>
 </template>
 <script>
 import { defineComponent } from 'vue'

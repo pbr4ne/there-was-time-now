@@ -13,13 +13,13 @@
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <n-button strong circle>
+          <n-button strong circle @click="version()">
             <template #icon>
               <n-icon><version-icon /></n-icon>
             </template>
           </n-button>
         </template>
-        <span>Version History (not implemented yet)</span>
+        <span>Version History</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
@@ -110,6 +110,7 @@ import {
 
 import TGameAbout from '@/components/TGameAbout.vue'
 import TGameImport from '@/components/TGameImport.vue'
+import TGameVersion from '@/components/TGameVersion.vue'
 import useMessage from '@/composables/useMessage'
 import usePause from '@/composables/usePause'
 import useSaveLoad from '@/composables/useSaveLoad'
@@ -145,6 +146,19 @@ export default defineComponent({
         content: () => h(TGameAbout),
         'show-icon': false,
         positiveText: 'Neat',
+        onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
+      });
+    }
+
+    const version = () => {
+      pause();
+      dialog.create({
+        title: 'Version History',
+        content: () => h(TGameVersion),
+        'show-icon': false,
+        positiveText: 'Good to Know',
         onPositiveClick: unpause,
         onMaskClick: unpause,
         onClose: unpause,
@@ -237,6 +251,7 @@ export default defineComponent({
       pauseTime,
       restart,
       switchTheme,
+      version,
     }
   },
 })
