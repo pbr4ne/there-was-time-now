@@ -13,6 +13,16 @@
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
+          <n-button strong circle>
+            <template #icon>
+              <n-icon><version-icon /></n-icon>
+            </template>
+          </n-button>
+        </template>
+        <span>Version History (not implemented yet)</span>
+      </n-tooltip>
+      <n-tooltip placement="top" trigger="hover">
+        <template #trigger>
           <n-button strong circle @click="switchTheme">
             <template #icon>
               <n-icon>
@@ -86,6 +96,10 @@ import {
   PauseOutlined as PauseIcon,
 } from '@vicons/antd'
 
+import {
+  IosGitBranch as VersionIcon,
+} from '@vicons/ionicons4'
+
 import { 
   DarkModeOutlined as DarkModeIcon,
   FileUploadOutlined as LoadIcon,
@@ -115,6 +129,7 @@ export default defineComponent({
     PauseIcon,
     RestartIcon,
     SaveIcon,
+    VersionIcon,
   },
   setup() {
     const dialog = useDialog();
