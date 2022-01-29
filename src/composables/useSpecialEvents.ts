@@ -1,19 +1,18 @@
 import { watchEffect } from 'vue'
-import { useDialog } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
 import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
-import { GameConstants } from '@/enum/Constants'
+import { Person } from '@/entities/Person'
+import { Research } from '@/entities/Research'
 import { NarrativeKey, PersonKey, ResearchKey } from '@/enum/Enums'
 import { messages } from '@/locales/en'
 
 //todo - some of this could probably be triggered other ways
 export default function useSpecialEvents() {
 
-  const dialog = useDialog();
-  const { personList, researchList } = useInitialize();
-  const { sendNarrativeMessage } = useMessage();
+  const { personList, researchList, unlockableList } = useInitialize();
+  const { sendNarrativeMessage, sendUnlockMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
   const { confetti, countdownTriggered, gameEnded, gameWon, isLoading, sellFeatureEnabled, slowdownEnabled, 
           spokeToLennox, spokeToSama } = useFlags();
@@ -49,6 +48,7 @@ export default function useSpecialEvents() {
     if(!personList[PersonKey.LENNOX_YOUNG].isUnlocked && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 10 && slowdownEnabled.value) {
       personList[PersonKey.LENNOX_YOUNG].isUnlocked = true;
       researchList[ResearchKey.BIOLOGY].isUnlocked = true;
+      sendUnlockMessage(ResearchKey.BIOLOGY, personList[PersonKey.LENNOX_YOUNG]);
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_YOUNG_LENNOX]);
     }
   });
@@ -105,13 +105,6 @@ export default function useSpecialEvents() {
     }
   });
 
-  //When time is halfway up, show message
-  // watchEffect(() => {
-  //   if(countdownTimer.secondsLeft() == GameConstants.INITIAL_TIME / 2 && !isLoading.value){
-  //     sendNarrativeMessage(messages[NarrativeKey.HALFWAY]);
-  //   }
-  // });
-
   //When you finish building all devices, you win
   watchEffect(() => {
     if(isLoading.value) {
@@ -133,6 +126,31 @@ export default function useSpecialEvents() {
       gameEnded.value = true;
       gameWon.value = false;
       sendNarrativeMessage(messages[NarrativeKey.FAILURE]);
+    }
+  });
+
+  watchEffect(() => {
+    if (isLoading.value) {
+      return;
+    }
+    for(const key in unlockableList){
+      const unlockable = unlockableList[key];
+      let person = null;
+      if(unlockable instanceof Person) {
+        person = unlockable;
+      } else if(unlockable instanceof Research) {
+        person = personList[unlockable.personKey];
+      }
+      if(!unlockable.isUnlocked) {
+        const unlock = researchList[unlockable.unlockedBy];
+        if(unlock) {
+          const threshold = unlockable.unlockThreshold;
+          if(unlock.total >= threshold) {
+            unlockable.isUnlocked = true;
+            sendUnlockMessage(key, person)
+          }
+        }
+      }
     }
   });
 }

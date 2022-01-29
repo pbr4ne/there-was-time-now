@@ -21,7 +21,6 @@ import useGameMessage from '@/composables/useMessage'
 import useResearch from '@/composables/useResearch'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useSpecialEvents from '@/composables/useSpecialEvents'
-import useUnlockWatch from '@/composables/useUnlockWatch'
 import { GameConstants } from '@/enum/Constants'
 
 
@@ -47,7 +46,6 @@ export default {
 
     startIncrements();
     useSpecialEvents();
-    useUnlockWatch();
 
     //Autosave
     setTimeout(function() {

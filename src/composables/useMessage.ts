@@ -20,6 +20,7 @@ export default function useMessage() {
 
   function sendMessage(message: Message, person: Person) {
     if(!message.wasSent){
+      message.wasSent = true;
       setTimestamp(message, person.year, timeElapsed);
       createNotification(message);
       person.messageList.unshift(message);
@@ -55,13 +56,7 @@ export default function useMessage() {
       return;
     }
 
-    if(!message.wasSent) {
-      message.wasSent = true;
-      sendMessage(message, person);
-    }
-    else {
-      return;
-    }
+    sendMessage(message, person);
   }
 
   function sendNarrativeMessage(message: Message) {
