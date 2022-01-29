@@ -1,7 +1,6 @@
 import { watchEffect } from 'vue'
 import { useDialog } from 'naive-ui'
 import useInitialize from '@/composables/useInitialize'
-// @ts-ignore
 import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import useFlags from '@/composables/useFlags'
@@ -16,16 +15,16 @@ export default function useSpecialEvents() {
   const { personList, researchList } = useInitialize();
   const { sendNarrativeMessage } = useMessage();
   const { countdownTimer, countupTimer, } = useTime();
-  const { confetti, countdownTriggered, gameEnded, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
-  
+  const { confetti, countdownTriggered, gameEnded, gameWon, isLoading, sellFeatureEnabled, slowdownEnabled, 
+          spokeToLennox, spokeToSama } = useFlags();
 
   //When first quantum computer is built, start the end of world timer
   watchEffect(() => {
     if(!countdownTriggered.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
       countdownTriggered.value = true;
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_COUNTDOWN]);
       countdownTimer.start();
       countupTimer.stop();
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_COUNTDOWN]);
     }
   });
 
@@ -122,6 +121,7 @@ export default function useSpecialEvents() {
     if(!gameEnded.value && crystalSarcophagus.total > 0) {
       countdownTimer.stop();
       gameEnded.value = true;
+      gameWon.value = true;
       confetti.value = true;
       sendNarrativeMessage(messages[NarrativeKey.SUCCESS]);
     }
@@ -131,6 +131,7 @@ export default function useSpecialEvents() {
   watchEffect(async() => {
     if(!gameEnded.value && countdownTimer.isExpired() && !isLoading.value) {
       gameEnded.value = true;
+      gameWon.value = false;
       sendNarrativeMessage(messages[NarrativeKey.FAILURE]);
     }
   });

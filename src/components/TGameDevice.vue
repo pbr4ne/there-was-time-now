@@ -8,7 +8,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { NGrid, NGridItem } from 'naive-ui'
-import TGameDeviceCard from '@/components/TGameDeviceCard'
+import TGameDeviceCard from '@/components/TGameDeviceCard.vue'
 import useResearch from '@/composables/useResearch'
 import { Research } from '@/entities/Research'
 

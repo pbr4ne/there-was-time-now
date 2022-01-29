@@ -11,13 +11,13 @@
 
 <script>
 import { watch } from 'vue'
-import { NLayout } from 'naive-ui'
+import { NLayout, useMessage } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
 import TGameTabs from '@/components/TGameTabs.vue'
 import useFlags from '@/composables/useFlags'
-import useMessage from '@/composables/useMessage'
+import useGameMessage from '@/composables/useMessage'
 import useResearch from '@/composables/useResearch'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useSpecialEvents from '@/composables/useSpecialEvents'
@@ -34,20 +34,18 @@ export default {
     TGameTabs,
   },
   setup () {
+    const message = useMessage();
     const { gamePaused, gameStarted, isLoading, saveStopwatch } = useFlags();
-    const { sendInitialMessage } = useMessage();
+    const { sendInitialMessage } = useGameMessage();
     const { startIncrements } = useResearch();
-    const { loadGameState, saveGameState } = useSaveLoad();
+    const { saveGameState } = useSaveLoad();
     
-    loadGameState().then(function() {
-      if(!gameStarted.value) {
-        sendInitialMessage();
-        gameStarted.value = true;
-      }
-    }).finally(function() {
-        startIncrements();
-    });
+    if(!gameStarted.value) {
+      sendInitialMessage();
+      gameStarted.value = true;
+    }
 
+    startIncrements();
     useSpecialEvents();
     useUnlockWatch();
 
@@ -55,7 +53,7 @@ export default {
     setTimeout(function() {
       watch(saveStopwatch.seconds, () => {
         if((saveStopwatch.seconds.value % GameConstants.SAVE_INTERVAL === 0 && !isLoading.value && !gamePaused.value)){
-          saveGameState();
+          saveGameState().then(message.success('Autosaved'));
         }
       });
     }, GameConstants.SAVE_INTERVAL * 1000);

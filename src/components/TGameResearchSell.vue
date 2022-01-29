@@ -1,11 +1,11 @@
 <template>
   <n-popover trigger="hover" :disabled="!canSellResearch(research, sellIncrement())">
     <template #trigger>
-      <n-button @click="sellResearch(research, sellIncrement())" :disabled="!canSellResearch(research, sellIncrement())">
+      <n-button :disabled="!canSellResearch(research, sellIncrement())" @click="sellResearch(research, sellIncrement())">
         Sell
       </n-button>
     </template>
-    <span>Sell {{research.label}} for {{sellResearchPrice(research, sellIncrement())}}</span>
+    <span>Sell {{ research.label }} for {{ sellResearchPrice(research, sellIncrement()) }}</span>
   </n-popover>
 </template>
 

@@ -1,13 +1,13 @@
 <template>
   <n-popover trigger="hover" :placement="placement()" :style="{ maxWidth: '200px' }">
-   <template #trigger>
+    <template #trigger>
       <div @click="changeTab()">
-        {{research.label}} <b :style="{ color: research.color }">{{research.total}}</b>
+        {{ research.label }} <b :style="{ color: research.color }">{{ research.total }}</b>
       </div>
-   </template>
-   <div>
-    <span :style="{color: research.color}">{{research.label}}</span><br />
-     {{messages[research.key].messageSections[0].text}}
+    </template>
+    <div>
+      <span :style="{color: research.color}">{{ research.label }}</span><br>
+      {{ messages[research.key].messageSections[0].text }}
     </div>
   </n-popover>
 </template>

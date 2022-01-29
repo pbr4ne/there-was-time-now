@@ -2,8 +2,6 @@ import * as localforage from 'localforage/dist/localforage.js'
 import useCurrency from '@/composables/useCurrency'
 import useFlags from '@/composables/useFlags'
 import useInitialize from '@/composables/useInitialize'
-// @ts-ignore
-import useMessage from '@/composables/useMessage'
 import useTime from '@/composables/useTime'
 import { GameState } from '@/dto/GameState'
 import { GameStatePerson } from '@/dto/GameStatePerson'
@@ -17,14 +15,14 @@ localforage.config({
 
 export default function useSaveLoad() {
   const { currency } = useCurrency();
-  const { countdownTriggered, currentPerson, gameEnded, gameStarted, isLoading, sellFeatureEnabled, slowdownEnabled, spokeToLennox, spokeToSama } = useFlags();
+  const { countdownTriggered, currentPerson, gameEnded, gameStarted, gameWon, isLoading, sellFeatureEnabled, slowdownEnabled, 
+          spokeToLennox, spokeToSama } = useFlags();
   const { personList, researchList } = useInitialize();
-  const { sendInitialMessage } = useMessage();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
 
-  //todo - missing initial message
   //todo - the countup timer is getting messed up
   const clearGameState = () => {
+    console.log(`clearing game state in ${localforage.driver()}`);
     return localforage.setItem(SaveKey.GAME_STATE, null)
     .then(function() {
       Object.values(personList).forEach((person: any) => {
@@ -45,6 +43,7 @@ export default function useSaveLoad() {
       currency.value = 0;
       sellFeatureEnabled.value = false;
       gameStarted.value = true;
+      gameWon.value = false;
       gameEnded.value = false;
       countdownTriggered.value = false;
       expandConstant.value = GameConstants.INITIAL_EXPANSION_CONSTANT;
@@ -54,21 +53,14 @@ export default function useSaveLoad() {
       countdownTimer.restart(GameConstants.INITIAL_TIME);
       countdownTimer.stop();
       countupTimer.restart(0);
-      countupTimer.start();
       currentPerson.value = PersonKey.LENNOX_OLD;
-      sendInitialMessage();
     })
     .catch(function(err: any) {
       console.log(`Error saving game state: ${err}`);
     });
   }
 
-  const saveGameState = () => {
-    console.log('saving');
-    if(isLoading.value) {
-      console.log('busy loading, will skip saving'); //todo - lol this is lazy
-      return;
-    }
+  const populateGameStateFromRuntime = () => {
     const savedPeople = new Array<GameStatePerson>();
     Object.values(personList)
       .forEach((person: any) => {
@@ -83,18 +75,62 @@ export default function useSaveLoad() {
       savedResearch.push(gameStateResearch);
     });
 
-    const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameEnded.value, 
+    const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameWon.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
       slowdownEnabled.value, spokeToLennox.value, spokeToSama.value, savedPeople, savedResearch);
+
+    return gameState;
+  }
+
+  const saveGameState = () => {
+    console.log(`saving to ${localforage.driver()}`);
+    if(isLoading.value) {
+      console.log('busy loading, will skip saving'); //todo - lol this is lazy
+      return;
+    }
     
-    return localforage.setItem(SaveKey.GAME_STATE, gameState)
+    return localforage.setItem(SaveKey.GAME_STATE, populateGameStateFromRuntime())
       .catch(function(err: any) {
         console.log(`Error saving game state: ${err}`);
       });
   }
 
-  const loadGameState = () => {
-    console.log('loading...');
+  const populateRuntimeFromGameState = (gameState: GameState) => {
+    gameState.people.forEach((gameStatePerson: GameStatePerson) => {
+      const person = personList[gameStatePerson.key];
+      person.isUnlocked = gameStatePerson.isUnlocked;
+      person.messageList = JSON.parse(gameStatePerson.messageList);
+    });
+
+    gameState.researches.forEach((gameStateResearch: GameStateResearch) => {
+      const research = researchList[gameStateResearch.key];
+      research.isUnlocked = gameStateResearch.isUnlocked;
+      research.total = gameStateResearch.total;
+      research.current = gameStateResearch.current;
+      research.numWorkers = gameStateResearch.numWorkers;
+    });
+
+    currency.value = gameState.currency;
+    sellFeatureEnabled.value = gameState.sellFeatureEnabled;
+    gameStarted.value = gameState.gameStarted;
+    gameWon.value = gameState.gameWon;
+    gameEnded.value = gameState.gameEnded;
+    countdownTriggered.value = gameState.countdownTriggered;
+    countupTimer.restart(gameState.countupSecondsPassed);
+    slowdownEnabled.value = gameState.slowdownEnabled;
+    spokeToLennox.value = gameState.spokeToLennox;
+    spokeToSama.value = gameState.spokeToSama;
+    if(countdownTriggered.value) {
+      expandConstant.value = gameState.expandConstant;
+      if(!gameEnded.value) {
+        countdownTimer.restart(gameState.countdownSecondsLeft);
+      }
+      countupTimer.stop();
+    }
+  }
+
+  const loadGameInternal = () => {
+    console.log(`loading from ${localforage.driver()}`);
     isLoading.value = true;
     return localforage.getItem(SaveKey.GAME_STATE)
     .then(function(gameState: GameState) {
@@ -103,47 +139,38 @@ export default function useSaveLoad() {
         console.log('didn\'t end up loading');
         return;
       }
-      gameState.people.forEach((gameStatePerson: GameStatePerson) => {
-        const person = personList[gameStatePerson.key];
-        person.isUnlocked = gameStatePerson.isUnlocked;
-        person.messageList = JSON.parse(gameStatePerson.messageList);
-      });
-
-      gameState.researches.forEach((gameStateResearch: GameStateResearch) => {
-        const research = researchList[gameStateResearch.key];
-        research.isUnlocked = gameStateResearch.isUnlocked;
-        research.total = gameStateResearch.total;
-        research.current = gameStateResearch.current;
-        research.numWorkers = gameStateResearch.numWorkers;
-      });
-
-      currency.value = gameState.currency;
-      sellFeatureEnabled.value = gameState.sellFeatureEnabled;
-      gameStarted.value = gameState.gameStarted;
-      gameEnded.value = gameState.gameEnded;
-      countdownTriggered.value = gameState.countdownTriggered;
-      countupTimer.restart(gameState.countupSecondsPassed);
-      slowdownEnabled.value = gameState.slowdownEnabled;
-      spokeToLennox.value = gameState.spokeToLennox;
-      spokeToSama.value = gameState.spokeToSama;
-      if(countdownTriggered.value) {
-        expandConstant.value = gameState.expandConstant;
-        if(!gameEnded.value) {
-          countdownTimer.restart(gameState.countdownSecondsLeft);
-        }
-        countupTimer.stop();
-      }
+      populateRuntimeFromGameState(gameState);
       isLoading.value = false;
       console.log('done loading');
     })
     .catch(function(err: any) {
       isLoading.value = false;
-      console.log(`Error loading gameStarted: ${err}`);
+      console.log(`Error loading game state: ${err}`);
     });
+  }
+
+  const loadGameState = () => {
+    return localforage.ready().then(loadGameInternal);
+  }
+
+  const importGameState = (value: string) => {
+    console.log('import game state');
+    try {
+      populateRuntimeFromGameState(JSON.parse(decodeURIComponent(atob(value))));
+      return true;
+    } catch (exception) {
+      return false;
+    }
+  }
+
+  const exportGameState = () => {
+    return btoa(encodeURIComponent(JSON.stringify(populateGameStateFromRuntime())));
   }
 
   return {
     clearGameState,
+    exportGameState,
+    importGameState,
     loadGameState,
     saveGameState,
   }

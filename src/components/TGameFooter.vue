@@ -3,57 +3,73 @@
     <n-space justify="end" style="padding: 5px;">
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon @click="about()">
-            <n-icon><about-icon /></n-icon>
+          <n-button strong circle @click="about()">
+            <template #icon>
+              <n-icon><about-icon /></n-icon>
+            </template>
           </n-button>
         </template>
         <span>About</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon @click="switchTheme">
-            <n-icon>
-              <light-mode-icon v-if="!lightMode"/>
-              <dark-mode-icon v-if="lightMode"/>
-            </n-icon>
+          <n-button strong circle @click="version()">
+            <template #icon>
+              <n-icon><version-icon /></n-icon>
+            </template>
           </n-button>
         </template>
-        <span>{{otherThemeName()}}</span>
+        <span>Version History</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
-            <n-icon><pause-icon /></n-icon>
+          <n-button strong circle @click="switchTheme">
+            <template #icon>
+              <n-icon>
+                <light-mode-icon v-if="!lightMode" />
+                <dark-mode-icon v-if="lightMode" />
+              </n-icon>
+            </template>
           </n-button>
         </template>
-        <span>Pause (not implemented yet)</span>
+        <span>{{ otherThemeName() }}</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
-            <n-icon><load-icon /></n-icon>
+          <n-button strong circle @click="pauseTime()">
+            <template #icon>
+              <n-icon><pause-icon /></n-icon>
+            </template>
           </n-button>
         </template>
-        <span>Import (not implemented yet)</span>
+        <span>Pause</span>
       </n-tooltip>
       <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon>
-            <n-icon><save-icon /></n-icon>
+          <n-button strong circle @click="importGame()">
+            <template #icon>
+              <n-icon><load-icon /></n-icon>
+            </template>
           </n-button>
         </template>
-        <span>Export (not implemented yet)</span>
+        <span>Import</span>
       </n-tooltip>
-       <n-tooltip placement="top" trigger="hover">
+      <n-tooltip placement="top" trigger="hover">
         <template #trigger>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <n-button strong circle #icon @click="restart()">
-            <n-icon><restart-icon /></n-icon>
+          <n-button strong circle @click="exportGame()">
+            <template #icon>
+              <n-icon><save-icon /></n-icon>
+            </template>
+          </n-button>
+        </template>
+        <span>Export</span>
+      </n-tooltip>
+      <n-tooltip placement="top" trigger="hover">
+        <template #trigger>
+          <n-button strong circle @click="restart()">
+            <template #icon>
+              <n-icon><restart-icon /></n-icon>
+            </template>
           </n-button>
         </template>
         <span>Restart</span>
@@ -63,12 +79,12 @@
 </template>
 
 <script>
-/*eslint-disable*/
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 
 import { 
   NButton,
   NIcon,
+  NInput,
   NLayoutFooter,
   NSpace,
   NTooltip,
@@ -81,7 +97,8 @@ import {
 } from '@vicons/antd'
 
 import {
-} from '@vicons/fluent'
+  IosGitBranch as VersionIcon,
+} from '@vicons/ionicons4'
 
 import { 
   DarkModeOutlined as DarkModeIcon,
@@ -91,11 +108,13 @@ import {
   SaveOutlined as SaveIcon,
 } from '@vicons/material'
 
-import TGameAbout from '@/components/TGameAbout'
-import useFlags from '@/composables/useFlags'
+import TGameAbout from '@/components/TGameAbout.vue'
+import TGameImport from '@/components/TGameImport.vue'
+import TGameVersion from '@/components/TGameVersion.vue'
+import useMessage from '@/composables/useMessage'
+import usePause from '@/composables/usePause'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
-import useTime from '@/composables/useTime'
 
 export default defineComponent({
   components: {
@@ -110,43 +129,93 @@ export default defineComponent({
     NTooltip,
     PauseIcon,
     RestartIcon,
-    TGameAbout,
     SaveIcon,
+    VersionIcon,
   },
   setup() {
     const dialog = useDialog();
-    const { gameEnded, gamePaused } = useFlags();
-    const { clearGameState } = useSaveLoad();
+    const { sendInitialMessage } = useMessage();
+    const { pause, unpause } = usePause();
+    const { clearGameState, exportGameState, importGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
-    const { countdownTimer, countdownTriggered, countupTimer } = useTime();
 
     const about = () => {
+      pause();
       dialog.create({
         title: 'About',
         content: () => h(TGameAbout),
         'show-icon': false,
-      })
+        positiveText: 'Neat',
+        onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
+      });
     }
 
-    //todo - this isn't pausing the countdown properly
-    const pause = () => {
-      countdownTimer.stop();
-      countupTimer.stop();
-      gamePaused.value = true;
+    const version = () => {
+      pause();
+      dialog.create({
+        title: 'Version History',
+        content: () => h(TGameVersion),
+        'show-icon': false,
+        positiveText: 'Good to Know',
+        onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
+      });
+    }
 
+    const pauseTime = () => {
+      pause();
       dialog.info({
         title: 'Paused',
         content: 'There was time now... to go to the bathroom.',
-        onClose: () => {
-          console.log('on close');
-          gamePaused.value = false;
-          if(countdownTriggered.value) {
-            countdownTimer.start();
-          } else if(!gameEnded.value) {
-            countupTimer.start();
-          }
-        }
-      })
+        positiveText: 'Back to it!',
+        onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
+      });
+    }
+
+    const importGame = () => {
+      pause();
+      const importError = ref(false);
+      const importDialog = dialog.warning({
+        title: 'Import Game',
+        content: () => h(TGameImport, { 
+          importError,
+          onCancelImport: () => { 
+            unpause(); 
+            importDialog.destroy(); 
+          },
+          onImportString: $event => {
+            const successfulImport = importGameState($event.value);
+            if(successfulImport) {
+              importDialog.destroy();
+            } else {
+              importError.value = true;
+            }
+          },
+        }),
+        onMaskClick: unpause,
+        onClose: unpause,
+      });
+    }
+
+    const exportGame = () => {
+      pause();
+      dialog.info({
+        title: 'Export Game',
+        content: () => h(NInput, { 
+          autosize: { maxRows: 10 }, 
+          type: 'textarea',
+          value: exportGameState() 
+        }),
+        positiveText: 'Done!',
+        onPositiveClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
+      });
     }
 
     const otherThemeName = () => {
@@ -158,26 +227,31 @@ export default defineComponent({
     }
 
     const restart = () => {
+      pause();
       dialog.warning({
         title: 'Restart Game?',
         content: 'You will lose all of your progress!',
         positiveText: 'I\'m going back to the start',
         negativeText: 'Oops, never mind',
         onPositiveClick: () => {
-          clearGameState();
-        }
-      })
+          clearGameState().then(sendInitialMessage);
+        },
+        onNegativeClick: unpause,
+        onMaskClick: unpause,
+        onClose: unpause,
+      });
     }
 
     return {
       about,
-      clearGameState,
-      gamePaused,
+      exportGame,
+      importGame,
       lightMode,
       otherThemeName,
-      pause,
+      pauseTime,
       restart,
       switchTheme,
+      version,
     }
   },
 })

@@ -1,6 +1,5 @@
 import { watchEffect } from 'vue'
 import useInitialize from '@/composables/useInitialize'
-// @ts-ignore
 import useMessage from '@/composables/useMessage'
 import useFlags from '@/composables/useFlags'
 import { Person } from '@/entities/Person'

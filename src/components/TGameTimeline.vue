@@ -1,9 +1,13 @@
 <template>
   <n-space vertical style="padding: 20px;">
-      <n-switch v-model:value="showTimeline">
-        <template #checked>Hide Timeline</template>
-        <template #unchecked>Show Timeline</template>
-      </n-switch>
+    <n-switch v-model:value="showTimeline">
+      <template #checked>
+        Hide Timeline
+      </template>
+      <template #unchecked>
+        Show Timeline
+      </template>
+    </n-switch>
     <n-collapse-transition :show="showTimeline">
       <n-timeline>
         <n-timeline-item
@@ -11,7 +15,7 @@
           :key="message.title"
           :title="message.title"
           :color="'#63e2b7'"
-          :content= "renderMessageContent(message)"
+          :content="renderMessageContent(message)"
           :time="message.timestamp"
         />
       </n-timeline>
@@ -29,7 +33,7 @@ import {
   NTimeline,
   NTimelineItem,
 } from 'naive-ui'
-import TGameMessage from '@/components/TGameMessage'
+import TGameMessage from '@/components/TGameMessage.vue'
 import useMessage from '@/composables/useMessage'
 import useInitialize from '@/composables/useInitialize'
 import { PersonKey } from '@/enum/Enums'
