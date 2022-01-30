@@ -329,7 +329,7 @@ const messages = {
     }],
   ),
   [ResearchKey.ZODIAC_TALISMAN]: new Message('Unlocked Zodiac Talisman', [{
-      text: 'Comes in 12 varieties'
+      text: 'Comes in 12 varieties.'
     }],
   ),
   [ResearchKey.SARSEN_STONES]: new Message('Unlocked Sarsen Stones', [{
