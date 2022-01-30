@@ -19,7 +19,7 @@ export default function useSpecialEvents() {
 
   //When first quantum computer is built, start the end of world timer
   watchEffect(() => {
-    if(!countdownTriggered.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 1 && !isLoading.value) {
+    if(!countdownTriggered.value && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 1 && !isLoading.value) {
       countdownTriggered.value = true;
       countdownTimer.start();
       countupTimer.stop();
@@ -29,7 +29,7 @@ export default function useSpecialEvents() {
 
   //When fifth quantum computer is built, unlock buy/sell
   watchEffect(() => {
-    if(!sellFeatureEnabled.value && researchList[ResearchKey.QUANTUM_COMPUTER].total == 5 && !isLoading.value) {
+    if(!sellFeatureEnabled.value && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_WORKERS]);
     }
@@ -55,7 +55,7 @@ export default function useSpecialEvents() {
 
   //When fifth biology is researched, send message
   watchEffect(() => {
-    if(!spokeToLennox.value && researchList[ResearchKey.BIOLOGY].total == 5 && !isLoading.value){
+    if(!spokeToLennox.value && researchList[ResearchKey.BIOLOGY].total >= 5 && !isLoading.value){
       spokeToLennox.value = true;
       sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_LENNOX]);
     }
@@ -63,7 +63,7 @@ export default function useSpecialEvents() {
 
   //When first telomere stretcher is researched, unlock sama, alchemy, crystal sarcophagus, chronocrystals, omegaperson, the fluid
   watchEffect(() => {
-    if(!personList[PersonKey.SAMA].isUnlocked && researchList[ResearchKey.TELOMERE_STRETCHER].total == 1 && !isLoading.value){
+    if(!personList[PersonKey.SAMA].isUnlocked && researchList[ResearchKey.TELOMERE_STRETCHER].total >= 1 && !isLoading.value){
       personList[PersonKey.SAMA].isUnlocked = true;
       researchList[ResearchKey.ALCHEMY].isUnlocked = true;
       researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].isUnlocked = true;
@@ -83,7 +83,7 @@ export default function useSpecialEvents() {
 
   //When fifth alchemy is researched, send message
   watchEffect(() => {
-    if(!spokeToSama.value && researchList[ResearchKey.ALCHEMY].total == 5 && !isLoading.value){
+    if(!spokeToSama.value && researchList[ResearchKey.ALCHEMY].total >= 5 && !isLoading.value){
       spokeToSama.value = true;
       sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_SAMA]);
     }
@@ -91,7 +91,7 @@ export default function useSpecialEvents() {
 
   //When first distiller stretcher is researched, unlock itotia, philosopher's stone, eezo
   watchEffect(() => {
-    if(!personList[PersonKey.ITOTIA].isUnlocked && researchList[ResearchKey.DISTILLER].total == 1 && !isLoading.value){
+    if(!personList[PersonKey.ITOTIA].isUnlocked && researchList[ResearchKey.DISTILLER].total >= 1 && !isLoading.value){
       personList[PersonKey.ITOTIA].isUnlocked = true;
       researchList[ResearchKey.MATHEMATICS].isUnlocked = true;
       researchList[ResearchKey.PHILOSOPHERS_STONE].isUnlocked = true;
@@ -108,7 +108,7 @@ export default function useSpecialEvents() {
   
   //When first nepohualtzintzin is researched, unlock nechtan, astronomy, tzolk'in, obsidian
   watchEffect(() => {
-    if(!personList[PersonKey.NECHTAN].isUnlocked && researchList[ResearchKey.NEPOHUALTZINTZIN].total == 1 && !isLoading.value){
+    if(!personList[PersonKey.NECHTAN].isUnlocked && researchList[ResearchKey.NEPOHUALTZINTZIN].total >= 1 && !isLoading.value){
       personList[PersonKey.NECHTAN].isUnlocked = true;
       researchList[ResearchKey.ASTRONOMY].isUnlocked = true;
       researchList[ResearchKey.TZOLKIN].isUnlocked = true;
