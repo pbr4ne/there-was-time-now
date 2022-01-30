@@ -4,10 +4,13 @@ import useFlags from '@/composables/useFlags'
 import useInitialize from '@/composables/useInitialize'
 import useTime from '@/composables/useTime'
 import { GameState } from '@/dto/GameState'
+import { GameStateMessage } from '@/dto/GameStateMessage'
 import { GameStatePerson } from '@/dto/GameStatePerson'
 import { GameStateResearch } from '@/dto/GameStateResearch'
+import { Message } from '@/entities/Message'
 import { GameConstants } from '@/enum/Constants'
 import { PersonKey, SaveKey, ResearchKey } from '@/enum/Enums'
+import { messages } from '@/locales/en'
 
 localforage.config({
   name: GameConstants.DB_NAME,
@@ -20,7 +23,6 @@ export default function useSaveLoad() {
   const { personList, researchList } = useInitialize();
   const { countdownTimer, countupTimer, expandConstant } = useTime();
 
-  //todo - the countup timer is getting messed up
   const clearGameState = () => {
     console.log(`clearing game state in ${localforage.driver()}`);
     return localforage.setItem(SaveKey.GAME_STATE, null)
@@ -64,7 +66,14 @@ export default function useSaveLoad() {
     const savedPeople = new Array<GameStatePerson>();
     Object.values(personList)
       .forEach((person: any) => {
-      const gameStatePerson = new GameStatePerson(person.key, person.isUnlocked, JSON.stringify(person.messageList));
+      const gameStateMessageList = new Array<GameStateMessage>();
+      person.messageList.forEach((message: Message) => {
+        //todo this seems error-prone
+        const gameKey = Object.keys(messages).find(key => messages[key].title === message.title);
+        console.log(gameKey);
+        gameStateMessageList.push(new GameStateMessage(gameKey!, message.timestamp, message.isRead, message.wasSent))
+      });
+      const gameStatePerson = new GameStatePerson(person.key, person.isUnlocked, gameStateMessageList);
       savedPeople.push(gameStatePerson);
     });
 
@@ -99,7 +108,14 @@ export default function useSaveLoad() {
     gameState.people.forEach((gameStatePerson: GameStatePerson) => {
       const person = personList[gameStatePerson.key];
       person.isUnlocked = gameStatePerson.isUnlocked;
-      person.messageList = JSON.parse(gameStatePerson.messageList);
+      const messageList = new Array<Message>();
+      gameStatePerson.messageList.forEach((gameStateMessage: GameStateMessage) => {
+        const message = messages[gameStateMessage.key];
+        message.icon = researchList[gameStateMessage.key]?.icon;
+        message.color = researchList[gameStateMessage.key]?.color;
+        messageList.push(message);
+      });
+      person.messageList = messageList;
     });
 
     gameState.researches.forEach((gameStateResearch: GameStateResearch) => {
