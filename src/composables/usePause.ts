@@ -13,10 +13,12 @@ export default function usePause() {
 
   const unpause = () => {
     gamePaused.value = false;
-    if(countdownTriggered.value) {
-      countdownTimer.resume();
-    } else if(!gameEnded.value) {
-      countupTimer.start();
+    if(!gameEnded.value) {
+      if(countdownTriggered.value) {
+        countdownTimer.resume();
+      } else{
+        countupTimer.start();
+      }
     }
   }
 
