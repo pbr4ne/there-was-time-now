@@ -5,7 +5,7 @@
   <br><br>
   programming by <span style="color: #00FF00">pbrane</span>
   <br><br>
-  writing by James Funfer <a href="https://jamesfunfer.com/" style="color: #F72585">author page</a>
+  writing by James Funfer <a href="https://jamesfunfer.com/" style="color: #F72585" target="_blank">author page</a>
   <br><br>
   special thanks to: 
   <div class="indent">
