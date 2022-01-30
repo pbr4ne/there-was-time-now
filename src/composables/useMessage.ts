@@ -1,5 +1,5 @@
 import { h, ref } from 'vue'
-import { useDialog, NIcon } from 'naive-ui'
+import { useDialog, NH3, NIcon } from 'naive-ui'
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'
@@ -9,6 +9,7 @@ import { PersonKey,  NarrativeKey } from '@/enum/Enums'
 import { messages } from '@/locales/en'
 import { Message } from '@/entities/Message'
 import { Person } from '@/entities/Person'
+import { Research } from '@/entities/Research'
 
 const showTimeline = ref(false);
 
@@ -20,10 +21,12 @@ export default function useMessage() {
 
   function createNotification(message: Message) {
     pause();
+    const dialogIcon = message.icon? message.icon : TimeIcon;
+    const style = message.color? { color: message.color } : {}; 
     dialog.create({
       title: message.title,
       content: () => h(TGameMessage, { messageList: [message] }),
-      icon: () => h(NIcon, null, { default: () => h(TimeIcon) }),
+      icon: () => h(NIcon, style, { default: () => h(dialogIcon) }),
       maskClosable: false,
       closable: false,
       positiveText: "OK!",
@@ -34,7 +37,7 @@ export default function useMessage() {
   function createNotificationMultipleMessages(messageList: Array<Message>) {
     pause();
     dialog.create({
-      title: 'Unlocked...',
+      title: 'Unlocked Multiple',
       content: () => h(TGameMessage, { messageList, displayMessageTitle: true, }),
       icon: () => h(NIcon, null, { default: () => h(TimeIcon) }),
       maskClosable: false,
@@ -54,25 +57,29 @@ export default function useMessage() {
 
   const sendInitialMessage = () => sendNarrativeMessage(messages[NarrativeKey.INTRO]);
 
-  function sendUnlockMessages(unlocks: any) {
+  function sendUnlockMessages(unlocks: Array<any>) {
     const messageList = new Array<Message>();
-    Object.keys(unlocks).forEach((unlockKey : any) => {
-      const message = messages[unlockKey];
+    unlocks.forEach((unlock) => {
+      const message = messages[unlock.research.key];
       message.wasSent = true;
-      const person = personList[unlocks[unlockKey]];
+      message.icon = unlock.research.icon;
+      message.color = unlock.research.color;
+      const person = unlock.person;
       person.messageList.unshift(message);
       messageList.push(message);
     });
     createNotificationMultipleMessages(messageList);
   }
 
-  function sendUnlockMessage(key: string, person: Person) {
-    const message = messages[key];
+  function sendUnlockMessage(research: Research, person: Person) {
+    const message = messages[research.key];
     if(!message) {
       return;
     }
 
     message.wasSent = true;
+    message.icon = research.icon;
+    message.color = research.color;
     createNotification(message);
 
     setTimestamp(message, person.year, timeElapsed);

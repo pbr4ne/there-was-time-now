@@ -48,7 +48,7 @@ export default function useSpecialEvents() {
     if(!personList[PersonKey.LENNOX_YOUNG].isUnlocked && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 10 && slowdownEnabled.value) {
       personList[PersonKey.LENNOX_YOUNG].isUnlocked = true;
       researchList[ResearchKey.BIOLOGY].isUnlocked = true;
-      sendUnlockMessage(ResearchKey.BIOLOGY, personList[PersonKey.LENNOX_YOUNG]);
+      sendUnlockMessage(researchList[ResearchKey.BIOLOGY], personList[PersonKey.LENNOX_YOUNG]);
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_YOUNG_LENNOX]);
     }
   });
@@ -70,13 +70,13 @@ export default function useSpecialEvents() {
       researchList[ResearchKey.CHRONOCRYSTALS].isUnlocked = true;
       researchList[ResearchKey.OMEGAPERSON].isUnlocked = true;
       researchList[ResearchKey.THE_FLUID].isUnlocked = true;
-      sendUnlockMessages({
-        [ResearchKey.ALCHEMY]: PersonKey.SAMA,
-        [ResearchKey.THE_FLUID]: PersonKey.LENNOX_YOUNG,
-        [ResearchKey.OMEGAPERSON]: PersonKey.LENNOX_YOUNG,
-        [ResearchKey.CHRONOCRYSTALS]: PersonKey.LENNOX_OLD,
-        [ResearchKey.CRYSTAL_SARCOPHAGUS]: PersonKey.LENNOX_OLD,
-      });
+      sendUnlockMessages([
+        { research: researchList[ResearchKey.ALCHEMY], person: personList[PersonKey.SAMA] },
+        { research: researchList[ResearchKey.THE_FLUID], person: personList[PersonKey.LENNOX_YOUNG] },
+        { research: researchList[ResearchKey.OMEGAPERSON], person: personList[PersonKey.LENNOX_YOUNG] },
+        { research: researchList[ResearchKey.CHRONOCRYSTALS], person: personList[PersonKey.LENNOX_OLD] },
+        { research: researchList[ResearchKey.CRYSTAL_SARCOPHAGUS], person: personList[PersonKey.LENNOX_OLD] },
+      ]);
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_SAMA]);
     }
   });
@@ -96,11 +96,11 @@ export default function useSpecialEvents() {
       researchList[ResearchKey.MATHEMATICS].isUnlocked = true;
       researchList[ResearchKey.PHILOSOPHERS_STONE].isUnlocked = true;
       researchList[ResearchKey.ELEMENT_ZERO].isUnlocked = true;
-      sendUnlockMessages({
-        [ResearchKey.MATHEMATICS]: PersonKey.ITOTIA,
-        [ResearchKey.ELEMENT_ZERO]: PersonKey.SAMA,
-        [ResearchKey.PHILOSOPHERS_STONE]: PersonKey.SAMA,
-      });
+      sendUnlockMessages([
+        { research: researchList[ResearchKey.MATHEMATICS], person: personList[PersonKey.ITOTIA] },
+        { research: researchList[ResearchKey.ELEMENT_ZERO], person: personList[PersonKey.SAMA] },
+        { research: researchList[ResearchKey.PHILOSOPHERS_STONE], person: personList[PersonKey.SAMA] },
+      ]);
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_ITOTIA]);
     }
   });
@@ -113,11 +113,11 @@ export default function useSpecialEvents() {
       researchList[ResearchKey.ASTRONOMY].isUnlocked = true;
       researchList[ResearchKey.TZOLKIN].isUnlocked = true;
       researchList[ResearchKey.OBSIDIAN].isUnlocked = true;
-      sendUnlockMessages({
-        [ResearchKey.ASTRONOMY]: PersonKey.NECHTAN,
-        [ResearchKey.OBSIDIAN]: PersonKey.ITOTIA,
-        [ResearchKey.TZOLKIN]: PersonKey.ITOTIA,
-      });
+      sendUnlockMessages([
+        { research: researchList[ResearchKey.ASTRONOMY], person: personList[PersonKey.NECHTAN] },
+        { research: researchList[ResearchKey.OBSIDIAN], person: personList[PersonKey.ITOTIA] },
+        { research: researchList[ResearchKey.TZOLKIN], person: personList[PersonKey.ITOTIA] },
+      ]);
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_NECHTAN]);
     }
   });
@@ -153,18 +153,21 @@ export default function useSpecialEvents() {
     for(const key in unlockableList){
       const unlockable = unlockableList[key];
       let person = null;
-      if(unlockable instanceof Person) {
-        person = unlockable;
-      } else if(unlockable instanceof Research) {
+      let icon = null;
+      let color = null;
+      if(unlockable instanceof Research) {
         person = personList[unlockable.personKey];
-      }
-      if(!unlockable.isUnlocked) {
-        const unlock = researchList[unlockable.unlockedBy];
-        if(unlock) {
-          const threshold = unlockable.unlockThreshold;
-          if(unlock.total >= threshold) {
-            unlockable.isUnlocked = true;
-            sendUnlockMessage(key, person)
+        icon = unlockable.icon;
+        color = unlockable.color;
+      
+        if(!unlockable.isUnlocked) {
+          const unlock = researchList[unlockable.unlockedBy];
+          if(unlock) {
+            const threshold = unlockable.unlockThreshold;
+            if(unlock.total >= threshold) {
+              unlockable.isUnlocked = true;
+              sendUnlockMessage(unlockable, person)
+            }
           }
         }
       }

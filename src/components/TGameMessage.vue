@@ -3,7 +3,12 @@
     <br>
     <div v-for="message in messageList" :key="message.title">
       <span v-if="displayMessageTitle">
-        <n-h4>{{ message.title }}</n-h4>
+        <n-button text>
+          <template #icon>
+            <n-icon :color="message.color"><component :is="messageIcon(message.icon)" /></n-icon>
+          </template>
+          <b>{{ message.title }}</b>
+        </n-button>
       </span>
       <div 
         v-for="section in message.messageSections" 
@@ -22,12 +27,16 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { NH4 } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import { NButton, NH4, NIcon, NSpace } from 'naive-ui'
+import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 
 export default defineComponent({
   components: {
+    NButton,
     NH4,
+    NIcon,
+    NSpace,
   },
   props: {
     messageList: {
@@ -40,6 +49,9 @@ export default defineComponent({
     }
   },
   setup() {
+    return {
+      messageIcon: (icon) => icon? h(icon) : h(TimeIcon),
+    }
   },
 })
 </script>
