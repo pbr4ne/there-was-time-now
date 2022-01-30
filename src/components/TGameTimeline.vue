@@ -46,16 +46,13 @@ export default defineComponent({
     NTimeline,
     NTimelineItem,
   },
-  props: {
-    //person: Person,
-  },
   setup() {
     const { showTimeline } = useMessage();
     const { personList } = useInitialize();
 
     //todo - this is spitting out warnings
     const renderMessageContent = (message) => {
-      return h(TGameMessage, { messageSections: message.messageSections});
+      return h(TGameMessage, { messageList: [message] });
     }
 
     const person = personList[PersonKey.LENNOX_OLD];

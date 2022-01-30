@@ -22,7 +22,20 @@ export default function useMessage() {
     pause();
     dialog.create({
       title: message.title,
-      content: () => h(TGameMessage, { messageSections: message.messageSections}),
+      content: () => h(TGameMessage, { messageList: [message] }),
+      icon: () => h(NIcon, null, { default: () => h(TimeIcon) }),
+      maskClosable: false,
+      closable: false,
+      positiveText: "OK!",
+      onPositiveClick: unpause,
+    });
+  }
+
+  function createNotificationMultipleMessages(messageList: Array<Message>) {
+    pause();
+    dialog.create({
+      title: 'Unlocked...',
+      content: () => h(TGameMessage, { messageList, displayMessageTitle: true, }),
       icon: () => h(NIcon, null, { default: () => h(TimeIcon) }),
       maskClosable: false,
       closable: false,
@@ -40,6 +53,18 @@ export default function useMessage() {
   }
 
   const sendInitialMessage = () => sendNarrativeMessage(messages[NarrativeKey.INTRO]);
+
+  function sendUnlockMessages(unlocks: any) {
+    const messageList = new Array<Message>();
+    Object.keys(unlocks).forEach((unlockKey : any) => {
+      const message = messages[unlockKey];
+      message.wasSent = true;
+      const person = personList[unlocks[unlockKey]];
+      person.messageList.unshift(message);
+      messageList.push(message);
+    });
+    createNotificationMultipleMessages(messageList);
+  }
 
   function sendUnlockMessage(key: string, person: Person) {
     const message = messages[key];
@@ -68,6 +93,7 @@ export default function useMessage() {
     sendInitialMessage,
     sendNarrativeMessage,
     sendUnlockMessage,
+    sendUnlockMessages,
     showTimeline,
   }
 }
