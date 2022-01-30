@@ -1,5 +1,5 @@
 import { h, ref } from 'vue'
-import { useDialog, NH3, NIcon } from 'naive-ui'
+import { useDialog, NIcon } from 'naive-ui'
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import TGameMessage from '@/components/TGameMessage.vue'
 import useInitialize from '@/composables/useInitialize'

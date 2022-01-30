@@ -58,7 +58,7 @@ export default defineComponent({
     const { showTimeline } = useMessage();
     const { personList } = useInitialize();
 
-    //todo - this is spitting out warnings
+    //todo - the content slot is only supposed to allow a string, so using this spits out warnings
     const renderMessageContent = (message) => {
       return h(TGameMessage, { messageList: [message] });
     }

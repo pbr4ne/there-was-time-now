@@ -70,7 +70,6 @@ export default function useSaveLoad() {
       person.messageList.forEach((message: Message) => {
         //todo this seems error-prone
         const gameKey = Object.keys(messages).find(key => messages[key].title === message.title);
-        console.log(gameKey);
         gameStateMessageList.push(new GameStateMessage(gameKey!, message.timestamp, message.isRead, message.wasSent))
       });
       const gameStatePerson = new GameStatePerson(person.key, person.isUnlocked, gameStateMessageList);
@@ -111,8 +110,11 @@ export default function useSaveLoad() {
       const messageList = new Array<Message>();
       gameStatePerson.messageList.forEach((gameStateMessage: GameStateMessage) => {
         const message = messages[gameStateMessage.key];
-        message.icon = researchList[gameStateMessage.key]?.icon;
-        message.color = researchList[gameStateMessage.key]?.color;
+        const research = researchList[gameStateMessage.key];
+        if(research) {
+          message.icon = research.icon;
+          message.color = research.color;
+        }
         messageList.push(message);
       });
       person.messageList = messageList;

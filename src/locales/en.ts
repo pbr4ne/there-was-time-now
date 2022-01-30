@@ -1,3 +1,6 @@
+import { CrownOutlined as WonIcon } from '@vicons/antd'
+import { SkullOutline as LostIcon } from '@vicons/ionicons5'
+import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import { Message } from "@/entities/Message"
 import { NarrativeKey, ResearchKey } from '@/enum/Enums'
 
@@ -7,7 +10,8 @@ const messages = {
       text: 'The year is 1984. You are Lennox, a physicist researching the most cutting-edge technology: Quantum Computing! With enough research, you should be able to build your own Quantum Computer.'
     }, {
       text: 'Let\'s get started...',
-    }]
+    }],
+    TimeIcon
   ),
   [NarrativeKey.UNLOCK_COUNTDOWN]: new Message('You fire up your very first quantum computer.', [{
       person: 'Quantum Computer',
@@ -246,13 +250,17 @@ const messages = {
     text: "...dug up by Young Lennox's archaeology team and fed to the volunteer Omegaperson..."
   },{
     text: "...who, in 1984, steps into the Crystal Sarcophagus in order to solve the TIME PARADOX! Congratulations, There Is Time Now!..."
-    }]
+    }],
+    WonIcon,
+    '#FFDC00'
   ),
   [NarrativeKey.FAILURE]: new Message('Failure', [{
     text: "As you watch the final seconds of the clock run out and drain the last drops of your whiskey, listening to the final throes of the undergrad's desperate bacchanal, you wonder: \"did I not click things quickly enough?\""
     },{
     text: "#outatime"
-    }]
+    }],
+    LostIcon,
+    '#FF4136'
   ),
 
   //Sciences

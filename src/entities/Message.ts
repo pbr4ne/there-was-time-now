@@ -1,16 +1,18 @@
+import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
+
 export class Message {
   title: string;
   messageSections: Array<MessageSection>;
   timestamp: string = '';
   isRead: boolean = false;
   wasSent: boolean = false;
-  icon: any = null;
+  icon: object;
   color: string = '';
 
-  constructor(title: string, messageSections: Array<MessageSection>, icon?: any, color?: string) {
+  constructor(title: string, messageSections: Array<MessageSection>, icon?: object, color?: string) {
     this.title = title;
     this.messageSections = messageSections;
-    this.icon = icon;
+    this.icon = icon ? icon : TimeIcon;
     this.color = color!;
   }
 }

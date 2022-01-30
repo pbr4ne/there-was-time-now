@@ -44,10 +44,10 @@
           <pause-icon />
         </n-icon>
         <n-icon v-if="gameEnded && !gameWon" color="#63e2b7" size="40">
-          <lost-icon />
+          <lost-icon color="#FF4136" />
         </n-icon>
         <n-icon v-if="gameEnded && gameWon" color="#63e2b7" size="40">
-          <won-icon />
+          <won-icon color="#FFDC00" />
         </n-icon>
       </n-space>
     </n-space>
