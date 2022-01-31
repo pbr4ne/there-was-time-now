@@ -1,4 +1,16 @@
 <template>
+  <n-h4 :style="{color: '#4CC9F0'}">
+    v0.4 - 2022-01-30
+  </n-h4>
+  <ul>
+    <li>non-backwards-compatible change to saves, sorry!</li>
+    <li>copy export to clipboard</li>
+    <li>added icons and colours to the timelines and dialog boxes</li>
+    <li>every character gets their own timeline messages</li>
+    <li>fixed dialog bug attributing the wrong character</li>
+    <li>fixed game countdown continuing after game has ended but you unpause</li>
+  </ul>
+
   <n-h4 :style="{color: '#4361EE'}">
     v0.3 - 2022-01-29
   </n-h4>

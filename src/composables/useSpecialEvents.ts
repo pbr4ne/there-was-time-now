@@ -47,6 +47,7 @@ export default function useSpecialEvents() {
     if(!personList[PersonKey.LENNOX_YOUNG].isUnlocked && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 10 && slowdownEnabled.value) {
       personList[PersonKey.LENNOX_YOUNG].isUnlocked = true;
       researchList[ResearchKey.BIOLOGY].isUnlocked = true;
+      //todo - these double messages unpause once the first one is closed
       sendUnlockMessage(researchList[ResearchKey.BIOLOGY], personList[PersonKey.LENNOX_YOUNG]);
       sendNarrativeMessage(messages[NarrativeKey.UNLOCK_YOUNG_LENNOX], [PersonKey.LENNOX_OLD]);
     }
