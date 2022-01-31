@@ -36,7 +36,6 @@ import {
   Atom as PhysicsIcon,
   BuildingMonument as TimehengeIcon,
   Circles as SarsenStonesIcon,
-  CircleX as DefaultIcon,
   Diamond as ChronocrystalsIcon,
   DropletHalf2 as TheFluidIcon,
   Dna as TelomereStretcherIcon,
@@ -98,36 +97,20 @@ function associateUnlocks() {
   //Lennox (1984)
   researchList[ResearchKey.QUANTUM_COMPUTING].setUnlock(ResearchKey.PHYSICS, 10);
   researchList[ResearchKey.QUANTUM_COMPUTER].setUnlock(ResearchKey.QUANTUM_COMPUTING, 10);
-  // researchList[ResearchKey.CHRONOCRYSTALS].setUnlock(ResearchKey.TELOMERE_STRETCHER, 10);
-  // researchList[ResearchKey.CRYSTAL_SARCOPHAGUS].setUnlock(ResearchKey.TELOMERE_STRETCHER, 10);
 
   //Lennox (1934)
-  // personList[PersonKey.LENNOX_YOUNG].setUnlock(ResearchKey.QUANTUM_COMPUTER, 10); these happen as special events
-  // researchList[ResearchKey.BIOLOGY].setUnlock(ResearchKey.QUANTUM_COMPUTER, 10);
   researchList[ResearchKey.GENETIC_MEMORY].setUnlock(ResearchKey.BIOLOGY, 13);
   researchList[ResearchKey.TELOMERE_STRETCHER].setUnlock(ResearchKey.GENETIC_MEMORY, 13);
-  // researchList[ResearchKey.THE_FLUID].setUnlock(ResearchKey.CHRONOCRYSTALS, 10);
-  // researchList[ResearchKey.OMEGAPERSON].setUnlock(ResearchKey.CHRONOCRYSTALS, 10);
 
   //Sama (904)
-  // personList[PersonKey.SAMA].setUnlock(ResearchKey.THE_FLUID, 10);
-  // researchList[ResearchKey.ALCHEMY].setUnlock(ResearchKey.THE_FLUID, 10);
   researchList[ResearchKey.CHRONOMOGRIFICATION].setUnlock(ResearchKey.ALCHEMY, 16);
   researchList[ResearchKey.DISTILLER].setUnlock(ResearchKey.CHRONOMOGRIFICATION, 16);
-  // researchList[ResearchKey.ELEMENT_ZERO].setUnlock(ResearchKey.DISTILLER, 10);
-  // researchList[ResearchKey.PHILOSOPHERS_STONE].setUnlock(ResearchKey.DISTILLER, 10);
 
   //Itotia (374)
-  // personList[PersonKey.ITOTIA].setUnlock(ResearchKey.ELEMENT_ZERO, 10);
-  // researchList[ResearchKey.MATHEMATICS].setUnlock(ResearchKey.ELEMENT_ZERO, 10);
   researchList[ResearchKey.TIMELESS_ALGEBRA].setUnlock(ResearchKey.MATHEMATICS, 19);
   researchList[ResearchKey.NEPOHUALTZINTZIN].setUnlock(ResearchKey.TIMELESS_ALGEBRA, 19);
-  // researchList[ResearchKey.OBSIDIAN].setUnlock(ResearchKey.NEPOHUALTZINTZIN, 10);
-  // researchList[ResearchKey.TZOLKIN].setUnlock(ResearchKey.NEPOHUALTZINTZIN, 10);
 
   //Nechtan (2524 BC)
-  // personList[PersonKey.NECHTAN].setUnlock(ResearchKey.OBSIDIAN, 10);
-  // researchList[ResearchKey.ASTRONOMY].setUnlock(ResearchKey.OBSIDIAN, 10);
   researchList[ResearchKey.AETHERIC_HOROSCOPES].setUnlock(ResearchKey.ASTRONOMY, 22);
   researchList[ResearchKey.ZODIAC_TALISMAN].setUnlock(ResearchKey.AETHERIC_HOROSCOPES, 22);
   researchList[ResearchKey.SARSEN_STONES].setUnlock(ResearchKey.ZODIAC_TALISMAN, 22);
@@ -224,7 +207,7 @@ export default function useInitialize() {
   researchList[ResearchKey.PHYSICS].isUnlocked = true;
   personList[PersonKey.LENNOX_OLD].isUnlocked = true;
 
-  //todo - remove this later
+  //debug params
   const urlSearchParams = new URLSearchParams(window.location.search);
   const params = Object.fromEntries(urlSearchParams.entries());
 

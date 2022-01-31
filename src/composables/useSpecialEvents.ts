@@ -152,13 +152,8 @@ export default function useSpecialEvents() {
     for(const key in unlockableList){
       const unlockable = unlockableList[key];
       let person = null;
-      let icon = null;
-      let color = null;
       if(unlockable instanceof Research) {
-        person = personList[unlockable.personKey];
-        icon = unlockable.icon;
-        color = unlockable.color;
-      
+        person = personList[unlockable.personKey];   
         if(!unlockable.isUnlocked) {
           const unlock = researchList[unlockable.unlockedBy];
           if(unlock) {
