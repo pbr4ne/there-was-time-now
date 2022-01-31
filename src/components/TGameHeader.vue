@@ -33,7 +33,8 @@
               </n-statistic>
             </div>
           </template>
-          <span>{{ countdownTimer.realPeopleTimeLeft() }} Real People Time™ left</span>
+          <span v-if="!gameEnded">{{ countdownTimer.realPeopleTimeLeft() }} Real People Time™ left</span>
+          <span v-else>Game is over!</span>
         </n-popover>
         <n-spin v-if="countdownTimer.isRunning()" size="large" style="vertical-align: middle;">
           <template #icon>

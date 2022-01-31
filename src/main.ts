@@ -5,6 +5,6 @@ import App from './App.vue'
 const app = createApp(App)
 
 //todo - not sure why i have to register this one
-app.component('t-game-research-button', TGameResearchButton);
+app.component('TGameResearchButton', TGameResearchButton);
 
 app.mount('#app');
