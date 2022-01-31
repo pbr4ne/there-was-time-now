@@ -236,7 +236,7 @@ const messages = {
       person: 'Lennox',
       text: '...so that\'s what I need from your people, Nechtan. What do you say?'
     },{
-      person: 'Itotia',
+      person: 'Nechtan',
       text: 'I say we\'re gonna need a bigger boat. For the stones... y\'know.'
     }]
   ),
