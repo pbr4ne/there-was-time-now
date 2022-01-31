@@ -42,8 +42,7 @@ import {
 import { AccessTimeOutlined as TimeIcon } from '@vicons/material'
 import TGameMessage from '@/components/TGameMessage.vue'
 import useMessage from '@/composables/useMessage'
-import useInitialize from '@/composables/useInitialize'
-import { PersonKey } from '@/enum/Enums'
+import { Person } from '@/entities/Person'
 
 export default defineComponent({
   components: {
@@ -54,19 +53,18 @@ export default defineComponent({
     NTimeline,
     NTimelineItem,
   },
+  props: {
+    person: Person,
+  },
   setup() {
     const { showTimeline } = useMessage();
-    const { personList } = useInitialize();
 
     //todo - the content slot is only supposed to allow a string, so using this spits out warnings
     const renderMessageContent = (message) => {
       return h(TGameMessage, { messageList: [message] });
     }
 
-    const person = personList[PersonKey.LENNOX_OLD];
-
     return {
-      person,
       renderIcon: (icon) => icon? h(icon) : h(TimeIcon),
       renderMessageContent,
       showTimeline,

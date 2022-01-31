@@ -22,7 +22,7 @@ export default function useSpecialEvents() {
       countdownTriggered.value = true;
       countdownTimer.start();
       countupTimer.stop();
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_COUNTDOWN]);
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_COUNTDOWN], [PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -30,7 +30,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!sellFeatureEnabled.value && researchList[ResearchKey.QUANTUM_COMPUTER].total >= 5 && !isLoading.value) {
       sellFeatureEnabled.value = true;
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_WORKERS]);
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_WORKERS], [PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -38,7 +38,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!slowdownEnabled.value && Object.values(researchList).find((research: any) => research.numWorkers > 0)) {
       slowdownEnabled.value = true;
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_SLOWDOWN]);
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_SLOWDOWN], [PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -48,7 +48,7 @@ export default function useSpecialEvents() {
       personList[PersonKey.LENNOX_YOUNG].isUnlocked = true;
       researchList[ResearchKey.BIOLOGY].isUnlocked = true;
       sendUnlockMessage(researchList[ResearchKey.BIOLOGY], personList[PersonKey.LENNOX_YOUNG]);
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_YOUNG_LENNOX]);
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_YOUNG_LENNOX], [PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -56,7 +56,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!spokeToLennox.value && researchList[ResearchKey.BIOLOGY].total >= 5 && !isLoading.value){
       spokeToLennox.value = true;
-      sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_LENNOX]);
+      sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_LENNOX], [PersonKey.LENNOX_OLD, PersonKey.LENNOX_YOUNG]);
     }
   });
 
@@ -76,7 +76,7 @@ export default function useSpecialEvents() {
         { research: researchList[ResearchKey.CHRONOCRYSTALS], person: personList[PersonKey.LENNOX_OLD] },
         { research: researchList[ResearchKey.CRYSTAL_SARCOPHAGUS], person: personList[PersonKey.LENNOX_OLD] },
       ]);
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_SAMA]);
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_SAMA], [PersonKey.LENNOX_OLD]);
     }
   });
 
@@ -84,7 +84,7 @@ export default function useSpecialEvents() {
   watchEffect(() => {
     if(!spokeToSama.value && researchList[ResearchKey.ALCHEMY].total >= 5 && !isLoading.value){
       spokeToSama.value = true;
-      sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_SAMA]);
+      sendNarrativeMessage(messages[NarrativeKey.SPEAK_TO_SAMA], [PersonKey.LENNOX_OLD, PersonKey.SAMA]);
     }
   });
 
@@ -100,7 +100,7 @@ export default function useSpecialEvents() {
         { research: researchList[ResearchKey.ELEMENT_ZERO], person: personList[PersonKey.SAMA] },
         { research: researchList[ResearchKey.PHILOSOPHERS_STONE], person: personList[PersonKey.SAMA] },
       ]);
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_ITOTIA]);
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_ITOTIA], [PersonKey.LENNOX_OLD, PersonKey.ITOTIA]);
     }
   });
 
@@ -117,7 +117,7 @@ export default function useSpecialEvents() {
         { research: researchList[ResearchKey.OBSIDIAN], person: personList[PersonKey.ITOTIA] },
         { research: researchList[ResearchKey.TZOLKIN], person: personList[PersonKey.ITOTIA] },
       ]);
-      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_NECHTAN]);
+      sendNarrativeMessage(messages[NarrativeKey.UNLOCK_NECHTAN], [PersonKey.LENNOX_OLD, PersonKey.ITOTIA, PersonKey.NECHTAN]);
     }
   });
 
@@ -132,7 +132,7 @@ export default function useSpecialEvents() {
       gameEnded.value = true;
       gameWon.value = true;
       confetti.value = true;
-      sendNarrativeMessage(messages[NarrativeKey.SUCCESS]);
+      sendNarrativeMessage(messages[NarrativeKey.SUCCESS], [PersonKey.LENNOX_OLD, PersonKey.LENNOX_YOUNG, PersonKey.SAMA, PersonKey.ITOTIA, PersonKey.NECHTAN]);
     }
   });
 
@@ -141,7 +141,7 @@ export default function useSpecialEvents() {
     if(!gameEnded.value && countdownTimer.isExpired() && !isLoading.value) {
       gameEnded.value = true;
       gameWon.value = false;
-      sendNarrativeMessage(messages[NarrativeKey.FAILURE]);
+      sendNarrativeMessage(messages[NarrativeKey.FAILURE], [PersonKey.LENNOX_OLD, PersonKey.LENNOX_YOUNG, PersonKey.SAMA, PersonKey.ITOTIA, PersonKey.NECHTAN]);
     }
   });
 

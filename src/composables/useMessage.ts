@@ -13,13 +13,14 @@ import { Research } from '@/entities/Research'
 
 const showTimeline = ref(false);
 
+//todo - functions are inconsistent whether they want objects or keys
 export default function useMessage() {
   const dialog = useDialog();
   const { personList } = useInitialize();
   const { pause, unpause } = usePause();
   const { timeElapsed } = useTime();
 
-  function createNotification(message: Message) {
+  const createNotification = (message: Message) => {
     pause();
     const dialogIcon = message.icon? message.icon : TimeIcon;
     const style = message.color? { color: message.color } : {}; 
@@ -34,7 +35,7 @@ export default function useMessage() {
     });
   }
 
-  function createNotificationMultipleMessages(messageList: Array<Message>) {
+  const createNotificationMultipleMessages = (messageList: Array<Message>) => {
     pause();
     dialog.create({
       title: 'Unlocked Multiple',
@@ -47,7 +48,7 @@ export default function useMessage() {
     });
   }
   
-  function setTimestamp(message: Message, year: number, timeElapsed: any) {
+  const setTimestamp = (message: Message, year: number, timeElapsed: any) => {
     const d = new Date(year, 0);
     d.setDate(d.getDate() + timeElapsed.value);
     message.timestamp = d.toISOString().split('T')[0];
@@ -55,9 +56,9 @@ export default function useMessage() {
     message.timestamp = message.timestamp.replace('1900-', '2524 BC ');
   }
 
-  const sendInitialMessage = () => sendNarrativeMessage(messages[NarrativeKey.INTRO]);
+  const sendInitialMessage = () => sendNarrativeMessage(messages[NarrativeKey.INTRO], [PersonKey.LENNOX_OLD]);
 
-  function sendUnlockMessages(unlocks: Array<any>) {
+  const sendUnlockMessages = (unlocks: Array<any>) => {
     const messageList = new Array<Message>();
     unlocks.forEach((unlock) => {
       const message = messages[unlock.research.key];
@@ -65,18 +66,16 @@ export default function useMessage() {
       message.icon = unlock.research.icon;
       message.color = unlock.research.color;
       const person = unlock.person;
+
+      setTimestamp(message, person.year, timeElapsed);
       person.messageList.unshift(message);
       messageList.push(message);
     });
     createNotificationMultipleMessages(messageList);
   }
 
-  function sendUnlockMessage(research: Research, person: Person) {
+  const sendUnlockMessage = (research: Research, person: Person) => {
     const message = messages[research.key];
-    if(!message) {
-      return;
-    }
-
     message.wasSent = true;
     message.icon = research.icon;
     message.color = research.color;
@@ -86,14 +85,16 @@ export default function useMessage() {
     person.messageList.unshift(message);
   }
 
-  function sendNarrativeMessage(message: Message) {
-    const person = personList[PersonKey.LENNOX_OLD]
-    
+  const sendNarrativeMessage = (message: Message, personKeyList: Array<PersonKey>) => {
     message.wasSent = true;
     createNotification(message);
 
-    setTimestamp(message, person.year, timeElapsed);
-    person.messageList.unshift(message);
+    personKeyList.forEach(personKey => {
+      const personSpecificMessage = { ...message };
+      const person = personList[personKey];
+      setTimestamp(personSpecificMessage, person.year, timeElapsed);
+      person.messageList.unshift(personSpecificMessage);
+    });
   }
 
   return {
