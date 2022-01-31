@@ -108,9 +108,9 @@ import {
   SaveOutlined as SaveIcon,
 } from '@vicons/material'
 
-import TGameAbout from '@/components/TGameAbout.vue'
-import TGameImport from '@/components/TGameImport.vue'
-import TGameVersion from '@/components/TGameVersion.vue'
+import TGameAbout from '@/components/settings/TGameAbout.vue'
+import TGameImport from '@/components/settings/TGameImport.vue'
+import TGameVersion from '@/components/settings/TGameVersion.vue'
 import useMessage from '@/composables/useMessage'
 import usePause from '@/composables/usePause'
 import useSaveLoad from '@/composables/useSaveLoad'
@@ -191,6 +191,7 @@ export default defineComponent({
           onImportString: $event => {
             const successfulImport = importGameState($event.value);
             if(successfulImport) {
+              importError.value = false;
               importDialog.destroy();
             } else {
               importError.value = true;

@@ -30,9 +30,9 @@ export default defineComponent({
     NSpace,
   },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     importError: {
       type: Object,
+      required: true
     }
   },
   emits: ['cancel-import', 'import-string'],

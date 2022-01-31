@@ -19,9 +19,9 @@
 import { defineComponent, h } from 'vue'
 import { NSpace, NTabs, NTabPane } from 'naive-ui'
 import TGameTabCard from '@/components/TGameTabCard.vue'
-import TGameDevice from '@/components/TGameDevice.vue'
+import TGameDevice from '@/components/research/TGameDevice.vue'
 import TGameTimeline from '@/components/TGameTimeline.vue'
-import TGameResearch from '@/components/TGameResearch.vue'
+import TGameResearch from '@/components/research/TGameResearch.vue'
 import useFlags from '@/composables/useFlags'
 import useInitialize from '@/composables/useInitialize'
 

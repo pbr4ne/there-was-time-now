@@ -1,5 +1,5 @@
 import { createApp, h } from 'vue'
-import TGameResearchButton from '@/components/TGameResearchButton.vue'
+import TGameResearchButton from '@/components/research/TGameResearchButton.vue'
 import App from './App.vue'
 
 const app = createApp(App)
