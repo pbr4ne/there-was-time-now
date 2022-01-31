@@ -115,6 +115,9 @@ export default function useSaveLoad() {
           message.icon = research.icon;
           message.color = research.color;
         }
+        message.isRead = gameStateMessage.isRead;
+        message.wasSent = gameStateMessage.wasSent;
+        message.timestamp = gameStateMessage.timestamp;
         messageList.push(message);
       });
       person.messageList = messageList;
