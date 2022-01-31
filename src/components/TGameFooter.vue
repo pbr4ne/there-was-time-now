@@ -48,7 +48,7 @@
         <template #trigger>
           <n-button strong circle @click="importGame()">
             <template #icon>
-              <n-icon><load-icon /></n-icon>
+              <n-icon><import-icon /></n-icon>
             </template>
           </n-button>
         </template>
@@ -58,7 +58,7 @@
         <template #trigger>
           <n-button strong circle @click="exportGame()">
             <template #icon>
-              <n-icon><save-icon /></n-icon>
+              <n-icon><export-icon /></n-icon>
             </template>
           </n-button>
         </template>
@@ -102,10 +102,10 @@ import {
 
 import { 
   DarkModeOutlined as DarkModeIcon,
-  FileUploadOutlined as LoadIcon,
+  FileUploadOutlined as ImportIcon,
   LightModeOutlined as LightModeIcon,
   RestartAltOutlined as RestartIcon,
-  SaveOutlined as SaveIcon,
+  SaveOutlined as ExportIcon,
 } from '@vicons/material'
 
 import TGameAbout from '@/components/settings/TGameAbout.vue'
@@ -116,13 +116,13 @@ import useGameMessage from '@/composables/useMessage'
 import usePause from '@/composables/usePause'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
-
 export default defineComponent({
   components: {
     AboutIcon,
     DarkModeIcon,
+    ExportIcon,
+    ImportIcon,
     LightModeIcon,
-    LoadIcon,
     NButton,
     NIcon,
     NLayoutFooter,
@@ -130,7 +130,7 @@ export default defineComponent({
     NTooltip,
     PauseIcon,
     RestartIcon,
-    SaveIcon,
+
     VersionIcon,
   },
   setup() {
@@ -146,7 +146,7 @@ export default defineComponent({
       dialog.create({
         title: 'About',
         content: () => h(TGameAbout),
-        'show-icon': false,
+        icon: () => h(AboutIcon),
         positiveText: 'Neat',
         onPositiveClick: unpause,
         onMaskClick: unpause,
@@ -159,7 +159,7 @@ export default defineComponent({
       dialog.create({
         title: 'Version History',
         content: () => h(TGameVersion),
-        'show-icon': false,
+        icon: () => h(VersionIcon),
         positiveText: 'Good to Know',
         onPositiveClick: unpause,
         onMaskClick: unpause,
@@ -169,9 +169,10 @@ export default defineComponent({
 
     const pauseTime = () => {
       pause();
-      dialog.info({
+      dialog.create({
         title: 'Paused',
         content: 'There was time now... to go to the bathroom.',
+        icon: () => h(PauseIcon),
         positiveText: 'Back to it!',
         onPositiveClick: unpause,
         onMaskClick: unpause,
@@ -182,7 +183,7 @@ export default defineComponent({
     const importGame = () => {
       pause();
       const importError = ref(false);
-      const importDialog = dialog.warning({
+      const importDialog = dialog.create({
         title: 'Import Game',
         content: () => h(TGameImport, { 
           importError,
@@ -201,6 +202,7 @@ export default defineComponent({
             }
           },
         }),
+        icon: () => h(ImportIcon),
         onMaskClick: unpause,
         onClose: unpause,
       });
@@ -209,7 +211,7 @@ export default defineComponent({
     const exportGame = () => {
       pause();
       const exportMessage = ref('');
-      const exportDialog = dialog.info({
+      const exportDialog = dialog.create({
         title: 'Export Game',
         content: () => h(TGameExport, {
           exportMessage,
@@ -225,6 +227,7 @@ export default defineComponent({
             exportDialog.destroy();
           }
         }),
+        icon: () => h(ExportIcon),
         onMaskClick: unpause,
         onClose: unpause,
       });
@@ -240,9 +243,10 @@ export default defineComponent({
 
     const restart = () => {
       pause();
-      dialog.warning({
+      dialog.create({
         title: 'Restart Game?',
         content: 'You will lose all of your progress!',
+        icon: () => h(RestartIcon),
         positiveText: 'I\'m going back to the start',
         negativeText: 'Oops, never mind',
         onPositiveClick: () => {
