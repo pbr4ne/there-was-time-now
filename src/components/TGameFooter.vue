@@ -84,11 +84,11 @@ import { defineComponent, h, ref } from 'vue'
 import { 
   NButton,
   NIcon,
-  NInput,
   NLayoutFooter,
   NSpace,
   NTooltip,
   useDialog,
+  useMessage,
 } from 'naive-ui'
 
 import {
@@ -109,9 +109,10 @@ import {
 } from '@vicons/material'
 
 import TGameAbout from '@/components/settings/TGameAbout.vue'
+import TGameExport from '@/components/settings/TGameExport.vue'
 import TGameImport from '@/components/settings/TGameImport.vue'
 import TGameVersion from '@/components/settings/TGameVersion.vue'
-import useMessage from '@/composables/useMessage'
+import useGameMessage from '@/composables/useMessage'
 import usePause from '@/composables/usePause'
 import useSaveLoad from '@/composables/useSaveLoad'
 import useTheme from '@/composables/useTheme'
@@ -134,7 +135,8 @@ export default defineComponent({
   },
   setup() {
     const dialog = useDialog();
-    const { sendInitialMessage } = useMessage();
+    const { sendInitialMessage } = useGameMessage();
+    const message = useMessage();
     const { pause, unpause } = usePause();
     const { clearGameState, exportGameState, importGameState } = useSaveLoad();
     const { lightMode, switchTheme } = useTheme();
@@ -193,6 +195,7 @@ export default defineComponent({
             if(successfulImport) {
               importError.value = false;
               importDialog.destroy();
+              message.info("Successfully imported game.")
             } else {
               importError.value = true;
             }
@@ -205,15 +208,23 @@ export default defineComponent({
 
     const exportGame = () => {
       pause();
-      dialog.info({
+      const exportMessage = ref('');
+      const exportDialog = dialog.info({
         title: 'Export Game',
-        content: () => h(NInput, { 
-          autosize: { maxRows: 10 }, 
-          type: 'textarea',
-          value: exportGameState() 
+        content: () => h(TGameExport, {
+          exportMessage,
+          exportString: exportGameState(),
+          onCopyToClipboard: $event => {
+            console.log($event);
+            navigator.clipboard.writeText($event)
+              .then(() => exportMessage.value = 'Copy successful!')
+              .catch(() => exportMessage.value = 'Error copying to clipboard.')
+          },
+          onCloseExport: () => {
+            unpause();
+            exportDialog.destroy();
+          }
         }),
-        positiveText: 'Done!',
-        onPositiveClick: unpause,
         onMaskClick: unpause,
         onClose: unpause,
       });
