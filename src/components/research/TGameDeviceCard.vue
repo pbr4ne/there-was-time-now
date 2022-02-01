@@ -9,7 +9,7 @@
   </n-popover>
 </template>
 <script>
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 import { NCard, NPopover } from 'naive-ui'
 import TGameDeviceProgress from '@/components/research/TGameDeviceProgress.vue'
 import TGameResearchNeeds from '@/components/research/TGameResearchNeeds.vue'
