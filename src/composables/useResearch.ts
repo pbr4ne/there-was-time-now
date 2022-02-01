@@ -122,7 +122,7 @@ export default function useResearch() {
             //after 10 seconds, restart research
             if(fromWorker) {
               if(research.numWorkers > 0) {
-                setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
+                setTimeout(() => autoIncrement(research), incrementDelay(research));
               }
             }
           }
@@ -130,7 +130,7 @@ export default function useResearch() {
       },100);
     } else if(fromWorker) {
       if(research.numWorkers > 0) {
-        setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
+        setTimeout(() => autoIncrement(research), incrementDelay(research));
       }
     }
   };
@@ -141,9 +141,13 @@ export default function useResearch() {
       if(canIncrementResearch(research)) {
         incrementResearch(research, true);
       } else {
-        setTimeout(() => autoIncrement(research), 10000 / ((research.numWorkers+2)/2));
+        setTimeout(() => autoIncrement(research), incrementDelay(research));
       }
     }
+  }
+
+  const incrementDelay = (research: Research) => {
+    return 10000 / ((research.numWorkers+2)/2);
   }
 
   const startIncrements = () => {
