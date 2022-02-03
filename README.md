@@ -2,25 +2,6 @@
 
 A game about "science" and "time".
 
-## Project setup
-```
-npm install
-```
+# Installation
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+To set up the project locally, check [here](INSTALLATION.md).
