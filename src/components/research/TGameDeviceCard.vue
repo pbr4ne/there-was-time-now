@@ -6,7 +6,8 @@
     :keep-alive-on-hover="false"
   >
     <template #trigger>
-      <n-card>
+      <!--todo - i might regret this hacky styling-->
+      <n-card :style="{ maxWidth: '620px' }">
         <t-game-device-progress :research="research" />
       </n-card>
     </template>
