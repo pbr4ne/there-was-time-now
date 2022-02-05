@@ -1,4 +1,12 @@
 <template>
+  <n-h4 :style="{color: '#e0c3fc'}">
+    v0.5 - 2022-02-04
+  </n-h4>
+  <ul>
+    <li>tooltips no longer stay alive when you mouse over them</li>
+    <li>added a button to device, for clarity</li>
+    <li>fixed time expansion cap - limit of exactly 1000</li>
+  </ul>
   <n-h4 :style="{color: '#4CC9F0'}">
     v0.4 - 2022-01-30
   </n-h4>
