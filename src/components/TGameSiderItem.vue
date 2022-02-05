@@ -1,5 +1,10 @@
 <template>
-  <n-popover trigger="hover" :placement="placement()" :style="{ maxWidth: '200px' }">
+  <n-popover 
+    trigger="hover" 
+    :placement="placement()" 
+    :style="{ maxWidth: '200px' }" 
+    :keep-alive-on-hover="false"
+  >
     <template #trigger>
       <div @click="changeTab()">
         {{ research.label }} <b :style="{ color: research.color }">{{ research.total }}</b>

@@ -1,5 +1,10 @@
 <template>
-  <n-popover :style="{ maxWidth: '200px' }" trigger="hover" placement="top-start">
+  <n-popover 
+    :style="{ maxWidth: '200px' }" 
+    trigger="hover" 
+    placement="top-start"
+    :keep-alive-on-hover="false"
+  >
     <template #trigger>
       <n-card :style="cardStyle()" @click="startResearch(research)">
         <t-game-device-progress :research="research" />

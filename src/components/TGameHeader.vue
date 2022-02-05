@@ -22,7 +22,7 @@
         <n-statistic v-if="slowdownEnabled && !gameEnded" label="Time Expansion">
           {{ expandConstantFormatted() }}
         </n-statistic>
-        <n-popover trigger="hover">
+        <n-popover trigger="hover" :keep-alive-on-hover="false">
           <template #trigger>
             <div>
               <n-statistic v-if="gameEnded" label="Days Left">

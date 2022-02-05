@@ -1,6 +1,10 @@
 <template>
   <n-button-group size="small">
-    <n-popover trigger="hover" :disabled="!canSellWorker(research)">
+    <n-popover 
+      trigger="hover" 
+      :disabled="!canSellWorker(research)"
+      :keep-alive-on-hover="false"
+    >
       <template #trigger>
         <n-button round :disabled="!canSellWorker(research)" @click="sellWorker(research)">
           <template #icon>
@@ -13,7 +17,11 @@
     <n-button style="width: 40px">
       {{ research.numWorkers }}
     </n-button>
-    <n-popover trigger="hover" :disabled="!canBuyWorker(research)">
+    <n-popover 
+      trigger="hover" 
+      :disabled="!canBuyWorker(research)"
+      :keep-alive-on-hover="false"
+    >
       <template #trigger>
         <n-button round :disabled="!canBuyWorker(research)" @click="buyWorker(research)">
           <template #icon>

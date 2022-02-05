@@ -1,5 +1,9 @@
 <template>
-  <n-popover trigger="hover" :disabled="!canSellResearch(research, sellIncrement())">
+  <n-popover 
+    trigger="hover" 
+    :disabled="!canSellResearch(research, sellIncrement())"
+    :keep-alive-on-hover="false"
+  >
     <template #trigger>
       <n-button :disabled="!canSellResearch(research, sellIncrement())" @click="sellResearch(research, sellIncrement())">
         Sell
