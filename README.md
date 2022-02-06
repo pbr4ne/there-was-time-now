@@ -22,3 +22,9 @@ Please see [credits](credits.md) for a list of all dependencies and their licens
 [vue-timer-hook](https://github.com/riderx/vue-timer-hook) - Vue 3 hook to handle timers<br>
 [vue-confetti-explosion](https://github.com/valgeirb/vue-confetti-explosion) - Confetti!<br>
 [credit-roll](https://github.com/libscie/credit-roll) - Markdown credits generator<br>
+
+## Stats
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=pbr4ne&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pbr4ne&theme=radical&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
