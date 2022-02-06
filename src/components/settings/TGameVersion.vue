@@ -1,4 +1,10 @@
 <template>
+  <n-h4 :style="{color: '#f4e285'}">
+    v0.6 - 2022-02-06
+  </n-h4>
+  <ul>
+    <li>fixed device button being incorrectly disabled</li>
+  </ul>
   <n-h4 :style="{color: '#e0c3fc'}">
     v0.5 - 2022-02-04
   </n-h4>
