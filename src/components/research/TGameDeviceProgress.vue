@@ -10,7 +10,7 @@
         </n-h2>
         <n-button 
           :color="research.color" 
-          :disabled="canIncrementResearch(research)"
+          :disabled="!canIncrementResearch(research)"
           ghost 
           round 
           @click="startResearch(research)"
