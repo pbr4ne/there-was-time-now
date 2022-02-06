@@ -1,6 +1,6 @@
 # There Was Time Now
 
-A game about "science" and "time".
+An incremental game about "science" and "time".
 
 Play it here: https://pbr4ne.github.io/there-was-time-now<br>
 
