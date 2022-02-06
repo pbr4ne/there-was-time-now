@@ -217,7 +217,7 @@ export default function useInitialize() {
     }
     for(const research in researchList) {
       researchList[research].isUnlocked = true;
-      if(research != ResearchKey.CRYSTAL_SARCOPHAGUS){
+      if(!researchList[research].isDevice){
         researchList[research].total = 100;
       }
     }
