@@ -1,4 +1,10 @@
 <template>
+  <n-h4 :style="{color: '##EFAE0'}">
+    v0.7 - 2022-02-06
+  </n-h4>
+  <ul>
+    <li>prevent time expansion from continuing to expand time at 1000</li>
+  </ul>
   <n-h4 :style="{color: '#f4e285'}">
     v0.6 - 2022-02-06
   </n-h4>
