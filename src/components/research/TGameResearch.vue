@@ -20,15 +20,15 @@
         >
           <thead>
             <tr>
-              <th style="text-align: center;">
+              <th style="text-align: center;" scope="col">
                 Research
               </th>
-              <th v-if="sellFeatureEnabled" style="text-align: center;">
+              <th v-if="sellFeatureEnabled" style="text-align: center;" scope="col">
                 <n-button size="tiny" @click="changeSellIncrement()">
                   ×{{ sellIncrement() }}
                 </n-button>
               </th>
-              <th v-if="sellFeatureEnabled" style="text-align: center;">
+              <th v-if="sellFeatureEnabled" style="text-align: center;" scope="col">
                 {{ person.workerTitle }}
               </th>
             </tr>
