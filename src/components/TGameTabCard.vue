@@ -14,7 +14,5 @@ export default defineComponent({
   props: {
     person: Person,
   },
-  setup () {
-  }
 })
 </script>

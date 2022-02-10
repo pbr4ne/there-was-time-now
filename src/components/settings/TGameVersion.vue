@@ -67,8 +67,6 @@ export default defineComponent({
   components: {
     NH4,
   },
-  setup() {
-  },
 })
 </script>
 <style scoped>

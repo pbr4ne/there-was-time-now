@@ -31,7 +31,5 @@ export default defineComponent({
   props: {
     research: Research
   },
-  setup() {
-  },
 })
 </script>
