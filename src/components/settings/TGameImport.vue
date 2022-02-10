@@ -1,6 +1,6 @@
 <template>
   <n-space vertical>
-    <span><i>This will overwrite your progress!</i></span>
+    <span><em>This will overwrite your progress!</em></span>
     <span v-if="importError.value" :style="{color: '#FF4136'}">Error importing game.</span>
     <n-input 
       v-model:value="imp"

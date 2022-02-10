@@ -16,7 +16,7 @@
           <span v-else>{{ researchRequirement.quantity }} {{ researchList[researchRequirement.researchKey].label }}</span>
         </span>
         <span v-if="research.expand != 1 && slowdownEnabled">
-          <br><i>This will slow down time by {{ research.expand }}%</i>
+          <br><em>This will slow down time by {{ research.expand }}%</em>
         </span>
       </div>
     </div>
