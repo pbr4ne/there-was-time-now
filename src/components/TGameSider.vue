@@ -45,7 +45,7 @@ export default defineComponent({
 
     //todo - make this better
     const sidebar = computed(() => {
-      const sidebar = [];
+      const sidebarData = [];
       const unlockedPersonList = Object.values(personList).filter(person => person.isUnlocked);
       const deviceGroup = [];
       const personGroup = [];
@@ -72,32 +72,32 @@ export default defineComponent({
       let i = 0;
       personGroup.forEach(personResearchList => {
         if(i > 0 && personResearchList.length > 0) {
-          sidebar.push({
+          sidebarData.push({
             key: 'divider-' + i,
             type: 'divider',
           });
         }
-        sidebar.push(...personResearchList);
+        sidebarData.push(...personResearchList);
         i++;
       });
 
       if(deviceGroup.length > 0) {
-        sidebar.push({
+        sidebarData.push({
           key: 'divider-device',
           type: 'divider',
         });
-        sidebar.push({
+        sidebarData.push({
           key: 'devices',
           label: 'D E V I C E S'
         });
-        sidebar.push({
+        sidebarData.push({
           key: 'divider-device2',
           type: 'divider',
         });
-        sidebar.push(...deviceGroup);
+        sidebarData.push(...deviceGroup);
       }
 
-      return sidebar;
+      return sidebarData;
     });
 
     return {
