@@ -48,9 +48,9 @@ export default function useMessage() {
     });
   }
   
-  const setTimestamp = (message: Message, year: number, timeElapsed: any) => {
+  const setTimestamp = (message: Message, year: number, newTimeElapsed: any) => {
     const d = new Date(year, 0);
-    d.setDate(d.getDate() + timeElapsed.value);
+    d.setDate(d.getDate() + newTimeElapsed.value);
     message.timestamp = d.toISOString().split('T')[0];
     //todo - this is hacky
     message.timestamp = message.timestamp.replace('1900-', '2524 BC ');
