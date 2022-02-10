@@ -7,7 +7,7 @@
   >
     <template #trigger>
       <div @click="changeTab()">
-        {{ research.label }} <b :style="{ color: research.color }">{{ research.total }}</b>
+        {{ research.label }} <strong :style="{ color: research.color }">{{ research.total }}</strong>
       </div>
     </template>
     <div>

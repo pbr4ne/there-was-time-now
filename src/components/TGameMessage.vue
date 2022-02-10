@@ -7,7 +7,7 @@
           <template #icon>
             <n-icon :color="message.color"><component :is="messageIcon(message.icon)" /></n-icon>
           </template>
-          <b>{{ message.title }}</b>
+          <strong>{{ message.title }}</strong>
         </n-button>
       </span>
       <div 
