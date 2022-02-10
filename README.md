@@ -1,4 +1,7 @@
 # There Was Time Now
+<!-- ALL-CONTRIBUTORS-BADGE:START - manually created to include non-github users -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An incremental game about "science" and "time".
 
@@ -33,3 +36,17 @@ Please see [credits](credits.md) for a list of all dependencies and their licens
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=pbr4ne&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=pbr4ne&theme=radical&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - manually created to include non-github users -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/pbr4ne"><img src="https://avatars.githubusercontent.com/u/22901953?v=4?s=100" width="100px;" alt=""/><br /><sub><b>pbr4ne</b></sub></a><br /><a href="https://github.com/pbr4ne/there-was-time-now/commits?author=pbr4ne" title="Code">💻</a> <a href="#design-pbr4ne" title="UI Design">🎨</a><a href="#ideas-pbr4ne" title="Game Design">🤔</a></td>
+    <td align="center"><a href="https://jamesfunfer.com"><img src="https://i.postimg.cc/zDjhDgBP/jf.jpg" width="100px;" alt=""/><br /><sub><b>James Funfer</b></sub></a><br /><a href="#narrative-jfunfer" title="Narrative">🖋</a><a href="#ideas-jfunfer" title="Game Design">🤔</a></td>
+  </tr>
+</table>
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
