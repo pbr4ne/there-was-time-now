@@ -83,11 +83,9 @@ export default function useSaveLoad() {
       savedResearch.push(gameStateResearch);
     });
 
-    const gameState = new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameWon.value, gameEnded.value, 
+    return new GameState(currency.value, sellFeatureEnabled.value, gameStarted.value, gameWon.value, gameEnded.value, 
       countdownTriggered.value, countdownTimer.secondsLeft(), countupTimer.secondsElapsed(), expandConstant.value, 
       slowdownEnabled.value, spokeToLennox.value, spokeToSama.value, savedPeople, savedResearch);
-
-    return gameState;
   }
 
   const saveGameState = () => {
