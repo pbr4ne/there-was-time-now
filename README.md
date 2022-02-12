@@ -7,7 +7,7 @@
 
 An incremental game about "science" and "time".
 
-Play it here: https://pbr4ne.github.io/there-was-time-now<br>
+Play it [here on github](https://pbr4ne.github.io/there-was-time-now) or on [itch.io](https://pbrane.itch.io/there-was-time-now)<br>
 
 [pbr4ne](https://github.com/pbr4ne) - development<br>
 [James Funfer](https://jamesfunfer.com) - writing & narrative<br><br>
