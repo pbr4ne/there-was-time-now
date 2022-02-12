@@ -12,6 +12,12 @@ Play it here: https://pbr4ne.github.io/there-was-time-now<br>
 [pbr4ne](https://github.com/pbr4ne) - development<br>
 [James Funfer](https://jamesfunfer.com) - writing & narrative<br><br>
 
+This game was created for the [2022 New Year's Incremental Game Jam](https://itch.io/jam/new-years-incremental-game-jam/entries). There is some work to be done:
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_there-was-time-now&metric=bugs)](https://sonarcloud.io/summary/new_code?id=pbr4ne_there-was-time-now)<br>
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_there-was-time-now&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=pbr4ne_there-was-time-now)<br>
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_there-was-time-now&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pbr4ne_there-was-time-now)<br>
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_there-was-time-now&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=pbr4ne_there-was-time-now)<br>
+
 ## Installation
 
 Instructions to set up the project locally can be found [here](installation.md).
