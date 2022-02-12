@@ -6,12 +6,15 @@
     "serve": "vite --open",
     "build": "vite build --out-dir dist",
     "preview": "vite preview --open --port 8080",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test:unit": "jest src",
+    "test:coverage": "jest src --coverage"
   },
   "dependencies": {
     "vue": "^3.2.13"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vicons/antd": "^0.12.0",
@@ -24,13 +27,17 @@
     "@vicons/tabler": "^0.12.0",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/eslint-config-typescript": "^10.0.0",
+    "@vue/test-utils": "^2.0.0-rc.18",
     "eslint": "^8.8.0",
     "eslint-plugin-vue": "^8.0.3",
+    "jest": "^26.6.3",
     "localforage": "^1.10.0",
     "naive-ui": "^2.25.0",
+    "ts-jest": "^26.5.6",
     "typescript": "~4.5.5",
     "vite": "^2.7.13",
     "vue-confetti-explosion": "^1.0.1",
+    "vue-jest": "^5.0.0-alpha.10",
     "vue-timer-hook": "^0.0.22"
   },
   "browserslist": [
