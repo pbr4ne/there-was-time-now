@@ -1,6 +1,6 @@
-# Installation
+# Contributing to There Was Time Now
 
-You can play the game at https://pbr4ne.github.io/there-was-time-now but if you want to install it locally:
+Please feel free to open a pull request and contribute!
 
 ## Project setup
 ```
@@ -25,4 +25,14 @@ npm run preview
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Runs unit tests
+```
+npm run test:unit
+```
+
+### Runs test coverage report
+```
+npm run test:coverage
 ```

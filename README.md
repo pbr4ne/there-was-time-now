@@ -18,13 +18,13 @@ This game was created for the [2022 New Year's Incremental Game Jam](https://itc
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_there-was-time-now&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pbr4ne_there-was-time-now)<br>
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_there-was-time-now&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=pbr4ne_there-was-time-now)<br>
 
-## Installation
+## Contributing
 
-Instructions to set up the project locally can be found [here](installation.md).
+Contributions very welcome! Instructions to set up the project locally can be found [here](CONTRIBUTING.md).
 
 ## Credits
 
-Please see [credits](credits.md) for a list of all dependencies and their licenses.
+Please see [credits](CREDITS.md) for a list of all dependencies and their licenses.
 
 ## Special callout to
 
