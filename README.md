@@ -3,7 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
 ![GitHub](https://img.shields.io/github/license/pbr4ne/there-was-time-now)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pbr4ne_there-was-time-now&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pbr4ne_there-was-time-now)
-![Still Time](https://img.shields.io/badge/is%20there%20still%20time%3F-...yes%3F-4361EE)
+![Sarsen Stones](https://img.shields.io/badge/sarsen%20stones-49-%234361EE)
 
 An incremental game about "science" and "time".
 
