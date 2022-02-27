@@ -1,63 +1,61 @@
 <template>
-  <n-layout-header bordered style="padding-top: 5px;">
-    <n-space justify="space-between" class="twtnHeader">
-      <n-space style="padding-left: 5px;" width="100%">
-        <span :class="[titleText, titleFont]">{{ titleValue }}</span>
-      </n-space>
-
-      <ConfettiExplosion
-        v-if="confetti"
-        :particle-count="200"
-        :duration="5000"
-        :stage-height="confettiHeight"
-        :stage-width="confettiWidth"
-        :colors="['#F72585', '#B5179E', '#4361EE', '#4CC9F0']"
-      />
-
-      <n-space width="209px">
-        <n-statistic v-if="sellFeatureEnabled" label="Budget">
-          {{ currency }}
-        </n-statistic>
-
-        <n-statistic v-if="slowdownEnabled && !gameEnded" label="Time Expansion">
-          {{ expandConstantFormatted() }}
-        </n-statistic>
-        <n-popover trigger="hover" :keep-alive-on-hover="false">
-          <template #trigger>
-            <div>
-              <n-statistic v-if="gameEnded" label="Days Left">
-                0
-              </n-statistic>
-              <n-statistic v-else-if="countdownTriggered" label="Days Left">
-                {{ timeLeft }}
-              </n-statistic>
-            </div>
-          </template>
-          <span v-if="!gameEnded">{{ countdownTimer.realPeopleTimeLeft() }} Real People Time™ left</span>
-          <span v-else>Game is over!</span>
-        </n-popover>
-        <n-spin v-if="countdownTimer.isRunning()" size="large" style="vertical-align: middle;">
-          <template #icon>
-            <n-icon><time-icon /></n-icon>
-          </template>
-        </n-spin>
-        <n-icon v-if="gamePaused && !gameEnded" color="#63e2b7" size="40">
-          <pause-icon />
-        </n-icon>
-        <n-icon v-if="gameEnded && !gameWon" color="#63e2b7" size="40">
-          <lost-icon color="#FF4136" />
-        </n-icon>
-        <n-icon v-if="gameEnded && gameWon" color="#63e2b7" size="40">
-          <won-icon color="#FFDC00" />
-        </n-icon>
-      </n-space>
+  <n-space justify="space-between" class="twtnHeader">
+    <n-space style="padding-left: 5px;" width="100%">
+      <span :class="[titleText, titleFont]">{{ titleValue }}</span>
     </n-space>
-  </n-layout-header>
+
+    <ConfettiExplosion
+      v-if="confetti"
+      :particle-count="200"
+      :duration="5000"
+      :stage-height="confettiHeight"
+      :stage-width="confettiWidth"
+      :colors="['#F72585', '#B5179E', '#4361EE', '#4CC9F0']"
+    />
+
+    <n-space width="209px">
+      <n-statistic v-if="sellFeatureEnabled" label="Budget">
+        {{ currency }}
+      </n-statistic>
+
+      <n-statistic v-if="slowdownEnabled && !gameEnded" label="Time Expansion">
+        {{ expandConstantFormatted() }}
+      </n-statistic>
+      <n-popover trigger="hover" :keep-alive-on-hover="false">
+        <template #trigger>
+          <div>
+            <n-statistic v-if="gameEnded" label="Days Left">
+              0
+            </n-statistic>
+            <n-statistic v-else-if="countdownTriggered" label="Days Left">
+              {{ timeLeft }}
+            </n-statistic>
+          </div>
+        </template>
+        <span v-if="!gameEnded">{{ countdownTimer.realPeopleTimeLeft() }} Real People Time™ left</span>
+        <span v-else>Game is over!</span>
+      </n-popover>
+      <n-spin v-if="countdownTimer.isRunning()" size="large" style="vertical-align: middle;">
+        <template #icon>
+          <n-icon><time-icon /></n-icon>
+        </template>
+      </n-spin>
+      <n-icon v-if="gamePaused && !gameEnded" color="#63e2b7" size="40">
+        <pause-icon />
+      </n-icon>
+      <n-icon v-if="gameEnded && !gameWon" color="#63e2b7" size="40">
+        <lost-icon color="#FF4136" />
+      </n-icon>
+      <n-icon v-if="gameEnded && gameWon" color="#63e2b7" size="40">
+        <won-icon color="#FFDC00" />
+      </n-icon>
+    </n-space>
+  </n-space>
 </template>
 
 <script>
 import { computed, defineComponent, ref } from 'vue'
-import { NIcon, NLayoutHeader, NPopover, NSpace, NSpin, NStatistic} from 'naive-ui'
+import { NIcon, NPopover, NSpace, NSpin, NStatistic} from 'naive-ui'
 import ConfettiExplosion from 'vue-confetti-explosion'
 import { PauseOutlined as PauseIcon, CrownOutlined as WonIcon } from '@vicons/antd'
 import { SkullOutline as LostIcon } from '@vicons/ionicons5'
@@ -73,7 +71,6 @@ export default defineComponent({
     ConfettiExplosion,
     LostIcon,
     NIcon,
-    NLayoutHeader,
     NPopover,
     NSpace,
     NSpin,

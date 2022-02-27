@@ -1,81 +1,79 @@
 <template>
-  <n-layout-footer bordered>
-    <n-space justify="end" style="padding: 5px;">
-      <n-tooltip placement="top" trigger="hover">
-        <template #trigger>
-          <n-button strong circle @click="about()">
-            <template #icon>
-              <n-icon><about-icon /></n-icon>
-            </template>
-          </n-button>
-        </template>
-        <span>About</span>
-      </n-tooltip>
-      <n-tooltip placement="top" trigger="hover">
-        <template #trigger>
-          <n-button strong circle @click="version()">
-            <template #icon>
-              <n-icon><version-icon /></n-icon>
-            </template>
-          </n-button>
-        </template>
-        <span>Version History</span>
-      </n-tooltip>
-      <n-tooltip placement="top" trigger="hover">
-        <template #trigger>
-          <n-button strong circle @click="switchTheme">
-            <template #icon>
-              <n-icon>
-                <light-mode-icon v-if="!lightMode" />
-                <dark-mode-icon v-if="lightMode" />
-              </n-icon>
-            </template>
-          </n-button>
-        </template>
-        <span>{{ otherThemeName() }}</span>
-      </n-tooltip>
-      <n-tooltip placement="top" trigger="hover">
-        <template #trigger>
-          <n-button strong circle @click="pauseTime()">
-            <template #icon>
-              <n-icon><pause-icon /></n-icon>
-            </template>
-          </n-button>
-        </template>
-        <span>Pause</span>
-      </n-tooltip>
-      <n-tooltip placement="top" trigger="hover">
-        <template #trigger>
-          <n-button strong circle @click="importGame()">
-            <template #icon>
-              <n-icon><import-icon /></n-icon>
-            </template>
-          </n-button>
-        </template>
-        <span>Import</span>
-      </n-tooltip>
-      <n-tooltip placement="top" trigger="hover">
-        <template #trigger>
-          <n-button strong circle @click="exportGame()">
-            <template #icon>
-              <n-icon><export-icon /></n-icon>
-            </template>
-          </n-button>
-        </template>
-        <span>Export</span>
-      </n-tooltip>
-      <n-tooltip placement="top" trigger="hover">
-        <template #trigger>
-          <n-button strong circle @click="restart()">
-            <template #icon>
-              <n-icon><restart-icon /></n-icon>
-            </template>
-          </n-button>
-        </template>
-        <span>Restart</span>
-      </n-tooltip>
-    </n-space>
-  </n-layout-footer>
+  <n-space justify="end" style="padding: 5px;">
+    <n-tooltip placement="top" trigger="hover">
+      <template #trigger>
+        <n-button strong circle @click="about()">
+          <template #icon>
+            <n-icon><about-icon /></n-icon>
+          </template>
+        </n-button>
+      </template>
+      <span>About</span>
+    </n-tooltip>
+    <n-tooltip placement="top" trigger="hover">
+      <template #trigger>
+        <n-button strong circle @click="version()">
+          <template #icon>
+            <n-icon><version-icon /></n-icon>
+          </template>
+        </n-button>
+      </template>
+      <span>Version History</span>
+    </n-tooltip>
+    <n-tooltip placement="top" trigger="hover">
+      <template #trigger>
+        <n-button strong circle @click="switchTheme">
+          <template #icon>
+            <n-icon>
+              <light-mode-icon v-if="!lightMode" />
+              <dark-mode-icon v-if="lightMode" />
+            </n-icon>
+          </template>
+        </n-button>
+      </template>
+      <span>{{ otherThemeName() }}</span>
+    </n-tooltip>
+    <n-tooltip placement="top" trigger="hover">
+      <template #trigger>
+        <n-button strong circle @click="pauseTime()">
+          <template #icon>
+            <n-icon><pause-icon /></n-icon>
+          </template>
+        </n-button>
+      </template>
+      <span>Pause</span>
+    </n-tooltip>
+    <n-tooltip placement="top" trigger="hover">
+      <template #trigger>
+        <n-button strong circle @click="importGame()">
+          <template #icon>
+            <n-icon><import-icon /></n-icon>
+          </template>
+        </n-button>
+      </template>
+      <span>Import</span>
+    </n-tooltip>
+    <n-tooltip placement="top" trigger="hover">
+      <template #trigger>
+        <n-button strong circle @click="exportGame()">
+          <template #icon>
+            <n-icon><export-icon /></n-icon>
+          </template>
+        </n-button>
+      </template>
+      <span>Export</span>
+    </n-tooltip>
+    <n-tooltip placement="top" trigger="hover">
+      <template #trigger>
+        <n-button strong circle @click="restart()">
+          <template #icon>
+            <n-icon><restart-icon /></n-icon>
+          </template>
+        </n-button>
+      </template>
+      <span>Restart</span>
+    </n-tooltip>
+  </n-space>
 </template>
 
 <script>
@@ -84,7 +82,6 @@ import { defineComponent, h, ref } from 'vue'
 import { 
   NButton,
   NIcon,
-  NLayoutFooter,
   NSpace,
   NTooltip,
   useDialog,
@@ -125,7 +122,6 @@ export default defineComponent({
     LightModeIcon,
     NButton,
     NIcon,
-    NLayoutFooter,
     NSpace,
     NTooltip,
     PauseIcon,

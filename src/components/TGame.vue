@@ -1,17 +1,21 @@
 <template>
   <n-layout position="absolute">
-    <t-game-header />
+    <n-layout-header bordered style="padding-top: 5px;">
+      <t-game-header />
+    </n-layout-header>
     <n-layout has-sider>
       <t-game-sider />
       <t-game-tabs />
     </n-layout>
-    <t-game-footer />
+    <n-layout-footer bordered>
+      <t-game-footer />
+    </n-layout-footer>
   </n-layout>
 </template>
 
 <script>
 import { watch } from 'vue'
-import { NLayout, useMessage } from 'naive-ui'
+import { NLayout, NLayoutFooter, NLayoutHeader, useMessage } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
@@ -27,6 +31,8 @@ import { GameConstants } from '@/enum/Constants'
 export default {
   components: {
     NLayout,
+    NLayoutFooter,
+    NLayoutHeader,
     TGameFooter,
     TGameHeader,
     TGameSider,
