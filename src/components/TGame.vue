@@ -17,7 +17,9 @@
       >
         <t-game-sider :collapsed="collapsed" />
       </n-layout-sider>
-      <t-game-tabs />
+      <n-layout-content>
+        <t-game-tabs />
+      </n-layout-content>
     </n-layout>
     <n-layout-footer bordered>
       <t-game-footer />
@@ -27,7 +29,7 @@
 
 <script>
 import { ref, watch } from 'vue'
-import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutSider, useMessage } from 'naive-ui'
+import { NLayout, NLayoutContent, NLayoutFooter, NLayoutHeader, NLayoutSider, useMessage } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
@@ -43,6 +45,7 @@ import { GameConstants } from '@/enum/Constants'
 export default {
   components: {
     NLayout,
+    NLayoutContent,
     NLayoutFooter,
     NLayoutHeader,
     NLayoutSider,
