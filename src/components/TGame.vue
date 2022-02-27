@@ -4,7 +4,19 @@
       <t-game-header />
     </n-layout-header>
     <n-layout has-sider>
-      <t-game-sider />
+      <n-layout-sider
+        bordered
+        show-trigger
+        collapse-mode="width"
+        :collapsed-width="64"
+        :collapsed="collapsed"
+        :width="245"
+        :native-scrollbar="false"
+        @collapse="collapsed = true"
+        @expand="collapsed = false" 
+      >
+        <t-game-sider :collapsed="collapsed" />
+      </n-layout-sider>
       <t-game-tabs />
     </n-layout>
     <n-layout-footer bordered>
@@ -14,8 +26,8 @@
 </template>
 
 <script>
-import { watch } from 'vue'
-import { NLayout, NLayoutFooter, NLayoutHeader, useMessage } from 'naive-ui'
+import { ref, watch } from 'vue'
+import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutSider, useMessage } from 'naive-ui'
 import TGameFooter from '@/components/TGameFooter.vue'
 import TGameHeader from '@/components/TGameHeader.vue'
 import TGameSider from '@/components/TGameSider.vue'
@@ -33,6 +45,7 @@ export default {
     NLayout,
     NLayoutFooter,
     NLayoutHeader,
+    NLayoutSider,
     TGameFooter,
     TGameHeader,
     TGameSider,
@@ -44,6 +57,9 @@ export default {
     const { sendInitialMessage } = useGameMessage();
     const { startIncrements } = useResearch();
     const { saveGameState } = useSaveLoad();
+
+    //initially collapse the sider for smol windows
+    let collapsed = window.innerWidth < 700;
     
     if(!gameStarted.value) {
       sendInitialMessage();
@@ -63,6 +79,7 @@ export default {
     }, GameConstants.SAVE_INTERVAL * 1000);
 
     return {
+      collapsed: ref(collapsed),
     };
   }
 }
