@@ -1,6 +1,10 @@
 <template>
-  <n-layout position="absolute">
-    <n-layout-header bordered style="padding-top: 5px;">
+  <n-layout 
+    position="absolute" 
+    :native-scrollbar="false"
+    content-style="height: 100%; display: flex; flex-direction: column"
+  >
+    <n-layout-header bordered style="padding-top: 5px">
       <t-game-header />
     </n-layout-header>
     <n-layout has-sider>
@@ -21,7 +25,7 @@
         <t-game-tabs />
       </n-layout-content>
     </n-layout>
-    <n-layout-footer bordered>
+    <n-layout-footer bordered style="flex-shrink: 0">
       <t-game-footer />
     </n-layout-footer>
   </n-layout>
