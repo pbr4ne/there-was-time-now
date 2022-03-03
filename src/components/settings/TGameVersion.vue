@@ -1,5 +1,12 @@
 <template>
-  <n-h4 :style="{color: '##EFAE0'}">
+  <n-h4 :style="{color: '#bc6c25'}">
+    v0.8 - 2022-03-02
+  </n-h4>
+  <ul>
+    <li>freeze footer to bottom</li>
+    <li>minor balancing tweaks</li>
+  </ul>
+  <n-h4 :style="{color: '#FEFAE0'}">
     v0.7 - 2022-02-06
   </n-h4>
   <ul>
